@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>Zephyrus-NMS</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+  <groupId>net.minezrc.zephyrus.nms</groupId>
+  <packaging>pom</packaging>
+  <name>Zephyrus NMS</name>
+  <modules>
+    <module>v1_6_4</module>
+    <module>v1_7_2</module>
+  </modules>
+  
+  <parent>
+    <groupId>net.minezrc.zephyrus</groupId>
+    <artifactId>Zephyrus</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  
+  <licenses>
+    <license>
+      <name>GNU General Public License 3.0</name>
+      <distribution>repo</distribution>
+      <comments>License on all new contributions</comments>
+    </license>
+  </licenses>
+
+  <dependencies>
+    <dependency>
+      <groupId>net.minezrc.zephyrus</groupId>
+      <artifactId>Zephyrus-API</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+</project>

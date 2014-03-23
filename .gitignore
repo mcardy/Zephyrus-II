@@ -1,0 +1,19 @@
+# Mac filesystem dust
+.DS_Store
+
+# Maven stuff
+target
+
+# Eclipse stuff
+/.classpath
+/.project
+/.settings
+
+# netbeans
+/nbproject
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/

@@ -1,0 +1,23 @@
+# -   ______           _                            -
+# -  |___  /          | |                           -
+# -     / /  ___ _ __ | |__  _   _ _ __ _   _ ___   -
+# -    / /  / _ \ '_ \| '_ \| | | | '__| | | / __|  -
+# -  ./ /__|  __/ |_) | | | | |_| | |  | |_| \__ \  -
+# -  \_____/\___| .__/|_| |_|\__, |_|   \__,_|___/  -
+# -             | |           __/ |                 -
+# -             |_|          |___/                  -
+# Enables/disables update checker
+# - Possible Values: true or false
+Update-Checking: true
+
+# The amount of seconds it takes to regenerate 1 mana
+# - Possible Values: Any number greater than 0
+Mana-Regen: 1
+
+# Enables/disables spell recipes
+# - Possible Values: true or false
+Spell-Recipes: true
+
+# Enables/disables particle effects
+# - Possible Values: true or false
+Particle-Effects: true

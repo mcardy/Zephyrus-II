@@ -1,0 +1,111 @@
+package net.minezrc.zephyrus.core;
+
+import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.core.command.SimpleCommandManager;
+import net.minezrc.zephyrus.core.config.ConfigOptions;
+import net.minezrc.zephyrus.core.enchant.SimpleEnchantManager;
+import net.minezrc.zephyrus.core.item.SimpleItemManager;
+import net.minezrc.zephyrus.core.nms.SimpleNMSManager;
+import net.minezrc.zephyrus.core.spell.SimpleSpellManager;
+import net.minezrc.zephyrus.core.state.SimpleStateManager;
+import net.minezrc.zephyrus.core.user.SimpleUserManager;
+import net.minezrc.zephyrus.core.util.Updater;
+import net.minezrc.zephyrus.core.util.Updater.UpdateResult;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
+/**
+ * Zephyrus - ZephyrusPlugin.java
+ * 
+ * @author minnymin3
+ * 
+ */
+
+public class ZephyrusPlugin extends JavaPlugin {
+
+	@Override
+	public void onLoad() {
+		Zephyrus.setPlugin(this);
+		Zephyrus.setCommandManager(new SimpleCommandManager());
+		Zephyrus.setEnchantmentManager(new SimpleEnchantManager());
+		Zephyrus.setItemManager(new SimpleItemManager());
+		Zephyrus.setNMSManager(new SimpleNMSManager());
+		Zephyrus.setSpellManager(new SimpleSpellManager());
+		Zephyrus.setStateManager(new SimpleStateManager());
+		Zephyrus.setUserManager(new SimpleUserManager());
+	}
+
+	@Override
+	public void onEnable() {
+		ConfigOptions.loadOptions(getConfig());
+		Zephyrus.getCommandManager().load();
+		Zephyrus.getEnchantmentManager().load();
+		Zephyrus.getItemManager().load();
+		Zephyrus.getNMSManager().load();
+		Zephyrus.getSpellManager().load();
+		Zephyrus.getStateManager().load();
+		Zephyrus.getUserManager().load();
+		schedulePostLoadTask(Updater.update());
+	}
+
+	@Override
+	public void onDisable() {
+		Zephyrus.getCommandManager().unload();
+		Zephyrus.getEnchantmentManager().unload();
+		Zephyrus.getItemManager().unload();
+		Zephyrus.getNMSManager().unload();
+		Zephyrus.getSpellManager().unload();
+		Zephyrus.getStateManager().unload();
+		Zephyrus.getUserManager().unload();
+		Zephyrus.unload();
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String name, String[] args) {
+		return Zephyrus.getCommandManager().handle(sender, command, name, args);
+	}
+
+	public void schedulePostLoadTask(final Updater updater) {
+		Bukkit.getScheduler().runTaskAsynchronously(this, new BukkitRunnable() {
+			@Override
+			public void run() {
+				UpdateResult result = updater.getResult();
+				switch (result) {
+				case DISABLED:
+					getLogger().info("Update checking has been disabled for Zephyrus");
+					break;
+				case FAIL_APIKEY:
+					getLogger()
+							.info("Update checking API key is not correctly configured. See /plugins/Updater/config.yml for details");
+					break;
+				case FAIL_BADID:
+					getLogger().info("Update checker failed to find a project for Zephyrus. It may have been removed.");
+					break;
+				case FAIL_DBO:
+					getLogger()
+							.info("Unable to connect to dev.bukkit.org. If this is the first time you are seeing this then the server is most likely temporairily unreachable.");
+					break;
+				case FAIL_NOVERSION:
+					getLogger()
+							.info("Something went wrong when checking for updates. Expected version format not found. Contact the plugin author for more details.");
+					break;
+				case NO_UPDATE:
+					getLogger().info("Zephyrus is up to date.");
+					break;
+				case UPDATE_AVAILABLE:
+					getLogger().info("An update is available for Zephyrus: " + updater.getLatestName() + " "
+							+ updater.getLatestType() + ". Get it here:");
+					getLogger().info(updater.getLatestFileLink());
+					break;
+				default:
+					break;
+
+				}
+			}
+		});
+	}
+}

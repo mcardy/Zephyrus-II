@@ -1,0 +1,25 @@
+# Spell Config - Zephyrus
+# -----------------------
+# Config options:
+# Enabled: 
+# - Whether or not the spell should be enabled
+# - Possible values: true, false
+# Name:
+# - The name of the spell
+# - Possible values: any single word
+# Description:
+# - The description of the spell
+# - Possible values: any string of words
+# RequiredLevel:
+# - The minimum level to learn this spell at
+# - Possible values: any number above 0
+# ManaCost:
+# - The mana cost when the spell is cast
+# - Possible values: any number above 0
+# XpReward:
+# - The xp reward when the spell is cast
+# - Possible values: any number above 0
+# Recipe:
+# - The recipe for the spell
+# - Possible values: list of items in the following form
+# - '{"id":262,"amount":10,"data":0}'

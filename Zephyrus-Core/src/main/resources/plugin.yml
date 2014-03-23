@@ -1,0 +1,10 @@
+name: Zephyrus II
+version: ${pom.version}
+description: Zephyrus is an all-in-one magic plugin providing magic spells and items that users can use on RPG and survival servers alike
+
+author: minnymin3
+
+main: net.minezrc.zephyrus.core.ZephyrusPlugin
+load: STARTUP
+website: http://dev.bukkit.org/bukkit-plugins/zephyrus/
+prefix: Zephyrus
