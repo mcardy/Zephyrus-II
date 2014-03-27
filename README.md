@@ -7,7 +7,7 @@ Zephyrus is licenced under GNU General Public Licence version 3
 
 #### Jenkins Build Server
 
-[![Build Status](http://ci.minezrc.net/job/ZephyrusCore/badge/icon)](http://ci.minezrc.net/job/ZephyrusCore/)
+[![Build Status](http://ci.minezrc.net/job/Zephyrus-II/badge/icon)](http://ci.minezrc.net/job/Zephyrus-II/)
 
 #### BukkitDev Page
 
