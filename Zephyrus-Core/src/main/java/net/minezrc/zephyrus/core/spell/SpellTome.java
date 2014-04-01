@@ -92,10 +92,10 @@ public class SpellTome implements Listener {
 			Bukkit.getPluginManager().callEvent(learn);
 			if (!learn.isCancelled()) {
 				user.addSpell(spell);
-				player.sendMessage(new Message("item.spelltome.complete", "You have successfully learned ",
+				new Message("item.spelltome.complete", "You have successfully learned ",
 						MessageColor.GRAY, MessageFormatting.NONE).addComponent(new MessageComponent(spell.getName(),
 						MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(MessageHoverEvent.TEXT, spell
-						.getDescription())).getMessage());
+						.getDescription())).sendMessage(player);
 				player.setItemInHand(null);
 			}
 		} catch (Exception e) {

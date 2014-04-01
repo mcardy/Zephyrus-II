@@ -1,5 +1,8 @@
 package net.minezrc.zephyrus.spell;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 
 /**
  * Zephyrus - Bindable.java
@@ -8,6 +11,7 @@ package net.minezrc.zephyrus.spell;
  * 
  */
 
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Bindable {
 	
 }

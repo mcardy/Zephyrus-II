@@ -1,5 +1,8 @@
 package net.minezrc.zephyrus.spell;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Zephyrus - SpellRequirements.java
  * 
@@ -7,6 +10,7 @@ package net.minezrc.zephyrus.spell;
  *  
  */
 
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Prerequisite {
 
 	public Class<? extends Spell> requiredSpell();
