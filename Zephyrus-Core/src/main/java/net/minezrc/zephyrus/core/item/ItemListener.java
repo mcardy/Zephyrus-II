@@ -81,11 +81,8 @@ public class ItemListener implements Listener {
 									&& user.getLevel() >= spell.getRequiredLevel()
 									&& !((((RegisteredSpell) spell).getOriginal().getClass()
 											.isAnnotationPresent(Prerequisite.class) && !user.isSpellLearned(Zephyrus
-											.getSpell(((Prerequisite) spell.getClass()
-													.getAnnotation(Prerequisite.class)).requiredSpell()))))
-									|| (spell.getClass().isAnnotationPresent(Prerequisite.class) && !user
-											.isSpellLearned(Zephyrus.getSpell(((Prerequisite) spell.getClass()
-													.getAnnotation(Prerequisite.class)).requiredSpell())))) {
+											.getSpell(((Prerequisite) ((RegisteredSpell) spell).getOriginal()
+													.getClass().getAnnotation(Prerequisite.class)).requiredSpell()))))) {
 								spells.add(spell);
 							}
 						}
@@ -115,12 +112,12 @@ public class ItemListener implements Listener {
 								player.playSound(loc, Sound.ORB_PICKUP, 3, 12);
 							}
 						} else if (spells.size() > 1) {
-							InventoryGUI gui = new InventoryGUI(ChatColor.DARK_AQUA
-									+ "Which spell would you like to craft?");
+							InventoryGUI gui = new InventoryGUI(Language.get("crafting.selectionname", "Craft which spell?"));
 							for (int i = 0; i < spells.size(); i++) {
-								gui.setSlot(i, SpellTome.createSpellTome(spells.get(i)), getButton(spells.get(i), event
+								gui.setSlot(i + 1, SpellTome.createSpellTome(spells.get(i)), getButton(spells.get(i), event
 										.getClickedBlock(), itemEntity));
 							}
+							gui.open(player);
 						} else {
 							Language.sendError("crafting.nospell", "You cannot craft any spells with those aspects. Consult the SpellBook for more information.", player);
 						}
@@ -180,21 +177,21 @@ public class ItemListener implements Listener {
 				Bukkit.getPluginManager().callEvent(craftEvent);
 				if (!craftEvent.isCancelled()) {
 					Location loc = block.getLocation().add(0.5, 1.5, 0.5);
-					loc.getWorld().dropItem(loc, SpellTome.createSpellTome(spell)).setVelocity(new Vector(0, 0, 0));
-					int chance = 1;
+					loc.getWorld().dropItem(loc, SpellTome.createSpellTome(spell))
+							.setVelocity(new Vector(0, 0, 0));
+					int amount = 1;
 					if (user.getLevel() < 7) {
-						chance = 1;
+						amount = 1;
 					} else if (user.getLevel() < 15) {
-						chance = 2;
+						amount = 2;
 					} else {
-						chance = 3;
+						amount = 3;
 					}
 					block.setType(Material.AIR);
-					for (Entity i : entities) {
+					for (org.bukkit.entity.Item i : entities) {
 						i.remove();
 					}
-					loc.getWorld()
-							.dropItem(loc.add(0, +1, 0), new ItemStack(Material.BOOK, new Random().nextInt(chance)))
+					loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount))
 							.setVelocity(new Vector(0, 0, 0));
 					ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 30);
 					player.playSound(loc, Sound.ORB_PICKUP, 3, 12);

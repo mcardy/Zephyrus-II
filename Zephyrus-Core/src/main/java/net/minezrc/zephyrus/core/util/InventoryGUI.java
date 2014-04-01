@@ -70,6 +70,9 @@ public class InventoryGUI implements Listener {
 		if (size > 54)
 			return;
 		size = size % 9 == 0 ? size : size + 9 - (size % 9);
+		if (size < 9) {
+			size = 9;
+		}
 		if (size != inv.getSize()) {
 			Inventory newinv = Bukkit.createInventory(null, size);
 			newinv.setContents(inv.getContents());
