@@ -1,26 +1,26 @@
-package net.minezrc.zephyrus.nms.v1_6_R3;
+package net.minezrc.zephyrus.nms.v1_7_R1;
 
-import net.minecraft.server.v1_6_R3.EntityHuman;
-import net.minecraft.server.v1_6_R3.IMerchant;
-import net.minecraft.server.v1_6_R3.MerchantRecipe;
-import net.minecraft.server.v1_6_R3.MerchantRecipeList;
+import net.minecraft.server.v1_7_R1.EntityHuman;
+import net.minecraft.server.v1_7_R1.IMerchant;
+import net.minecraft.server.v1_7_R1.MerchantRecipe;
+import net.minecraft.server.v1_7_R1.MerchantRecipeList;
 import net.minezrc.zephyrus.nms.UpgradeTrade;
 
-import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_6_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_7_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
  * Zephyrus - ItemUpgradeTrade.java
  *
- * This class represents the 1.6.4 version of the item upgrade trade
+ * This class represents the 1.7.2 version of the item upgrade trade
  *
  * @author minnymin3
  *
  */
 
-public class ItemUpgradeTrade implements IMerchant, UpgradeTrade {
+public class NMSUpgradeTrade implements IMerchant, UpgradeTrade {
 
 	private MerchantRecipe offer;
 	private EntityHuman currentTrader;
@@ -39,7 +39,7 @@ public class ItemUpgradeTrade implements IMerchant, UpgradeTrade {
 	}
 
 	@Override
-	public EntityHuman m_() {
+	public EntityHuman b() {
 		return currentTrader;
 	}
 	
@@ -49,7 +49,7 @@ public class ItemUpgradeTrade implements IMerchant, UpgradeTrade {
 	}
 
 	@Override
-	public void a_(net.minecraft.server.v1_6_R3.ItemStack arg0) {
+	public void a_(net.minecraft.server.v1_7_R1.ItemStack arg0) {
 	}
 
 	@Override
@@ -79,8 +79,8 @@ public class ItemUpgradeTrade implements IMerchant, UpgradeTrade {
 	}
 	
 	@Override
-	public ItemUpgradeTrade clone() {
-		ItemUpgradeTrade mer = new ItemUpgradeTrade();
+	public NMSUpgradeTrade clone() {
+		NMSUpgradeTrade mer = new NMSUpgradeTrade();
 		mer.offer = this.offer;
 		return mer;
 	}

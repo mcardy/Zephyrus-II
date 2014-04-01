@@ -38,8 +38,8 @@ public class SimpleNMSManager implements NMSManager {
 
 	@Override
 	public UpgradeTrade getItemUpgradeTrade() {
-		Class<?> cls = ReflectionUtils.getClass("net.minezrc.zephyrus.nms." + getVersion() + ".ItemUpgradeTrade");
-		if (cls != null && cls.isAssignableFrom(UpgradeTrade.class)) {
+		Class<?> cls = ReflectionUtils.getClass("net.minezrc.zephyrus.nms." + getVersion() + ".NMSUpgradeTrade");
+		if (cls != null) {
 			return (UpgradeTrade) ReflectionUtils.newInstance(cls);
 		} else {
 			return null;
