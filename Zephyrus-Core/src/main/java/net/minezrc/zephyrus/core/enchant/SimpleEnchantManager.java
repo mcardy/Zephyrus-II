@@ -62,20 +62,23 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 	public void unload() {
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void registerEnchantment(Enchant enchantment) {
-		boolean modified = false;
-		if (accepting == false) {
-			ReflectionUtils.setField(Enchantment.class, true, "acceptingNew");
-			modified = true;
-			accepting = true;
-		}
-		enchantmentMap.put(id, enchantment);
-		Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
-		id++;
-		if (modified) {
-			ReflectionUtils.setField(Enchantment.class, false, "acceptingNew");
-			accepting = false;
+		if (Enchantment.getById(id) == null) {
+			boolean modified = false;
+			if (accepting == false) {
+				ReflectionUtils.setField(Enchantment.class, true, "acceptingNew");
+				modified = true;
+				accepting = true;
+			}
+			enchantmentMap.put(id, enchantment);
+			Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
+			id++;
+			if (modified) {
+				ReflectionUtils.setField(Enchantment.class, false, "acceptingNew");
+				accepting = false;
+			}
 		}
 	}
 

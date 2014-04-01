@@ -42,28 +42,6 @@ public class Message {
 			}
 		}
 	}
-	
-	/**
-	 * Create a new message
-	 * 
-	 * @param key The text of the message
-	 * @param color The colour of the message
-	 * @param formats The formatting for the message
-	 */
-	public Message(String key, MessageColor color, MessageFormatting... formats) {
-		this.message = new JSONObject();
-		this.color = color;
-		this.formats = formats;
-		add("text", Language.get(key));
-		if (color != null) {
-			add("color", color.getColor());
-		}
-		for (MessageFormatting format : formats) {
-			if (format != MessageFormatting.NONE) {
-				add(format.getFormat(), true);
-			}
-		}
-	}
 
 	/**
 	 * Adds a MessageComponent to this message. Appends message onto base text

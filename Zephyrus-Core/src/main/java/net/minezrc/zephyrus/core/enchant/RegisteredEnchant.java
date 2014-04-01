@@ -19,6 +19,7 @@ public class RegisteredEnchant extends Enchantment {
 	
 	public RegisteredEnchant(int id, Enchant enchant) {
 		super(id);
+		this.enchant = enchant;
 	}
 
 	@Override
