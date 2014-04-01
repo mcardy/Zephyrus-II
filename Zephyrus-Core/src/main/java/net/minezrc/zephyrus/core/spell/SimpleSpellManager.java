@@ -5,16 +5,18 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.spell.attack.Arrow;
 import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.restoration.Feed;
-import net.minezrc.zephyrus.core.util.ItemSerializer;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellManager;
@@ -54,14 +56,15 @@ public class SimpleSpellManager implements SpellManager {
 	}
 
 	@Override
-	public Spell getSpell(Set<ItemStack> recipe) {
+	public List<Spell> getSpell(Set<ItemStack> recipe) {
+		List<Spell> spellSet = new ArrayList<Spell>();
 		Iterator<Spell> spells = spellList.iterator();
 		while (spells.hasNext()) {
 			Spell spell = spells.next();
-			if (spell.getRecipe().isEqual(recipe))
-				return spell;
+			if (new SpellRecipe(spell.getRecipe()).isSatisfied(recipe))
+				spellSet.add(spell);
 		}
-		return null;
+		return spellSet;
 	}
 
 	@Override
@@ -78,17 +81,6 @@ public class SimpleSpellManager implements SpellManager {
 					return spell;
 				}
 			}
-		}
-		return null;
-	}
-
-	@Override
-	public Spell getSpell(SpellRecipe recipe) {
-		Iterator<Spell> spells = spellList.iterator();
-		while (spells.hasNext()) {
-			Spell spell = spells.next();
-			if (spell.getRecipe().isEqual(recipe.getItems()))
-				return spell;
 		}
 		return null;
 	}
@@ -127,7 +119,7 @@ public class SimpleSpellManager implements SpellManager {
 		spellConfig.addDefaults(name + ".RequiredLevel", spell.getRequiredLevel());
 		spellConfig.addDefaults(name + ".ManaCost", spell.getManaCost());
 		spellConfig.addDefaults(name + ".XpReward", spell.getXpReward());
-		spellConfig.addDefaults(name + ".Recipe", toItemList(spell.getRecipe().getItems()));
+		spellConfig.addDefaults(name + ".Recipe", toList(spell.getRecipe()));
 		if (spell instanceof ConfigurableSpell) {
 			Iterator<Entry<String, Object>> iter = ((ConfigurableSpell) spell).getDefaultConfiguration().entrySet()
 					.iterator();
@@ -143,7 +135,7 @@ public class SimpleSpellManager implements SpellManager {
 			regSpell.setName(config.getString(name + ".Name").toLowerCase());
 			regSpell.setRequiredLevel(config.getInt(name + ".RequiredLevel"));
 			regSpell.setXpReward(config.getInt(name + ".XpReward"));
-			regSpell.setRecipe(fromItemList(config.getStringList(name + ".Recipe")));
+			regSpell.setRecipe(fromList(config.getStringList(name + ".Recipe")));
 			if (regSpell.spell instanceof ConfigurableSpell) {
 				((ConfigurableSpell) regSpell.spell).loadConfiguration(spellConfig.getConfig()
 						.getConfigurationSection(name));
@@ -153,6 +145,32 @@ public class SimpleSpellManager implements SpellManager {
 				Bukkit.getPluginManager().registerEvents((Listener) spell, Zephyrus.getPlugin());
 			}
 		}
+	}
+
+	private AspectList fromList(List<String> list) {
+		List<Aspect> aspectType = new ArrayList<Aspect>();
+		List<Integer> aspectValue = new ArrayList<Integer>();
+		for (String s : list) {
+			String[] split = s.split("-");
+			try {
+				Aspect aspect = Aspect.valueOf(split[0]);
+				int value = Integer.parseInt(split[1]);
+				aspectType.add(aspect);
+				aspectValue.add(value);
+			} catch (Exception ex) {
+				// Catch any syntax errors caused by the user
+			}
+		}
+		return AspectList.newList().setAspectLists(aspectType, aspectValue);
+	}
+
+	private List<String> toList(AspectList recipe) {
+		Map<Aspect, Integer> aspects = recipe.getAspectMap();
+		List<String> list = new ArrayList<String>();
+		for (Aspect aspect : aspects.keySet()) {
+			list.add(aspect + "-" + aspects.get(aspect));
+		}
+		return list;
 	}
 
 	private void updateCompatibility(String base) {
@@ -172,21 +190,7 @@ public class SimpleSpellManager implements SpellManager {
 		}
 	}
 
-	private SpellRecipe fromItemList(List<String> items) {
-		ItemStack[] itemarray = new ItemStack[items.size()];
-		for (int i = 0; i < items.size(); i++) {
-			itemarray[i] = ItemSerializer.fromString(items.get(i));
-		}
-		return new SpellRecipe(itemarray);
-	}
-
-	private List<String> toItemList(Set<ItemStack> items) {
-		List<String> list = new ArrayList<String>();
-		for (ItemStack item : items) {
-			list.add(ItemSerializer.toString(item));
-		}
-		return list;
-	}
+	
 
 	@Override
 	public void load() {

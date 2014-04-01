@@ -1,11 +1,11 @@
 package net.minezrc.zephyrus.core.spell;
 
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
-import net.minezrc.zephyrus.spell.SpellRecipe;
 import net.minezrc.zephyrus.user.User;
 
 /**
@@ -24,7 +24,7 @@ public class RegisteredSpell implements Spell {
 	private int reqLevel = -1;
 	private int manaCost = -1;
 	private int xpReward = -1;
-	private SpellRecipe recipe = null;
+	private AspectList recipe = null;
 	
 	protected RegisteredSpell(Spell spell) {
 		this.spell = spell;
@@ -79,11 +79,11 @@ public class RegisteredSpell implements Spell {
 	}
 	
 	@Override
-	public SpellRecipe getRecipe() {
+	public AspectList getRecipe() {
 		return this.recipe != null ? this.recipe : this.spell.getRecipe();
 	}
 	
-	protected void setRecipe(SpellRecipe recipe) {
+	protected void setRecipe(AspectList recipe) {
 		this.recipe = recipe;
 	}
 
@@ -115,6 +115,10 @@ public class RegisteredSpell implements Spell {
 	@Override
 	public CastResult onCast(User user, int power, Spell combo, String[] args) {
 		return this.spell.onCast(user, power, combo, args);
+	}
+
+	public Object getOriginal() {
+		return this.spell;
 	}
 	
 	

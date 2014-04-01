@@ -2,8 +2,17 @@ package net.minezrc.zephyrus.core.command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
+import net.minezrc.zephyrus.core.chat.Message;
+import net.minezrc.zephyrus.core.chat.MessageComponent;
+import net.minezrc.zephyrus.core.chat.MessageEvent.MessageHoverEvent;
+import net.minezrc.zephyrus.core.chat.MessageForm.MessageColor;
+import net.minezrc.zephyrus.core.chat.MessageForm.MessageFormatting;
+import net.minezrc.zephyrus.core.spell.RegisteredSpell;
 import net.minezrc.zephyrus.core.spell.SpellTome;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.command.Command;
@@ -19,6 +28,7 @@ import net.minezrc.zephyrus.user.User;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -73,6 +83,62 @@ public class ItemCommand {
 		}
 	}
 
+	@Command(name = "aspects",
+			permission = "zephyrus.aspect",
+			description = "Checks the aspects on an itemstack",
+			usage = "/aspects")
+	public void onAspects(CommandArgs args) {
+		if (args.getArgs().length == 0) {
+			if (!args.isPlayer()) {
+				Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+				return;
+			}
+			if (args.getPlayer().getItemInHand() == null) {
+				Language.sendError("command.aspects.noitem", "You need to have an item in your hand to analyze", args
+						.getSender());
+				return;
+			}
+			AspectList list = Zephyrus.getAspectManager().getAspects(args.getPlayer().getItemInHand());
+			Language.sendMessage("command.aspects.aspecttitle", "Aspects: ", args.getSender());
+			for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
+				Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(), "[NAME]", entry
+						.getKey().getColor()
+						+ Language.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry.getKey()
+								.getDefaultName()) + ChatColor.WHITE, "[DESC]", Language.get("aspect."
+						+ entry.getKey().name() + ".desc", entry.getKey().getDefaultDescription()), "[AMOUNT]", entry
+						.getValue() + "");
+			}
+		} else {
+			Material mat = Material.getMaterial(args.getArgs()[0].toUpperCase());
+			if (mat != null) {
+				AspectList list = Zephyrus.getAspectManager().getAspects(new ItemStack(mat));
+				Language.sendMessage("command.aspects.aspecttitle", "Aspects: ", args.getSender());
+				for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
+					Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(), "[NAME]", Language
+							.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry.getKey()
+									.getDefaultName()), "[DESC]", Language.get("aspect." + entry.getKey().name()
+							+ ".desc", entry.getKey().getDefaultDescription()), "[AMOUNT]", entry.getValue() + "");
+				}
+			}
+		}
+	}
+
+	@Command(name = "aspects.list")
+	public void onAspectList(CommandArgs args) {
+		if (args.isPlayer()) {
+			Message message = new Message("command.aspects.aspecttitle", "Aspects: ", MessageColor.RED,
+					MessageFormatting.BOLD);
+			for (Aspect aspect : Aspect.values()) {
+				message.addComponent(new MessageComponent(aspect.getColor()
+						+ Language.get("aspect." + aspect.name().toLowerCase() + ".name", aspect.getDefaultName())
+						+ " - ", MessageColor.valueOf(aspect.getColor().name()))
+						.setHoverEvent(MessageHoverEvent.TEXT, Language.get("aspect." + aspect.name() + ".desc", aspect
+								.getDefaultDescription())));
+			}
+			message.sendMessage(args.getPlayer());
+		}
+	}
+
 	@Command(name = "bind")
 	public void onBind(CommandArgs args) {
 		if (!args.isPlayer()) {
@@ -97,7 +163,8 @@ public class ItemCommand {
 					.getArgs()[0]);
 			return;
 		}
-		if (!spell.getClass().isAnnotationPresent(Bindable.class)) {
+		if (!(spell instanceof RegisteredSpell && ((RegisteredSpell) spell).getOriginal().getClass()
+				.isAnnotationPresent(Bindable.class))) {
 			Language.sendError("command.bind.unable", "That spell cannot be bound to a wand", args.getSender());
 			return;
 		}

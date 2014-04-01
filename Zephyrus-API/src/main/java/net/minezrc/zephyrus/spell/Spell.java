@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.spell;
 
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
@@ -19,7 +20,7 @@ public interface Spell {
 	public String getDescription();
 	public int getManaCost();
 	public int getXpReward();
-	public SpellRecipe getRecipe();
+	public AspectList getRecipe();
 	public int getRequiredLevel();
 
 	public SpellElement getElement();

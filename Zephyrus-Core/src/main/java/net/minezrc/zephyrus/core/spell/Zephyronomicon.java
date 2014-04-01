@@ -1,8 +1,10 @@
 package net.minezrc.zephyrus.core.spell;
 
 import java.util.Arrays;
+import java.util.Map.Entry;
 
 import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.spell.Spell;
 
@@ -29,8 +31,8 @@ public class Zephyronomicon {
 		meta.setLore(Arrays.asList(Language.get("item.zephyronomicon.lore", ChatColor.GRAY
 				+ "Your encyclopedia to all things magic")));
 
-		meta.addPage(Language.get("item.zephyronomicon.pg1", ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "Welcome to the magical world of Zephyrus.\n\n"
-				+ ChatColor.BLACK + ChatColor.RESET
+		meta.addPage(Language.get("item.zephyronomicon.pg1", ChatColor.DARK_AQUA + "" + ChatColor.BOLD
+				+ "Welcome to the magical world of Zephyrus.\n\n" + ChatColor.BLACK + ChatColor.RESET
 				+ " This book is a quick start guide meant get you casting spells as quickly as possible.\n\n"
 				+ ChatColor.GOLD + "Next Page"));
 		// TODO Write brief tutorial
@@ -52,25 +54,19 @@ public class Zephyronomicon {
 
 		for (Spell spell : Zephyrus.getSpellSet()) {
 			if (spell.getRequiredLevel() > startLevel && spell.getRequiredLevel() < endLevel) {
-				currentText.append(ChatColor.GOLD + WordUtils.capitalize(spell.getName()) + ChatColor.DARK_GRAY
-						+ "\n " + Language.get("item.recipebook.recipe", "Recipe") + ":" + ChatColor.GRAY);
-				if (spell.getRecipe().getItems().size() <= 4) {
-					for (ItemStack recipe : spell.getRecipe().getItems()) {
+				currentText.append(ChatColor.GOLD + WordUtils.capitalize(spell.getName()) + ChatColor.DARK_GRAY + "\n "
+						+ Language.get("item.recipebook.recipe", "Recipe") + ":" + ChatColor.GRAY);
+				if (spell.getRecipe().getAspectMap().size() <= 4) {
+					for (Entry<Aspect, Integer> recipe : spell.getRecipe().getAspectMap().entrySet()) {
 						currentText.append("\n  "
-								+ WordUtils.capitalizeFully(recipe.getType().name().toLowerCase().replace("_", " "))
-								+ " x" + recipe.getAmount());
-						if (recipe.getDurability() > 0) {
-							currentText.append(" meta " + recipe.getDurability());
-						}
+								+ Language.get("aspect." + recipe.getKey().name().toLowerCase() + ".name", recipe.getKey()
+										.getDefaultName()) + " x" + recipe.getValue());
 					}
 				} else {
-					for (ItemStack recipe : spell.getRecipe().getItems()) {
-						currentText.append(WordUtils.capitalizeFully(recipe.getType().name().toLowerCase()
-								.replace("_", " "))
-								+ " x" + recipe.getAmount());
-						if (recipe.getDurability() > 0) {
-							currentText.append(" meta " + recipe.getDurability());
-						}
+					for (Entry<Aspect, Integer> recipe : spell.getRecipe().getAspectMap().entrySet()) {
+						currentText.append(Language.get("aspect." + recipe.getKey().name().toLowerCase() + ".name", recipe
+								.getKey().getDefaultName())
+								+ " x" + recipe.getValue());
 						currentText.append(", ");
 					}
 				}
@@ -90,5 +86,4 @@ public class Zephyronomicon {
 		item.setItemMeta(meta);
 		return item;
 	}
-
 }

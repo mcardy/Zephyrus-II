@@ -78,13 +78,14 @@ public class Language {
 	public static void sendError(String key, String def, CommandSender sender) {
 		sender.sendMessage(ChatColor.DARK_RED + get(key, def));
 	}
-	
+
 	/**
 	 * Sends an error message to the specified CommandSender with replacements
 	 * 
 	 * @param key The key to get
 	 * @param sender The CommandSender to send the message to
-	 * @param replace The group of replacements (what to replace followed by replacement)
+	 * @param replace The group of replacements (what to replace followed by
+	 *            replacement)
 	 */
 	public static void sendError(String key, CommandSender sender, String... replace) {
 		String msg = get(key);
@@ -100,14 +101,16 @@ public class Language {
 		}
 		sender.sendMessage(ChatColor.DARK_RED + msg);
 	}
-	
+
 	/**
-	 * Sends an error message to the specified CommandSender with default text and replacements
+	 * Sends an error message to the specified CommandSender with default text
+	 * and replacements
 	 * 
 	 * @param key The key to get
 	 * @param def The default text
 	 * @param sender The CommandSender to send the message to
-	 * @param replace The group of replacements (what to replace followed by replacement)
+	 * @param replace The group of replacements (what to replace followed by
+	 *            replacement)
 	 */
 	public static void sendError(String key, String def, CommandSender sender, String... replace) {
 		String msg = get(key, def);
@@ -144,13 +147,14 @@ public class Language {
 	public static void sendMessage(String key, String def, CommandSender sender) {
 		sender.sendMessage(get(key, def));
 	}
-	
+
 	/**
 	 * Sends a message to the specified CommandSender with replacements
 	 * 
 	 * @param key The key to get
 	 * @param sender The CommandSender to send the message to
-	 * @param replace The group of replacements (what to replace followed by replacement)
+	 * @param replace The group of replacements (what to replace followed by
+	 *            replacement)
 	 */
 	public static void sendMessage(String key, CommandSender sender, String... replace) {
 		String msg = get(key);
@@ -166,14 +170,16 @@ public class Language {
 		}
 		sender.sendMessage(msg);
 	}
-	
+
 	/**
-	 * Sends a message to the specified CommandSender with default text and replacements
+	 * Sends a message to the specified CommandSender with default text and
+	 * replacements
 	 * 
 	 * @param key The key to get
 	 * @param def The default text
 	 * @param sender The CommandSender to send the message to
-	 * @param replace The group of replacements (what to replace followed by replacement)
+	 * @param replace The group of replacements (what to replace followed by
+	 *            replacement)
 	 */
 	public static void sendMessage(String key, String def, CommandSender sender, String... replace) {
 		String msg = get(key, def);

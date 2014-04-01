@@ -21,5 +21,8 @@
 # - Possible values: any number above 0
 # Recipe:
 # - The recipe for the spell
-# - Possible values: list of items in the following form
-# - '{"id":262,"amount":10,"data":0}'
+# - Possible values: list of aspects in the following form
+# - 'FIRE-2'
+# - Possible aspects: 
+# -   ANIMAL ARMOR ATTACK DIRT ENDER EVIL FIRE GLASS ICE LIGHT
+# -   MACHINE MAGIC METAL PLANT STONE TOOL VALUE WATER WIND WOOD

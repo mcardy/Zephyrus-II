@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus;
 
+import java.util.List;
 import java.util.Set;
 
 import net.minezrc.zephyrus.aspect.AspectManager;
@@ -10,7 +11,6 @@ import net.minezrc.zephyrus.item.ItemManager;
 import net.minezrc.zephyrus.nms.NMSManager;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellManager;
-import net.minezrc.zephyrus.spell.SpellRecipe;
 import net.minezrc.zephyrus.state.StateManager;
 import net.minezrc.zephyrus.user.User;
 import net.minezrc.zephyrus.user.UserManager;
@@ -121,16 +121,7 @@ public class Zephyrus {
 	 * @param recipe The recipe to get
 	 * @return A spell loaded by Zephyrus or null if no spell is found
 	 */
-	public static Spell getSpell(Set<ItemStack> recipe) {
-		return spellManager.getSpell(recipe);
-	}
-
-	/**
-	 * Gets a spell from its recipe
-	 * @param recipe The recipe to get
-	 * @return A spell loaded by Zephyrus or null if no spell is found
-	 */
-	public static Spell getSpell(SpellRecipe recipe) {
+	public static List<Spell> getSpell(Set<ItemStack> recipe) {
 		return spellManager.getSpell(recipe);
 	}
 

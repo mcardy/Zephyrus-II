@@ -1,5 +1,7 @@
 package net.minezrc.zephyrus.core.spell.buff;
 
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.state.StateList;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.spell.Spell;
@@ -7,13 +9,10 @@ import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
-import net.minezrc.zephyrus.spell.SpellRecipe;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * Zephyrus - Armour.java
@@ -50,10 +49,8 @@ public class Armor implements Spell {
 	}
 
 	@Override
-	public SpellRecipe getRecipe() {
-		return new SpellRecipe(new ItemStack(Material.GOLD_BLOCK, 8), new ItemStack(Material.GOLD_HELMET),
-				new ItemStack(Material.GOLD_CHESTPLATE), new ItemStack(Material.GOLD_LEGGINGS), new ItemStack(
-						Material.GOLD_BOOTS));
+	public AspectList getRecipe() {
+		return AspectList.newList().setAspectTypes(Aspect.ARMOR, Aspect.VALUE, Aspect.MAGIC).setAspectValues(24, 48, 4);
 	}
 
 	@Override

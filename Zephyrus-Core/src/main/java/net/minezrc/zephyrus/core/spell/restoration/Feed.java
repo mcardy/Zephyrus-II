@@ -1,17 +1,16 @@
 package net.minezrc.zephyrus.core.spell.restoration;
 
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
-import net.minezrc.zephyrus.spell.SpellRecipe;
 import net.minezrc.zephyrus.user.User;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * Zephyrus - Feed.java
@@ -48,9 +47,8 @@ public class Feed implements Spell {
 	}
 
 	@Override
-	public SpellRecipe getRecipe() {
-		return new SpellRecipe(new ItemStack(Material.COOKED_BEEF), new ItemStack(Material.COOKED_CHICKEN),
-				new ItemStack(Material.COOKED_FISH));
+	public AspectList getRecipe() {
+		return AspectList.newList().setAspectTypes(Aspect.ANIMAL, Aspect.PLANT).setAspectValues(16, 4);
 	}
 
 	@Override

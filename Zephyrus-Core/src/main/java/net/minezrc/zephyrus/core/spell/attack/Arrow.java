@@ -1,16 +1,14 @@
 package net.minezrc.zephyrus.core.spell.attack;
 
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
-import net.minezrc.zephyrus.spell.SpellRecipe;
 import net.minezrc.zephyrus.user.User;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * Zephyrus - Arrow.java
@@ -24,7 +22,7 @@ public class Arrow implements Spell {
 
 	@Override
 	public String getName() {
-		return "Arrow";
+		return "arrow";
 	}
 
 	@Override
@@ -48,8 +46,8 @@ public class Arrow implements Spell {
 	}
 
 	@Override
-	public SpellRecipe getRecipe() {
-		return new SpellRecipe(new ItemStack(Material.ARROW, 10));
+	public AspectList getRecipe() {
+		return AspectList.newList(Aspect.ATTACK, 10);
 	}
 
 	@Override

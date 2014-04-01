@@ -3,6 +3,8 @@ package net.minezrc.zephyrus.core.spell.attack;
 import java.util.Map;
 
 import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.DataStructureUtils;
 import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
@@ -12,13 +14,10 @@ import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
-import net.minezrc.zephyrus.spell.SpellRecipe;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -61,8 +60,8 @@ public class ArrowStorm implements Spell, ConfigurableSpell {
 	}
 
 	@Override
-	public SpellRecipe getRecipe() {
-		return new SpellRecipe(new ItemStack(Material.ARROW, 16), new ItemStack(Material.BOW));
+	public AspectList getRecipe() {
+		return AspectList.newList(Aspect.ATTACK, 50);
 	}
 	
 	@Override

@@ -3,6 +3,8 @@ package net.minezrc.zephyrus.core.spell.mobility;
 import java.util.HashSet;
 import java.util.Map;
 
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.DataStructureUtils;
 import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
@@ -11,14 +13,11 @@ import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
-import net.minezrc.zephyrus.spell.SpellRecipe;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * Zephyrus - Bang.java
@@ -53,9 +52,8 @@ public class Bang implements Spell, ConfigurableSpell {
 	}
 
 	@Override
-	public SpellRecipe getRecipe() {
-		SpellRecipe recipe = new SpellRecipe(new ItemStack(Material.FEATHER, 16));
-		return recipe;
+	public AspectList getRecipe() {
+		return AspectList.newList(Aspect.WIND, 8);
 	}
 
 	@Override

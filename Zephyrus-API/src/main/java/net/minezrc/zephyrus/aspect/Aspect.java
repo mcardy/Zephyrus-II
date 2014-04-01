@@ -10,35 +10,48 @@ import org.bukkit.ChatColor;
  */
 
 public enum Aspect {
-	FIRE("Ignibus", "Fire, Heat, Flame", ChatColor.RED), 
-	WATER("Aqua", "Water, Aquatics", ChatColor.BLUE), 
-	ICE("Rigentem", "Ice, Cold", ChatColor.AQUA), 
-	WIND("Ventum", "Wind, Movement", ChatColor.GRAY), 
-	PLANT("Frondibus","Life, Growth", ChatColor.GREEN), 
-	PURE("Clara", "Purity", ChatColor.WHITE), 
-	EVIL("Tenebris", "Evil, Darkness", ChatColor.DARK_PURPLE), 
-	EARTH("Terrae",	"Ground, Soil", ChatColor.DARK_GREEN), 
-	ANIMAL("Animalis", "Animal", ChatColor.GOLD), 
-	ROCK("Lapideas", "Stone", ChatColor.DARK_GRAY), 
-	RARE("Rarum", "Rare, Valuable", ChatColor.GOLD), 
-	METAL("Metallica", "Metal", ChatColor.GRAY), 
-	GLASS("Purgare", "Glass, Clear", ChatColor.WHITE), 
-	MACHINE("Cogitatus", "Machine", ChatColor.DARK_GRAY), 
-	ATTACK("Ingrata", "Attack, Harmful", ChatColor.DARK_RED), 
-	MAGIC("Magia", "Magic, Arcane", ChatColor.LIGHT_PURPLE), 
-	ENDER("Slutar", "Ender", ChatColor.DARK_PURPLE), 
-	TOOL("Strumento", "Tool", ChatColor.DARK_GRAY), 
-	WOOD("Lignum", "Wood, Tree", ChatColor.DARK_GREEN), 
-	ARMOR("Armatura", "Armor Protection", ChatColor.DARK_GRAY);
 	
-	private String displayName;
-	private String description;
+	ANIMAL("Animalis", "Animal", ChatColor.GOLD), // Leather, Wool, etc.
+	ARMOR("Armatura", "Armor Protection", ChatColor.DARK_GRAY), // Armor
+	ATTACK("Impetum", "Attack, Harmful", ChatColor.DARK_RED), // Sword, Arrow, Bow, etc.
+	DIRT("Terrae",	"Ground, Soil", ChatColor.DARK_GREEN), // Dirt, Sand, Sandstone
+	ENDER("Slutar", "Ender", ChatColor.DARK_PURPLE), // Ender pearls, Ender egg
+	EVIL("Tenebris", "Darkness, Evil, Death", ChatColor.DARK_PURPLE), // Skull, Bone, etc.
+	FIRE("Ignibus", "Fire, Heat, Flame", ChatColor.RED), // Blazerod, Lava
+	GLASS("Purgare", "Glass, Clear, Crystal", ChatColor.WHITE), // Glass
+	ICE("Rigentem", "Ice, Cold", ChatColor.AQUA), // Ice, Snow
+	LIGHT("Lucem", "Light, Glow", ChatColor.YELLOW), // Torch, Glowstone
+	MACHINE("Cogitatus", "Machine", ChatColor.DARK_GRAY), // Redstone, Dispenser, Piston, etc.
+	MAGIC("Magia", "Magic, Arcane", ChatColor.LIGHT_PURPLE), // Blaze Rod, Cauldron, Enchanting table, etc.
+	METAL("Metallicis", "Metal", ChatColor.GRAY), // Metal ingot, Metal ore, Bucket, Metal tools, etc.
+	PLANT("Folia","Plant, Life, Growth", ChatColor.GREEN), // Grass, Leaves, etc.
+	STONE("Lapideas", "Stone", ChatColor.DARK_GRAY), // Diamonds, Gold, Lapis, etc.
+	TOOL("Strumento", "Tool", ChatColor.DARK_GRAY), // Stone, Sandstone, Cobblestone, etc.
+	VALUE("Prezioso", "Rare, Valuable", ChatColor.GOLD), // Shovel, Pickaxe, etc.
+	WATER("Aqua", "Water, Aquatics", ChatColor.BLUE), // Water, Lilly pad, etc.
+	WIND("Ventum", "Wind, Movement", ChatColor.GRAY), // Feather, Featherfalling boots, Tall grass, etc.
+	WOOD("Lignum", "Wood, Tree", ChatColor.DARK_GREEN); // Wood, Planks, Saplings, etc...
+	
 	private ChatColor color;
+	private String description;
+	private String name;
 	
-	Aspect(String displayName, String description, ChatColor color) {
-		this.displayName = displayName;
+	Aspect(String name, String description, ChatColor color) {
+		this.name = name;
 		this.description = description;
 		this.color = color;
+	}
+	
+	public ChatColor getColor() {
+		return color;
+	}
+	
+	public String getDefaultDescription() {
+		return description;
+	}
+	
+	public String getDefaultName() {
+		return name;
 	}
 	
 }

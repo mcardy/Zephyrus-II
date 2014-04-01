@@ -1,6 +1,7 @@
 package net.minezrc.zephyrus.core;
 
 import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.core.aspect.SimpleAspectManager;
 import net.minezrc.zephyrus.core.command.SimpleCommandManager;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.core.enchant.SimpleEnchantManager;
@@ -30,6 +31,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 	@Override
 	public void onLoad() {
 		Zephyrus.setPlugin(this);
+		Zephyrus.setAspectManager(new SimpleAspectManager());
 		Zephyrus.setCommandManager(new SimpleCommandManager());
 		Zephyrus.setEnchantmentManager(new SimpleEnchantManager());
 		Zephyrus.setItemManager(new SimpleItemManager());
@@ -41,15 +43,20 @@ public class ZephyrusPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		ConfigOptions.loadOptions(getConfig());
-		Zephyrus.getCommandManager().load();
-		Zephyrus.getEnchantmentManager().load();
-		Zephyrus.getItemManager().load();
-		Zephyrus.getNMSManager().load();
-		Zephyrus.getSpellManager().load();
-		Zephyrus.getStateManager().load();
-		Zephyrus.getUserManager().load();
-		schedulePostLoadTask(Updater.update());
+		try {
+			ConfigOptions.loadOptions(getConfig());
+			Zephyrus.getAspectManager().load();
+			Zephyrus.getCommandManager().load();
+			Zephyrus.getEnchantmentManager().load();
+			Zephyrus.getItemManager().load();
+			Zephyrus.getNMSManager().load();
+			Zephyrus.getSpellManager().load();
+			Zephyrus.getStateManager().load();
+			Zephyrus.getUserManager().load();
+			schedulePostLoadTask(Updater.update());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	@Override

@@ -1,7 +1,12 @@
 package net.minezrc.zephyrus.spell;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+
+import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.aspect.Aspect;
+import net.minezrc.zephyrus.aspect.AspectList;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -14,31 +19,43 @@ import org.bukkit.inventory.ItemStack;
 
 public class SpellRecipe {
 
-	private Set<ItemStack> items;
+	private AspectList list;
 
 	/**
-	 * Creates a new SpellRecipe with the given items as the recipe
+	 * Creates a new SpellRecipe with the given aspect list
 	 * 
-	 * @param items The items that this recipe contains
+	 * @param list The aspect list to craft with
 	 */
-	public SpellRecipe(ItemStack... items) {
-		Set<ItemStack> s = new HashSet<ItemStack>();
+	public SpellRecipe(AspectList list) {
+		this.list = list;
+	}
+
+	public AspectList getList() {
+		return list;
+	}
+
+	public boolean isSatisfied(Set<ItemStack> items) {
+		Map<Aspect, Integer> map = new HashMap<Aspect, Integer>();
 		for (ItemStack i : items) {
-			s.add(i);
+			Map<Aspect, Integer> itemMap = Zephyrus.getAspectManager().getAspects(i).getAspectMap();
+			for (Aspect aspect : itemMap.keySet()) {
+				if (map.containsKey(aspect)) {
+					map.put(aspect, itemMap.get(aspect) + map.get(aspect));
+				} else {
+					map.put(aspect, itemMap.get(aspect));
+				}
+			}
 		}
-		this.items = s;
+		Map<Aspect, Integer> recipe = list.getAspectMap();
+		for (Aspect aspect : list.getAspectMap().keySet()) {
+			if (!map.containsKey(aspect)) {
+				return false;
+			}
+			if (map.get(aspect) < recipe.get(aspect)) {
+				return false;
+			}
+		}
+		return true;
 	}
-
-	public Set<ItemStack> getItems() {
-		return items;
-	}
-
-	public boolean isEqual(Set<ItemStack> items) {
-		return this.getItems().equals(items);
-	}
-
-	public boolean isEqual(SpellRecipe recipe) {
-		return isEqual(recipe.getItems());
-	}
-
+	
 }

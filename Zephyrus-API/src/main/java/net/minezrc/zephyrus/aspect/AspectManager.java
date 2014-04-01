@@ -13,6 +13,6 @@ import org.bukkit.inventory.ItemStack;
 
 public interface AspectManager extends Manager {
 
-	public AspectList getReagents(ItemStack item);
+	public AspectList getAspects(ItemStack item);
 	
 }
