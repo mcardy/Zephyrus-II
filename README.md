@@ -13,23 +13,23 @@ Zephyrus is licenced under GNU General Public Licence version 3
 When referencing Zephyrus, it is best to reference the API as it is more lightweight and easier to manage. Download the Zephyrus-API jar from the [Continues Integration Server](http://ci.minezrc.net/job/Zephyrus-II/lastStableBuild/) or from the [releases section](https://github.com/minnymin3/Zephyrus-II/releases) of the Github repository.
 
 Maven:
-‘’’
-<repositories>
-  <repository>
-    <id>zephyrus</id>
-    <url>http://ci.minezrc.net/plugin/repository/everything/</url>
-  </repository>
-</repositories>
 
-<dependencies>
-  <dependency>
-    <groupid>net.minezrc.zephyrus</groupid>
-    <artifactId>Zephyrus-API</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-    <scope>provided</scope>
-  </dependency>
-</dependencies>
-‘’’
+    <repositories>
+      <repository>
+        <id>zephyrus</id>
+        <url>http://ci.minezrc.net/plugin/repository/everything/</url>
+      </repository>
+    </repositories>
+
+    <dependencies>
+      <dependency>
+        <groupid>net.minezrc.zephyrus</groupid>
+        <artifactId>Zephyrus-API</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+
 
 #### BukkitDev Page
 
