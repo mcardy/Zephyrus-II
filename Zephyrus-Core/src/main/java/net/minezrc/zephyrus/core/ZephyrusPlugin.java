@@ -27,7 +27,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 
 public class ZephyrusPlugin extends JavaPlugin {
-
+	
 	@Override
 	public void onLoad() {
 		Zephyrus.setPlugin(this);
@@ -54,6 +54,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 			Zephyrus.getStateManager().load();
 			Zephyrus.getUserManager().load();
 			schedulePostLoadTask(Updater.update());
+			getLogger().info("Fully loaded Zephyrus-II v" + getDescription().getVersion());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -83,35 +84,35 @@ public class ZephyrusPlugin extends JavaPlugin {
 				UpdateResult result = updater.getResult();
 				switch (result) {
 				case DISABLED:
-					getLogger().info("Update checking has been disabled for Zephyrus");
+					getLogger().info("[Updater] Update checking has been disabled for Zephyrus");
 					break;
 				case FAIL_APIKEY:
 					getLogger()
-							.info("Update checking API key is not correctly configured. See /plugins/Updater/config.yml for details");
+							.info("[Updater] Update checking API key is not correctly configured. See /plugins/Updater/config.yml for details");
 					break;
 				case FAIL_BADID:
-					getLogger().info("Update checker failed to find a project for Zephyrus. It may have been removed.");
+					getLogger().info("[Updater] Update checker failed to find a project for Zephyrus. It may have been removed.");
 					break;
 				case FAIL_DBO:
 					getLogger()
-							.info("Unable to connect to dev.bukkit.org. If this is the first time you are seeing this then the server is most likely temporairily unreachable.");
+							.info("[Updater] Unable to connect to dev.bukkit.org. If this is the first time you are seeing this then the server is most likely temporairily unreachable.");
 					break;
 				case FAIL_NOVERSION:
 					getLogger()
-							.info("Something went wrong when checking for updates. Expected version format not found. Contact the plugin author for more details.");
+							.info("[Updater] Something went wrong when checking for updates. Expected version format not found. Contact the plugin author for more details.");
 					break;
 				case NO_UPDATE:
-					getLogger().info("Zephyrus is up to date.");
+					getLogger().info("[Updater] Zephyrus is up to date.");
 					break;
 				case UPDATE_AVAILABLE:
-					getLogger().info("An update is available for Zephyrus: " + updater.getLatestName() + " "
+					getLogger().info("[Updater] An update is available for Zephyrus: " + updater.getLatestName() + " "
 							+ updater.getLatestType() + ". Get it here:");
 					getLogger().info(updater.getLatestFileLink());
 					break;
 				default:
 					break;
-
 				}
+				getLogger().info("[Spells] Loaded " + Zephyrus.getSpellManager().getSpellSet().size() + " spells");
 			}
 		});
 	}

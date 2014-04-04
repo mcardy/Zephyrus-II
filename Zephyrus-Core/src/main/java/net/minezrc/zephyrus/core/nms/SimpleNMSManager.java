@@ -24,11 +24,11 @@ public class SimpleNMSManager implements NMSManager {
 	@Override
 	public void load() {
 		this.version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-		Zephyrus.getPlugin().getLogger().info("Found Bukkit version " + getVersion());
+		Zephyrus.getPlugin().getLogger().info("[Version Dependency] Found Bukkit version " + getVersion());
 		if (getItemUpgradeTrade() != null) {
-			Zephyrus.getPlugin().getLogger().info("Loaded compatibility for version " + getVersion());
+			Zephyrus.getPlugin().getLogger().info("[Version Dependency] Loaded compatibility for version " + getVersion());
 		} else {
-			Zephyrus.getPlugin().getLogger().warning("Zephyrus is not fully compatible with this version of Bukkit! Some features may not be available!");
+			Zephyrus.getPlugin().getLogger().warning("[Version Dependency] Zephyrus is not fully compatible with this version of Bukkit! Some features may not be available!");
 		}
 	}
 

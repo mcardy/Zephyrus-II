@@ -276,7 +276,7 @@ public class Zephyrus {
 					+ " cannot be registered as well.");
 		}
 		Zephyrus.plugin = plugin;
-		Zephyrus.plugin.getLogger().info("Initialized Zephyrus Core v" + plugin.getDescription().getVersion());
+		Zephyrus.plugin.getLogger().info("Initialized Zephyrus-II Core v" + plugin.getDescription().getVersion());
 	}
 
 	/**
