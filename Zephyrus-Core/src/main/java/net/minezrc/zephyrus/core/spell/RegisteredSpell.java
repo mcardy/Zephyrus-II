@@ -113,8 +113,8 @@ public class RegisteredSpell implements Spell {
 	}
 
 	@Override
-	public CastResult onCast(User user, int power, Spell combo, String[] args) {
-		return this.spell.onCast(user, power, combo, args);
+	public CastResult onCast(User user, int power, String[] args) {
+		return this.spell.onCast(user, power, args);
 	}
 
 	public Object getOriginal() {

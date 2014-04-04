@@ -13,9 +13,12 @@ import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
+import net.minezrc.zephyrus.core.item.SpellTome;
 import net.minezrc.zephyrus.core.spell.attack.Arrow;
 import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
+import net.minezrc.zephyrus.core.spell.mobility.Bang;
+import net.minezrc.zephyrus.core.spell.mobility.Blink;
 import net.minezrc.zephyrus.core.spell.restoration.Feed;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
@@ -204,6 +207,8 @@ public class SimpleSpellManager implements SpellManager {
 		// Creation
 		// Illusion
 		// Mobility
+		registerSpell(new Bang());
+		registerSpell(new Blink());
 		// Restoration
 		registerSpell(new Feed());
 		// World

@@ -85,7 +85,7 @@ public class Bang implements Spell, ConfigurableSpell {
 	}
 
 	@Override
-	public CastResult onCast(User user, int power, Spell combo, String[] args) {
+	public CastResult onCast(User user, int power, String[] args) {
 		@SuppressWarnings("deprecation")
 		Location loc = user.getPlayer().getTargetBlock(null, 1000).getLocation();
 		loc.setX(loc.getX() + 0.5);

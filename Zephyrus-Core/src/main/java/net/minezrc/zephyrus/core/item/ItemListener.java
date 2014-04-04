@@ -3,12 +3,10 @@ package net.minezrc.zephyrus.core.item;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.spell.RegisteredSpell;
-import net.minezrc.zephyrus.core.spell.SpellTome;
 import net.minezrc.zephyrus.core.util.InventoryGUI;
 import net.minezrc.zephyrus.core.util.InventoryGUI.InventoryButton;
 import net.minezrc.zephyrus.core.util.Language;
@@ -108,7 +106,7 @@ public class ItemListener implements Listener {
 								}
 								loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount))
 										.setVelocity(new Vector(0, 0, 0));
-								ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 30);
+								ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 0.25F, 0.1F, 0.25F, 0, 50);
 								player.playSound(loc, Sound.ORB_PICKUP, 3, 12);
 							}
 						} else if (spells.size() > 1) {
@@ -149,7 +147,7 @@ public class ItemListener implements Listener {
 							UserPreCastEvent preCast = new UserPreCastEvent(user, spell, 1, null);
 							Bukkit.getPluginManager().callEvent(preCast);
 							if (!preCast.isCancelled()) {
-								CastResult result = spell.onCast(user, 1 + wand.getPowerIncrease(spell), null, null);
+								CastResult result = spell.onCast(user, 1 + wand.getPowerIncrease(spell), null);
 								if (result == CastResult.NORMAL_SUCCESS) {
 									user.drainMana(spell.getManaCost());
 									user.addLevelProgress(spell.getXpReward());
@@ -193,7 +191,7 @@ public class ItemListener implements Listener {
 					}
 					loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount))
 							.setVelocity(new Vector(0, 0, 0));
-					ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 30);
+					ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 0.25F, 0.1F, 0.25F, 0, 50);
 					player.playSound(loc, Sound.ORB_PICKUP, 3, 12);
 				}
 				player.closeInventory();

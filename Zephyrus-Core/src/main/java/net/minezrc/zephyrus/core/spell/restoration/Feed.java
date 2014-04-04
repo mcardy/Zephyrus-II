@@ -75,7 +75,7 @@ public class Feed implements Spell {
 	}
 
 	@Override
-	public CastResult onCast(User user, int power, Spell combo, String[] args) {
+	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
 		if (player.getFoodLevel() < 20) {
 			player.setFoodLevel(player.getFoodLevel() + 1);

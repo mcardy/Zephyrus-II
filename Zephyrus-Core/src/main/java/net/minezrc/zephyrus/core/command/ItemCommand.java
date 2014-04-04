@@ -12,8 +12,8 @@ import net.minezrc.zephyrus.core.chat.MessageComponent;
 import net.minezrc.zephyrus.core.chat.MessageEvent.MessageHoverEvent;
 import net.minezrc.zephyrus.core.chat.MessageForm.MessageColor;
 import net.minezrc.zephyrus.core.chat.MessageForm.MessageFormatting;
+import net.minezrc.zephyrus.core.item.SpellTome;
 import net.minezrc.zephyrus.core.spell.RegisteredSpell;
-import net.minezrc.zephyrus.core.spell.SpellTome;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.command.Command;
 import net.minezrc.zephyrus.core.util.command.CommandArgs;
@@ -132,8 +132,8 @@ public class ItemCommand {
 				message.addComponent(new MessageComponent(aspect.getColor()
 						+ Language.get("aspect." + aspect.name().toLowerCase() + ".name", aspect.getDefaultName())
 						+ " - ", MessageColor.valueOf(aspect.getColor().name()))
-						.setHoverEvent(MessageHoverEvent.TEXT, Language.get("aspect." + aspect.name() + ".desc", aspect
-								.getDefaultDescription())));
+						.setHoverEvent(MessageHoverEvent.TEXT, Language.get("aspect." + aspect.name().toLowerCase()
+								+ ".desc", aspect.getDefaultDescription())));
 			}
 			message.sendMessage(args.getPlayer());
 		}

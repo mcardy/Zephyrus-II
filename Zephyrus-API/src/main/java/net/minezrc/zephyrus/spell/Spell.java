@@ -30,6 +30,6 @@ public interface Spell {
 	public void onDisable();
 	public void onEnable();
 	
-	public CastResult onCast(User user, int power, Spell combo, String[] args);
+	public CastResult onCast(User user, int power, String[] args);
 	
 }

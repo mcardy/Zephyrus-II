@@ -131,9 +131,10 @@ public class UserCommand {
 					builder.append("=");
 				}
 				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}", args.getSender(), "[LEVEL]", user
-						.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + "" + user.getMana() + ChatColor.GRAY + " / "
-						+ ChatColor.GREEN + user.getMaxMana() + ChatColor.DARK_GRAY, "[BAR]", builder.toString());
+				Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}", args
+						.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + ""
+						+ user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN + user.getMaxMana()
+						+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
 			} else {
 				Language.sendError("command.player", "No player specified", args.getSender());
 			}
@@ -150,9 +151,10 @@ public class UserCommand {
 					builder.append("=");
 				}
 				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}", args.getSender(), "[LEVEL]", user
-						.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + "" + user.getMana() + ChatColor.GRAY + " / "
-						+ ChatColor.GREEN + user.getMaxMana() + ChatColor.DARK_GRAY, "[BAR]", builder.toString());
+				Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}", args
+						.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + ""
+						+ user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN + user.getMaxMana()
+						+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
 			} else {
 				Language.sendError("command.offline", "That player is offline", args.getSender());
 			}

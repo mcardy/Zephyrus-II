@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.core.spell.attack;
 
+import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.spell.Bindable;
@@ -10,6 +11,12 @@ import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
 import net.minezrc.zephyrus.user.User;
 
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.metadata.FixedMetadataValue;
+
 /**
  * Zephyrus - Arrow.java
  * 
@@ -18,7 +25,7 @@ import net.minezrc.zephyrus.user.User;
  */
 
 @Bindable
-public class Arrow implements Spell {
+public class Arrow implements Spell, Listener {
 
 	@Override
 	public String getName() {
@@ -74,9 +81,22 @@ public class Arrow implements Spell {
 	}
 
 	@Override
-	public CastResult onCast(User user, int power, Spell combo, String[] args) {
-		user.getPlayer().launchProjectile(org.bukkit.entity.Arrow.class);
+	public CastResult onCast(User user, int power, String[] args) {
+		user.getPlayer().launchProjectile(org.bukkit.entity.Arrow.class)
+				.setMetadata("removal_flag", new FixedMetadataValue(Zephyrus.getPlugin(), true));
 		return CastResult.NORMAL_SUCCESS;
+	}
+
+	@EventHandler
+	public void onProjectileHit(final ProjectileHitEvent event) {
+		if (event.getEntity() instanceof Arrow && event.getEntity().hasMetadata("removal_flag")) {
+			Bukkit.getScheduler().runTaskLater(Zephyrus.getPlugin(), new Runnable() {
+				@Override
+				public void run() {
+					event.getEntity().remove();
+				}
+			}, 10L);
+		}
 	}
 
 }

@@ -18,8 +18,8 @@ import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * Zephyrus - ArrowStorm.java
@@ -63,7 +63,7 @@ public class ArrowStorm implements Spell, ConfigurableSpell {
 	public AspectList getRecipe() {
 		return AspectList.newList(Aspect.ATTACK, 50);
 	}
-	
+
 	@Override
 	public Map<String, Object> getDefaultConfiguration() {
 		return DataStructureUtils.createMap(DataStructureUtils.createList("amount"), DataStructureUtils
@@ -99,30 +99,21 @@ public class ArrowStorm implements Spell, ConfigurableSpell {
 	}
 
 	@Override
-	public CastResult onCast(User user, int power, Spell combo, String[] args) {
-		new Run(user.getPlayer().getName(), amount * power).runTask(Zephyrus.getPlugin());
-		return CastResult.NORMAL_SUCCESS;
-	}
-
-	private class Run extends BukkitRunnable {
-		int amount;
-		String player;
-
-		public Run(String player, int amount) {
-			this.amount = amount;
-			this.player = player;
-		}
-
-		@Override
-		public void run() {
-			if (amount > 0 && Bukkit.getPlayer(player) != null) {
-				org.bukkit.entity.Arrow arrow = Bukkit.getPlayer(player)
-						.launchProjectile(org.bukkit.entity.Arrow.class);
-				arrow.setMetadata("no_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
-				new Run(player, amount - 1).runTaskLater(Zephyrus.getPlugin(), 1);
+	public CastResult onCast(User user, int power, String[] args) {
+		final Player player = user.getPlayer();
+		final int amount = this.amount * power;
+		Bukkit.getScheduler().runTaskTimer(Zephyrus.getPlugin(), new Runnable() {
+			@Override
+			public void run() {
+				int shots = amount;
+				if (shots > 0 && player.isOnline()) {
+					player.launchProjectile(org.bukkit.entity.Arrow.class)
+							.setMetadata("removal_flag", new FixedMetadataValue(Zephyrus.getPlugin(), true));
+					shots--;
+				}
 			}
-		}
-
+		}, 1, 1);
+		return CastResult.NORMAL_SUCCESS;
 	}
 
 }

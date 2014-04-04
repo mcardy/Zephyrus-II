@@ -69,7 +69,7 @@ public class Armor implements Spell {
 	}
 
 	@Override
-	public CastResult onCast(User user, int power, Spell combo, String[] args) {
+	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
 		if (player.getInventory().getHelmet() == null && player.getInventory().getChestplate() == null
 				&& player.getInventory().getLeggings() == null && player.getInventory().getBoots() == null) {

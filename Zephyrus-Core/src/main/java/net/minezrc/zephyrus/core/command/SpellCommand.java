@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minezrc.zephyrus.Zephyrus;
-import net.minezrc.zephyrus.core.spell.Zephyronomicon;
+import net.minezrc.zephyrus.core.item.Zephyronomicon;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.command.Command;
 import net.minezrc.zephyrus.core.util.command.CommandArgs;
@@ -65,7 +65,7 @@ public class SpellCommand {
 		UserPreCastEvent preCast = new UserPreCastEvent(user, spell, 1, args.getArgs());
 		Bukkit.getPluginManager().callEvent(preCast);
 		if (!preCast.isCancelled()) {
-			CastResult result = spell.onCast(user, 1, null, args.getArgs());
+			CastResult result = spell.onCast(user, 1, args.getArgs());
 			if (result == CastResult.NORMAL_SUCCESS) {
 				user.drainMana(spell.getManaCost());
 				user.addLevelProgress(spell.getXpReward());
