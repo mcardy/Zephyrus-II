@@ -11,6 +11,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <dependencies>
+    <!--Zephyrus API dependency-->
     <dependency>
       <groupId>net.minezrc.zephyrus</groupId>
       <artifactId>Zephyrus-API</artifactId>
@@ -20,13 +21,19 @@
     <!--All supported NMS versions-->
     <dependency>
       <groupId>net.minezrc.zephyrus.nms</groupId>
-      <artifactId>v1_6_4</artifactId>
+      <artifactId>v1_6_R3</artifactId>
       <version>${project.parent.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>net.minezrc.zephyrus.nms</groupId>
-      <artifactId>v1_7_2</artifactId>
+      <artifactId>v1_7_R1</artifactId>
+      <version>${project.parent.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>net.minezrc.zephyrus.nms</groupId>
+      <artifactId>v1_7_R2</artifactId>
       <version>${project.parent.version}</version>
       <optional>true</optional>
     </dependency>

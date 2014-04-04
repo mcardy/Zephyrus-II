@@ -6,8 +6,9 @@
   <packaging>pom</packaging>
   <name>Zephyrus NMS</name>
   <modules>
-    <module>v1_6_4</module>
-    <module>v1_7_2</module>
+    <module>v1_6_R3</module>
+    <module>v1_7_R1</module>
+    <module>v1_7_R2</module>
   </modules>
   
   <parent>
