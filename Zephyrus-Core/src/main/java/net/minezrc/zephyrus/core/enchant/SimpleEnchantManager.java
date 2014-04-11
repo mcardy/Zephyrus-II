@@ -1,8 +1,11 @@
 package net.minezrc.zephyrus.core.enchant;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.util.reflection.ReflectionUtils;
@@ -14,15 +17,18 @@ import net.minezrc.zephyrus.enchant.PickaxeEnchant;
 import net.minezrc.zephyrus.enchant.SwordEnchant;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * Zephyrus - SimpleEnchantmentManager.java
@@ -32,8 +38,6 @@ import org.bukkit.inventory.ItemStack;
  */
 
 public class SimpleEnchantManager implements EnchantManager, Listener {
-
-	//TODO apply enchantments
 	
 	private Map<Integer, Enchant> enchantmentMap;
 	private int id;
@@ -144,6 +148,26 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 							((SwordEnchant) ench).onDamage(entry.getValue(), event);
 						}
 					}
+				}
+			}
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onEnchant(EnchantItemEvent event) {
+		for (Enchant ench : enchantmentMap.values()) {
+			if (ench.getTarget().isTypeCompatible(event.getItem())) {
+				int chance = new Random().nextInt(ench.getChance());
+				if (chance == 0) {
+					int level = event.getExpLevelCost() / ench.getCostPerLevel();
+					level = level <= ench.getMaxLevel() ? level : ench.getMaxLevel();
+					event.getEnchantsToAdd().put(Enchantment.getById(120), level);
+					ItemMeta meta = event.getItem().getItemMeta();
+					List<String> lore = meta.getLore() != null ? meta.getLore() : new ArrayList<String>();
+					lore.add(ChatColor.GRAY + ench.getName());
+					meta.setLore(lore);
+					event.getItem().setItemMeta(meta);
 				}
 			}
 		}
