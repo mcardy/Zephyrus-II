@@ -8,7 +8,6 @@ import net.minezrc.zephyrus.hook.ProtectionHook;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 
 /**
  * Zephyrus - SimpleHookManager.java
