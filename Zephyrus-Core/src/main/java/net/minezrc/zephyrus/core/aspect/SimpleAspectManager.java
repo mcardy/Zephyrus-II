@@ -40,35 +40,38 @@ import org.bukkit.inventory.ItemStack;
 public class SimpleAspectManager implements AspectManager {
 
 	private Map<String, AspectList> map;
-	
+
 	public SimpleAspectManager() {
 		map = new HashMap<String, AspectList>();
 	}
-	
+
 	private void add(Material material, AspectList list) {
 		add(material, 0, list);
 	}
-	
+
 	private void add(Material material, int data, AspectList list) {
 		map.put(material.name() + ":" + data, list);
 	}
-	
+
 	@Override
 	public AspectList getAspects(ItemStack item) {
-		String name = item.getType() + ":" + item.getDurability();
-		AspectList list;
-		if (map.containsKey(name)) {
-			list = map.get(name);
-		} else {
-			list = map.get(item.getType() + ":0");
+		if (item != null) {
+			String name = item.getType() + ":" + item.getDurability();
+			AspectList list;
+			if (map.containsKey(name)) {
+				list = map.get(name);
+			} else {
+				list = map.get(item.getType() + ":0");
+			}
+			List<Integer> values = new ArrayList<Integer>();
+			for (int i : list.getAmountList()) {
+				values.add(i * item.getAmount());
+			}
+			return AspectList.newList().setAspectLists(list.getTypeList(), values);
 		}
-		List<Integer> values = new ArrayList<Integer>();
-		for (int i : list.getAmountList()) {
-			values.add(i * item.getAmount());
-		}
-		return AspectList.newList().setAspectLists(list.getTypeList(), values);
+		return AspectList.newList();
 	}
-	
+
 	@Override
 	public void load() {
 		add(Material.STONE, AspectList.newList(STONE, 2));
@@ -98,7 +101,8 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.NOTE_BLOCK, AspectList.newList().setAspectTypes(WOOD, MACHINE).setAspectValues(16, 2));
 		add(Material.POWERED_RAIL, AspectList.newList().setAspectTypes(METAL, MACHINE).setAspectValues(2, 4));
 		add(Material.DETECTOR_RAIL, AspectList.newList().setAspectTypes(METAL, MACHINE).setAspectValues(4, 4));
-		add(Material.PISTON_STICKY_BASE, AspectList.newList().setAspectTypes(METAL, WOOD, MACHINE, ANIMAL).setAspectValues(4, 4, 12, 1));
+		add(Material.PISTON_STICKY_BASE, AspectList.newList().setAspectTypes(METAL, WOOD, MACHINE, ANIMAL)
+				.setAspectValues(4, 4, 12, 1));
 		add(Material.WEB, AspectList.newList(ANIMAL, 1));
 		add(Material.LONG_GRASS, AspectList.newList().setAspectTypes(PLANT, WIND).setAspectValues(2, 1));
 		add(Material.DEAD_BUSH, AspectList.newList().setAspectTypes(EVIL, PLANT).setAspectValues(2, 1));
@@ -110,7 +114,7 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.BROWN_MUSHROOM, AspectList.newList(PLANT, 2));
 		add(Material.GOLD_BLOCK, AspectList.newList().setAspectTypes(VALUE, METAL).setAspectValues(36, 36));
 		add(Material.IRON_BLOCK, AspectList.newList(METAL, 72));
-		add(Material.DOUBLE_STEP, 0,  AspectList.newList(STONE, 2));
+		add(Material.DOUBLE_STEP, 0, AspectList.newList(STONE, 2));
 		add(Material.DOUBLE_STEP, 2, AspectList.newList(WOOD, 2));
 		add(Material.DOUBLE_STEP, 6, AspectList.newList().setAspectTypes(STONE, EVIL).setAspectValues(2, 2));
 		add(Material.STEP, 0, AspectList.newList(STONE, 1));
@@ -119,7 +123,8 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.BRICK, AspectList.newList(STONE, 4));
 		add(Material.TNT, AspectList.newList(FIRE, 4));
 		add(Material.BOOKSHELF, AspectList.newList().setAspectTypes(WOOD, MAGIC).setAspectValues(12, 3));
-		add(Material.MOSSY_COBBLESTONE, AspectList.newList().setAspectTypes(STONE, PLANT, EVIL).setAspectValues(1, 1, 1));
+		add(Material.MOSSY_COBBLESTONE, AspectList.newList().setAspectTypes(STONE, PLANT, EVIL)
+				.setAspectValues(1, 1, 1));
 		add(Material.OBSIDIAN, AspectList.newList().setAspectTypes(STONE, WATER, FIRE).setAspectValues(4, 1, 1));
 		add(Material.TORCH, AspectList.newList(LIGHT, 1));
 		add(Material.FIRE, AspectList.newList(FIRE, 4));
@@ -158,7 +163,7 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.JUKEBOX, AspectList.newList().setAspectTypes(VALUE, WOOD, MACHINE).setAspectValues(8, 16, 2));
 		add(Material.FENCE, AspectList.newList(WOOD, 2));
 		add(Material.PUMPKIN, AspectList.newList(PLANT, 4));
-		
+
 		add(Material.ARROW, AspectList.newList(ATTACK, 4));
 	}
 

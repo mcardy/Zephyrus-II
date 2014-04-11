@@ -6,6 +6,7 @@ import java.util.List;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.state.State;
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 /**
@@ -21,6 +22,7 @@ public interface User {
 	public int addLevelProgress(int progress);
 	public void addSpell(Spell spell);
 	public void addState(State state, int time);
+	public void castSpell(Spell spell, int power, String[] args);
 	public float drainMana(float mana);
 	public List<String> getLearnedSpells();
 	public int getLevel();
@@ -30,8 +32,10 @@ public interface User {
 	public int getMaxMana();
 	public Player getPlayer();
 	public Collection<State> getStates();
+	public LivingEntity getTarget(Spell spell);
 	public boolean isSpellLearned(Spell spell);
 	public boolean isStateApplied(State state);
 	public void setManaDisplay(boolean b);
+	public void setTarget(LivingEntity entity, String spell, boolean friendly);
 	
 }

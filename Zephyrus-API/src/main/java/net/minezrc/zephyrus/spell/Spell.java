@@ -1,7 +1,6 @@
 package net.minezrc.zephyrus.spell;
 
 import net.minezrc.zephyrus.aspect.AspectList;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
@@ -25,7 +24,6 @@ public interface Spell {
 
 	public SpellElement getElement();
 	public SpellType getType();
-	public CastPriority getPriority();
 	
 	public void onDisable();
 	public void onEnable();

@@ -3,21 +3,25 @@ package net.minezrc.zephyrus.core.spell.mobility;
 import java.util.HashSet;
 import java.util.Map;
 
+import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.DataStructureUtils;
+import net.minezrc.zephyrus.core.util.ParticleEffects;
+import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
 import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
 import net.minezrc.zephyrus.user.User;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * Zephyrus - Bang.java
@@ -29,6 +33,7 @@ import org.bukkit.entity.Entity;
 @Bindable
 public class Bang implements Spell, ConfigurableSpell {
 
+	private double[][] particles;
 	private int radius;
 
 	@Override
@@ -70,35 +75,45 @@ public class Bang implements Spell, ConfigurableSpell {
 	public SpellType getType() {
 		return SpellType.MOBILITY;
 	}
-
-	@Override
-	public CastPriority getPriority() {
-		return CastPriority.LOW;
-	}
-
+	
 	@Override
 	public void onDisable() {
 	}
 
 	@Override
 	public void onEnable() {
+		particles = new double[90][2];
+		for (int i = 0; i < 90; i++) {
+			particles[i][0] = 2 * Math.cos(i * 4);
+			particles[i][1] = 2 * Math.sin(i * 4);
+		}
 	}
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		@SuppressWarnings("deprecation")
-		Location loc = user.getPlayer().getTargetBlock(null, 1000).getLocation();
-		loc.setX(loc.getX() + 0.5);
-		loc.setZ(loc.getZ() + 0.5);
-		Location ploc = loc;
-		ploc.setY(ploc.getY() + 2);
+		Location loc = user.getPlayer().getTargetBlock(null, 1000).getLocation().add(-0.5, 1, -0.5);
 		for (Entity entity : getNearbyEntities(loc, radius)) {
 			if (entity != user.getPlayer()) {
 				entity.setVelocity(entity.getLocation().toVector().subtract(loc.toVector()).normalize().setY(0.4)
-						.multiply(power));
+						.multiply(power * 2));
 			}
 		}
-		return CastResult.NORMAL_SUCCESS;
+		playParticleEffect(loc);
+		return CastResult.SUCCESS;
+	}
+
+	private void playParticleEffect(final Location loc) {
+		for (int i = 0; i < particles.length; i++) {
+			final double[] particle = particles[i];
+			Bukkit.getScheduler().runTaskLater(Zephyrus.getPlugin(), new BukkitRunnable() {
+				@Override
+				public void run() {
+					Location pos = loc.clone().add(particle[0], 0, particle[1]);
+					ParticleEffects.sendParticle(Particle.INSTANT_SPELL, pos, 1);
+				}
+			}, i / 4);
+		}
 	}
 
 	private Entity[] getNearbyEntities(Location l, int radius) {

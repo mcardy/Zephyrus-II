@@ -7,7 +7,6 @@ import net.minezrc.zephyrus.core.util.ParticleEffects;
 import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
 import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
@@ -70,11 +69,6 @@ public class Blink implements Spell {
 	}
 
 	@Override
-	public CastPriority getPriority() {
-		return CastPriority.LOW;
-	}
-
-	@Override
 	public void onDisable() {
 	}
 
@@ -100,11 +94,11 @@ public class Blink implements Spell {
 				ParticleEffects.sendParticle(Particle.ENDER, previous, 1, 1, 1, 1, 16);
 				player.teleport(teleport);
 				player.getWorld().playEffect(teleport, Effect.ENDER_SIGNAL, 0);
-				return CastResult.NORMAL_SUCCESS;
+				return CastResult.SUCCESS;
 			}
 		}
 		Language.sendError("spell.blink.failure", "You can't blink there!", player);
-		return CastResult.NORMAL_FAIL;
+		return CastResult.FAILURE;
 	}
 
 }

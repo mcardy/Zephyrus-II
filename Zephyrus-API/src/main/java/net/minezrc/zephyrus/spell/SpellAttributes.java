@@ -32,28 +32,20 @@ public class SpellAttributes {
 	 */
 	public enum CastResult {
 		/**
-		 * A normal cast success
+		 * A cast success
 		 */
-		NORMAL_SUCCESS,
+		SUCCESS,
 		/**
-		 * A normal cast failure
+		 * A cast failure
 		 */
-		NORMAL_FAIL,
-		/**
-		 * A combo cast success which cancels the other spell's cast
-		 */
-		COMBO_SUCCESS,
-		/**
-		 * A combo cast failure which will allow the other spell to cast
-		 */
-		COMBO_FAILURE;
+		FAILURE,
 	}
 
 	/**
 	 * An identifier for the element of a spell
 	 */
 	public enum SpellElement {
-		AIR, ARCANE, DARKNESS, EARTH, ENDER, FIRE, LIGHT, PASSIVE, WATER;
+		AIR, ARCANE, DARKNESS, EARTH, ENDER, FIRE, LIGHT, NEUTREAL, WATER;
 	}
 
 	/**

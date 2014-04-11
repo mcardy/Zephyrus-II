@@ -4,7 +4,6 @@ import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
@@ -53,17 +52,12 @@ public class Feed implements Spell {
 
 	@Override
 	public SpellElement getElement() {
-		return SpellElement.PASSIVE;
+		return SpellElement.NEUTREAL;
 	}
 
 	@Override
 	public SpellType getType() {
 		return SpellType.RESTORATION;
-	}
-
-	@Override
-	public CastPriority getPriority() {
-		return CastPriority.LOW;
 	}
 
 	@Override
@@ -79,10 +73,10 @@ public class Feed implements Spell {
 		Player player = user.getPlayer();
 		if (player.getFoodLevel() < 20) {
 			player.setFoodLevel(player.getFoodLevel() + 1);
-			return CastResult.NORMAL_SUCCESS;
+			return CastResult.SUCCESS;
 		} else {
 			Language.sendError("spell.feed.full", "You are already full!", player);
-			return CastResult.NORMAL_FAIL;
+			return CastResult.FAILURE;
 		}
 	}
 

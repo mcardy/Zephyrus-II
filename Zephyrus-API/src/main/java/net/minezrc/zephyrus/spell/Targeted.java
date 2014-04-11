@@ -6,16 +6,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Zephyrus - SpellRequirements.java
+ * Zephyrus - Targeted.java
  * 
  * @author minnymin3
- *  
+ * 
  */
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Prerequisite {
+public @interface Targeted {
 
-	public Class<? extends Spell> requiredSpell();
+	public boolean friendly();
 	
 }

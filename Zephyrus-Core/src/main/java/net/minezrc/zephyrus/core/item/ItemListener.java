@@ -13,14 +13,11 @@ import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.ParticleEffects;
 import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
 import net.minezrc.zephyrus.event.UserCraftSpellEvent;
-import net.minezrc.zephyrus.event.UserPostCastEvent;
-import net.minezrc.zephyrus.event.UserPreCastEvent;
 import net.minezrc.zephyrus.item.ActionItem;
 import net.minezrc.zephyrus.item.Item;
 import net.minezrc.zephyrus.item.Wand;
 import net.minezrc.zephyrus.spell.Prerequisite;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
@@ -106,11 +103,13 @@ public class ItemListener implements Listener {
 								}
 								loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount))
 										.setVelocity(new Vector(0, 0, 0));
-								ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 0.25F, 0.1F, 0.25F, 0, 50);
+								ParticleEffects
+										.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 0.25F, 0.1F, 0.25F, 0, 50);
 								player.playSound(loc, Sound.ORB_PICKUP, 3, 12);
 							}
 						} else if (spells.size() > 1) {
-							InventoryGUI gui = new InventoryGUI(Language.get("crafting.selectionname", "Craft which spell?"));
+							InventoryGUI gui = new InventoryGUI(
+									Language.get("crafting.selectionname", "Craft which spell?"));
 							for (int i = 0; i < spells.size(); i++) {
 								gui.setSlot(i + 1, SpellTome.createSpellTome(spells.get(i)), getButton(spells.get(i), event
 										.getClickedBlock(), itemEntity));
@@ -130,31 +129,7 @@ public class ItemListener implements Listener {
 						if (bound != null) {
 							Spell spell = Zephyrus.getSpell(bound);
 							User user = Zephyrus.getUser(player);
-							if (spell == null) {
-								Language.sendError("item.wand.cast.badspell", "The currently bound spell does not exist! Unbind and rebind it.", player);
-								return;
-							}
-							if (!user.isSpellLearned(Zephyrus.getSpell(bound))) {
-								Language.sendError("item.wand.cast.learn", "You have not learned [SPELL]", player, "[SPELL]", bound);
-								return;
-							}
-							if (user.getMana() < spell.getManaCost()) {
-								Language.sendError("command.cast.mana", "You do not have enough mana to cast [SPELL] [MANA]", player, "[SPELL]", spell
-										.getName(), "[MANA]", ChatColor.RED + "" + user.getMana() + ChatColor.GRAY
-										+ "/" + ChatColor.GREEN + spell.getManaCost());
-								return;
-							}
-							UserPreCastEvent preCast = new UserPreCastEvent(user, spell, 1, null);
-							Bukkit.getPluginManager().callEvent(preCast);
-							if (!preCast.isCancelled()) {
-								CastResult result = spell.onCast(user, 1 + wand.getPowerIncrease(spell), null);
-								if (result == CastResult.NORMAL_SUCCESS) {
-									user.drainMana(spell.getManaCost());
-									user.addLevelProgress(spell.getXpReward());
-									UserPostCastEvent postCast = new UserPostCastEvent(user, spell, 1, null);
-									Bukkit.getPluginManager().callEvent(postCast);
-								}
-							}
+							user.castSpell(spell, wand.getPowerIncrease(spell), null);
 						} else {
 							Language.sendError("item.wand.nobound", "There is no spell bound to this wand! Bind one with /bind <spell>", player);
 						}
@@ -175,8 +150,7 @@ public class ItemListener implements Listener {
 				Bukkit.getPluginManager().callEvent(craftEvent);
 				if (!craftEvent.isCancelled()) {
 					Location loc = block.getLocation().add(0.5, 1.5, 0.5);
-					loc.getWorld().dropItem(loc, SpellTome.createSpellTome(spell))
-							.setVelocity(new Vector(0, 0, 0));
+					loc.getWorld().dropItem(loc, SpellTome.createSpellTome(spell)).setVelocity(new Vector(0, 0, 0));
 					int amount = 1;
 					if (user.getLevel() < 7) {
 						amount = 1;
@@ -189,8 +163,7 @@ public class ItemListener implements Listener {
 					for (org.bukkit.entity.Item i : entities) {
 						i.remove();
 					}
-					loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount))
-							.setVelocity(new Vector(0, 0, 0));
+					loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount)).setVelocity(new Vector(0, 0, 0));
 					ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 0.25F, 0.1F, 0.25F, 0, 50);
 					player.playSound(loc, Sound.ORB_PICKUP, 3, 12);
 				}

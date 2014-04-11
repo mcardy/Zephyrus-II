@@ -5,7 +5,6 @@ import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.state.StateList;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
@@ -44,11 +43,6 @@ public class Armor implements Spell {
 	}
 
 	@Override
-	public CastPriority getPriority() {
-		return CastPriority.HIGH;
-	}
-
-	@Override
 	public AspectList getRecipe() {
 		return AspectList.newList().setAspectTypes(Aspect.ARMOR, Aspect.VALUE, Aspect.MAGIC).setAspectValues(24, 48, 4);
 	}
@@ -75,14 +69,14 @@ public class Armor implements Spell {
 				&& player.getInventory().getLeggings() == null && player.getInventory().getBoots() == null) {
 			user.addState(StateList.ARMOR, 120);
 			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold", player);
-			return CastResult.NORMAL_SUCCESS;
+			return CastResult.SUCCESS;
 		} else if (user.isStateApplied(StateList.ARMOR)) {
 			user.addState(StateList.ARMOR, 120);
 			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold", player);
-			return CastResult.NORMAL_SUCCESS;
+			return CastResult.SUCCESS;
 		} else {
 			Language.sendError("spell.armor.fail", "You cannot be waring armour when casting this spell", player);
-			return CastResult.NORMAL_FAIL;
+			return CastResult.FAILURE;
 		}
 	}
 

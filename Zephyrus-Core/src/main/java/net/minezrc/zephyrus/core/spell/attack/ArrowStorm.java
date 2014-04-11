@@ -10,7 +10,6 @@ import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Prerequisite;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
@@ -86,11 +85,6 @@ public class ArrowStorm implements Spell, ConfigurableSpell {
 	}
 
 	@Override
-	public CastPriority getPriority() {
-		return CastPriority.HIGH;
-	}
-
-	@Override
 	public void onEnable() {
 	}
 
@@ -113,7 +107,7 @@ public class ArrowStorm implements Spell, ConfigurableSpell {
 				}
 			}
 		}, 1, 1);
-		return CastResult.NORMAL_SUCCESS;
+		return CastResult.SUCCESS;
 	}
 
 }

@@ -5,7 +5,6 @@ import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
@@ -66,12 +65,7 @@ public class Arrow implements Spell, Listener {
 	public SpellType getType() {
 		return SpellType.ATTACK;
 	}
-
-	@Override
-	public CastPriority getPriority() {
-		return CastPriority.LOW;
-	}
-
+	
 	@Override
 	public void onEnable() {
 	}
@@ -84,7 +78,7 @@ public class Arrow implements Spell, Listener {
 	public CastResult onCast(User user, int power, String[] args) {
 		user.getPlayer().launchProjectile(org.bukkit.entity.Arrow.class)
 				.setMetadata("removal_flag", new FixedMetadataValue(Zephyrus.getPlugin(), true));
-		return CastResult.NORMAL_SUCCESS;
+		return CastResult.SUCCESS;
 	}
 
 	@EventHandler

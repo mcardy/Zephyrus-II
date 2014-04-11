@@ -44,7 +44,7 @@ public class ItemCommand {
 
 	@Command(name = "spelltome",
 			aliases = { "tome" },
-			permission = "zephyrus.spelltome.give",
+			permission = "zephyrus.command.spelltome.give",
 			description = "Gives a spelltome to the designated player",
 			usage = "/spelltome <spell> [player]")
 	public void onTomeCommand(CommandArgs args) {
@@ -84,7 +84,7 @@ public class ItemCommand {
 	}
 
 	@Command(name = "aspects",
-			permission = "zephyrus.aspect",
+			permission = "zephyrus.command.aspects",
 			description = "Checks the aspects on an itemstack",
 			usage = "/aspects")
 	public void onAspects(CommandArgs args) {
@@ -123,23 +123,29 @@ public class ItemCommand {
 		}
 	}
 
-	@Command(name = "aspects.list")
+	@Command(name = "aspects.list",
+			permission = "zephyrus.command.aspects",
+			description = "List all aspects",
+			usage = "/aspects list")
 	public void onAspectList(CommandArgs args) {
 		if (args.isPlayer()) {
 			Message message = new Message("command.aspects.aspecttitle", "Aspects: ", MessageColor.RED,
 					MessageFormatting.BOLD);
 			for (Aspect aspect : Aspect.values()) {
-				message.addComponent(new MessageComponent(aspect.getColor()
-						+ Language.get("aspect." + aspect.name().toLowerCase() + ".name", aspect.getDefaultName())
-						+ " - ", MessageColor.valueOf(aspect.getColor().name()))
+				message.addComponent(new MessageComponent(Language.get("aspect." + aspect.name().toLowerCase()
+						+ ".name", aspect.getDefaultName()), MessageColor.valueOf(aspect.getColor().name()))
 						.setHoverEvent(MessageHoverEvent.TEXT, Language.get("aspect." + aspect.name().toLowerCase()
 								+ ".desc", aspect.getDefaultDescription())));
+				message.addComponent(new MessageComponent(" - ", MessageColor.BLACK, MessageFormatting.BOLD));
 			}
 			message.sendMessage(args.getPlayer());
 		}
 	}
 
-	@Command(name = "bind")
+	@Command(name = "bind",
+			permission = "zephyrus.command.bind",
+			description = "Binds a spell to the wand held in your hand",
+			usage = "/bind <spell>")
 	public void onBind(CommandArgs args) {
 		if (!args.isPlayer()) {
 			Language.sendError("command.ingame", "This command is only available in game", args.getSender());

@@ -20,6 +20,8 @@ import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
 import net.minezrc.zephyrus.core.spell.mobility.Blink;
 import net.minezrc.zephyrus.core.spell.restoration.Feed;
+import net.minezrc.zephyrus.core.spell.restoration.Heal;
+import net.minezrc.zephyrus.core.spell.restoration.Healer;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellManager;
@@ -211,9 +213,11 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new Blink());
 		// Restoration
 		registerSpell(new Feed());
+		registerSpell(new Heal());
+		registerSpell(new Healer());
 		// World
 		for (Spell spell : spellList) {
-			spell.onDisable();
+			spell.onEnable();
 		}
 		spellConfig.saveConfig();
 	}

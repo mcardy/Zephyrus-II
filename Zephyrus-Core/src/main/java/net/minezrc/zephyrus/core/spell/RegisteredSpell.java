@@ -2,7 +2,6 @@ package net.minezrc.zephyrus.core.spell;
 
 import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.spell.Spell;
-import net.minezrc.zephyrus.spell.SpellAttributes.CastPriority;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
@@ -98,11 +97,6 @@ public class RegisteredSpell implements Spell {
 	}
 
 	@Override
-	public CastPriority getPriority() {
-		return this.spell.getPriority();
-	}
-
-	@Override
 	public void onEnable() {
 		this.spell.onEnable();
 	}
@@ -117,7 +111,7 @@ public class RegisteredSpell implements Spell {
 		return this.spell.onCast(user, power, args);
 	}
 
-	public Object getOriginal() {
+	public Spell getOriginal() {
 		return this.spell;
 	}
 	

@@ -11,17 +11,27 @@ import java.util.Map.Entry;
 import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
+import net.minezrc.zephyrus.core.spell.RegisteredSpell;
 import net.minezrc.zephyrus.core.state.StateList;
 import net.minezrc.zephyrus.core.util.Language;
+import net.minezrc.zephyrus.event.UserPostCastEvent;
+import net.minezrc.zephyrus.event.UserPreCastEvent;
+import net.minezrc.zephyrus.event.UserTargetEntityEvent;
 import net.minezrc.zephyrus.spell.Spell;
+import net.minezrc.zephyrus.spell.Targeted;
+import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.state.State;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BlockIterator;
 
 /**
  * Zephyrus - OnlineUser.java
@@ -42,6 +52,9 @@ public class OnlineUser implements User {
 	private boolean display;
 	private Map<State, Integer> states;
 	private int tick;
+	private LivingEntity target;
+	private int targetTime;
+	private String targetSpell;
 
 	protected OnlineUser(Player player) {
 		this.player = player;
@@ -85,12 +98,66 @@ public class OnlineUser implements User {
 	}
 
 	@Override
+	public void castSpell(Spell spell, int power, String[] args) {
+		Spell original = ((RegisteredSpell)spell).getOriginal();
+		if (spell == null || !isSpellLearned(spell)) {
+			Language.sendError("command.cast.learn", "You have not learned [SPELL]", getPlayer(), "[SPELL]", args[0]);
+			return;
+		}
+		if (getMana() < spell.getManaCost()) {
+			Language.sendError("command.cast.mana", "You do not have enough mana to cast [SPELL] [MANA]", getPlayer(), "[SPELL]", spell
+					.getName(), "[MANA]", ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/" + ChatColor.GREEN
+					+ spell.getManaCost());
+			return;
+		}
+		if (original.getClass().isAnnotationPresent(Targeted.class)) {
+			LivingEntity targetEntity = getTarget(getPlayer());
+			if (targetEntity != null) {
+				setTarget(targetEntity, spell.getName(), original.getClass().getAnnotation(Targeted.class).friendly());
+			}
+		}
+		UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, args);
+		Bukkit.getPluginManager().callEvent(preCast);
+		if (!preCast.isCancelled()) {
+			CastResult result = spell.onCast(this, power, args);
+			if (result == CastResult.SUCCESS) {
+				drainMana(spell.getManaCost());
+				addLevelProgress(spell.getXpReward());
+				Bukkit.getPluginManager().callEvent(new UserPostCastEvent(this, spell, power, args));
+			}
+		}
+	}
+
+	private LivingEntity getTarget(Player player) {
+		BlockIterator iterator = new BlockIterator(player, 10);
+		while (iterator.hasNext()) {
+			Block block = iterator.next();
+			for (Entity entity : player.getNearbyEntities(10, 10, 10)) {
+				if (entity instanceof LivingEntity) {
+					int accuracy = 2;
+					for (int offX = -accuracy; offX < accuracy; offX++) {
+						for (int offY = -accuracy; offY < accuracy; offY++) {
+							for (int offZ = -accuracy; offZ < accuracy; offZ++) {
+								if (entity.getLocation().getBlock().getRelative(offX, offY, offZ).equals(block)) {
+									return (LivingEntity) entity;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
 	public float drainMana(float mana) {
 		this.mana -= mana;
 		if (getManaDisplay()) {
-			Zephyrus.getUserManager().getBarDisplay().setBar(getPlayer(), ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD
-					+ ChatColor.AQUA + getMana() + "/" + getMaxMana() + ChatColor.RESET
-					+ ChatColor.DARK_AQUA + "}---", (int) (((float) getMana() / (float) getMaxMana()) * 200));
+			Zephyrus.getUserManager()
+					.getBarDisplay()
+					.setBar(getPlayer(), ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD + ChatColor.AQUA + getMana()
+							+ "/" + getMaxMana() + ChatColor.RESET + ChatColor.DARK_AQUA + "}---", (int) (((float) getMana() / (float) getMaxMana()) * 200));
 		}
 		return this.mana;
 	}
@@ -136,6 +203,14 @@ public class OnlineUser implements User {
 	}
 
 	@Override
+	public LivingEntity getTarget(Spell spell) {
+		if (spell.getName().equals(targetSpell)) {
+			return target;
+		}
+		return null;
+	}
+
+	@Override
 	public boolean isStateApplied(State state) {
 		return this.states.containsKey(state);
 	}
@@ -167,9 +242,10 @@ public class OnlineUser implements User {
 		this.display = config.getBoolean("display");
 		this.states = new HashMap<State, Integer>();
 		if (getManaDisplay()) {
-			Zephyrus.getUserManager().getBarDisplay().setBar(getPlayer(), ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD
-					+ ChatColor.AQUA + getMana() + "/" + getMaxMana() + ChatColor.RESET
-					+ ChatColor.DARK_AQUA + "}---", (int) (((float) getMana() / (float) getMaxMana()) * 200));
+			Zephyrus.getUserManager()
+					.getBarDisplay()
+					.setBar(getPlayer(), ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD + ChatColor.AQUA + getMana()
+							+ "/" + getMaxMana() + ChatColor.RESET + ChatColor.DARK_AQUA + "}---", (int) (((float) getMana() / (float) getMaxMana()) * 200));
 		}
 	}
 
@@ -189,12 +265,30 @@ public class OnlineUser implements User {
 		this.display = b;
 	}
 
+	@Override
+	public void setTarget(LivingEntity target, String spell, boolean friendly) {
+		if (!targetSpell.equals(spell) || this.target == null) {
+			if (Zephyrus.getHookManager().canTarget(player, target, friendly)) {
+				UserTargetEntityEvent event = new UserTargetEntityEvent(this, target, friendly);
+				Bukkit.getPluginManager().callEvent(event);
+				if (!event.isCancelled()) {
+					this.target = target;
+					this.targetSpell = spell;
+				} else {
+					this.target = null;
+				}
+			} else {
+				this.target = null;
+			}
+		}
+	}
+
 	// This method is triggered every 2 ticks
 	// Tick time meaures 10ths of a second
 	protected void tick() {
 		if (Bukkit.getPlayer(playerName) == null) {
 			save();
-			((SimpleUserManager)Zephyrus.getUserManager()).removeUser(playerName);
+			((SimpleUserManager) Zephyrus.getUserManager()).removeUser(playerName);
 			return;
 		}
 		for (State state : getStates()) {
@@ -207,7 +301,7 @@ public class OnlineUser implements User {
 			float amount = 1F / (float) ConfigOptions.MANA_REGEN;
 			if (getMana() + amount < getMaxMana()) {
 				drainMana(-amount);
-			} else if (getMana() != getMaxMana()) { 
+			} else if (getMana() != getMaxMana()) {
 				drainMana(getMana() - getMaxMana());
 			}
 			for (Entry<State, Integer> entry : this.states.entrySet()) {
@@ -221,6 +315,13 @@ public class OnlineUser implements User {
 					state.onRemoved(this);
 				} else {
 					this.states.put(state, time);
+				}
+			}
+			if (target != null) {
+				targetTime++;
+				if (targetTime == 10) {
+					targetTime = 0;
+					target = null;
 				}
 			}
 		}
