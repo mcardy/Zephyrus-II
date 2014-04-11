@@ -21,3 +21,8 @@ Spell-Recipes: true
 # Enables/disables particle effects
 # - Possible Values: true or false
 Particle-Effects: true
+
+# Options for disabling spell casting in town or faction that is not your own
+# - Possible values: true or false
+Towny-Casting: false
+Faction-Casting: false

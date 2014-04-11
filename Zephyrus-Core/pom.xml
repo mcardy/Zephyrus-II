@@ -37,7 +37,7 @@
       <version>${project.parent.version}</version>
       <optional>true</optional>
     </dependency>
-    <!-- End of NMS support-->
+    <!--End of NMS support-->
   </dependencies>
   <build>
     <plugins>

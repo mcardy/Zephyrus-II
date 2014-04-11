@@ -6,6 +6,7 @@ import java.util.Set;
 import net.minezrc.zephyrus.aspect.AspectManager;
 import net.minezrc.zephyrus.command.CommandManager;
 import net.minezrc.zephyrus.enchant.EnchantManager;
+import net.minezrc.zephyrus.hook.PluginHookManager;
 import net.minezrc.zephyrus.item.Item;
 import net.minezrc.zephyrus.item.ItemManager;
 import net.minezrc.zephyrus.nms.NMSManager;
@@ -35,6 +36,7 @@ public class Zephyrus {
 	private static AspectManager aspectManager;
 	private static CommandManager commandManager;
 	private static EnchantManager enchantmentManager;
+	private static PluginHookManager hookManager;
 	private static ItemManager itemManager;
 	private static NMSManager nmsManager;
 	private static SpellManager spellManager;
@@ -63,6 +65,14 @@ public class Zephyrus {
 	 */
 	public static EnchantManager getEnchantmentManager() {
 		return enchantmentManager;
+	}
+	
+	/**
+	 * Gets the PluginHookManager singleton
+	 * @return The PluginHookManager instance
+	 */
+	public static PluginHookManager getHookManager() {
+		return hookManager;
 	}
 	
 	/**
@@ -251,6 +261,18 @@ public class Zephyrus {
 			throw new IllegalStateException("Zephyrus enchantment manager already set! It cannot be set twice!");
 		}
 		enchantmentManager = manager;
+	}
+	
+	/**
+	 * Attempts to set the PluginHookManager singleton
+	 * @param manager The manager to set
+	 * @throws IllegalStateException when the manager is already set
+	 */
+	public static void setHookManager(PluginHookManager manager) {
+		if (Zephyrus.hookManager != null) {
+			throw new IllegalStateException("Zephyrus hook manager already set! It cannot be set twice!");
+		}
+		hookManager = manager;
 	}
 	
 	/**

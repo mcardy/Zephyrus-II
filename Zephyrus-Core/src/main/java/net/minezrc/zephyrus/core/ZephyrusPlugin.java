@@ -5,6 +5,7 @@ import net.minezrc.zephyrus.core.aspect.SimpleAspectManager;
 import net.minezrc.zephyrus.core.command.SimpleCommandManager;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.core.enchant.SimpleEnchantManager;
+import net.minezrc.zephyrus.core.hook.SimpleHookManager;
 import net.minezrc.zephyrus.core.item.SimpleItemManager;
 import net.minezrc.zephyrus.core.nms.SimpleNMSManager;
 import net.minezrc.zephyrus.core.spell.SimpleSpellManager;
@@ -34,6 +35,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 		Zephyrus.setAspectManager(new SimpleAspectManager());
 		Zephyrus.setCommandManager(new SimpleCommandManager());
 		Zephyrus.setEnchantmentManager(new SimpleEnchantManager());
+		Zephyrus.setHookManager(new SimpleHookManager());
 		Zephyrus.setItemManager(new SimpleItemManager());
 		Zephyrus.setNMSManager(new SimpleNMSManager());
 		Zephyrus.setSpellManager(new SimpleSpellManager());
@@ -48,6 +50,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 			Zephyrus.getAspectManager().load();
 			Zephyrus.getCommandManager().load();
 			Zephyrus.getEnchantmentManager().load();
+			Zephyrus.getHookManager().load();
 			Zephyrus.getItemManager().load();
 			Zephyrus.getNMSManager().load();
 			Zephyrus.getSpellManager().load();
@@ -64,6 +67,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 	public void onDisable() {
 		Zephyrus.getCommandManager().unload();
 		Zephyrus.getEnchantmentManager().unload();
+		Zephyrus.getHookManager().unload();
 		Zephyrus.getItemManager().unload();
 		Zephyrus.getNMSManager().unload();
 		Zephyrus.getSpellManager().unload();
