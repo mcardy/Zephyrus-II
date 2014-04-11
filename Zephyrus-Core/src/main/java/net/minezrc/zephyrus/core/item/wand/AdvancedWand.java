@@ -32,7 +32,7 @@ public class AdvancedWand implements Wand {
 	@Override
 	public ItemRecipe getRecipe() {
 		ItemRecipe recipe = new ItemRecipe();
-		recipe.setShape("  i", " s ", "d  ");
+		recipe.setShape("  d", " s ", "i  ");
 		recipe.setIngredient('d', Material.GLOWSTONE);
 		recipe.setIngredient('s', Material.STICK);
 		recipe.setIngredient('i', Material.DIAMOND);

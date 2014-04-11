@@ -32,7 +32,7 @@ public class StandardWand implements Wand {
 	@Override
 	public ItemRecipe getRecipe() {
 		ItemRecipe recipe = new ItemRecipe();
-		recipe.setShape("  i", " s ", "d  ");
+		recipe.setShape("  d", " s ", "i  ");
 		recipe.setIngredient('d', Material.GLOWSTONE_DUST);
 		recipe.setIngredient('s', Material.STICK);
 		recipe.setIngredient('i', Material.GOLD_INGOT);

@@ -21,7 +21,7 @@ import org.bukkit.inventory.meta.BookMeta;
  * 
  */
 
-public class Zephyronomicon {
+public class MagicBooks {
 
 	public static ItemStack createZephyronomicon() {
 		ItemStack item = new ItemStack(Material.WRITTEN_BOOK);
@@ -45,7 +45,7 @@ public class Zephyronomicon {
 		ItemStack item = new ItemStack(Material.WRITTEN_BOOK);
 		BookMeta meta = (BookMeta) item.getItemMeta();
 
-		meta.setTitle(Language.get("item.recipebook.name", ChatColor.GOLD + "Zephyric Recipe Book"));
+		meta.setTitle(Language.get("item.recipebook.name", ChatColor.GOLD + "Mystic Recipe Book"));
 		meta.setLore(Arrays.asList(Language.get("item.recipebook.lore", ChatColor.GRAY
 				+ "Recipes for all spells from level " + startLevel + " to level " + endLevel)));
 

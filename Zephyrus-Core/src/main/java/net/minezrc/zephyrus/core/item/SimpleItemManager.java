@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.item.wand.AdvancedWand;
+import net.minezrc.zephyrus.core.item.wand.BasicFireWand;
+import net.minezrc.zephyrus.core.item.wand.BasicObsidianWand;
 import net.minezrc.zephyrus.core.item.wand.BasicWand;
 import net.minezrc.zephyrus.core.item.wand.StandardWand;
 import net.minezrc.zephyrus.item.Item;
@@ -54,6 +56,8 @@ public class SimpleItemManager implements ItemManager {
 	public void load() {
 		Bukkit.getPluginManager().registerEvents(new ItemListener(), Zephyrus.getPlugin());
 		registerItem(new BasicWand());
+		registerItem(new BasicFireWand());
+		registerItem(new BasicObsidianWand());
 		registerItem(new StandardWand());
 		registerItem(new AdvancedWand());
 	}

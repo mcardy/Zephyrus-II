@@ -31,7 +31,7 @@ public class BasicFireWand implements Wand {
 	@Override
 	public ItemRecipe getRecipe() {
 		ItemRecipe recipe = new ItemRecipe();
-		recipe.setShape("aai", "asa", "daa");
+		recipe.setShape("aad", "asa", "iaa");
 		recipe.setIngredient('a', Material.BLAZE_POWDER);
 		recipe.setIngredient('d', Material.REDSTONE);
 		recipe.setIngredient('s', Material.STICK);

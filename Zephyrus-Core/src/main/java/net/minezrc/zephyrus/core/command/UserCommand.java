@@ -73,7 +73,7 @@ public class UserCommand {
 			description = "Levels up you or someone else",
 			usage = "/level add [player]")
 	public void onLevelAdd(CommandArgs args) {
-		if (args.getArgs().length < 2) {
+		if (args.getArgs().length == 0) {
 			if (args.isPlayer()) {
 				User user = Zephyrus.getUser(args.getPlayer().getName());
 				int level = user.getLevel();
@@ -83,22 +83,36 @@ public class UserCommand {
 			} else {
 				Language.sendError("command.player", "No player specified", args.getSender());
 			}
-		} else if (args.getArgs().length < 3) {
-			if (Bukkit.getPlayer(args.getArgs()[1]) != null) {
-				Player target = Bukkit.getServer().getPlayer(args.getArgs()[1]);
+		} else if (args.getArgs().length == 1) {
+			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
+				Player target = Bukkit.getServer().getPlayer(args.getArgs()[0]);
 				User user = Zephyrus.getUser(target.getName());
 				int level = user.getLevel();
 				user.addLevelProgress((level * level * level + 100));
 				Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(), "[PLAYER]", args
 						.getSender().getName());
+			} else if (args.isPlayer()) {
+				try {
+					int levels = Integer.parseInt(args.getArgs()[0]);
+					User user = Zephyrus.getUser(args.getPlayer());
+					for (int i = 0; i < levels; i++) {
+						int level = user.getLevel();
+						user.addLevelProgress((level * level * level + 100));
+					}
+					Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(), "[PLAYER]", args
+							.getSender().getName());
+				} catch (NumberFormatException ex) {
+					Language.sendError("command.number", "Got [STRING] but expected a number", args.getSender(), "[STRING]", args
+							.getArgs()[2]);
+				}
 			} else {
-				Language.sendError("command.offline", "That player is offline", args.getSender());
+				Language.sendError("command.player", "No player specified", args.getSender());
 			}
 		} else {
-			if (Bukkit.getPlayer(args.getArgs()[1]) != null) {
+			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
 				try {
-					int levels = Integer.parseInt(args.getArgs()[2]);
-					Player target = Bukkit.getServer().getPlayer(args.getArgs()[1]);
+					int levels = Integer.parseInt(args.getArgs()[1]);
+					Player target = Bukkit.getServer().getPlayer(args.getArgs()[0]);
 					User user = Zephyrus.getUser(target.getName());
 					for (int i = 0; i < levels; i++) {
 						int level = user.getLevel();
@@ -166,7 +180,7 @@ public class UserCommand {
 			description = "Restores your's or someone else's mana",
 			usage = "/mana restore [player]")
 	public void onManaRestoreCommand(CommandArgs args) {
-		if (args.getArgs().length < 2) {
+		if (args.getArgs().length == 0) {
 			if (args.isPlayer()) {
 				Player player = args.getPlayer();
 				User user = Zephyrus.getUser(player.getName());
@@ -176,7 +190,7 @@ public class UserCommand {
 				Language.sendError("command.player", "No player specified", args.getSender());
 			}
 		} else {
-			if (Bukkit.getPlayer(args.getArgs()[1]) != null) {
+			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
 				Player player = Bukkit.getServer().getPlayer(args.getArgs()[1]);
 				User user = Zephyrus.getUser(player.getName());
 				user.drainMana(-user.getMaxMana() + user.getMana());
