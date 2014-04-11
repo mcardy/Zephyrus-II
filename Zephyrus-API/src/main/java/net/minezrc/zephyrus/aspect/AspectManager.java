@@ -13,6 +13,11 @@ import org.bukkit.inventory.ItemStack;
 
 public interface AspectManager extends Manager {
 
+	/**
+	 * Gets the aspects that pertain to itemstack
+	 * @param item The itemstack to get the aspects of
+	 * @return An aspect list
+	 */
 	public AspectList getAspects(ItemStack item);
 	
 }

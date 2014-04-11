@@ -3,7 +3,7 @@ package net.minezrc.zephyrus.aspect;
 import org.bukkit.ChatColor;
 
 /**
- * Zephyrus - EssenceType.java
+ * Zephyrus - Aspect.java
  * 
  * @author minnymin3
  * 
@@ -42,14 +42,23 @@ public enum Aspect {
 		this.color = color;
 	}
 	
+	/**
+	 * Gets the ChatColor of the aspect
+	 */
 	public ChatColor getColor() {
 		return color;
 	}
 	
+	/**
+	 * Gets the default description written in English
+	 */
 	public String getDefaultDescription() {
 		return description;
 	}
 	
+	/**
+	 * Gets the default name written in English
+	 */
 	public String getDefaultName() {
 		return name;
 	}
