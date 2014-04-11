@@ -5,6 +5,7 @@ import java.util.List;
 import net.minezrc.zephyrus.hook.EconomyHook;
 import net.minezrc.zephyrus.hook.PluginHookManager;
 import net.minezrc.zephyrus.hook.ProtectionHook;
+import net.minezrc.zephyrus.spell.Spell;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -43,6 +44,16 @@ public class SimpleHookManager implements PluginHookManager {
 			hook.setupHook();
 			this.hooks.add(hook);
 		}
+	}
+	
+	@Override
+	public boolean canCast(Player player, Spell spell) {
+		for (ProtectionHook hook : this.hooks) {
+			if (!hook.canCast(player, spell)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override

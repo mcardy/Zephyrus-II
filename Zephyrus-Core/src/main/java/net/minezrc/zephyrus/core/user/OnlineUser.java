@@ -116,14 +116,16 @@ public class OnlineUser implements User {
 				setTarget(targetEntity, spell.getName(), original.getClass().getAnnotation(Targeted.class).friendly());
 			}
 		}
-		UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, args);
-		Bukkit.getPluginManager().callEvent(preCast);
-		if (!preCast.isCancelled()) {
-			CastResult result = spell.onCast(this, power, args);
-			if (result == CastResult.SUCCESS) {
-				drainMana(spell.getManaCost());
-				addLevelProgress(spell.getXpReward());
-				Bukkit.getPluginManager().callEvent(new UserPostCastEvent(this, spell, power, args));
+		if (Zephyrus.getHookManager().canCast(player, spell)) {
+			UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, args);
+			Bukkit.getPluginManager().callEvent(preCast);
+			if (!preCast.isCancelled()) {
+				CastResult result = spell.onCast(this, power, args);
+				if (result == CastResult.SUCCESS) {
+					drainMana(spell.getManaCost());
+					addLevelProgress(spell.getXpReward());
+					Bukkit.getPluginManager().callEvent(new UserPostCastEvent(this, spell, power, args));
+				}
 			}
 		}
 	}

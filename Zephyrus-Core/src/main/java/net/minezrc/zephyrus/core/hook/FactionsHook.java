@@ -29,13 +29,13 @@ public class FactionsHook implements ProtectionHook {
 		UPlayer uplayer = UPlayer.get(player);
 		Location loc = player.getLocation();
 		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
-		if (faction == null) {
-			return true;
-		} else if (faction.getUPlayers().contains(uplayer)) {
-			return true;
-		} else {
+		if (faction != null) {
+			if (faction.getUPlayers().contains(uplayer)) {
+				return true;
+			}
 			return false;
 		}
+		return true;
 	}
 
 	@Override
