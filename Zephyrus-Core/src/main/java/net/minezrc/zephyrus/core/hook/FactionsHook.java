@@ -1,10 +1,12 @@
 package net.minezrc.zephyrus.core.hook;
 
+import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.hook.ProtectionHook;
 import net.minezrc.zephyrus.spell.Spell;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -25,13 +27,42 @@ import com.massivecraft.mcore.ps.PS;
 public class FactionsHook implements ProtectionHook {
 
 	@Override
+	public boolean canBuild(Player player, Block block) {
+		UPlayer uplayer = UPlayer.get(player);
+		Location loc = block.getLocation();
+		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
+		if (faction != null) {
+			if (faction.getUPlayers().contains(uplayer)) {
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean canBuild(Player player, Location loc) {
+		UPlayer uplayer = UPlayer.get(player);
+		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
+		if (faction != null) {
+			if (faction.getUPlayers().contains(uplayer)) {
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public boolean canCast(Player player, Spell spell) {
 		UPlayer uplayer = UPlayer.get(player);
 		Location loc = player.getLocation();
 		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
 		if (faction != null) {
-			if (faction.getUPlayers().contains(uplayer)) {
-				return true;
+			if (ConfigOptions.FACTION_CASTING) {
+				if (faction.getUPlayers().contains(uplayer)) {
+					return true;
+				}
 			}
 			return false;
 		}
@@ -59,7 +90,7 @@ public class FactionsHook implements ProtectionHook {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void setupHook() {
 	}

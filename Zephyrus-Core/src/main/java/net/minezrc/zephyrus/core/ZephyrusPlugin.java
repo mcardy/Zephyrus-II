@@ -23,6 +23,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 /**
  * Zephyrus - ZephyrusPlugin.java
  * 
+ * TODO Held Spells
+ * Held spells are spells that are cast then continue to cast until they are right clicked
+ * TODO Re-implement all spells and items
+ * TODO Implement Combo-Spells
+ * TODO Item level and upgrades
+ * TODO Particle projectiles
+ * 
  * @author minnymin3
  * 
  */

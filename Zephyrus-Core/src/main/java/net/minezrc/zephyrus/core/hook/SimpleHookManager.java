@@ -7,6 +7,8 @@ import net.minezrc.zephyrus.hook.PluginHookManager;
 import net.minezrc.zephyrus.hook.ProtectionHook;
 import net.minezrc.zephyrus.spell.Spell;
 
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -44,6 +46,26 @@ public class SimpleHookManager implements PluginHookManager {
 			hook.setupHook();
 			this.hooks.add(hook);
 		}
+	}
+	
+	@Override
+	public boolean canBuild(Player player, Block block) {
+		for (ProtectionHook hook : this.hooks) {
+			if (!hook.canBuild(player, block)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean canBuild(Player player, Location loc) {
+		for (ProtectionHook hook : this.hooks) {
+			if (!hook.canBuild(player, loc)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override

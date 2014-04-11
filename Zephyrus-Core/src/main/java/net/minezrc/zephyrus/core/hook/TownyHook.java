@@ -1,9 +1,12 @@
 package net.minezrc.zephyrus.core.hook;
 
+import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.hook.ProtectionHook;
 import net.minezrc.zephyrus.spell.Spell;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -26,11 +29,37 @@ public class TownyHook implements ProtectionHook {
 	private Towny towny;
 	
 	@Override
-	public boolean canCast(Player player, Spell spell) {
-		TownBlock block = TownyUniverse.getTownBlock(player.getLocation());
-		if (block != null) {
-			if (block.getType() == TownBlockType.ARENA || block.getType() == TownBlockType.WILDS) {
+	public boolean canBuild(Player player, Block block) {
+		TownBlock tblock = TownyUniverse.getTownBlock(block.getLocation());
+		if (tblock != null) {
+			if (tblock.getType() == TownBlockType.WILDS) {
 				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean canBuild(Player player, Location loc) {
+		TownBlock tblock = TownyUniverse.getTownBlock(loc);
+		if (tblock != null) {
+			if (tblock.getType() == TownBlockType.WILDS) {
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean canCast(Player player, Spell spell) {
+		TownBlock tblock = TownyUniverse.getTownBlock(player.getLocation());
+		if (tblock != null) {
+			if (ConfigOptions.TOWNY_CASTING) {
+				if (tblock.getType() == TownBlockType.ARENA || tblock.getType() == TownBlockType.WILDS) {
+					return true;
+				}
 			}
 			return false;
 		}

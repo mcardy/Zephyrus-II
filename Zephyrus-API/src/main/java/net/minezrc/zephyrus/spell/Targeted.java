@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
+
 /**
  * Zephyrus - Targeted.java
  * 
@@ -17,5 +19,6 @@ import java.lang.annotation.Target;
 public @interface Targeted {
 
 	public boolean friendly();
+	public TargetType type();
 	
 }

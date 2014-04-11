@@ -5,6 +5,8 @@ import net.minezrc.zephyrus.hook.ProtectionHook;
 import net.minezrc.zephyrus.spell.Spell;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -26,6 +28,16 @@ public class WorldGuardHook implements ProtectionHook {
 	private StateFlag flag;
 	private WorldGuardPlugin plugin;
 
+	@Override
+	public boolean canBuild(Player player, Block block) {
+		return plugin.canBuild(player, block);
+	}
+	
+	@Override
+	public boolean canBuild(Player player, Location loc) {
+		return plugin.canBuild(player, loc);
+	}
+	
 	@Override
 	public boolean canCast(Player player, Spell spell) {
 		if (plugin.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(flag)

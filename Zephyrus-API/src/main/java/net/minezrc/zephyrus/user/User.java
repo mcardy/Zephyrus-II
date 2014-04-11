@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.List;
 
 import net.minezrc.zephyrus.spell.Spell;
+import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
 import net.minezrc.zephyrus.state.State;
 
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 /**
@@ -32,10 +32,9 @@ public interface User {
 	public int getMaxMana();
 	public Player getPlayer();
 	public Collection<State> getStates();
-	public LivingEntity getTarget(Spell spell);
+	public Target getTarget(Spell spell);
 	public boolean isSpellLearned(Spell spell);
 	public boolean isStateApplied(State state);
-	public void setManaDisplay(boolean b);
-	public void setTarget(LivingEntity entity, String spell, boolean friendly);
+	public void setTarget(Spell spell, TargetType type, boolean friendly);
 	
 }
