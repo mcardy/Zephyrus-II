@@ -11,7 +11,8 @@ import static net.minezrc.zephyrus.aspect.Aspect.LIGHT;
 import static net.minezrc.zephyrus.aspect.Aspect.MACHINE;
 import static net.minezrc.zephyrus.aspect.Aspect.MAGIC;
 import static net.minezrc.zephyrus.aspect.Aspect.METAL;
-import static net.minezrc.zephyrus.aspect.Aspect.PLANT;
+import static net.minezrc.zephyrus.aspect.Aspect.LIFE;
+import static net.minezrc.zephyrus.aspect.Aspect.POWER;
 import static net.minezrc.zephyrus.aspect.Aspect.STONE;
 import static net.minezrc.zephyrus.aspect.Aspect.TOOL;
 import static net.minezrc.zephyrus.aspect.Aspect.VALUE;
@@ -75,11 +76,11 @@ public class SimpleAspectManager implements AspectManager {
 	@Override
 	public void load() {
 		add(Material.STONE, AspectList.newList(STONE, 2));
-		add(Material.GRASS, AspectList.newList().setAspectTypes(DIRT, PLANT).setAspectValues(2, 1));
+		add(Material.GRASS, AspectList.newList().setAspectTypes(DIRT, LIFE).setAspectValues(2, 1));
 		add(Material.DIRT, AspectList.newList(DIRT, 2));
 		add(Material.COBBLESTONE, AspectList.newList(STONE, 1));
 		add(Material.WOOD, AspectList.newList(WOOD, 2));
-		add(Material.SAPLING, AspectList.newList().setAspectTypes(PLANT, WOOD).setAspectValues(4, 1));
+		add(Material.SAPLING, AspectList.newList().setAspectTypes(LIFE, WOOD).setAspectValues(4, 1));
 		add(Material.BEDROCK, AspectList.newList(STONE, 16));
 		add(Material.WATER, AspectList.newList(WATER, 8));
 		add(Material.STATIONARY_WATER, AspectList.newList(WATER, 8));
@@ -90,28 +91,28 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.GOLD_ORE, AspectList.newList().setAspectTypes(STONE, METAL, VALUE).setAspectValues(2, 2, 2));
 		add(Material.IRON_ORE, AspectList.newList().setAspectTypes(STONE, METAL).setAspectValues(2, 4));
 		add(Material.COAL_ORE, AspectList.newList().setAspectTypes(STONE, FIRE).setAspectValues(2, 2));
-		add(Material.LOG, AspectList.newList().setAspectTypes(WOOD, PLANT).setAspectValues(8, 1));
-		add(Material.LEAVES, AspectList.newList(PLANT, 2));
-		add(Material.SPONGE, AspectList.newList(PLANT, 1));
+		add(Material.LOG, AspectList.newList().setAspectTypes(WOOD, LIFE).setAspectValues(8, 1));
+		add(Material.LEAVES, AspectList.newList(LIFE, 2));
+		add(Material.SPONGE, AspectList.newList(LIFE, 1));
 		add(Material.GLASS, AspectList.newList(GLASS, 4));
 		add(Material.LAPIS_ORE, AspectList.newList().setAspectTypes(VALUE, STONE).setAspectValues(4, 2));
 		add(Material.LAPIS_BLOCK, AspectList.newList().setAspectTypes(VALUE).setAspectValues(9));
 		add(Material.DISPENSER, AspectList.newList().setAspectTypes(STONE, MACHINE).setAspectValues(7, 8));
 		add(Material.SANDSTONE, AspectList.newList().setAspectTypes(DIRT, STONE).setAspectValues(4, 1));
 		add(Material.NOTE_BLOCK, AspectList.newList().setAspectTypes(WOOD, MACHINE).setAspectValues(16, 2));
-		add(Material.POWERED_RAIL, AspectList.newList().setAspectTypes(METAL, MACHINE).setAspectValues(2, 4));
+		add(Material.POWERED_RAIL, AspectList.newList().setAspectTypes(METAL, MACHINE, POWER).setAspectValues(2, 4, 2));
 		add(Material.DETECTOR_RAIL, AspectList.newList().setAspectTypes(METAL, MACHINE).setAspectValues(4, 4));
 		add(Material.PISTON_STICKY_BASE, AspectList.newList().setAspectTypes(METAL, WOOD, MACHINE, ANIMAL)
 				.setAspectValues(4, 4, 12, 1));
 		add(Material.WEB, AspectList.newList(ANIMAL, 1));
-		add(Material.LONG_GRASS, AspectList.newList().setAspectTypes(PLANT, WIND).setAspectValues(2, 1));
-		add(Material.DEAD_BUSH, AspectList.newList().setAspectTypes(EVIL, PLANT).setAspectValues(2, 1));
+		add(Material.LONG_GRASS, AspectList.newList().setAspectTypes(LIFE, WIND).setAspectValues(2, 1));
+		add(Material.DEAD_BUSH, AspectList.newList().setAspectTypes(EVIL, LIFE).setAspectValues(2, 1));
 		add(Material.PISTON_BASE, AspectList.newList().setAspectTypes(METAL, WOOD, MACHINE).setAspectValues(4, 4, 12));
 		add(Material.WOOL, AspectList.newList(ANIMAL, 4));
-		add(Material.YELLOW_FLOWER, AspectList.newList(PLANT, 4));
-		add(Material.RED_ROSE, AspectList.newList(PLANT, 4));
-		add(Material.RED_MUSHROOM, AspectList.newList(PLANT, 2));
-		add(Material.BROWN_MUSHROOM, AspectList.newList(PLANT, 2));
+		add(Material.YELLOW_FLOWER, AspectList.newList(LIFE, 4));
+		add(Material.RED_ROSE, AspectList.newList(LIFE, 4));
+		add(Material.RED_MUSHROOM, AspectList.newList(LIFE, 2));
+		add(Material.BROWN_MUSHROOM, AspectList.newList(LIFE, 2));
 		add(Material.GOLD_BLOCK, AspectList.newList().setAspectTypes(VALUE, METAL).setAspectValues(36, 36));
 		add(Material.IRON_BLOCK, AspectList.newList(METAL, 72));
 		add(Material.DOUBLE_STEP, 0, AspectList.newList(STONE, 2));
@@ -121,9 +122,9 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.STEP, 2, AspectList.newList(WOOD, 1));
 		add(Material.STEP, 6, AspectList.newList().setAspectTypes(STONE, EVIL).setAspectValues(1, 1));
 		add(Material.BRICK, AspectList.newList(STONE, 4));
-		add(Material.TNT, AspectList.newList(FIRE, 4));
+		add(Material.TNT, AspectList.newList(POWER, 8));
 		add(Material.BOOKSHELF, AspectList.newList().setAspectTypes(WOOD, MAGIC).setAspectValues(12, 3));
-		add(Material.MOSSY_COBBLESTONE, AspectList.newList().setAspectTypes(STONE, PLANT, EVIL)
+		add(Material.MOSSY_COBBLESTONE, AspectList.newList().setAspectTypes(STONE, LIFE, EVIL)
 				.setAspectValues(1, 1, 1));
 		add(Material.OBSIDIAN, AspectList.newList().setAspectTypes(STONE, WATER, FIRE).setAspectValues(4, 1, 1));
 		add(Material.TORCH, AspectList.newList(LIGHT, 1));
@@ -135,7 +136,7 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.DIAMOND_ORE, AspectList.newList().setAspectTypes(STONE, VALUE, GLASS).setAspectValues(2, 4, 1));
 		add(Material.DIAMOND_BLOCK, AspectList.newList().setAspectTypes(VALUE, GLASS).setAspectValues(72, 18));
 		add(Material.WORKBENCH, AspectList.newList().setAspectTypes(WOOD, TOOL).setAspectValues(8, 2));
-		add(Material.CROPS, AspectList.newList(PLANT, 1));
+		add(Material.CROPS, AspectList.newList(LIFE, 1));
 		add(Material.SOIL, AspectList.newList(DIRT, 2));
 		add(Material.FURNACE, AspectList.newList().setAspectTypes(STONE, FIRE).setAspectValues(8, 1));
 		add(Material.BURNING_FURNACE, AspectList.newList().setAspectTypes(STONE, FIRE).setAspectValues(8, 4));
@@ -157,12 +158,12 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.SNOW, AspectList.newList(ICE, 2));
 		add(Material.ICE, AspectList.newList(ICE, 1));
 		add(Material.SNOW_BLOCK, AspectList.newList(ICE, 2));
-		add(Material.CACTUS, AspectList.newList().setAspectTypes(PLANT, ATTACK).setAspectValues(2, 1));
+		add(Material.CACTUS, AspectList.newList().setAspectTypes(LIFE, ATTACK).setAspectValues(2, 1));
 		add(Material.CLAY, AspectList.newList(DIRT, 4));
-		add(Material.SUGAR_CANE_BLOCK, AspectList.newList(PLANT, 2));
+		add(Material.SUGAR_CANE_BLOCK, AspectList.newList(LIFE, 2));
 		add(Material.JUKEBOX, AspectList.newList().setAspectTypes(VALUE, WOOD, MACHINE).setAspectValues(8, 16, 2));
 		add(Material.FENCE, AspectList.newList(WOOD, 2));
-		add(Material.PUMPKIN, AspectList.newList(PLANT, 4));
+		add(Material.PUMPKIN, AspectList.newList(LIFE, 4));
 
 		add(Material.ARROW, AspectList.newList(ATTACK, 4));
 	}
