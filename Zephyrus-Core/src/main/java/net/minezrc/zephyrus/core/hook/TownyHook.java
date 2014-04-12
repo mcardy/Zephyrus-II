@@ -1,6 +1,7 @@
 package net.minezrc.zephyrus.core.hook;
 
 import net.minezrc.zephyrus.core.config.ConfigOptions;
+import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.hook.ProtectionHook;
 import net.minezrc.zephyrus.spell.Spell;
 
@@ -61,6 +62,7 @@ public class TownyHook implements ProtectionHook {
 					return true;
 				}
 			}
+			Language.sendError("spell.cast.town", "You cannot cast spells inside of towns", player);
 			return false;
 		}
 		return true;

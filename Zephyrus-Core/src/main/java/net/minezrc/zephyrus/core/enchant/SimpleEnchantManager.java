@@ -55,10 +55,10 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 	@Override
 	public void load() {
 		Bukkit.getPluginManager().registerEvents(this, Zephyrus.getPlugin());
-		ReflectionUtils.setField(Enchantment.class, true, "acceptingNew");
+		ReflectionUtils.setStaticField(Enchantment.class, true, "acceptingNew");
 		accepting = true;
 		registerEnchantment(new GlowEnchant());
-		ReflectionUtils.setField(Enchantment.class, false, "acceptingNew");
+		ReflectionUtils.setStaticField(Enchantment.class, false, "acceptingNew");
 		accepting = false;
 	}
 
@@ -72,7 +72,7 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 		if (Enchantment.getById(id) == null) {
 			boolean modified = false;
 			if (accepting == false) {
-				ReflectionUtils.setField(Enchantment.class, true, "acceptingNew");
+				ReflectionUtils.setStaticField(Enchantment.class, true, "acceptingNew");
 				modified = true;
 				accepting = true;
 			}
@@ -80,7 +80,7 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 			Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
 			id++;
 			if (modified) {
-				ReflectionUtils.setField(Enchantment.class, false, "acceptingNew");
+				ReflectionUtils.setStaticField(Enchantment.class, false, "acceptingNew");
 				accepting = false;
 			}
 		}

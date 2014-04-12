@@ -36,6 +36,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 	
 	@Override
 	public void onLoad() {
+		saveDefaultConfig();
 		Zephyrus.setPlugin(this);
 		Zephyrus.setAspectManager(new SimpleAspectManager());
 		Zephyrus.setCommandManager(new SimpleCommandManager());

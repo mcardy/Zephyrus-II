@@ -1,6 +1,7 @@
 package net.minezrc.zephyrus.core.hook;
 
 import net.minezrc.zephyrus.core.config.ConfigOptions;
+import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.hook.ProtectionHook;
 import net.minezrc.zephyrus.spell.Spell;
 
@@ -58,12 +59,13 @@ public class FactionsHook implements ProtectionHook {
 		UPlayer uplayer = UPlayer.get(player);
 		Location loc = player.getLocation();
 		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
-		if (faction != null) {
+		if (faction != null && !faction.isNone()) {
 			if (ConfigOptions.FACTION_CASTING) {
 				if (faction.getUPlayers().contains(uplayer)) {
 					return true;
 				}
 			}
+			Language.sendError("spell.cast.faction", "You cannot cast spells inside of factions", player);
 			return false;
 		}
 		return true;

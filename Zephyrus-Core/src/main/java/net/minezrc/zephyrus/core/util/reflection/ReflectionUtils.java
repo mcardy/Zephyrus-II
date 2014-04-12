@@ -3,9 +3,10 @@ package net.minezrc.zephyrus.core.util.reflection;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 public class ReflectionUtils {
-
+	
 	/**
 	 * Sets the value of a field
 	 * @param obj The object to set the field in
@@ -28,10 +29,28 @@ public class ReflectionUtils {
 	 * @param value The value to set the field to
 	 * @param fieldName The field name
 	 */
-	public static void setField(Class<?> cls, Object value, String fieldName) {
+	public static void setStaticField(Class<?> cls, Object value, String fieldName) {
 		try {
 			getField(cls, fieldName).set(null, value);
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void setStaticFinalField(Class<?> cls, Object value, String fieldName) {
+		try {
+			Field field = getField(cls, fieldName);
+			Field modifier = Field.class.getDeclaredField("modifiers");
+			modifier.setAccessible(true);
+			modifier.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+			field.set(null, value);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();

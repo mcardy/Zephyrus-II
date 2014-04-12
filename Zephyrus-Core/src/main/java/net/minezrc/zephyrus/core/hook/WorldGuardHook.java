@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.core.hook;
 
+import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.reflection.ReflectionUtils;
 import net.minezrc.zephyrus.hook.ProtectionHook;
 import net.minezrc.zephyrus.spell.Spell;
@@ -40,10 +41,11 @@ public class WorldGuardHook implements ProtectionHook {
 	
 	@Override
 	public boolean canCast(Player player, Spell spell) {
-		if (plugin.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(flag)
-				|| player.hasPermission("zephyrus.worldguard.bypass")) {
+		if (plugin.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(flag)) {
+				//|| player.hasPermission("zephyrus.worldguard.bypass")) {
 			return true;
 		}
+		Language.sendError("spell.cast.region", "You cannot cast spells inside of this region", player);
 		return false;
 	}
 
@@ -74,7 +76,7 @@ public class WorldGuardHook implements ProtectionHook {
 		Flag<?>[] flags = new Flag<?>[DefaultFlag.flagsList.length + 1];
 		System.arraycopy(DefaultFlag.flagsList, 0, flags, 0, DefaultFlag.flagsList.length);
 		flags[DefaultFlag.flagsList.length] = flag;
-		ReflectionUtils.setField(DefaultFlag.class, flags, "flagList");
+		ReflectionUtils.setStaticFinalField(DefaultFlag.class, flags, "flagsList");
 	}
 
 }
