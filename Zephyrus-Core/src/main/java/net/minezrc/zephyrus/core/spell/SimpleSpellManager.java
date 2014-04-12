@@ -13,6 +13,7 @@ import net.minezrc.zephyrus.core.item.SpellTome;
 import net.minezrc.zephyrus.core.spell.attack.Arrow;
 import net.minezrc.zephyrus.core.spell.attack.ArrowRain;
 import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
+import net.minezrc.zephyrus.core.spell.attack.Bolt;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
 import net.minezrc.zephyrus.core.spell.mobility.Blink;
@@ -130,6 +131,7 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new Arrow());
 		registerSpell(new ArrowRain());
 		registerSpell(new ArrowStorm());
+		registerSpell(new Bolt());
 		// Buff
 		registerSpell(new Armor());
 		// Creation
