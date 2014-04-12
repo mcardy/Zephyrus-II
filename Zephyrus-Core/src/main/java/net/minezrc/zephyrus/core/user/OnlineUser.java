@@ -71,6 +71,8 @@ public class OnlineUser implements User {
 		this.player = player;
 		this.playerName = player.getName();
 		this.target = new Target(null);
+		this.targetTime = 0;
+		this.targetSpell = "";
 		load();
 	}
 
@@ -269,20 +271,18 @@ public class OnlineUser implements User {
 	@SuppressWarnings("deprecation")
 	public void setTarget(Spell spell, TargetType type, boolean friendly) {
 		if (type == TargetType.BLOCK) {
-			if (!targetSpell.equals(spell) || this.target == null) {
-				Block target = player.getTargetBlock(null, 100);
-				if (Zephyrus.getHookManager().canBuild(player, target)) {
-					UserTargetBlockEvent event = new UserTargetBlockEvent(this, target);
-					Bukkit.getPluginManager().callEvent(event);
-					if (!event.isCancelled()) {
-						this.target = new Target(target);
-						this.targetSpell = spell.getName();
-					}
+			Block target = player.getTargetBlock(null, 100);
+			if (Zephyrus.getHookManager().canBuild(player, target)) {
+				UserTargetBlockEvent event = new UserTargetBlockEvent(this, target);
+				Bukkit.getPluginManager().callEvent(event);
+				if (!event.isCancelled()) {
+					this.target = new Target(target);
+					this.targetSpell = spell.getName();
 				}
 			}
 		} else if (type == TargetType.ENTITY) {
-			if (!targetSpell.equals(spell) || this.target == null) {
-				LivingEntity target = getTargetEntity();
+			LivingEntity target = getTargetEntity();
+			if (!targetSpell.equals(spell.getName()) || this.target.getEntity() == null || target != null) {
 				if (Zephyrus.getHookManager().canTarget(player, target, friendly)) {
 					UserTargetEntityEvent event = new UserTargetEntityEvent(this, target, friendly);
 					Bukkit.getPluginManager().callEvent(event);

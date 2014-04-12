@@ -36,7 +36,7 @@ public class Healer extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		if (user.getTarget(this) != null && user.getTarget(this).getEntity() != null) {
+		if (user.getTarget(this).getEntity() != null) {
 			LivingEntity target = user.getTarget(this).getEntity();
 			target.setHealth(target.getHealth() < target.getMaxHealth() ? target.getHealth() + 1 : target
 					.getMaxHealth());
