@@ -29,7 +29,7 @@ public class Woosh extends Spell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
-		player.setVelocity(player.getEyeLocation().getDirection().multiply(2));
+		player.setVelocity(player.getEyeLocation().getDirection().multiply(4 * power));
 		return CastResult.SUCCESS;
 	}
 

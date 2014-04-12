@@ -18,6 +18,7 @@ import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.illusion.Confuse;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
 import net.minezrc.zephyrus.core.spell.mobility.Blink;
+import net.minezrc.zephyrus.core.spell.mobility.Woosh;
 import net.minezrc.zephyrus.core.spell.restoration.Feed;
 import net.minezrc.zephyrus.core.spell.restoration.Heal;
 import net.minezrc.zephyrus.core.spell.restoration.Healer;
@@ -147,6 +148,7 @@ public class SimpleSpellManager implements SpellManager {
 		// Mobility
 		registerSpell(new Bang());
 		registerSpell(new Blink());
+		registerSpell(new Woosh());
 
 		// Restoration
 		registerSpell(new Feed());
