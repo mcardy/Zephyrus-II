@@ -18,7 +18,7 @@ import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Targeted {
 
-	public boolean friendly();
+	public boolean friendly() default false;
 	public TargetType type();
 	
 }

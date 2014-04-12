@@ -29,7 +29,7 @@ import org.bukkit.entity.Player;
  */
 
 @Bindable
-@Targeted(friendly = true, type = TargetType.BLOCK)
+@Targeted(type = TargetType.BLOCK)
 public class Blink extends Spell {
 
 	public Blink() {

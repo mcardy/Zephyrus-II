@@ -7,6 +7,7 @@ import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
+import net.minezrc.zephyrus.spell.annotation.Bindable;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ import org.bukkit.entity.Player;
  * 
  */
 
+@Bindable
 public class Feed extends Spell {
 
 	public Feed() {

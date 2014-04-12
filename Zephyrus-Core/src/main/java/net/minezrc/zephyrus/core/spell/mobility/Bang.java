@@ -14,7 +14,9 @@ import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
+import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
 import net.minezrc.zephyrus.spell.annotation.Bindable;
+import net.minezrc.zephyrus.spell.annotation.Targeted;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
@@ -31,6 +33,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 
 @Bindable
+@Targeted(type = TargetType.BLOCK)
 public class Bang extends Spell implements ConfigurableSpell {
 
 	private double[][] particles;
@@ -52,8 +55,7 @@ public class Bang extends Spell implements ConfigurableSpell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		@SuppressWarnings("deprecation")
-		Location loc = user.getPlayer().getTargetBlock(null, 1000).getLocation().add(-0.5, 1, -0.5);
+		Location loc = user.getTarget(this).getBlock().getLocation();
 		for (Entity entity : getNearbyEntities(loc, radius)) {
 			if (entity != user.getPlayer()) {
 				entity.setVelocity(entity.getLocation().toVector().subtract(loc.toVector()).normalize().setY(0.4)

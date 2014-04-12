@@ -122,18 +122,15 @@ public class ItemListener implements Listener {
 							: "none");
 					// Casting Bound Spell
 				} else if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-					if (bound != null) {
+					if (user.isCastingSpell()) {
+						user.stopCasting();
+					} else if (bound != null) {
 						Spell spell = Zephyrus.getSpell(bound);
 						user.castSpell(spell, wand.getPowerIncrease(spell), null);
 					} else {
 						Language.sendError("item.wand.nobound", "There is no spell bound to this wand! Bind one with /bind <spell>", player);
 					}
 				}
-			}
-		}
-		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if (user.isCastingSpell()) {
-				user.stopCasting();
 			}
 		}
 	}

@@ -15,11 +15,13 @@ import net.minezrc.zephyrus.core.spell.attack.ArrowRain;
 import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
 import net.minezrc.zephyrus.core.spell.attack.Bolt;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
+import net.minezrc.zephyrus.core.spell.illusion.Confuse;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
 import net.minezrc.zephyrus.core.spell.mobility.Blink;
 import net.minezrc.zephyrus.core.spell.restoration.Feed;
 import net.minezrc.zephyrus.core.spell.restoration.Heal;
 import net.minezrc.zephyrus.core.spell.restoration.Healer;
+import net.minezrc.zephyrus.core.spell.world.Clock;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellManager;
@@ -127,23 +129,45 @@ public class SimpleSpellManager implements SpellManager {
 	public void load() {
 		Bukkit.getPluginManager().registerEvents(new SpellTome(), Zephyrus.getPlugin());
 		spellConfig.saveDefaultConfig();
+
 		// Attack
 		registerSpell(new Arrow());
 		registerSpell(new ArrowRain());
 		registerSpell(new ArrowStorm());
 		registerSpell(new Bolt());
+
 		// Buff
 		registerSpell(new Armor());
+
 		// Creation
+
 		// Illusion
+		registerSpell(new Confuse());
+
 		// Mobility
 		registerSpell(new Bang());
 		registerSpell(new Blink());
+
 		// Restoration
 		registerSpell(new Feed());
 		registerSpell(new Heal());
 		registerSpell(new Healer());
+
 		// World
+		registerSpell(new Clock());
+
+		// TODO Re-implement: Butcher, Conjure, Detect, Dig, Dim, Dispel,
+		// Enderchest, Explode,
+		// Feather, FEed, FIreball, FireRing, FireShield, FlameStep, Flare, Fly,
+		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight, Mana,
+		// MassParalyze, Paralyze, Phase, Prospect, Punch, Repair, Satisfy,
+		// Shield, Shine, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
+		// VIsion, Zap, Zephyr
+
+		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
+		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
+		// 'WorldEdit' (build)
+
 		for (Spell spell : spellList) {
 			spell.onEnable();
 		}
