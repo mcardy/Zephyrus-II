@@ -33,7 +33,7 @@ public class FactionsHook implements ProtectionHook {
 		Location loc = block.getLocation();
 		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
 		if (faction != null) {
-			if (faction.getUPlayers().contains(uplayer)) {
+			if (uplayer.getFactionId().equals(faction.getId())) {
 				return true;
 			}
 			return false;
@@ -46,7 +46,7 @@ public class FactionsHook implements ProtectionHook {
 		UPlayer uplayer = UPlayer.get(player);
 		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
 		if (faction != null) {
-			if (faction.getUPlayers().contains(uplayer)) {
+			if (uplayer.getFactionId().equals(faction.getId())) {
 				return true;
 			}
 			return false;
@@ -61,7 +61,7 @@ public class FactionsHook implements ProtectionHook {
 		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
 		if (faction != null && !faction.isNone()) {
 			if (ConfigOptions.FACTION_CASTING) {
-				if (faction.getUPlayers().contains(uplayer)) {
+				if (uplayer.getFactionId().equals(faction.getId())) {
 					return true;
 				}
 			}

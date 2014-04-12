@@ -41,8 +41,8 @@ public class WorldGuardHook implements ProtectionHook {
 	
 	@Override
 	public boolean canCast(Player player, Spell spell) {
-		if (plugin.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(flag)) {
-				//|| player.hasPermission("zephyrus.worldguard.bypass")) {
+		if (plugin.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(flag)
+				|| player.hasPermission("zephyrus.worldguard.bypass")) {
 			return true;
 		}
 		Language.sendError("spell.cast.region", "You cannot cast spells inside of this region", player);
