@@ -164,7 +164,16 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.JUKEBOX, AspectList.newList().setAspectTypes(VALUE, WOOD, MACHINE).setAspectValues(8, 16, 2));
 		add(Material.FENCE, AspectList.newList(WOOD, 2));
 		add(Material.PUMPKIN, AspectList.newList(LIFE, 4));
-
+		add(Material.NETHERRACK, AspectList.newList().setAspectTypes(FIRE, STONE).setAspectValues(1, 1));
+		add(Material.SOUL_SAND, AspectList.newList().setAspectTypes(EVIL, DIRT).setAspectValues(1, 1));
+		add(Material.GLOWSTONE, AspectList.newList().setAspectTypes(LIGHT, STONE).setAspectValues(4, 1));
+		add(Material.JACK_O_LANTERN, AspectList.newList().setAspectTypes(LIFE, LIGHT).setAspectValues(3, 1));
+		add(Material.STAINED_GLASS, AspectList.newList(GLASS, 4));
+		add(Material.TRAP_DOOR, AspectList.newList().setAspectTypes(MACHINE, WOOD).setAspectValues(2, 10));
+		add(Material.SMOOTH_BRICK, AspectList.newList(STONE, 2));
+		add(Material.SMOOTH_BRICK, AspectList.newList().setAspectTypes(STONE, LIFE).setAspectValues(2, 1));
+		// 99
+		
 		add(Material.ARROW, AspectList.newList(ATTACK, 4));
 	}
 

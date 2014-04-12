@@ -20,9 +20,9 @@ public enum Aspect {
 	FIRE("Ignibus", "Fire, Heat, Flame", ChatColor.RED), // Blazerod, Lava
 	GLASS("Purgare", "Glass, Clear, Crystal", ChatColor.WHITE), // Glass
 	ICE("Rigentem", "Ice, Cold", ChatColor.AQUA), // Ice, Snow
-	LIFE("Folia","Plant, Life, Growth", ChatColor.GREEN), // Grass, Leaves, etc.
+	LIFE("Folia","Life, Growth", ChatColor.GREEN), // Grass, Leaves, etc.
 	LIGHT("Lucem", "Light, Glow", ChatColor.YELLOW), // Torch, Glowstone
-	MACHINE("Cogitatus", "Machine", ChatColor.DARK_GRAY), // Redstone, Dispenser, Piston, etc.
+	MACHINE("Cogitatus", "Machine, Mechanical", ChatColor.DARK_GRAY), // Redstone, Dispenser, Piston, etc.
 	MAGIC("Magia", "Magic, Arcane", ChatColor.LIGHT_PURPLE), // Blaze Rod, Cauldron, Enchanting table, etc.
 	METAL("Metallicis", "Metal", ChatColor.GRAY), // Metal ingot, Metal ore, Bucket, Metal tools, etc.
 	POWER("Potenza", "Power, Energy", ChatColor.RED),
