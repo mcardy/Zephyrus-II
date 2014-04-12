@@ -21,8 +21,9 @@ public class BallProjectile implements Projectile {
 	private Snowball snowball;
 	private Particle particle;
 	private int damage;
+	private int amount;
 	
-	public BallProjectile(Particle particle, int damage) {
+	public BallProjectile(Particle particle, int damage, int amount) {
 		this.particle = particle;
 		this.damage = damage;
 	}
@@ -54,7 +55,7 @@ public class BallProjectile implements Projectile {
 	
 	@Override
 	public void onParticleDisplay(Location loc) {
-		ParticleEffects.sendParticle(particle, loc, 4);
+		ParticleEffects.sendParticle(particle, loc, amount);
 	}
 
 	

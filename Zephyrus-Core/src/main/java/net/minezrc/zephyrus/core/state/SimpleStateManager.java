@@ -20,6 +20,7 @@ public class SimpleStateManager implements StateManager {
 	@Override
 	public void load() {
 		Bukkit.getPluginManager().registerEvents(StateList.ARMOR, Zephyrus.getPlugin());
+		Bukkit.getPluginManager().registerEvents(StateList.FEATHER, Zephyrus.getPlugin());
 	}
 
 	@Override

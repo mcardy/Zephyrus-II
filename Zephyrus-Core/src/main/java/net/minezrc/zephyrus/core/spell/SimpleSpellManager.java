@@ -14,12 +14,15 @@ import net.minezrc.zephyrus.core.spell.attack.Arrow;
 import net.minezrc.zephyrus.core.spell.attack.ArrowRain;
 import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
 import net.minezrc.zephyrus.core.spell.attack.Bolt;
+import net.minezrc.zephyrus.core.spell.attack.Fireball;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
+import net.minezrc.zephyrus.core.spell.buff.Feather;
 import net.minezrc.zephyrus.core.spell.illusion.Confuse;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
 import net.minezrc.zephyrus.core.spell.mobility.Blink;
 import net.minezrc.zephyrus.core.spell.mobility.Woosh;
 import net.minezrc.zephyrus.core.spell.restoration.Feed;
+import net.minezrc.zephyrus.core.spell.restoration.Feeder;
 import net.minezrc.zephyrus.core.spell.restoration.Heal;
 import net.minezrc.zephyrus.core.spell.restoration.Healer;
 import net.minezrc.zephyrus.core.spell.world.Clock;
@@ -136,10 +139,12 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new ArrowRain());
 		registerSpell(new ArrowStorm());
 		registerSpell(new Bolt());
-
+		registerSpell(new Fireball());
+		
 		// Buff
 		registerSpell(new Armor());
-
+		registerSpell(new Feather());
+		
 		// Creation
 
 		// Illusion
@@ -152,6 +157,7 @@ public class SimpleSpellManager implements SpellManager {
 
 		// Restoration
 		registerSpell(new Feed());
+		registerSpell(new Feeder());
 		registerSpell(new Heal());
 		registerSpell(new Healer());
 
@@ -160,7 +166,7 @@ public class SimpleSpellManager implements SpellManager {
 
 		// TODO Re-implement: Butcher, Conjure, Detect, Dig, Dim, Dispel,
 		// Enderchest, Explode,
-		// Feather, FEed, FIreball, FireRing, FireShield, FlameStep, Flare, Fly,
+		// Feather, FireRing, FireShield, FlameStep, Flare, Fly,
 		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight, Mana,
 		// MassParalyze, Paralyze, Phase, Prospect, Punch, Repair, Satisfy,
 		// Shield, Shine, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
