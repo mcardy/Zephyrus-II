@@ -11,17 +11,17 @@ import java.util.Map.Entry;
 import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
-import net.minezrc.zephyrus.core.spell.RegisteredSpell;
 import net.minezrc.zephyrus.core.state.StateList;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.event.UserPostCastEvent;
 import net.minezrc.zephyrus.event.UserPreCastEvent;
 import net.minezrc.zephyrus.event.UserTargetBlockEvent;
 import net.minezrc.zephyrus.event.UserTargetEntityEvent;
+import net.minezrc.zephyrus.spell.ContinuousSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
-import net.minezrc.zephyrus.spell.Targeted;
+import net.minezrc.zephyrus.spell.annotation.Targeted;
 import net.minezrc.zephyrus.state.State;
 import net.minezrc.zephyrus.user.Target;
 import net.minezrc.zephyrus.user.User;
@@ -47,21 +47,30 @@ public class OnlineUser implements User {
 
 	private Player player;
 	private String playerName;
+
+	private Map<State, Integer> states;
 	private List<String> learned;
+
 	private float mana;
+	private boolean display;
+
 	private int extraMana;
 	private int level;
 	private int progress;
-	private boolean display;
-	private Map<State, Integer> states;
 	private int tick;
+
 	private Target target;
 	private int targetTime;
 	private String targetSpell;
 
+	private ContinuousSpell continuousSpell;
+	private int continuousPower;
+	private String[] continuousArgs;
+
 	protected OnlineUser(Player player) {
 		this.player = player;
 		this.playerName = player.getName();
+		this.target = new Target(null);
 		load();
 	}
 
@@ -102,8 +111,10 @@ public class OnlineUser implements User {
 
 	@Override
 	public void castSpell(Spell spell, int power, String[] args) {
+		if (isCastingSpell()) {
+			return;
+		}
 		if (Zephyrus.getHookManager().canCast(player, spell)) {
-			Spell original = ((RegisteredSpell) spell).getOriginal();
 			if (spell == null || !isSpellLearned(spell)) {
 				Language.sendError("command.cast.learn", "You have not learned [SPELL]", getPlayer(), "[SPELL]", args[0]);
 				return;
@@ -114,8 +125,8 @@ public class OnlineUser implements User {
 						+ spell.getManaCost());
 				return;
 			}
-			if (original.getClass().isAnnotationPresent(Targeted.class)) {
-				Targeted targeted = original.getClass().getAnnotation(Targeted.class);
+			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
+				Targeted targeted = spell.getClass().getAnnotation(Targeted.class);
 				setTarget(spell, targeted.type(), targeted.friendly());
 			}
 			UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, args);
@@ -123,6 +134,11 @@ public class OnlineUser implements User {
 			if (!preCast.isCancelled()) {
 				CastResult result = spell.onCast(this, power, args);
 				if (result == CastResult.SUCCESS) {
+					if (spell instanceof ContinuousSpell) {
+						continuousSpell = (ContinuousSpell) spell;
+						continuousPower = power;
+						continuousArgs = args;
+					}
 					drainMana(spell.getManaCost());
 					addLevelProgress(spell.getXpReward());
 					Bukkit.getPluginManager().callEvent(new UserPostCastEvent(this, spell, power, args));
@@ -189,6 +205,11 @@ public class OnlineUser implements User {
 			return target;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isCastingSpell() {
+		return continuousSpell != null;
 	}
 
 	@Override
@@ -273,7 +294,14 @@ public class OnlineUser implements User {
 			}
 		}
 	}
-	
+
+	@Override
+	public void stopCasting() {
+		continuousSpell = null;
+		continuousArgs = null;
+		continuousPower = 0;
+	}
+
 	private LivingEntity getTargetEntity() {
 		BlockIterator iterator = new BlockIterator(player, 10);
 		while (iterator.hasNext()) {
@@ -309,6 +337,21 @@ public class OnlineUser implements User {
 				state.onTick(this);
 			}
 		}
+		if (isCastingSpell()) {
+			if (getMana() < continuousSpell.getManaCostPerTick()) {
+				Language.sendError("command.cast.continuous.mana", "You do not have enough mana to continue cast [SPELL] [MANA]", getPlayer(), "[SPELL]", continuousSpell
+						.getName(), "[MANA]", ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/" + ChatColor.GREEN
+						+ continuousSpell.getManaCost());
+				stopCasting();
+				return;
+			}
+			CastResult result = continuousSpell.onCastTick(this, continuousPower, continuousArgs);
+			if (result == CastResult.SUCCESS) {
+				drainMana(continuousSpell.getManaCostPerTick());
+			} else {
+				stopCasting();
+			}
+		}
 		if (tick >= 10) {
 			tick = 0;
 			float amount = 1F / (float) ConfigOptions.MANA_REGEN;
@@ -334,7 +377,7 @@ public class OnlineUser implements User {
 				targetTime++;
 				if (targetTime == 10) {
 					targetTime = 0;
-					target = null;
+					target = new Target(null);
 				}
 			}
 		}
