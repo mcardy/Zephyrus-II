@@ -168,8 +168,7 @@ public class ItemCommand {
 					.getArgs()[0]);
 			return;
 		}
-		if (!spell.getClass()
-				.isAnnotationPresent(Bindable.class)) {
+		if (!spell.getClass().isAnnotationPresent(Bindable.class)) {
 			Language.sendError("command.bind.unable", "That spell cannot be bound to a wand", args.getSender());
 			return;
 		}
@@ -190,6 +189,33 @@ public class ItemCommand {
 			Language.sendMessage("command.bind.complete", "Successfully bound [SPELL] to your wand", args.getSender(), "[SPELL]", ChatColor.GOLD
 					+ spell.getName() + ChatColor.WHITE);
 		}
+	}
+
+	@Command(name = "unbind",
+			aliases = { "bind.none", "bind.remove" },
+			permission = "zephyrus.command.bind",
+			description = "Removes the bound spell from the wand",
+			usage = "/unbind")
+	public void onBindNone(CommandArgs args) {
+		if (!args.isPlayer()) {
+			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+			return;
+		}
+		Item item = Zephyrus.getItem(args.getPlayer().getItemInHand());
+		if (item == null || !(item instanceof Wand)) {
+			Language.sendError("command.unbind.nowand", "You need to be equiped with a wand to unbind a spell", args
+					.getSender());
+			return;
+		}
+		Wand wand = (Wand) item;
+		ItemStack stack = args.getPlayer().getItemInHand();
+		ItemMeta meta = stack.getItemMeta();
+		meta.setDisplayName(wand.getName());
+		meta.setLore(wand.getLore());
+		stack.setItemMeta(meta);
+		args.getPlayer().setItemInHand(stack);
+		Language.sendMessage("command.unbind.complete", "Successfully unbound all spells from your wand", args
+				.getSender());
 	}
 
 	@Completer(name = "spelltome", aliases = { "tome" })
