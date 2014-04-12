@@ -9,12 +9,12 @@ import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.DataStructureUtils;
 import net.minezrc.zephyrus.core.util.ParticleEffects;
 import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
-import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
+import net.minezrc.zephyrus.spell.annotation.Bindable;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
@@ -31,53 +31,14 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 
 @Bindable
-public class Bang implements Spell, ConfigurableSpell {
+public class Bang extends Spell implements ConfigurableSpell {
 
 	private double[][] particles;
 	private int radius;
 
-	@Override
-	public String getName() {
-		return "Bang";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Creates a shockwave knocking back all entities";
-	}
-
-	@Override
-	public int getManaCost() {
-		return 200;
-	}
-
-	@Override
-	public int getXpReward() {
-		return 10;
-	}
-
-	@Override
-	public AspectList getRecipe() {
-		return AspectList.newList(Aspect.WIND, 8);
-	}
-
-	@Override
-	public int getRequiredLevel() {
-		return 5;
-	}
-
-	@Override
-	public SpellElement getElement() {
-		return SpellElement.AIR;
-	}
-
-	@Override
-	public SpellType getType() {
-		return SpellType.MOBILITY;
-	}
-	
-	@Override
-	public void onDisable() {
+	public Bang() {
+		super("bang", "Creates a shockwave knocking back all entities", 200, 10, AspectList.newList(Aspect.WIND, 8),
+				5, SpellElement.AIR, SpellType.MOBILITY);
 	}
 
 	@Override

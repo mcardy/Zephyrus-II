@@ -1,21 +1,24 @@
-package net.minezrc.zephyrus.spell;
+package net.minezrc.zephyrus.spell.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
+
 /**
- * Zephyrus - SpellRequirements.java
+ * Zephyrus - Targeted.java
  * 
  * @author minnymin3
- *  
+ * 
  */
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Prerequisite {
+public @interface Targeted {
 
-	public Class<? extends Spell> requiredSpell();
+	public boolean friendly();
+	public TargetType type();
 	
 }

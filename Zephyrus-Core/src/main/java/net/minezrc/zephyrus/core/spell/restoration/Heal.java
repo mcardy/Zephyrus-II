@@ -5,11 +5,11 @@ import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.MathUtils;
 import net.minezrc.zephyrus.core.util.ParticleEffects;
 import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
-import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
+import net.minezrc.zephyrus.spell.annotation.Bindable;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Location;
@@ -23,54 +23,11 @@ import org.bukkit.entity.Player;
  */
 
 @Bindable
-public class Heal implements Spell {
+public class Heal extends Spell {
 
-	@Override
-	public String getName() {
-		return "heal";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Quickly regenerate health";
-	}
-
-	@Override
-	public int getManaCost() {
-		return 10;
-	}
-
-	@Override
-	public int getXpReward() {
-		return 1;
-	}
-
-	@Override
-	public AspectList getRecipe() {
-		return AspectList.newList(Aspect.PLANT, 8);
-	}
-
-	@Override
-	public int getRequiredLevel() {
-		return 1;
-	}
-
-	@Override
-	public SpellElement getElement() {
-		return SpellElement.NEUTREAL;
-	}
-
-	@Override
-	public SpellType getType() {
-		return SpellType.RESTORATION;
-	}
-
-	@Override
-	public void onDisable() {
-	}
-
-	@Override
-	public void onEnable() {
+	public Heal() {
+		super("heal", "Quickly regenerate health", 10, 1, AspectList.newList(Aspect.LIFE, 8), 1, SpellElement.NEUTREAL,
+				SpellType.RESTORATION);
 	}
 
 	@Override

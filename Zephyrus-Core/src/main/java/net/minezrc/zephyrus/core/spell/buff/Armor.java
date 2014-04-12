@@ -20,46 +20,12 @@ import org.bukkit.entity.Player;
  * 
  */
 
-public class Armor implements Spell {
+public class Armor extends Spell {
 
-	@Override
-	public String getDescription() {
-		return "Equips arcane armour that protects you from most damage";
-	}
-
-	@Override
-	public SpellElement getElement() {
-		return SpellElement.ARCANE;
-	}
-
-	@Override
-	public int getManaCost() {
-		return 300;
-	}
-
-	@Override
-	public String getName() {
-		return "armor";
-	}
-
-	@Override
-	public AspectList getRecipe() {
-		return AspectList.newList().setAspectTypes(Aspect.ARMOR, Aspect.VALUE, Aspect.MAGIC).setAspectValues(24, 48, 4);
-	}
-
-	@Override
-	public int getRequiredLevel() {
-		return 8;
-	}
-
-	@Override
-	public SpellType getType() {
-		return SpellType.BUFF;
-	}
-
-	@Override
-	public int getXpReward() {
-		return 20;
+	public Armor() {
+		super("armor", "Equips arcane armor that absorbs most damage", 300, 20, AspectList.newList()
+				.setAspectTypes(Aspect.ARMOR, Aspect.VALUE, Aspect.MAGIC).setAspectValues(24, 48, 4), 8,
+				SpellElement.ARCANE, SpellType.BUFF);
 	}
 
 	@Override
@@ -78,14 +44,6 @@ public class Armor implements Spell {
 			Language.sendError("spell.armor.fail", "You cannot be waring armour when casting this spell", player);
 			return CastResult.FAILURE;
 		}
-	}
-
-	@Override
-	public void onDisable() {
-	}
-
-	@Override
-	public void onEnable() {
 	}
 
 }

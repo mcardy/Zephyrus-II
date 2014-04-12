@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.minezrc.zephyrus.Manager;
+import net.minezrc.zephyrus.YmlConfigFile;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 public interface SpellManager extends Manager {
 
+	public YmlConfigFile getConfig();
 	public Spell getSpell(Class<? extends Spell> spellClass);
 	public List<Spell> getSpell(Set<ItemStack> recipe);
 	public Spell getSpell(String name);

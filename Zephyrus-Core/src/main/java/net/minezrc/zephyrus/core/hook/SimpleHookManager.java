@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.core.hook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minezrc.zephyrus.hook.EconomyHook;
@@ -23,6 +24,10 @@ public class SimpleHookManager implements PluginHookManager {
 
 	private EconomyHook vault;
 	private List<ProtectionHook> hooks;
+	
+	public SimpleHookManager() {
+		hooks = new ArrayList<ProtectionHook>();
+	}
 	
 	@Override
 	public void load() {

@@ -11,10 +11,9 @@ import net.minezrc.zephyrus.user.User;
  * 
  */
 
-public interface ComboSpell extends Spell {
+public interface ComboSpell {
 
 	public CastPriority getPriority();
-
 	public CastResult onComboCast(User user, int power, String[] args, Spell combo);
 
 }

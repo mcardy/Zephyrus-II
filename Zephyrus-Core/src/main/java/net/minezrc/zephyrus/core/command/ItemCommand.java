@@ -13,7 +13,6 @@ import net.minezrc.zephyrus.core.chat.MessageEvent.MessageHoverEvent;
 import net.minezrc.zephyrus.core.chat.MessageForm.MessageColor;
 import net.minezrc.zephyrus.core.chat.MessageForm.MessageFormatting;
 import net.minezrc.zephyrus.core.item.SpellTome;
-import net.minezrc.zephyrus.core.spell.RegisteredSpell;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.command.Command;
 import net.minezrc.zephyrus.core.util.command.CommandArgs;
@@ -21,8 +20,8 @@ import net.minezrc.zephyrus.core.util.command.Completer;
 import net.minezrc.zephyrus.event.UserBindSpellEvent;
 import net.minezrc.zephyrus.item.Item;
 import net.minezrc.zephyrus.item.Wand;
-import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.Spell;
+import net.minezrc.zephyrus.spell.annotation.Bindable;
 import net.minezrc.zephyrus.user.User;
 
 import org.apache.commons.lang.WordUtils;
@@ -169,8 +168,8 @@ public class ItemCommand {
 					.getArgs()[0]);
 			return;
 		}
-		if (!(spell instanceof RegisteredSpell && ((RegisteredSpell) spell).getOriginal().getClass()
-				.isAnnotationPresent(Bindable.class))) {
+		if (!spell.getClass()
+				.isAnnotationPresent(Bindable.class)) {
 			Language.sendError("command.bind.unable", "That spell cannot be bound to a wand", args.getSender());
 			return;
 		}

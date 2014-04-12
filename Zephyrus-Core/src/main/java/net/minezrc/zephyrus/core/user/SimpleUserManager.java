@@ -9,9 +9,6 @@ import net.minezrc.zephyrus.user.UserManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 /**
  * Zephyrus - UserManager.java
@@ -20,9 +17,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
  * 
  */
 
-public class SimpleUserManager implements UserManager, Listener {
+public class SimpleUserManager implements UserManager {
 
-	private HashMap<String, User> userMap;
+	protected HashMap<String, User> userMap;
 	
 	private UserBarDisplay barDisplay;
 	
@@ -49,19 +46,12 @@ public class SimpleUserManager implements UserManager, Listener {
 	}
 	
 	public void load() {
-		Bukkit.getPluginManager().registerEvents(this, Zephyrus.getPlugin());
+		Bukkit.getPluginManager().registerEvents(new UserListener(this), Zephyrus.getPlugin());
 		Bukkit.getScheduler().runTaskTimerAsynchronously(Zephyrus.getPlugin(), new UserSaveTask(), 1200L, 1200L);
 		Bukkit.getScheduler().runTaskTimerAsynchronously(Zephyrus.getPlugin(), new UserTickTask(), 2L, 2L);
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			userMap.put(player.getName(), new OnlineUser(player));
 		}
-	}
-	
-	@EventHandler
-	public void onConnect(PlayerJoinEvent event) {
-		if (userMap.containsKey(event.getPlayer().getName()))
-			return;
-		userMap.put(event.getPlayer().getName(), new OnlineUser(event.getPlayer()));
 	}
 	
 	protected void removeUser(String player) {

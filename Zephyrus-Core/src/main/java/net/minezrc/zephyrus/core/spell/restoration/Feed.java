@@ -18,54 +18,12 @@ import org.bukkit.entity.Player;
  * 
  */
 
-public class Feed implements Spell {
+public class Feed extends Spell {
 
-	@Override
-	public String getName() {
-		return "feed";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Makes you slightly less hungry";
-	}
-
-	@Override
-	public int getRequiredLevel() {
-		return 1;
-	}
-
-	@Override
-	public int getManaCost() {
-		return 25;
-	}
-
-	@Override
-	public int getXpReward() {
-		return 2;
-	}
-
-	@Override
-	public AspectList getRecipe() {
-		return AspectList.newList().setAspectTypes(Aspect.ANIMAL, Aspect.PLANT).setAspectValues(16, 4);
-	}
-
-	@Override
-	public SpellElement getElement() {
-		return SpellElement.NEUTREAL;
-	}
-
-	@Override
-	public SpellType getType() {
-		return SpellType.RESTORATION;
-	}
-
-	@Override
-	public void onEnable() {
-	}
-
-	@Override
-	public void onDisable() {
+	public Feed() {
+		super("feed", "Feeds you scraps of magic food", 25, 2, AspectList.newList()
+				.setAspectTypes(Aspect.ANIMAL, Aspect.LIFE).setAspectValues(16, 4), 1, SpellElement.NEUTREAL,
+				SpellType.RESTORATION);
 	}
 
 	@Override

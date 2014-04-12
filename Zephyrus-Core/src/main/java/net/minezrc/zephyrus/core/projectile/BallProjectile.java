@@ -9,4 +9,6 @@ package net.minezrc.zephyrus.core.projectile;
 
 public class BallProjectile {
 
+	
+	
 }

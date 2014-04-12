@@ -145,6 +145,14 @@ public class Zephyrus {
 	}
 
 	/**
+	 * Gets the spell config
+	 * @return A YmlConfigFile for spells.yml
+	 */
+	public static YmlConfigFile getSpellConfig() {
+		return spellManager.getConfig();
+	}
+	
+	/**
 	 * Gets the SpellManager singleton
 	 * @return The SpellManager instance
 	 */

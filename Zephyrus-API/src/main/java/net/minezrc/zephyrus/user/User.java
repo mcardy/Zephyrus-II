@@ -33,8 +33,10 @@ public interface User {
 	public Player getPlayer();
 	public Collection<State> getStates();
 	public Target getTarget(Spell spell);
+	public boolean isCastingSpell();
 	public boolean isSpellLearned(Spell spell);
 	public boolean isStateApplied(State state);
 	public void setTarget(Spell spell, TargetType type, boolean friendly);
+	public void stopCasting();
 	
 }

@@ -6,13 +6,13 @@ import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.DataStructureUtils;
-import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
-import net.minezrc.zephyrus.spell.Prerequisite;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
+import net.minezrc.zephyrus.spell.annotation.Bindable;
+import net.minezrc.zephyrus.spell.annotation.Prerequisite;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
@@ -29,40 +29,15 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 @Bindable
 @Prerequisite(requiredSpell = Arrow.class)
-public class ArrowStorm implements Spell, ConfigurableSpell {
+public class ArrowStorm extends Spell implements ConfigurableSpell {
 
 	private int amount;
 
-	@Override
-	public String getName() {
-		return "arrowstorm";
+	public ArrowStorm() {
+		super("arrowstorm", "A barrage of arrows", 150, 12, AspectList.newList()
+				.setAspectTypes(Aspect.ATTACK, Aspect.WIND).setAspectValues(50, 25), 6, SpellElement.AIR, SpellType.ATTACK);
 	}
-
-	@Override
-	public String getDescription() {
-		return "A barrage of arrows";
-	}
-
-	@Override
-	public int getRequiredLevel() {
-		return 6;
-	}
-
-	@Override
-	public int getManaCost() {
-		return 150;
-	}
-
-	@Override
-	public int getXpReward() {
-		return 12;
-	}
-
-	@Override
-	public AspectList getRecipe() {
-		return AspectList.newList(Aspect.ATTACK, 50);
-	}
-
+	
 	@Override
 	public Map<String, Object> getDefaultConfiguration() {
 		return DataStructureUtils.createMap(DataStructureUtils.createList("amount"), DataStructureUtils
@@ -75,24 +50,6 @@ public class ArrowStorm implements Spell, ConfigurableSpell {
 	}
 
 	@Override
-	public SpellElement getElement() {
-		return SpellElement.AIR;
-	}
-
-	@Override
-	public SpellType getType() {
-		return SpellType.ATTACK;
-	}
-
-	@Override
-	public void onEnable() {
-	}
-
-	@Override
-	public void onDisable() {
-	}
-
-	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		final Player player = user.getPlayer();
 		final int amount = this.amount * power;
@@ -102,7 +59,7 @@ public class ArrowStorm implements Spell, ConfigurableSpell {
 				int shots = amount;
 				if (shots > 0 && player.isOnline()) {
 					player.launchProjectile(org.bukkit.entity.Arrow.class)
-							.setMetadata("removal_flag", new FixedMetadataValue(Zephyrus.getPlugin(), true));
+							.setMetadata("ignore_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
 					shots--;
 				}
 			}

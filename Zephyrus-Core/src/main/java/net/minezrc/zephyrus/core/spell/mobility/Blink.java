@@ -5,11 +5,14 @@ import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.ParticleEffects;
 import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
-import net.minezrc.zephyrus.spell.Bindable;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
+import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
+import net.minezrc.zephyrus.spell.annotation.Bindable;
+import net.minezrc.zephyrus.spell.annotation.Targeted;
+import net.minezrc.zephyrus.user.Target;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Effect;
@@ -26,62 +29,21 @@ import org.bukkit.entity.Player;
  */
 
 @Bindable
-public class Blink implements Spell {
+@Targeted(friendly = true, type = TargetType.BLOCK)
+public class Blink extends Spell {
 
-	@Override
-	public String getName() {
-		return "blink";
+	public Blink() {
+		super("blink", "Gets you from point to point without bothering with whats in between", 50, 8, AspectList
+				.newList().setAspectTypes(Aspect.ENDER, Aspect.MAGIC).setAspectValues(24, 4), 3, SpellElement.ENDER,
+				SpellType.MOBILITY);
 	}
 
-	@Override
-	public String getDescription() {
-		return "Gets you from point A to point B. How you ask? MAGIC!";
-	}
-
-	@Override
-	public int getManaCost() {
-		return 50;
-	}
-
-	@Override
-	public int getXpReward() {
-		return 8;
-	}
-
-	@Override
-	public AspectList getRecipe() {
-		return AspectList.newList().setAspectTypes(Aspect.ENDER, Aspect.MAGIC).setAspectValues(24, 4);
-	}
-
-	@Override
-	public int getRequiredLevel() {
-		return 3;
-	}
-
-	@Override
-	public SpellElement getElement() {
-		return SpellElement.ENDER;
-	}
-
-	@Override
-	public SpellType getType() {
-		return SpellType.MOBILITY;
-	}
-
-	@Override
-	public void onDisable() {
-	}
-
-	@Override
-	public void onEnable() {
-	}
-
-	@SuppressWarnings("deprecation")
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
-		Block block = player.getTargetBlock(null, 30);
-		if (block != null && block.getType() != Material.AIR) {
+		Target target = user.getTarget(this);
+		if (target != null && target.getBlock() != null && target.getBlock().getType() != Material.AIR) {
+			Block block = target.getBlock();
 			Location bottom = block.getLocation().add(0, 1, 0);
 			Location top = block.getLocation().add(0, 2, 0);
 			Block bottomBlock = bottom.getBlock();

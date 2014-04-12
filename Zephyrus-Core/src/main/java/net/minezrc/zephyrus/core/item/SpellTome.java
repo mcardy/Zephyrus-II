@@ -10,8 +10,8 @@ import net.minezrc.zephyrus.core.chat.MessageForm.MessageColor;
 import net.minezrc.zephyrus.core.chat.MessageForm.MessageFormatting;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.event.UserLearnSpellEvent;
-import net.minezrc.zephyrus.spell.Prerequisite;
 import net.minezrc.zephyrus.spell.Spell;
+import net.minezrc.zephyrus.spell.annotation.Prerequisite;
 import net.minezrc.zephyrus.user.User;
 
 import org.apache.commons.lang.WordUtils;
