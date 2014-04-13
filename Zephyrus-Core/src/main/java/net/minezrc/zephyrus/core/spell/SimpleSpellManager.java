@@ -18,6 +18,7 @@ import net.minezrc.zephyrus.core.spell.attack.Fireball;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.buff.Feather;
 import net.minezrc.zephyrus.core.spell.illusion.Confuse;
+import net.minezrc.zephyrus.core.spell.illusion.Disorient;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
 import net.minezrc.zephyrus.core.spell.mobility.Blink;
 import net.minezrc.zephyrus.core.spell.mobility.Woosh;
@@ -149,6 +150,7 @@ public class SimpleSpellManager implements SpellManager {
 
 		// Illusion
 		registerSpell(new Confuse());
+		registerSpell(new Disorient());
 
 		// Mobility
 		registerSpell(new Bang());
