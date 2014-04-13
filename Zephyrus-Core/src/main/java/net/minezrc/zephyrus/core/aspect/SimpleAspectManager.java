@@ -4,6 +4,7 @@ import static net.minezrc.zephyrus.aspect.Aspect.ANIMAL;
 import static net.minezrc.zephyrus.aspect.Aspect.ATTACK;
 import static net.minezrc.zephyrus.aspect.Aspect.DIRT;
 import static net.minezrc.zephyrus.aspect.Aspect.EVIL;
+import static net.minezrc.zephyrus.aspect.Aspect.ENDER;
 import static net.minezrc.zephyrus.aspect.Aspect.FIRE;
 import static net.minezrc.zephyrus.aspect.Aspect.GLASS;
 import static net.minezrc.zephyrus.aspect.Aspect.ICE;
@@ -124,8 +125,7 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.BRICK, AspectList.newList(STONE, 4));
 		add(Material.TNT, AspectList.newList(POWER, 8));
 		add(Material.BOOKSHELF, AspectList.newList().setAspectTypes(WOOD, MAGIC).setAspectValues(12, 3));
-		add(Material.MOSSY_COBBLESTONE, AspectList.newList().setAspectTypes(STONE, LIFE, EVIL)
-				.setAspectValues(1, 1, 1));
+		add(Material.MOSSY_COBBLESTONE, AspectList.newList().setAspectTypes(STONE, LIFE, EVIL).setAspectValues(1, 1, 1));
 		add(Material.OBSIDIAN, AspectList.newList().setAspectTypes(STONE, WATER, FIRE).setAspectValues(4, 1, 1));
 		add(Material.TORCH, AspectList.newList(LIGHT, 1));
 		add(Material.FIRE, AspectList.newList(FIRE, 4));
@@ -172,8 +172,49 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.TRAP_DOOR, AspectList.newList().setAspectTypes(MACHINE, WOOD).setAspectValues(2, 10));
 		add(Material.SMOOTH_BRICK, AspectList.newList(STONE, 2));
 		add(Material.SMOOTH_BRICK, AspectList.newList().setAspectTypes(STONE, LIFE).setAspectValues(2, 1));
-		// 99
+		add(Material.RED_MUSHROOM, AspectList.newList().setAspectTypes(LIFE, DIRT).setAspectValues(2, 1));
+		add(Material.BROWN_MUSHROOM, AspectList.newList().setAspectTypes(LIFE, DIRT).setAspectValues(2, 1));
+		add(Material.IRON_BARDING, AspectList.newList().setAspectTypes(METAL).setAspectValues(1));
+		add(Material.THIN_GLASS, AspectList.newList().setAspectTypes(GLASS).setAspectValues(1));
+		add(Material.MELON, AspectList.newList().setAspectTypes(LIFE, WATER).setAspectValues(3, 2));
+		add(Material.VINE, AspectList.newList().setAspectTypes(LIFE).setAspectValues(1));
+		add(Material.FENCE_GATE, AspectList.newList().setAspectTypes(WOOD, MACHINE).setAspectValues(8, 2));
+		add(Material.BRICK_STAIRS, AspectList.newList().setAspectTypes(STONE).setAspectValues(2));
+		add(Material.SMOOTH_STAIRS, AspectList.newList().setAspectTypes(STONE).setAspectValues(2));
+		add(Material.MYCEL, AspectList.newList().setAspectTypes(DIRT, EVIL).setAspectValues(2, 1));
+		add(Material.WATER_LILY, AspectList.newList().setAspectTypes(WATER, LIFE).setAspectValues(2, 2));
+		add(Material.NETHER_BRICK, AspectList.newList().setAspectTypes(FIRE, EVIL, STONE).setAspectValues(1, 2, 2));
+		add(Material.NETHER_FENCE, AspectList.newList().setAspectTypes(FIRE, EVIL, STONE).setAspectValues(1, 1, 1));
+		add(Material.NETHER_BRICK_STAIRS, AspectList.newList().setAspectTypes(FIRE, EVIL, STONE)
+				.setAspectValues(2, 3, 3));
+		add(Material.NETHER_STALK, AspectList.newList().setAspectTypes(EVIL, LIFE).setAspectValues(2, 2));
+		add(Material.ENCHANTMENT_TABLE, AspectList.newList().setAspectTypes(MAGIC, VALUE).setAspectValues(8, 4));
+		add(Material.BREWING_STAND, AspectList.newList().setAspectTypes(MAGIC, WATER, FIRE).setAspectValues(4, 1, 1));
+		add(Material.CAULDRON, AspectList.newList().setAspectTypes(METAL, WATER).setAspectValues(8, 4));
+		add(Material.ENDER_PORTAL_FRAME, AspectList.newList().setAspectTypes(ENDER, STONE).setAspectValues(8, 8));
+		add(Material.ENDER_STONE, AspectList.newList().setAspectTypes(ENDER, STONE).setAspectValues(1, 1));
+		add(Material.DRAGON_EGG, AspectList.newList().setAspectTypes(EVIL, LIFE, MAGIC).setAspectValues(32, 32, 32));
+		add(Material.REDSTONE_LAMP_OFF, AspectList.newList().setAspectTypes(MACHINE, LIGHT).setAspectValues(2, 4));
+		add(Material.REDSTONE_LAMP_ON, AspectList.newList().setAspectTypes(MACHINE, LIGHT).setAspectValues(2, 4));
+		add(Material.WOOD_STEP, AspectList.newList(WOOD, 1));
+		add(Material.SANDSTONE_STAIRS, AspectList.newList().setAspectTypes(STONE, DIRT).setAspectValues(1, 1));
+		add(Material.EMERALD_ORE, AspectList.newList().setAspectTypes(STONE, VALUE).setAspectValues(2, 4));
+		add(Material.ENDER_CHEST, AspectList.newList(ENDER, 8));
+		add(Material.TRIPWIRE_HOOK, AspectList.newList().setAspectTypes(MACHINE, WOOD, METAL).setAspectValues(2, 1, 1));
+		add(Material.TRIPWIRE, AspectList.newList(VALUE, 64));
+		add(Material.SPRUCE_WOOD_STAIRS, AspectList.newList(WOOD, 1));
+		add(Material.BIRCH_WOOD_STAIRS, AspectList.newList(WOOD, 1));
+		add(Material.JUNGLE_WOOD_STAIRS, AspectList.newList(WOOD, 1));
+		add(Material.BEACON, AspectList.newList().setAspectTypes(GLASS, MAGIC, POWER).setAspectValues(8, 32, 16));
+		add(Material.COBBLE_WALL, AspectList.newList(STONE, 1));
+		add(Material.COBBLE_WALL, 1, AspectList.newList().setAspectTypes(STONE, LIFE).setAspectValues(1, 1));
+		add(Material.WOOD_BUTTON, AspectList.newList().setAspectTypes(WOOD, MACHINE).setAspectValues(1, 1));
+		add(Material.ANVIL, AspectList.newList().setAspectTypes(METAL, TOOL).setAspectValues(200, 20));
+		add(Material.TRAPPED_CHEST, AspectList.newList().setAspectTypes(WOOD, MACHINE).setAspectValues(16, 4));
+		add(Material.IRON_PLATE, AspectList.newList().setAspectTypes(METAL, MACHINE).setAspectValues(8, 1));
 		
+		//
+
 		add(Material.ARROW, AspectList.newList(ATTACK, 4));
 	}
 
