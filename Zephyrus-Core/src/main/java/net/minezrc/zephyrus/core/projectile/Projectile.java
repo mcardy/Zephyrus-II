@@ -2,6 +2,7 @@ package net.minezrc.zephyrus.core.projectile;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 /**
@@ -13,10 +14,10 @@ import org.bukkit.entity.Player;
 
 public interface Projectile {
 
-	public int getDamage();
 	public Entity getEntity();
 	public void launchProjectile(Player player);
 	public void onParticleDisplay(Location loc);
-	public void onHit(Location loc);
+	public void onHitBlock(Location loc);
+	public void onHitEntity(LivingEntity entity);
 	
 }

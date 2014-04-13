@@ -2,7 +2,7 @@ package net.minezrc.zephyrus.core.spell.attack;
 
 import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
-import net.minezrc.zephyrus.core.projectile.BallProjectile;
+import net.minezrc.zephyrus.core.projectile.DamagingBallProjectile;
 import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
@@ -29,7 +29,7 @@ public class Fireball extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		BallProjectile projectile = new BallProjectile(Particle.FIRE, 4 * power, 16 * power);
+		DamagingBallProjectile projectile = new DamagingBallProjectile(Particle.FIRE, 4 * power, 16 * power);
 		projectile.launchProjectile(user.getPlayer());
 		return CastResult.SUCCESS;
 	}

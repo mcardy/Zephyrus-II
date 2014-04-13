@@ -9,6 +9,7 @@ import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 
@@ -19,23 +20,18 @@ import org.bukkit.entity.Snowball;
  * 
  */
 
-public class BeamProjectile implements Projectile {
+public class DamagingBeamProjectile implements Projectile {
 
 	private Snowball snowball;
 	private Particle particle;
 	private int damage;
 	private List<Location> locs;
 	
-	public BeamProjectile(Particle particle, int damage) {
+	public DamagingBeamProjectile(Particle particle, int damage) {
 		this.particle = particle;
 		this.damage = damage;
 		locs = new ArrayList<Location>();
 	}
-	
-	@Override
-	public int getDamage() {
-		return damage;
-	}	
 	
 	@Override
 	public Entity getEntity() {
@@ -54,7 +50,12 @@ public class BeamProjectile implements Projectile {
 	}
 	
 	@Override
-	public void onHit(Location loc) {
+	public void onHitBlock(Location loc) {
+	}
+	
+	@Override
+	public void onHitEntity(LivingEntity entity) {
+		entity.damage(damage);
 	}
 	
 	@Override

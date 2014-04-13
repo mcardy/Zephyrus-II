@@ -6,6 +6,7 @@ import net.minezrc.zephyrus.Zephyrus;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +29,7 @@ public class ProjectileHandler implements Listener {
 	private ProjectileHandler() {
 		projectileData = new WeakHashMap<Entity, Projectile>();
 	}
-	
+
 	protected static ProjectileHandler getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new ProjectileHandler();
@@ -36,7 +37,7 @@ public class ProjectileHandler implements Listener {
 		}
 		return INSTANCE;
 	}
-	
+
 	protected void launchProjectile(final Projectile projectile) {
 		projectileData.put(projectile.getEntity(), projectile);
 		Bukkit.getScheduler().runTask(Zephyrus.getPlugin(), new BukkitRunnable() {
@@ -49,25 +50,24 @@ public class ProjectileHandler implements Listener {
 			}
 		});
 	}
-	
+
 	@EventHandler
 	public void onProjectileHitEntity(EntityDamageByEntityEvent event) {
-		if (event.getDamager() instanceof Snowball) {
+		if (event.getEntity() instanceof LivingEntity && event.getDamager() instanceof Snowball) {
 			if (projectileData.containsKey(event.getDamager())) {
 				Projectile projectile = projectileData.get(event.getDamager());
-				projectile.onHit(event.getDamager().getLocation());
-				event.setDamage(projectile.getDamage());
+				projectile.onHitEntity((LivingEntity) event.getEntity());
 				projectileData.remove(event.getDamager());
 			}
 		}
 	}
-	
+
 	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event) {
+	public void onProjectileHitBlock(ProjectileHitEvent event) {
 		if (event.getEntity() instanceof Snowball) {
 			if (projectileData.containsKey(event.getEntity())) {
 				Projectile projectile = projectileData.get(event.getEntity());
-				projectile.onHit(event.getEntity().getLocation());
+				projectile.onHitBlock(event.getEntity().getLocation());
 				projectileData.remove(event.getEntity());
 			}
 		}

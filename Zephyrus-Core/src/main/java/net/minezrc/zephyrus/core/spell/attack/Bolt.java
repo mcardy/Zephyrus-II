@@ -2,7 +2,7 @@ package net.minezrc.zephyrus.core.spell.attack;
 
 import net.minezrc.zephyrus.aspect.Aspect;
 import net.minezrc.zephyrus.aspect.AspectList;
-import net.minezrc.zephyrus.core.projectile.BeamProjectile;
+import net.minezrc.zephyrus.core.projectile.DamagingBeamProjectile;
 import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
@@ -28,7 +28,7 @@ public class Bolt extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		BeamProjectile projectile = new BeamProjectile(Particle.MAGIC_CRITICAL_HIT, 4);
+		DamagingBeamProjectile projectile = new DamagingBeamProjectile(Particle.MAGIC_CRITICAL_HIT, 4);
 		projectile.launchProjectile(user.getPlayer());
 		return CastResult.SUCCESS;
 	}
