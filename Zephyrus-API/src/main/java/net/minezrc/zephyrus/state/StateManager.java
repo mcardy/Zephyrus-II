@@ -1,5 +1,7 @@
 package net.minezrc.zephyrus.state;
 
+import java.util.List;
+
 import net.minezrc.zephyrus.Manager;
 
 /**
@@ -10,5 +12,8 @@ import net.minezrc.zephyrus.Manager;
  */
 
 public interface StateManager extends Manager {
+	
+	public List<State> getStates();
+	public void registerState(State state);
 	
 }

@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
-import net.minezrc.zephyrus.core.state.StateList;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.event.UserPostCastEvent;
 import net.minezrc.zephyrus.event.UserPreCastEvent;
@@ -225,7 +224,7 @@ public class OnlineUser implements User {
 	}
 
 	protected synchronized void load() {
-		for (State state : StateList.STATES) {
+		for (State state : Zephyrus.getStateManager().getStates()) {
 			state.onStartup(this);
 		}
 		YmlConfigFile configFile = new YmlConfigFile(playerName + ".yml", new File(
