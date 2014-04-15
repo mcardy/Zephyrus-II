@@ -57,8 +57,7 @@ public class ItemListener implements Listener {
 				if (action.getActions().contains(event.getAction())) {
 					action.onInteract(event);
 				}
-			}
-			if (item != null && item instanceof Wand) {
+			} else if (item != null && item instanceof Wand) {
 				Wand wand = (Wand) item;
 				String bound = wand.getSpell(player.getItemInHand());
 				// Spell Crafting
@@ -72,9 +71,8 @@ public class ItemListener implements Listener {
 					for (Spell spell : possibleSpells) {
 						if (wand.getCraftingAbilityLevel() >= spell.getRequiredLevel()
 								&& user.getLevel() >= spell.getRequiredLevel()
-								&& !(spell.getClass()
-										.isAnnotationPresent(Prerequisite.class) && !user.isSpellLearned(Zephyrus
-										.getSpell(((Prerequisite) spell.getClass()
+								&& !(spell.getClass().isAnnotationPresent(Prerequisite.class) && !user
+										.isSpellLearned(Zephyrus.getSpell(((Prerequisite) spell.getClass()
 												.getAnnotation(Prerequisite.class)).requiredSpell())))) {
 							spells.add(spell);
 						}

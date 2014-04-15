@@ -14,6 +14,7 @@ import net.minezrc.zephyrus.Manager;
 public interface EnchantManager extends Manager {
 
 	public Enchant getEnchant(int id);
+	public int getEnchant(String name);
 	public void registerEnchantment(Enchant enchantment);
 	
 }

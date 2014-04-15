@@ -60,6 +60,7 @@ public class SimpleItemManager implements ItemManager {
 		registerItem(new BasicObsidianWand());
 		registerItem(new StandardWand());
 		registerItem(new AdvancedWand());
+		registerItem(new SpellBook());
 	}
 
 	@Override

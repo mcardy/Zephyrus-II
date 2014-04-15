@@ -1,9 +1,9 @@
 package net.minezrc.zephyrus.core.enchant;
 
-import org.bukkit.enchantments.Enchantment;
-
 import net.minezrc.zephyrus.enchant.Enchant;
 import net.minezrc.zephyrus.enchant.EnchantTarget;
+
+import org.bukkit.enchantments.Enchantment;
 
 /**
  * Zephyrus - GlowEnchant.java

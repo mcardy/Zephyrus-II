@@ -48,8 +48,19 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 		id = 120;
 	}
 
+	@Override
 	public Enchant getEnchant(int id) {
 		return enchantmentMap.get(id);
+	}
+	
+	@Override
+	public int getEnchant(String name) {
+		for (Entry<Integer, Enchant> entry : enchantmentMap.entrySet()) {
+			if (entry.getValue().getName().equalsIgnoreCase(name)) {
+				return entry.getKey();
+			}
+		}
+		return 0;
 	}
 
 	@Override
