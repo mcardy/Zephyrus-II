@@ -11,6 +11,7 @@ import net.minezrc.zephyrus.core.nms.SimpleNMSManager;
 import net.minezrc.zephyrus.core.spell.SimpleSpellManager;
 import net.minezrc.zephyrus.core.state.SimpleStateManager;
 import net.minezrc.zephyrus.core.user.SimpleUserManager;
+import net.minezrc.zephyrus.core.util.Metrics;
 import net.minezrc.zephyrus.core.util.Updater;
 import net.minezrc.zephyrus.core.util.Updater.UpdateResult;
 
@@ -52,6 +53,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		try {
+			new Metrics(this).start();
 			ConfigOptions.loadOptions(getConfig());
 			Zephyrus.getAspectManager().load();
 			Zephyrus.getCommandManager().load();
