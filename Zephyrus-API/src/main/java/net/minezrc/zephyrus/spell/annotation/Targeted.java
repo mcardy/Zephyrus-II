@@ -18,7 +18,18 @@ import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Targeted {
 
+	/**
+	 * Whether or not the spell is beneficial. Defaulted to false
+	 * 
+	 * @return A boolean
+	 */
 	public boolean friendly() default false;
+
+	/**
+	 * The type of target (BLOCK or ENTITY)
+	 * 
+	 * @return TargetType enum constant
+	 */
 	public TargetType type();
-	
+
 }
