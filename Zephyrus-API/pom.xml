@@ -20,12 +20,13 @@
             <id>javadoc-jar</id>
             <phase>package</phase>
             <goals>
-              <goal>jar</goal>
+              <goal>javadoc</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
           <quiet>true</quiet>
+          <outputDirectory>${project.build.directory}/site/apidocs</outputDirectory>
         </configuration>
       </plugin>
     </plugins>
