@@ -16,8 +16,10 @@ import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
 import net.minezrc.zephyrus.core.spell.attack.Bolt;
 import net.minezrc.zephyrus.core.spell.attack.Fireball;
 import net.minezrc.zephyrus.core.spell.attack.Firecharge;
+import net.minezrc.zephyrus.core.spell.attack.Punch;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.buff.Feather;
+import net.minezrc.zephyrus.core.spell.creation.Conjure;
 import net.minezrc.zephyrus.core.spell.illusion.Confuse;
 import net.minezrc.zephyrus.core.spell.illusion.Disorient;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
@@ -143,12 +145,14 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new Bolt());
 		registerSpell(new Fireball());
 		registerSpell(new Firecharge());
+		registerSpell(new Punch());
 		
 		// Buff
 		registerSpell(new Armor());
 		registerSpell(new Feather());
 		
 		// Creation
+		registerSpell(new Conjure());
 
 		// Illusion
 		registerSpell(new Confuse());
@@ -168,11 +172,11 @@ public class SimpleSpellManager implements SpellManager {
 		// World
 		registerSpell(new Clock());
 
-		// TODO Re-implement: Butcher, Conjure, Detect, Dig, Dim, Dispel,
+		// TODO Re-implement: Butcher, Detect, Dig, Dim, Dispel,
 		// Enderchest, Explode,
 		// Feather, FireRing, FireShield, FlameStep, Flare, Fly,
 		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight, Mana,
-		// MassParalyze, Paralyze, Phase, Prospect, Punch, Repair, Satisfy,
+		// MassParalyze, Paralyze, Phase, Prospect, Repair, Satisfy,
 		// Shield, Shine, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
 		// VIsion, Zap, Zephyr
 

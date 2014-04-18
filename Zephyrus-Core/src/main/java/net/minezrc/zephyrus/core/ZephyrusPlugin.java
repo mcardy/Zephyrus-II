@@ -27,7 +27,6 @@ import org.bukkit.scheduler.BukkitRunnable;
  * TODO Re-implement all spells and items
  * TODO Implement Combo-Spells
  * TODO Item level and upgrades
- * TODO Particle projectiles
  * 
  * @author minnymin3
  * 
