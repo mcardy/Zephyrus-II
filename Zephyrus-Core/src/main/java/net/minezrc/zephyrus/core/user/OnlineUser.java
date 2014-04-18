@@ -129,6 +129,9 @@ public class OnlineUser implements User {
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
 				Targeted targeted = spell.getClass().getAnnotation(Targeted.class);
 				setTarget(spell, targeted.type(), targeted.friendly());
+				if (targeted.type() == TargetType.ENTITY && getTarget(spell).getEntity() == null) {
+					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
+				}
 			}
 			UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, args);
 			Bukkit.getPluginManager().callEvent(preCast);
