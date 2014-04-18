@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.core.hook;
 
+import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.hook.ProtectionHook;
@@ -88,6 +89,7 @@ public class FactionsHook implements ProtectionHook {
 	public boolean checkHook() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("Factions");
 		if (plugin != null && plugin instanceof Factions) {
+			Zephyrus.getPlugin().getLogger().info("[Plugin Hooks] Found and hooked Factions");
 			return true;
 		}
 		return false;

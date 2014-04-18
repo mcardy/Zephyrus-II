@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.core.hook;
 
+import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.hook.ProtectionHook;
@@ -83,6 +84,7 @@ public class TownyHook implements ProtectionHook {
 	public boolean checkHook() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("Towny");
 		if (plugin != null && plugin instanceof Towny) {
+			Zephyrus.getPlugin().getLogger().info("[Plugin Hooks] Found and hooked Towny");
 			return true;
 		}
 		return false;

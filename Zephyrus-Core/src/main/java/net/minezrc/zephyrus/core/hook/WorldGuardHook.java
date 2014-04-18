@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.core.hook;
 
+import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.util.Language;
 import net.minezrc.zephyrus.core.util.reflection.ReflectionUtils;
 import net.minezrc.zephyrus.hook.ProtectionHook;
@@ -64,6 +65,7 @@ public class WorldGuardHook implements ProtectionHook {
 	public boolean checkHook() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("WorldGuard");
 		if (plugin != null && plugin instanceof WorldGuardPlugin) {
+			Zephyrus.getPlugin().getLogger().info("[Plugin Hooks] Found and hooked WorldGuard");
 			return true;
 		}
 		return false;

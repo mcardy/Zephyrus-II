@@ -2,6 +2,7 @@ package net.minezrc.zephyrus.core.hook;
 
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
+import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.hook.EconomyHook;
 
 import org.bukkit.Bukkit;
@@ -24,6 +25,7 @@ public class VaultHook implements EconomyHook {
 	public boolean checkHook() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("Vault");
 		if (plugin != null && plugin instanceof Vault) {
+			Zephyrus.getPlugin().getLogger().info("[Plugin Hooks] Found and hooked Vault economy");
 			return true;
 		}
 		return false;

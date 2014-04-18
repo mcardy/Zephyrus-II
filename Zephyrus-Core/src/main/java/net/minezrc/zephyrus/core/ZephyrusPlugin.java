@@ -65,7 +65,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 			Zephyrus.getStateManager().load();
 			Zephyrus.getUserManager().load();
 			schedulePostLoadTask(Updater.update());
-			getLogger().info("Fully loaded Zephyrus-II v" + getDescription().getVersion());
+			getLogger().info("Fully loaded Zephyrus v" + getDescription().getVersion());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
