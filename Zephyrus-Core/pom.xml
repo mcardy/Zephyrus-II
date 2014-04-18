@@ -61,7 +61,7 @@
               <configuration>
               <resources>
                 <resource>
-                  <directory>../Libraries</directory>
+                  <directory>${project.parent.basedir}/Libraries</directory>
                 </resource>
               </resources>
             </configuration>
