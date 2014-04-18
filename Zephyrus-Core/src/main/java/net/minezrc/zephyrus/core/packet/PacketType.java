@@ -3,13 +3,6 @@ package net.minezrc.zephyrus.core.packet;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minezrc.zephyrus.core.packet.server.PacketChat;
-import net.minezrc.zephyrus.core.packet.server.PacketEntityDestroy;
-import net.minezrc.zephyrus.core.packet.server.PacketEntityLivingSpawn;
-import net.minezrc.zephyrus.core.packet.server.PacketEntityMetadata;
-import net.minezrc.zephyrus.core.packet.server.PacketEntityTeleport;
-import net.minezrc.zephyrus.core.packet.server.PacketPlayerAnimation;
-import net.minezrc.zephyrus.core.packet.server.PacketPlayerBed;
 import net.minezrc.zephyrus.core.util.reflection.NMSUtils;
 
 /**
@@ -33,8 +26,6 @@ public class PacketType {
 		LOGIN("PacketPlayOutLogin"),
 		/**
 		 * Sent for chat messages
-		 * 
-		 * @see PacketChat
 		 */
 		CHAT("PacketPlayOutChat"),
 		/**
@@ -68,14 +59,10 @@ public class PacketType {
 		PLAYER_HELD_ITEM("PacketPlayOutHeldItemSlot"),
 		/**
 		 * Sent to put the player in the bed position
-		 * 
-		 * @see PacketPlayerBed
 		 */
 		PLAYER_BED("PacketPlayOutBed"),
 		/**
 		 * Sent to execute a player animation
-		 * 
-		 * @see PacketPlayerAnimation
 		 */
 		PLAYER_ANIMATION("PacketPlayOutAnimation"),
 		/**
@@ -92,8 +79,6 @@ public class PacketType {
 		SPAWN_ENTITY("PacketPlayOutSpawnEntity"),
 		/**
 		 * Sent to spawn a living entity
-		 * 
-		 * @see PacketEntityLivingSpawn
 		 */
 		SPAWN_ENTITY_LIVING("PacketPlayOutSpawnEntityLiving"),
 		/**
@@ -110,8 +95,6 @@ public class PacketType {
 		ENTITY_VELOCITY("PacketPlayOutEntityVelocity"),
 		/**
 		 * Sent to remove an entity from the world
-		 * 
-		 * @see PacketEntityDestroy
 		 */
 		ENTITY_KILL("PacketPlayOutEntityDestroy"),
 		/**
@@ -134,8 +117,6 @@ public class PacketType {
 		ENTITY_MOVE_LOOK("PacketPlayOutRelEntityMoveLook"),
 		/**
 		 * Sent to teleport an entity (entity moves more than 4 blocks)
-		 * 
-		 * @see PacketEntityTeleport
 		 */
 		ENTITY_TELEPORT("PacketPlayOutEntityTeleport"),
 		/**
@@ -153,8 +134,6 @@ public class PacketType {
 		ENTITY_MOUNT("PacketPlayOutAttachEntity"),
 		/**
 		 * Sent to update an entity's metadata
-		 * 
-		 * @see PacketEntityMetadata
 		 */
 		ENTITY_METADATA("PacketPlayOutEntityMetadata"),
 		/**
@@ -203,20 +182,14 @@ public class PacketType {
 		EXPLOSION("PacketPlayOutExplosion"),
 		/**
 		 * Sent when an effect is played
-		 * 
-		 * @see player.playEffect()
 		 */
 		EFFECT_WORLD("PacketPlayOutWorldEvent"),
 		/**
 		 * Sent when a sound is played
-		 * 
-		 * @see player.playSound()
 		 */
 		EFFECT_SOUND("PacketPlayOutNamedSoundEffect"),
 		/**
 		 * Sent when a particle effect is created
-		 * 
-		 * @see ParticleEffects
 		 */
 		EFFECT_PARTICLE("PacketPlayOutWorldParticles"),
 		/**

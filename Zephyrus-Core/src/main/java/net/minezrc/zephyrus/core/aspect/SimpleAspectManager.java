@@ -212,7 +212,14 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.ANVIL, AspectList.newList().setAspectTypes(METAL, TOOL).setAspectValues(200, 20));
 		add(Material.TRAPPED_CHEST, AspectList.newList().setAspectTypes(WOOD, MACHINE).setAspectValues(16, 4));
 		add(Material.IRON_PLATE, AspectList.newList().setAspectTypes(METAL, MACHINE).setAspectValues(8, 1));
-		
+		add(Material.REDSTONE_COMPARATOR, AspectList.newList().setAspectTypes(MACHINE, POWER).setAspectValues(16, 1));
+		add(Material.DAYLIGHT_DETECTOR, AspectList.newList().setAspectTypes(MACHINE, LIGHT).setAspectValues(8, 8));
+		add(Material.REDSTONE_BLOCK, AspectList.newList(MACHINE, 9));
+		add(Material.QUARTZ_ORE, AspectList.newList().setAspectTypes(FIRE, STONE, VALUE).setAspectValues(1, 2, 1));
+		add(Material.HOPPER, AspectList.newList().setAspectTypes(METAL, MACHINE).setAspectValues(20, 8));
+		add(Material.QUARTZ_BLOCK, AspectList.newList().setAspectTypes(STONE, VALUE).setAspectValues(8, 8));
+		add(Material.QUARTZ_STAIRS, AspectList.newList().setAspectTypes(STONE, VALUE).setAspectValues(2, 2));
+		add(Material.ACTIVATOR_RAIL, AspectList.newList().setAspectTypes(MACHINE, METAL).setAspectValues(4, 2));
 		//
 
 		add(Material.ARROW, AspectList.newList(ATTACK, 4));
