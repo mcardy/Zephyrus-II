@@ -79,7 +79,8 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void registerEnchantment(Enchant enchantment) {
+	public int registerEnchantment(Enchant enchantment) {
+		id++;
 		if (Enchantment.getById(id) == null) {
 			boolean modified = false;
 			if (accepting == false) {
@@ -89,12 +90,12 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 			}
 			enchantmentMap.put(id, enchantment);
 			Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
-			id++;
 			if (modified) {
 				ReflectionUtils.setStaticField(Enchantment.class, false, "acceptingNew");
 				accepting = false;
 			}
 		}
+		return id;
 	}
 
 	@EventHandler

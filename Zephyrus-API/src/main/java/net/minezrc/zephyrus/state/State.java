@@ -5,7 +5,8 @@ import net.minezrc.zephyrus.user.User;
 import org.bukkit.event.Listener;
 
 /**
- * Zephyrus - State.java
+ * Zephyrus - State.java<br>
+ * Represents a status effect that can be applied to a user
  * 
  * @author minnymin3
  * 
@@ -16,7 +17,7 @@ public interface State extends Listener {
 	/**
 	 * The amount of time (in 10ths of a second) that the state should tick
 	 * 
-	 * @return
+	 * @return The amount the state ticks (0 for never)
 	 */
 	public int getTickTime();
 

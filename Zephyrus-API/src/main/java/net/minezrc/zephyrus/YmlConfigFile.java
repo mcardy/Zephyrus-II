@@ -7,8 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
- * Zephyrus - YmlConfigFile.java
- * 
+ * Zephyrus - YmlConfigFile.java<br>
  * Represents a config file that can be created within the Zephyrus folder.
  * Allows for add-ons to have all configs in one place.
  * 
@@ -18,10 +17,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class YmlConfigFile {
 
-	private String fileName;
 	private File configFile;
 	private File dataFolder;
 	private FileConfiguration fileConfiguration;
+	private String fileName;
 
 	/**
 	 * Creates a new yml config file with the given file name existing in
@@ -46,20 +45,6 @@ public class YmlConfigFile {
 	}
 
 	/**
-	 * The name of this configuration
-	 */
-	public String getFileName() {
-		return fileName;
-	}
-
-	/**
-	 * The current file of this configuration
-	 */
-	public File getFile() {
-		return configFile;
-	}
-
-	/**
 	 * Adds a default to the config
 	 * 
 	 * @param path The path of the value
@@ -81,6 +66,20 @@ public class YmlConfigFile {
 			this.reloadConfig();
 		}
 		return fileConfiguration;
+	}
+
+	/**
+	 * The current file of this configuration
+	 */
+	public File getFile() {
+		return configFile;
+	}
+
+	/**
+	 * The name of this configuration
+	 */
+	public String getFileName() {
+		return fileName;
 	}
 
 	/**

@@ -1,7 +1,8 @@
 package net.minezrc.zephyrus.spell;
 
 /**
- * Zephyrus - SpellAttributes.java
+ * Zephyrus - SpellAttributes.java<br>
+ * Represents attributes related to the spell
  * 
  * @author minnymin3
  * 
@@ -54,7 +55,7 @@ public class SpellAttributes {
 	public enum SpellType {
 		ATTACK, BUFF, CREATION, ILLUSION, MOBILITY, RESTORATION, WORLD;
 	}
-	
+
 	/**
 	 * An identifier for the type of target for a targeted spell
 	 */

@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 /**
- * Zephyrus - UserEvent.java
+ * Zephyrus - UserEvent.java <br>
+ * An abstract superclass representing an event called by a user
  * 
  * @author minnymin3
  * 
@@ -16,15 +17,15 @@ import org.bukkit.event.Event;
 public abstract class UserEvent extends Event {
 
 	private User user;
-	
+
 	public UserEvent(Player player) {
 		this.user = Zephyrus.getUser(player.getName());
 	}
-	
+
 	public UserEvent(User user) {
 		this.user = user;
 	}
-	
+
 	/**
 	 * Gets the user who performed the action
 	 * 
@@ -33,5 +34,5 @@ public abstract class UserEvent extends Event {
 	public User getUser() {
 		return this.user;
 	}
-	
+
 }

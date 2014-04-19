@@ -73,7 +73,7 @@ public class SimpleSpellManager implements SpellManager {
 	}
 
 	@Override
-	public List<Spell> getSpell(Set<ItemStack> recipe) {
+	public List<Spell> getSpells(Set<ItemStack> recipe) {
 		List<Spell> spellSet = new ArrayList<Spell>();
 		Iterator<Spell> spells = spellList.iterator();
 		while (spells.hasNext()) {

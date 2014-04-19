@@ -1,5 +1,6 @@
 package net.minezrc.zephyrus.event;
 
+import net.minezrc.zephyrus.item.Wand;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.user.User;
 
@@ -8,7 +9,8 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 /**
- * Zephyrus - UserBindSpellEvent.java
+ * Zephyrus - UserBindSpellEvent.java <br>
+ * An event called when a user binds a spell to a wand
  * 
  * @author minnymin3
  * 
@@ -16,23 +18,26 @@ import org.bukkit.event.HandlerList;
 
 public class UserBindSpellEvent extends UserEvent implements Cancellable {
 
-private static final HandlerList handlers = new HandlerList();
-	
+	private static final HandlerList handlers = new HandlerList();
+
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
-	private Spell spell;	
+
+	private Spell spell;
+	private Wand wand;
 	private boolean cancelled = false;
-	
-	public UserBindSpellEvent(Player player, Spell spell) {
+
+	public UserBindSpellEvent(Player player, Spell spell, Wand wand) {
 		super(player);
 		this.spell = spell;
+		this.wand = wand;
 	}
 
-
-	public UserBindSpellEvent(User player, Spell spell) {
+	public UserBindSpellEvent(User player, Spell spell, Wand wand) {
 		super(player);
 		this.spell = spell;
+		this.wand = wand;
 	}
 
 	@Override
@@ -48,7 +53,16 @@ private static final HandlerList handlers = new HandlerList();
 	public Spell getSpell() {
 		return spell;
 	}
-	
+
+	/**
+	 * Gets the wand that is being bound to
+	 * 
+	 * @return The wand being bound or null if being bound to a spellbook
+	 */
+	public Wand getWand() {
+		return wand;
+	}
+
 	@Override
 	public boolean isCancelled() {
 		return cancelled;
@@ -58,5 +72,5 @@ private static final HandlerList handlers = new HandlerList();
 	public void setCancelled(boolean cancel) {
 		cancelled = cancel;
 	}
-	
+
 }

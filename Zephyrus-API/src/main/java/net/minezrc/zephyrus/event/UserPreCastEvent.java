@@ -8,7 +8,8 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 /**
- * Zephyrus - UserPreCastEvent.java
+ * Zephyrus - UserPreCastEvent.java <br>
+ * An event called when a user is preparing a spell cast
  * 
  * @author minnymin3
  * 
@@ -17,23 +18,23 @@ import org.bukkit.event.HandlerList;
 public class UserPreCastEvent extends UserEvent implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();
-	
+
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
+
 	private Spell spell;
 	private String[] args;
 	private int power;
-	
+
 	private boolean cancelled = false;
-	
+
 	public UserPreCastEvent(Player player, Spell spell, int power, String[] args) {
 		super(player);
 		this.spell = spell;
 		this.power = power;
 		this.args = args;
 	}
-
 
 	public UserPreCastEvent(User player, Spell spell, int power, String[] args) {
 		super(player);
@@ -55,7 +56,7 @@ public class UserPreCastEvent extends UserEvent implements Cancellable {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
-	
+
 	/**
 	 * Gets the power that this spell is cast at
 	 * 
@@ -73,7 +74,7 @@ public class UserPreCastEvent extends UserEvent implements Cancellable {
 	public Spell getSpell() {
 		return spell;
 	}
-	
+
 	@Override
 	public boolean isCancelled() {
 		return cancelled;

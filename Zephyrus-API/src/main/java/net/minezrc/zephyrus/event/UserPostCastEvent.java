@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
 /**
- * Zephyrus - UserPreCastEvent.java
+ * Zephyrus - UserPreCastEvent.java <br>
+ * An event called after a spell is cast
  * 
  * @author minnymin3
  * 
@@ -16,15 +17,16 @@ import org.bukkit.event.HandlerList;
 public class UserPostCastEvent extends UserEvent {
 
 	private static final HandlerList handlers = new HandlerList();
-	
+
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
+
 	private Spell spell;
 	private String[] args;
-	
+
 	private int power;
-	
+
 	public UserPostCastEvent(Player player, Spell spell, int power, String[] args) {
 		super(player);
 		this.spell = spell;
@@ -52,7 +54,7 @@ public class UserPostCastEvent extends UserEvent {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
-	
+
 	/**
 	 * Gets the power that this spell is cast at
 	 * 

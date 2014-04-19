@@ -8,7 +8,8 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 /**
- * Zephyrus - UserTargetEntityEvent.java
+ * Zephyrus - UserTargetEntityEvent.java <br>
+ * An event called when a user targets a block
  * 
  * @author minnymin3
  * 
@@ -17,22 +18,27 @@ import org.bukkit.event.HandlerList;
 public class UserTargetBlockEvent extends UserEvent implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();
-	
+
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
-	
+
 	private Block target;
 	private boolean cancelled = false;
-	
+
 	public UserTargetBlockEvent(Player player, Block target) {
 		super(player);
 		this.target = target;
 	}
-	
+
 	public UserTargetBlockEvent(User user, Block target) {
 		super(user);
 		this.target = target;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 	/**
@@ -43,12 +49,7 @@ public class UserTargetBlockEvent extends UserEvent implements Cancellable {
 	public Block getTarget() {
 		return target;
 	}
-	
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
-	
+
 	@Override
 	public boolean isCancelled() {
 		return cancelled;

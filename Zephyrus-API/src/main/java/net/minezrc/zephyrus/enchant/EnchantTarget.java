@@ -4,7 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Zephyrus - EnchantTarget.java
+ * Zephyrus - EnchantTarget.java <br>
+ * An enum representing the type of item an enchant can be applied to
  * 
  * @author minnymin3
  * 
@@ -66,9 +67,9 @@ public enum EnchantTarget {
 	 */
 	ARMOR(Material.IRON_HELMET, Material.GOLD_HELMET, Material.DIAMOND_HELMET, Material.IRON_CHESTPLATE,
 			Material.GOLD_CHESTPLATE, Material.DIAMOND_CHESTPLATE, Material.IRON_LEGGINGS, Material.GOLD_LEGGINGS,
-			Material.DIAMOND_CHESTPLATE, Material.IRON_BOOTS, Material.GOLD_BOOTS, Material.DIAMOND_BOOTS), 
+			Material.DIAMOND_CHESTPLATE, Material.IRON_BOOTS, Material.GOLD_BOOTS, Material.DIAMOND_BOOTS),
 	/**
-	 * Represents an enchantment that cannot be applied to anything		
+	 * Represents an enchantment that cannot be applied to anything
 	 */
 	NONE;
 
@@ -78,6 +79,12 @@ public enum EnchantTarget {
 		this.items = items;
 	}
 
+	/**
+	 * Checks if the itemstack material is compatible with the target
+	 * 
+	 * @param item The itemstack to check
+	 * @return True if it is compatible
+	 */
 	public boolean isTypeCompatible(ItemStack item) {
 		for (Material mat : items) {
 			if (mat == item.getType()) {

@@ -8,10 +8,11 @@ import java.lang.annotation.Target;
 import net.minezrc.zephyrus.spell.Spell;
 
 /**
- * Zephyrus - SpellRequirements.java
+ * Zephyrus - Prerequisite.java<br>
+ * Represents a spell that has a prerequisite spell for crafting
  * 
  * @author minnymin3
- *  
+ * 
  */
 
 @Target(ElementType.TYPE)
@@ -19,5 +20,5 @@ import net.minezrc.zephyrus.spell.Spell;
 public @interface Prerequisite {
 
 	public Class<? extends Spell> requiredSpell();
-	
+
 }

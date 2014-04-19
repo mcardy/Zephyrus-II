@@ -21,8 +21,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 /**
- * Zephyrus - Zephyrus.java
- * 
+ * Zephyrus - Zephyrus.java<br>
  * Zephyrus's main API access class. Allows access to all of Zephyrus's API
  * features and handles singleton feature managers.
  * 
@@ -32,13 +31,13 @@ import org.bukkit.plugin.Plugin;
 
 public class Zephyrus {
 
-	private static Plugin plugin;
 	private static AspectManager aspectManager;
 	private static CommandManager commandManager;
 	private static EnchantManager enchantmentManager;
 	private static PluginHookManager hookManager;
 	private static ItemManager itemManager;
 	private static NMSManager nmsManager;
+	private static Plugin plugin;
 	private static SpellManager spellManager;
 	private static StateManager stateManager;
 	private static UserManager userManager;
@@ -76,21 +75,21 @@ public class Zephyrus {
 	}
 	
 	/**
-	 * Gets an item registered with Zephyrus by the given name
-	 * @param name The name of the item
-	 * @return An item registered with Zephyrus or null if no item was found
-	 */
-	public static Item getItem(String name) {
-		return itemManager.getItem(name);
-	}
-	
-	/**
 	 * Gets an item registered with Zephyrus by the given itemstack
 	 * @param item The itemstack of the item
 	 * @return An item registered or Zephyrus or null if no item was found
 	 */
 	public static Item getItem(ItemStack item) {
 		return itemManager.getItem(item);
+	}
+	
+	/**
+	 * Gets an item registered with Zephyrus by the given name
+	 * @param name The name of the item
+	 * @return An item registered with Zephyrus or null if no item was found
+	 */
+	public static Item getItem(String name) {
+		return itemManager.getItem(name);
 	}
 
 	/**
@@ -102,19 +101,19 @@ public class Zephyrus {
 	}
 
 	/**
-	 * Gets the Zephyrus plugin instance loaded by Bukkit
-	 * @return The Zephyrus plugin instance
-	 */
-	public static Plugin getPlugin() {
-		return plugin;
-	}
-
-	/**
 	 * Gets the NetMinecraftSource Manager singleton
 	 * @return The NMSManager instance
 	 */
 	public static NMSManager getNMSManager() {
 		return nmsManager;
+	}
+
+	/**
+	 * Gets the Zephyrus plugin instance loaded by Bukkit
+	 * @return The Zephyrus plugin instance
+	 */
+	public static Plugin getPlugin() {
+		return plugin;
 	}
 
 	/**
@@ -132,7 +131,7 @@ public class Zephyrus {
 	 * @return A spell loaded by Zephyrus or null if no spell is found
 	 */
 	public static List<Spell> getSpell(Set<ItemStack> recipe) {
-		return spellManager.getSpell(recipe);
+		return spellManager.getSpells(recipe);
 	}
 
 	/**
@@ -296,6 +295,18 @@ public class Zephyrus {
 	}
 
 	/**
+	 * Attempts to set the NMSManager singleton
+	 * @param manager The manager to set
+	 * @throws IllegalStateException when the manager is already set
+	 */
+	public static void setNMSManager(NMSManager manager) {
+		if (Zephyrus.nmsManager != null) {
+			throw new IllegalStateException("Zephyrus NMS manager already set! It cannot be set twice!");
+		}
+		nmsManager = manager;
+	}
+
+	/**
 	 * Attempts to set the plugin instance loaded by Bukkit
 	 * @param plugin The plugin to set
 	 * @throws IllegalStateException when the plugin is already set
@@ -307,18 +318,6 @@ public class Zephyrus {
 		}
 		Zephyrus.plugin = plugin;
 		Zephyrus.plugin.getLogger().info("Initialized Zephyrus-II Core v" + plugin.getDescription().getVersion());
-	}
-
-	/**
-	 * Attempts to set the NMSManager singleton
-	 * @param manager The manager to set
-	 * @throws IllegalStateException when the manager is already set
-	 */
-	public static void setNMSManager(NMSManager manager) {
-		if (Zephyrus.nmsManager != null) {
-			throw new IllegalStateException("Zephyrus NMS manager already set! It cannot be set twice!");
-		}
-		nmsManager = manager;
 	}
 
 	/**

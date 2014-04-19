@@ -8,7 +8,8 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 /**
- * Zephyrus - UserTargetEntityEvent.java
+ * Zephyrus - UserTargetEntityEvent.java <br>
+ * An event called when a user targets an entity
  * 
  * @author minnymin3
  * 
@@ -17,25 +18,30 @@ import org.bukkit.event.HandlerList;
 public class UserTargetEntityEvent extends UserEvent implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();
-	
+
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
-	
+
 	private LivingEntity target;
 	private boolean friendly;
 	private boolean cancelled = false;
-	
+
 	public UserTargetEntityEvent(Player player, LivingEntity target, boolean friendly) {
 		super(player);
 		this.target = target;
 		this.friendly = friendly;
 	}
-	
+
 	public UserTargetEntityEvent(User user, LivingEntity target, boolean friendly) {
 		super(user);
 		this.target = target;
 		this.friendly = friendly;
+	}
+	
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 	/**
@@ -46,7 +52,7 @@ public class UserTargetEntityEvent extends UserEvent implements Cancellable {
 	public LivingEntity getTarget() {
 		return target;
 	}
-	
+
 	/**
 	 * Gets whether or not the applied spell is friendly
 	 * 
@@ -55,12 +61,7 @@ public class UserTargetEntityEvent extends UserEvent implements Cancellable {
 	public boolean getIsFriendly() {
 		return friendly;
 	}
-	
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
-	
+
 	@Override
 	public boolean isCancelled() {
 		return cancelled;

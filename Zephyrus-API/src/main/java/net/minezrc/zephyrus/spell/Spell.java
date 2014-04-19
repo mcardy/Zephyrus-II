@@ -19,7 +19,8 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
- * Zephyrus - Spell.java
+ * Zephyrus - Spell.java<br>
+ * Represents a spell
  * 
  * @author minnymin3
  * 
@@ -42,7 +43,7 @@ public abstract class Spell {
 	public Spell(String name, String description, int manaCost, int xpReward, AspectList recipe, int requiredLevel,
 			SpellElement element, SpellType type) {
 		this.defaultName = name.toLowerCase();
-		
+
 		YmlConfigFile yml = Zephyrus.getSpellConfig();
 		updateCompatibility(defaultName);
 		yml.addDefaults(defaultName + ".Enabled", true);
@@ -75,48 +76,108 @@ public abstract class Spell {
 		this.type = type;
 	}
 
+	/**
+	 * Gets the name of the spell configured by the user
+	 * 
+	 * @return The name of the spell
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Gets the default name as originally defined in the constructor
+	 * 
+	 * @return The name of the spell
+	 */
 	public String getDefaultName() {
 		return this.defaultName;
 	}
 
+	/**
+	 * Gets the description of the spell configured by the user
+	 * 
+	 * @return The description of the spell
+	 */
 	public String getDescription() {
 		return this.description;
 	}
 
+	/**
+	 * Gets the mana cost of the spell configured by the user
+	 * 
+	 * @return The mana cost of the spell
+	 */
 	public int getManaCost() {
 		return this.manaCost;
 	}
 
+	/**
+	 * Gets the xp reward of the spell configured by the user
+	 * 
+	 * @return The xp reward of the spell
+	 */
 	public int getXpReward() {
 		return this.xpReward;
 	}
 
+	/**
+	 * Gets the recipe of the spell configured by the user
+	 * 
+	 * @return The recipe of the spell
+	 */
 	public AspectList getRecipe() {
 		return this.recipe;
 	}
 
+	/**
+	 * Gets the required level of the spell configured by the user
+	 * 
+	 * @return The required level of the spell
+	 */
 	public int getRequiredLevel() {
 		return this.requiredLevel;
 	}
 
+	/**
+	 * Gets the element of the spell
+	 * 
+	 * @return The SpellElement of the spell
+	 */
 	public SpellElement getElement() {
 		return this.element;
 	}
 
+	/**
+	 * Gets the type of the spell
+	 * 
+	 * @return The SpellType of the spell
+	 */
 	public SpellType getType() {
 		return this.type;
 	}
 
+	/**
+	 * Called when Zephyrus is enabled
+	 */
 	public void onDisable() {
 	}
 
+	/**
+	 * Called when Zephyrus is disabled
+	 */
 	public void onEnable() {
 	}
 
+	/**
+	 * Called when the player casts the spell
+	 * 
+	 * @param user The user who cast the spell
+	 * @param power The power this spell was cast with
+	 * @param args The arguments this spell was cast with
+	 * @return SUCCESS to drain mana and call post cast tasks, FAILURE to not
+	 *         drain mana
+	 */
 	public abstract CastResult onCast(User user, int power, String[] args);
 
 	private AspectList fromList(List<String> list) {

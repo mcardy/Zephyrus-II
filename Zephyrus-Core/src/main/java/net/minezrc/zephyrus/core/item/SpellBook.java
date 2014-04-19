@@ -142,7 +142,7 @@ public class SpellBook implements ActionItem {
 	}
 
 	private void bind(Player player, ItemStack item, Spell spell) {
-		UserBindSpellEvent event = new UserBindSpellEvent(player, spell);
+		UserBindSpellEvent event = new UserBindSpellEvent(player, spell, null);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled()) {
 			ItemMeta meta = item.getItemMeta();

@@ -11,7 +11,8 @@ import net.minezrc.zephyrus.aspect.AspectList;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Zephyrus - SpellRecipe.java
+ * Zephyrus - SpellRecipe.java<br>
+ * A class to represent a spell recipe
  * 
  * @author minnymin3
  * 
@@ -30,10 +31,21 @@ public class SpellRecipe {
 		this.list = list;
 	}
 
+	/**
+	 * Gets the list of aspects in this recipe
+	 * 
+	 * @return
+	 */
 	public AspectList getList() {
 		return list;
 	}
 
+	/**
+	 * Checks if the recipe is satisfied with the given items
+	 * 
+	 * @param items The items to check
+	 * @return True if the recipe is satisfied
+	 */
 	public boolean isSatisfied(Set<ItemStack> items) {
 		Map<Aspect, Integer> map = new HashMap<Aspect, Integer>();
 		for (ItemStack i : items) {
@@ -57,5 +69,5 @@ public class SpellRecipe {
 		}
 		return true;
 	}
-	
+
 }

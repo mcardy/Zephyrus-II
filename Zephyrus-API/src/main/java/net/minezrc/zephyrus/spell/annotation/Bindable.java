@@ -5,9 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
 /**
- * Zephyrus - Bindable.java
+ * Zephyrus - Bindable.java<br>
+ * An annotation to represent a spell that is bindable
  * 
  * @author minnymin3
  * 
@@ -16,5 +16,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Bindable {
-	
+
 }

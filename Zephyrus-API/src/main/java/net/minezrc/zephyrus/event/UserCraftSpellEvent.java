@@ -8,7 +8,8 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 /**
- * Zephyrus - UserCraftSpellEvent.java
+ * Zephyrus - UserCraftSpellEvent.java <br>
+ * An event called when a user crafts a spell
  * 
  * @author minnymin3
  * 
@@ -17,14 +18,15 @@ import org.bukkit.event.HandlerList;
 public class UserCraftSpellEvent extends UserEvent implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();
-	
+
 	public static HandlerList getHandlerList() {
 		return handlers;
 	}
+
 	private Spell spell;
-	
+
 	private boolean cancelled = false;
-	
+
 	public UserCraftSpellEvent(Player player, Spell spell) {
 		super(player);
 		this.spell = spell;
@@ -48,7 +50,7 @@ public class UserCraftSpellEvent extends UserEvent implements Cancellable {
 	public Spell getSpell() {
 		return spell;
 	}
-	
+
 	@Override
 	public boolean isCancelled() {
 		return cancelled;

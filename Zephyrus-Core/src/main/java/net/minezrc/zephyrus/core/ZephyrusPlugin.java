@@ -24,16 +24,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 /**
  * Zephyrus - ZephyrusPlugin.java
  * 
- * TODO Re-implement all spells and items
- * TODO Implement Combo-Spells
- * TODO Item level and upgrades
+ * TODO Re-implement all spells and items TODO Implement Combo-Spells TODO Item
+ * level and upgrades
  * 
  * @author minnymin3
  * 
  */
 
 public class ZephyrusPlugin extends JavaPlugin {
-	
+
 	@Override
 	public void onLoad() {
 		saveDefaultConfig();
@@ -102,7 +101,8 @@ public class ZephyrusPlugin extends JavaPlugin {
 							.info("[Updater] Update checking API key is not correctly configured. See /plugins/Updater/config.yml for details");
 					break;
 				case FAIL_BADID:
-					getLogger().info("[Updater] Update checker failed to find a project for Zephyrus. It may have been removed.");
+					getLogger()
+							.info("[Updater] Update checker failed to find a project for Zephyrus. It may have been removed.");
 					break;
 				case FAIL_DBO:
 					getLogger()

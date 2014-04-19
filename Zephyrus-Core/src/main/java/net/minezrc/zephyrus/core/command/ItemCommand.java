@@ -177,7 +177,7 @@ public class ItemCommand {
 					.getSender());
 			return;
 		}
-		UserBindSpellEvent event = new UserBindSpellEvent(args.getPlayer(), spell);
+		UserBindSpellEvent event = new UserBindSpellEvent(args.getPlayer(), spell, wand);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled()) {
 			ItemStack stack = args.getPlayer().getItemInHand();

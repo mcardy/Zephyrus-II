@@ -8,7 +8,8 @@ import java.lang.annotation.Target;
 import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
 
 /**
- * Zephyrus - Targeted.java
+ * Zephyrus - Targeted.java<br>
+ * Represents a targeted spell
  * 
  * @author minnymin3
  * 
