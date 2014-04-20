@@ -28,7 +28,7 @@ public class Bolt extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		DamagingBeamProjectile projectile = new DamagingBeamProjectile(Particle.MAGIC_CRITICAL_HIT, 4);
+		DamagingBeamProjectile projectile = new DamagingBeamProjectile(Particle.MAGIC_CRITICAL_HIT, 4 * power);
 		projectile.launchProjectile(user.getPlayer());
 		return CastResult.SUCCESS;
 	}

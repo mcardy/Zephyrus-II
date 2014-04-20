@@ -40,13 +40,14 @@ public class ArrowStorm extends Spell implements ConfigurableSpell {
 	
 	@Override
 	public Map<String, Object> getDefaultConfiguration() {
-		return DataStructureUtils.createMap(DataStructureUtils.createList("amount"), DataStructureUtils
-				.createList((Object) 10));
+		Map<String, Object> map = DataStructureUtils.createConfigurationMap();
+		map.put("Amount", 10);
+		return map;
 	}
 
 	@Override
 	public void loadConfiguration(ConfigurationSection config) {
-		amount = config.getInt("amount");
+		amount = config.getInt("Amount");
 	}
 
 	@Override

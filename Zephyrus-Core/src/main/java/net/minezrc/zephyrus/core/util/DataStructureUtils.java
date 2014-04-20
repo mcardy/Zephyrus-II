@@ -43,4 +43,8 @@ public class DataStructureUtils {
 		return map;
 	}
 	
+	public static Map<String, Object> createConfigurationMap() {
+		return new HashMap<String, Object>();
+	}
+	
 }
