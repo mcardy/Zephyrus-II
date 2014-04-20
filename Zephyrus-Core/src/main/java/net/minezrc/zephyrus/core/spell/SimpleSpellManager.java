@@ -14,6 +14,7 @@ import net.minezrc.zephyrus.core.spell.attack.Arrow;
 import net.minezrc.zephyrus.core.spell.attack.ArrowRain;
 import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
 import net.minezrc.zephyrus.core.spell.attack.Bolt;
+import net.minezrc.zephyrus.core.spell.attack.Butcher;
 import net.minezrc.zephyrus.core.spell.attack.Fireball;
 import net.minezrc.zephyrus.core.spell.attack.Firecharge;
 import net.minezrc.zephyrus.core.spell.attack.Punch;
@@ -30,6 +31,9 @@ import net.minezrc.zephyrus.core.spell.restoration.Feeder;
 import net.minezrc.zephyrus.core.spell.restoration.Heal;
 import net.minezrc.zephyrus.core.spell.restoration.Healer;
 import net.minezrc.zephyrus.core.spell.world.Clock;
+import net.minezrc.zephyrus.core.spell.world.Detect;
+import net.minezrc.zephyrus.core.spell.world.Dig;
+import net.minezrc.zephyrus.core.spell.world.Track;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellManager;
@@ -143,6 +147,7 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new ArrowRain());
 		registerSpell(new ArrowStorm());
 		registerSpell(new Bolt());
+		registerSpell(new Butcher());
 		registerSpell(new Fireball());
 		registerSpell(new Firecharge());
 		registerSpell(new Punch());
@@ -171,8 +176,11 @@ public class SimpleSpellManager implements SpellManager {
 
 		// World
 		registerSpell(new Clock());
+		registerSpell(new Detect());
+		registerSpell(new Dig());
+		registerSpell(new Track());
 
-		// TODO Re-implement: Butcher, Detect, Dig, Dim, Dispel,
+		// TODO Re-implement:
 		// Enderchest, Explode,
 		// Feather, FireRing, FireShield, FlameStep, Flare, Fly,
 		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight, Mana,
