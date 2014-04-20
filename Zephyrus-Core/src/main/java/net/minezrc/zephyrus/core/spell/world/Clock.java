@@ -28,7 +28,7 @@ public class Clock extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		if (args.length == 1) {
+		if (args.length == 0) {
 			ChatColor color;
 			long time = user.getPlayer().getWorld().getTime();
 			if (time > 12500) {
@@ -55,17 +55,17 @@ public class Clock extends Spell {
 			return CastResult.FAILURE;
 		} else {
 			World world = user.getPlayer().getWorld();
-			if (args[1].equalsIgnoreCase("day")) {
+			if (args[0].equalsIgnoreCase("day")) {
 				world.setTime(1000);
-			} else if (args[1].equalsIgnoreCase("night")) {
+			} else if (args[0].equalsIgnoreCase("night")) {
 				world.setTime(14000);
-			} else if (args[1].equalsIgnoreCase("noon")) {
+			} else if (args[0].equalsIgnoreCase("noon")) {
 				world.setTime(6000);
-			} else if (args[1].equalsIgnoreCase("midnight")) {
+			} else if (args[0].equalsIgnoreCase("midnight")) {
 				world.setTime(18000);
 			} else {
 				try {
-					int time = Integer.parseInt(args[1]);
+					int time = Integer.parseInt(args[0]);
 					world.setTime(time);
 				} catch (NumberFormatException ex) {
 					Language.sendError("spells.clock.usage", "Expected number or <day|night|noon|midnight>", user.getPlayer());

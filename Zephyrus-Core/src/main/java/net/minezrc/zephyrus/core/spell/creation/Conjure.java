@@ -31,7 +31,7 @@ public class Conjure extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		if (args.length == 1) {
+		if (args.length == 0) {
 			Language.sendError("spell.conjure.noitem", "Specify an item to conjure! /cast conjure <id>:<data> [amount]", user
 					.getPlayer());
 			return CastResult.FAILURE;
@@ -40,7 +40,7 @@ public class Conjure extends Spell {
 		byte data = 0;
 		int amount = 1;
 		if (args[1].contains("\\:")) {
-			String[] s = args[1].split("\\:");
+			String[] s = args[0].split("\\:");
 			try {
 				id = Integer.parseInt(s[0]);
 				data = Byte.parseByte(args[1]);
@@ -50,7 +50,7 @@ public class Conjure extends Spell {
 			}
 		} else {
 			try {
-				id = Integer.parseInt(args[1]);
+				id = Integer.parseInt(args[0]);
 			} catch (NumberFormatException ex) {
 				Language.sendError("spell.conjure.badid", "Invalid item!", user.getPlayer());
 				return CastResult.FAILURE;
@@ -58,7 +58,7 @@ public class Conjure extends Spell {
 		}
 		if (args.length > 2) {
 			try {
-				amount = Integer.parseInt(args[2]);
+				amount = Integer.parseInt(args[1]);
 			} catch (NumberFormatException ex) {
 				Language.sendError("spell.conjure.badamount", "Invalid amount!", user.getPlayer());
 				return CastResult.FAILURE;

@@ -133,19 +133,26 @@ public class OnlineUser implements User {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
 				}
 			}
-			UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, args);
+			String[] modArgs = null;
+			if (args != null) {
+				modArgs = new String[args.length-1];
+				for (int i = 1; i < args.length; i++) {
+					modArgs[i-1] = args[i];
+				}
+			}
+			UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, modArgs);
 			Bukkit.getPluginManager().callEvent(preCast);
 			if (!preCast.isCancelled()) {
-				CastResult result = spell.onCast(this, power, args);
+				CastResult result = spell.onCast(this, power, modArgs);
 				if (result == CastResult.SUCCESS) {
 					if (spell instanceof ContinuousSpell) {
 						continuousSpell = (ContinuousSpell) spell;
 						continuousPower = power;
-						continuousArgs = args;
+						continuousArgs = modArgs;
 					}
 					drainMana(spell.getManaCost());
 					addLevelProgress(spell.getXpReward());
-					Bukkit.getPluginManager().callEvent(new UserPostCastEvent(this, spell, power, args));
+					Bukkit.getPluginManager().callEvent(new UserPostCastEvent(this, spell, power, modArgs));
 				}
 			}
 		}
