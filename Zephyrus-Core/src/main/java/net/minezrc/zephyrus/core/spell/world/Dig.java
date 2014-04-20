@@ -47,6 +47,7 @@ public class Dig extends Spell implements ConfigurableSpell {
 			Language.sendError("spell.dig.blacklist", "You cannot break that block", user.getPlayer());
 			return CastResult.FAILURE;
 		}
+		block.breakNaturally();
 		return CastResult.SUCCESS;
 	}
 
