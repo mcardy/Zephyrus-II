@@ -1,5 +1,7 @@
 package net.minezrc.zephyrus.spell;
 
+import net.minezrc.zephyrus.YmlConfigFile;
+import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.aspect.AspectList;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
@@ -21,7 +23,9 @@ public abstract class ContinuousSpell extends Spell {
 	public ContinuousSpell(String name, String description, int manaCost, int xpReward, AspectList recipe,
 			int requiredLevel, SpellElement element, SpellType type, int manaCostTick) {
 		super(name, description, manaCost, xpReward, recipe, requiredLevel, element, type);
-		this.manaCostTick = manaCostTick;
+		YmlConfigFile yml = Zephyrus.getSpellConfig();
+		yml.addDefaults(getDefaultName() + ".ManaCostPerTick", manaCostTick);
+		this.manaCostTick = yml.getConfig().getConfigurationSection(getDefaultName()).getInt("ManaCostPerTick");
 	}
 
 	/**
