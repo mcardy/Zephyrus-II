@@ -131,6 +131,11 @@ public class ItemListener implements Listener {
 				}
 			}
 		}
+		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (user.isCastingSpell()) {
+				user.stopCasting();
+			}
+		}
 	}
 
 	public InventoryButton getButton(final Spell spell, final Block block, final Set<org.bukkit.entity.Item> entities) {
