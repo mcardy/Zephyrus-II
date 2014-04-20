@@ -32,12 +32,22 @@ public class WorldGuardHook implements ProtectionHook {
 
 	@Override
 	public boolean canBuild(Player player, Block block) {
-		return plugin.canBuild(player, block);
+		if (plugin.canBuild(player, block)) {
+			return true;
+		} else {
+			Language.sendError("user.target.block.worldguard", "You cannot target that block here", player);
+			return false;
+		}
 	}
 	
 	@Override
 	public boolean canBuild(Player player, Location loc) {
-		return plugin.canBuild(player, loc);
+		if (plugin.canBuild(player, loc)) {
+			return true;
+		} else {
+			Language.sendError("user.target.block.worldguard", "You cannot target that block here", player);
+			return false;
+		}
 	}
 	
 	@Override
@@ -56,7 +66,12 @@ public class WorldGuardHook implements ProtectionHook {
 			if (plugin.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(DefaultFlag.PVP)) {
 				return true;
 			}
-			return friendly;
+			if (friendly) {
+				return true;
+			} else {
+				Language.sendError("user.target.entity.worldguard", "You cannot target that player here", player);
+				return false;
+			}
 		}
 		return true;
 	}

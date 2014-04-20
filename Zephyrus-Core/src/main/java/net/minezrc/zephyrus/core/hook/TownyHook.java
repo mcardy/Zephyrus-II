@@ -29,19 +29,12 @@ import com.palmergames.bukkit.towny.utils.CombatUtil;
 public class TownyHook implements ProtectionHook {
 
 	private Towny towny;
-	
+
 	@Override
 	public boolean canBuild(Player player, Block block) {
-		TownBlock tblock = TownyUniverse.getTownBlock(block.getLocation());
-		if (tblock != null) {
-			if (tblock.getType() == TownBlockType.WILDS) {
-				return true;
-			}
-			return false;
-		}
-		return true;
+		return canBuild(player, block.getLocation());
 	}
-	
+
 	@Override
 	public boolean canBuild(Player player, Location loc) {
 		TownBlock tblock = TownyUniverse.getTownBlock(loc);
@@ -49,11 +42,12 @@ public class TownyHook implements ProtectionHook {
 			if (tblock.getType() == TownBlockType.WILDS) {
 				return true;
 			}
+			Language.sendError("user.target.block.town", "You cannot target blocks inside of a town", player);
 			return false;
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean canCast(Player player, Spell spell) {
 		TownBlock tblock = TownyUniverse.getTownBlock(player.getLocation());
@@ -74,12 +68,17 @@ public class TownyHook implements ProtectionHook {
 		if (entity instanceof Player) {
 			Player target = (Player) entity;
 			if (CombatUtil.preventDamageCall(towny, player, target)) {
-				return friendly;
+				if (friendly) {
+					return true;
+				} else {
+					Language.sendError("user.target.entity.towny", "You cannot target that player here", player);
+					return false;
+				}
 			}
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean checkHook() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("Towny");

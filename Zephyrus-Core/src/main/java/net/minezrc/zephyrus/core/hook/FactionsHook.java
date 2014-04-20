@@ -30,16 +30,7 @@ public class FactionsHook implements ProtectionHook {
 
 	@Override
 	public boolean canBuild(Player player, Block block) {
-		UPlayer uplayer = UPlayer.get(player);
-		Location loc = block.getLocation();
-		Faction faction = BoardColls.get().getFactionAt(PS.valueOf(loc));
-		if (faction != null) {
-			if (uplayer.getFactionId().equals(faction.getId())) {
-				return true;
-			}
-			return false;
-		}
-		return true;
+		return canBuild(player, block.getLocation());
 	}
 
 	@Override
@@ -50,6 +41,7 @@ public class FactionsHook implements ProtectionHook {
 			if (uplayer.getFactionId().equals(faction.getId())) {
 				return true;
 			}
+			Language.sendError("user.target.block.faction", "You cannot target blocks inside of a faction", player);
 			return false;
 		}
 		return true;
@@ -66,7 +58,7 @@ public class FactionsHook implements ProtectionHook {
 					return true;
 				}
 			}
-			Language.sendError("spell.cast.faction", "You cannot cast spells inside of factions", player);
+			Language.sendError("spell.cast.faction", "You cannot cast spells inside of a faction", player);
 			return false;
 		}
 		return true;
@@ -79,7 +71,12 @@ public class FactionsHook implements ProtectionHook {
 			UPlayer uplayer = UPlayer.get(player);
 			UPlayer utarget = UPlayer.get(target);
 			if (uplayer.getFaction() != null && uplayer.getFaction().getUPlayers().contains(utarget)) {
-				return friendly;
+				if (friendly) {
+					return true;
+				} else {
+					Language.sendError("user.target.entity.faction", "You cannot target that player", player);
+					return false;
+				}
 			}
 		}
 		return true;
