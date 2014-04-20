@@ -128,7 +128,7 @@ public class OnlineUser implements User {
 			}
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
 				Targeted targeted = spell.getClass().getAnnotation(Targeted.class);
-				setTarget(spell, targeted.type(), targeted.friendly());
+				setTarget(spell, targeted.type(), targeted.range(), targeted.friendly());
 				if (targeted.type() == TargetType.ENTITY && getTarget(spell).getEntity() == null) {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
 				}
@@ -271,9 +271,9 @@ public class OnlineUser implements User {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public void setTarget(Spell spell, TargetType type, boolean friendly) {
+	public void setTarget(Spell spell, TargetType type, int range, boolean friendly) {
 		if (type == TargetType.BLOCK) {
-			Block target = player.getTargetBlock(null, 100);
+			Block target = player.getTargetBlock(null, range);
 			if (Zephyrus.getHookManager().canBuild(player, target)) {
 				UserTargetBlockEvent event = new UserTargetBlockEvent(this, target);
 				Bukkit.getPluginManager().callEvent(event);
@@ -283,7 +283,7 @@ public class OnlineUser implements User {
 				}
 			}
 		} else if (type == TargetType.ENTITY) {
-			LivingEntity target = getTargetEntity();
+			LivingEntity target = getTargetEntity(range);
 			if (!targetSpell.equals(spell.getName()) || this.target.getEntity() == null || target != null) {
 				if (Zephyrus.getHookManager().canTarget(player, target, friendly)) {
 					UserTargetEntityEvent event = new UserTargetEntityEvent(this, target, friendly);
@@ -304,11 +304,11 @@ public class OnlineUser implements User {
 		continuousPower = 0;
 	}
 
-	private LivingEntity getTargetEntity() {
-		BlockIterator iterator = new BlockIterator(player, 10);
+	private LivingEntity getTargetEntity(int range) {
+		BlockIterator iterator = new BlockIterator(player, range);
 		while (iterator.hasNext()) {
 			Block block = iterator.next();
-			for (Entity entity : player.getNearbyEntities(10, 10, 10)) {
+			for (Entity entity : player.getNearbyEntities(range, range, range)) {
 				if (entity instanceof LivingEntity) {
 					int accuracy = 2;
 					for (int offX = -accuracy; offX < accuracy; offX++) {
@@ -327,7 +327,7 @@ public class OnlineUser implements User {
 	}
 
 	// This method is triggered every 2 ticks
-	// Tick time meaures 10ths of a second
+	// Method is called every 10th of a second
 	protected void tick() {
 		if (Bukkit.getPlayer(playerName) == null) {
 			save();

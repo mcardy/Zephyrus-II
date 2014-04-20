@@ -25,6 +25,13 @@ public @interface Targeted {
 	 * @return A boolean
 	 */
 	public boolean friendly() default false;
+	
+	/**
+	 * Determines the range of the target
+	 * 
+	 * @return An int
+	 */
+	public int range() default 10;
 
 	/**
 	 * The type of target (BLOCK or ENTITY)
