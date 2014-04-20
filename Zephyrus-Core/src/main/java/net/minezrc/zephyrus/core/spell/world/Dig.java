@@ -17,6 +17,7 @@ import net.minezrc.zephyrus.spell.annotation.Bindable;
 import net.minezrc.zephyrus.spell.annotation.Targeted;
 import net.minezrc.zephyrus.user.User;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -28,7 +29,7 @@ import org.bukkit.configuration.ConfigurationSection;
  */
 
 @Bindable
-@Targeted(type = TargetType.BLOCK)
+@Targeted(type = TargetType.BLOCK, range = 20)
 public class Dig extends Spell implements ConfigurableSpell {
 
 	private List<String> blacklist;
@@ -43,7 +44,7 @@ public class Dig extends Spell implements ConfigurableSpell {
 	@SuppressWarnings("deprecation")
 	public CastResult onCast(User user, int power, String[] args) {
 		Block block = user.getTarget(this).getBlock();
-		if (blacklist.contains(block.getTypeId())) {
+		if (blacklist.contains(block.getTypeId()) || block.getType() == Material.AIR) {
 			Language.sendError("spell.dig.blacklist", "You cannot break that block", user.getPlayer());
 			return CastResult.FAILURE;
 		}
