@@ -13,6 +13,7 @@ import net.minezrc.zephyrus.core.state.SimpleStateManager;
 import net.minezrc.zephyrus.core.user.SimpleUserManager;
 import net.minezrc.zephyrus.core.util.Metrics;
 import net.minezrc.zephyrus.core.util.Updater;
+import net.minezrc.zephyrus.core.util.VersionInfo;
 import net.minezrc.zephyrus.core.util.Updater.UpdateResult;
 
 import org.bukkit.Bukkit;
@@ -120,10 +121,13 @@ public class ZephyrusPlugin extends JavaPlugin {
 							+ updater.getLatestType() + ". Get it here:");
 					getLogger().info(updater.getLatestFileLink());
 					break;
+				case DEVELOPMENT:
+					getLogger().info("[Updater] You are running a development version of Zephyrus. No update was checked");
 				default:
 					break;
 				}
 				getLogger().info("[Spells] Loaded " + Zephyrus.getSpellManager().getSpellSet().size() + " spells");
+				VersionInfo.load();
 			}
 		});
 	}

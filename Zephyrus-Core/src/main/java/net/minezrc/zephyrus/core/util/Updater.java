@@ -50,7 +50,7 @@ public class Updater {
 	private URL url;
 	private Thread thread;
 
-	private String apiKey = null; 
+	private String apiKey = null;
 	private static final String TITLE_VALUE = "name";
 	private static final String LINK_VALUE = "downloadUrl";
 	private static final String TYPE_VALUE = "releaseType";
@@ -58,7 +58,7 @@ public class Updater {
 	private static final String QUERY = "/servermods/files?projectIds=";
 	private static final String HOST = "https://api.curseforge.com";
 	private static final String[] NO_UPDATE_TAG = { "-DEV", "-PRE", "-SNAPSHOT" };
-	
+
 	private YamlConfiguration config;
 	private Updater.UpdateResult result = Updater.UpdateResult.DISABLED;
 
@@ -71,6 +71,10 @@ public class Updater {
 		 * The updater did not find an update, and nothing was downloaded.
 		 */
 		NO_UPDATE,
+		/**
+		 * The updater found that this version is a development version
+		 */
+		DEVELOPMENT,
 		/**
 		 * The server administrator has disabled the updating system
 		 */
@@ -105,7 +109,7 @@ public class Updater {
 	public static Updater update() {
 		return new Updater(Zephyrus.getPlugin(), 56632);
 	}
-	
+
 	/**
 	 * Initialize the updater
 	 * 
@@ -114,6 +118,12 @@ public class Updater {
 	 */
 	private Updater(Plugin plugin, int id) {
 		this.plugin = plugin;
+
+		if (plugin.getDescription().getVersion().contains("B:")
+				|| plugin.getDescription().getVersion().contains("SNAPSHOT")) {
+			this.result = UpdateResult.DEVELOPMENT;
+			return;
+		}
 
 		final File pluginFile = plugin.getDataFolder().getParentFile();
 		final File updaterFile = new File(pluginFile, "Updater");
@@ -126,8 +136,8 @@ public class Updater {
 			try {
 				updaterConfigFile.createNewFile();
 			} catch (final IOException e) {
-				plugin.getLogger().severe("The updater could not create a configuration in "
-						+ updaterFile.getAbsolutePath());
+				plugin.getLogger().severe(
+						"The updater could not create a configuration in " + updaterFile.getAbsolutePath());
 				e.printStackTrace();
 			}
 		}
@@ -148,8 +158,8 @@ public class Updater {
 			try {
 				this.config.save(updaterConfigFile);
 			} catch (final IOException e) {
-				plugin.getLogger().severe("The updater could not save the configuration in "
-						+ updaterFile.getAbsolutePath());
+				plugin.getLogger().severe(
+						"The updater could not save the configuration in " + updaterFile.getAbsolutePath());
 				e.printStackTrace();
 			}
 		}
