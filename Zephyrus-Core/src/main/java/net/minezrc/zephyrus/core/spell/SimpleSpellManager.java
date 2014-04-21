@@ -21,6 +21,7 @@ import net.minezrc.zephyrus.core.spell.attack.Punch;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.buff.Feather;
 import net.minezrc.zephyrus.core.spell.creation.Conjure;
+import net.minezrc.zephyrus.core.spell.creation.Enderchest;
 import net.minezrc.zephyrus.core.spell.illusion.Confuse;
 import net.minezrc.zephyrus.core.spell.illusion.Disorient;
 import net.minezrc.zephyrus.core.spell.mobility.Bang;
@@ -158,6 +159,7 @@ public class SimpleSpellManager implements SpellManager {
 		
 		// Creation
 		registerSpell(new Conjure());
+		registerSpell(new Enderchest());
 
 		// Illusion
 		registerSpell(new Confuse());
