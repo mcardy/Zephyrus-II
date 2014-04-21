@@ -33,11 +33,10 @@ import org.bukkit.configuration.ConfigurationSection;
 public class Dig extends Spell implements ConfigurableSpell {
 
 	private List<String> blacklist;
-	
+
 	public Dig() {
-		super("dig", "Diggy diggy hole", 5, 1, AspectList.newList()
-				.setAspectTypes(Aspect.DIRT, Aspect.STONE, Aspect.TOOL).setAspectValues(64, 64, 8), 2,
-				SpellElement.EARTH, SpellType.WORLD);
+		super("dig", "Diggy diggy hole", 5, 1, AspectList.newList(Aspect.EARTH, 40, Aspect.STONE, 20, Aspect.TOOL, 20),
+				2, SpellElement.EARTH, SpellType.WORLD);
 	}
 
 	@Override

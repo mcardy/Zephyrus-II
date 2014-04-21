@@ -19,20 +19,31 @@ public class AspectList {
 	private List<Integer> aspectAmounts;
 
 	/**
-	 * Creates a new AspectList object
+	 * Creates a new AspectList object with given aspects and values
+	 * 
+	 * @return A new aspect list with the provided aspects
 	 */
 	public static AspectList newList() {
 		return new AspectList();
 	}
 
 	/**
-	 * Creates a new AspectList object with one aspect type
+	 * Creates a new AspectList object with given aspects and values
 	 * 
-	 * @param aspect The one aspect type that will be listed
-	 * @param value The amount of that aspect type
+	 * @param values Aspects followed by values
+	 * @return A new aspect list with the provided aspects
 	 */
-	public static AspectList newList(Aspect aspect, int value) {
-		return newList().setAspectTypes(aspect).setAspectValues(value);
+	public static AspectList newList(Object... values) {
+		List<Aspect> aspects = new ArrayList<Aspect>();
+		List<Integer> amounts = new ArrayList<Integer>();
+		for (int i = 0; i < values.length; i += 2) {
+			if (values.length <= i + 1 || !(values[i] instanceof Aspect) || !(values[i + 1] instanceof Integer)) {
+				continue;
+			}
+			aspects.add((Aspect) values[i]);
+			amounts.add((Integer) values[i + 1]);
+		}
+		return new AspectList().setAspectLists(aspects, amounts);
 	}
 
 	/**

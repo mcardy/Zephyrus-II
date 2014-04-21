@@ -31,10 +31,10 @@ public class Butcher extends Spell implements ConfigurableSpell {
 
 	private int radius;
 	private int damage;
-	
+
 	public Butcher() {
-		super("butcher", "Butchers all monsters nearby", 100, 10, AspectList.newList()
-				.setAspectTypes(Aspect.ANIMAL, Aspect.ATTACK).setAspectValues(16, 8), 4, SpellElement.NEUTREAL, SpellType.ATTACK);
+		super("butcher", "Butchers all monsters nearby", 100, 10, AspectList
+				.newList(Aspect.BEAST, 30, Aspect.WEAPON, 30), 4, SpellElement.NEUTREAL, SpellType.ATTACK);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class Butcher extends Spell implements ConfigurableSpell {
 		List<Entity> entities = player.getNearbyEntities(radius, radius, radius);
 		for (Entity entity : entities) {
 			if (entity instanceof Monster) {
-				((Monster)entity).damage(damage);
+				((Monster) entity).damage(damage);
 			}
 		}
 		return CastResult.SUCCESS;

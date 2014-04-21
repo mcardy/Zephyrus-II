@@ -26,9 +26,8 @@ import org.bukkit.entity.Player;
 public class Disorient extends Spell {
 
 	public Disorient() {
-		super("disorient", "Disorients your target", 150, 20, AspectList.newList()
-				.setAspectTypes(Aspect.ANIMAL, Aspect.EVIL, Aspect.ENDER).setAspectValues(16, 8, 8), 10, SpellElement.NEUTREAL,
-				SpellType.ILLUSION);
+		super("disorient", "Disorients your target", 100, 20, AspectList.newList(Aspect.MOVEMENT, 50, Aspect.ENDER, 25,
+				Aspect.BEAST, 25), 4, SpellElement.NEUTREAL, SpellType.ILLUSION);
 	}
 
 	@Override

@@ -22,8 +22,8 @@ import net.minezrc.zephyrus.user.User;
 public class Bolt extends Spell {
 
 	public Bolt() {
-		super("bolt", "Launches a ball of electricity", 20, 1, AspectList.newList()
-				.setAspectTypes(Aspect.WIND, Aspect.POWER).setAspectValues(8, 4), 1, SpellElement.AIR, SpellType.ATTACK);
+		super("bolt", "Launches a ball of electricity", 20, 1, AspectList
+				.newList(Aspect.ENERGY, 30, Aspect.WIND, 15, Aspect.MOVEMENT, 15, Aspect.WEAPON, 15), 1, SpellElement.AIR, SpellType.ATTACK);
 	}
 
 	@Override

@@ -23,9 +23,8 @@ import org.bukkit.entity.Player;
 public class Feed extends Spell {
 
 	public Feed() {
-		super("feed", "Feeds you scraps of magic food", 25, 2, AspectList.newList()
-				.setAspectTypes(Aspect.ANIMAL, Aspect.LIFE).setAspectValues(16, 4), 1, SpellElement.NEUTREAL,
-				SpellType.RESTORATION);
+		super("feed", "Feeds you scraps of magic food", 25, 2, AspectList.newList(Aspect.FLESH, 30, Aspect.LIFE, 15,
+				Aspect.BEAST, 15), 1, SpellElement.NEUTREAL, SpellType.RESTORATION);
 	}
 
 	@Override

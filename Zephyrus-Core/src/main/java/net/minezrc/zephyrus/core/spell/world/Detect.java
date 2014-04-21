@@ -35,10 +35,10 @@ import org.bukkit.entity.Player;
 public class Detect extends Spell implements ConfigurableSpell {
 
 	private int radius;
-	
+
 	public Detect() {
-		super("detect", "Detects monsters around you", 50, 5, AspectList.newList()
-				.setAspectTypes(Aspect.ANIMAL, Aspect.LIFE).setAspectValues(16, 16), 2, SpellElement.NEUTREAL, SpellType.WORLD);
+		super("detect", "Detects monsters around you", 50, 5, AspectList.newList(Aspect.BEAST, 40, Aspect.LIFE, 20,
+				Aspect.MOVEMENT, 20), 2, SpellElement.NEUTREAL, SpellType.WORLD);
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class Detect extends Spell implements ConfigurableSpell {
 			}
 		}
 		for (Entry<String, Integer> entry : entityMap.entrySet()) {
-			player.sendMessage(ChatColor.GREEN + WordUtils.capitalize(entry.getKey().toLowerCase().replace("_", " ")) + ": "
-					+ entry.getValue());
+			player.sendMessage(ChatColor.GREEN + WordUtils.capitalize(entry.getKey().toLowerCase().replace("_", " "))
+					+ ": " + entry.getValue());
 		}
 		if (entityMap.isEmpty()) {
 			Language.sendMessage("spell.detect.none", ChatColor.GRAY + "None...", player);

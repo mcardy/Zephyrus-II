@@ -22,7 +22,10 @@
 # Recipe:
 # - The recipe for the spell
 # - Possible values: list of aspects in the following form
+# - Note: Must include apostrophes around entry
 # - 'FIRE-2'
 # - Possible aspects: 
-# -   ANIMAL ARMOR ATTACK DIRT ENDER EVIL FIRE GLASS ICE LIGHT
-# -   MACHINE MAGIC METAL PLANT STONE TOOL VALUE WATER WIND WOOD
+# -   BEAST, CLEAR, CONSTRUCT, DARKNESS, DEFENSE, DESTRUCTION, EARTH
+# -   ENDER, ENERGY, EVIL, FLESH, FIRE, ICE, KNOWLEDGE, LIFE LIGHT
+# -   MACHINE, METAL, MOVEMENT, MYSTICAL, PLANT, STONE, TIME, TOOL
+# -   VALUE, VOID, WATER, WIND, WEAPON, WOOD

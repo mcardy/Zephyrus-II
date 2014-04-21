@@ -22,8 +22,8 @@ import net.minezrc.zephyrus.user.User;
 public class Woosh extends Spell {
 
 	public Woosh() {
-		super("woosh", "Woosh forwards in a burst of speed", 25, 3, AspectList.newList().setAspectTypes(Aspect.WIND)
-				.setAspectValues(10), 2, SpellElement.AIR, SpellType.MOBILITY);
+		super("woosh", "Woosh forwards in a burst of speed", 25, 3, AspectList.newList(Aspect.WIND, 40, Aspect.MOVEMENT, 20),
+				2, SpellElement.AIR, SpellType.MOBILITY);
 	}
 
 	@Override

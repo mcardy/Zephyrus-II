@@ -34,10 +34,10 @@ public class ArrowStorm extends Spell implements ConfigurableSpell {
 	private int amount;
 
 	public ArrowStorm() {
-		super("arrowstorm", "A barrage of arrows", 150, 12, AspectList.newList()
-				.setAspectTypes(Aspect.ATTACK, Aspect.WIND).setAspectValues(50, 25), 6, SpellElement.AIR, SpellType.ATTACK);
+		super("arrowstorm", "A barrage of arrows", 150, 12, AspectList
+				.newList(Aspect.WIND, 50, Aspect.WEAPON, 50, Aspect.WOOD, 50), 6, SpellElement.AIR, SpellType.ATTACK);
 	}
-	
+
 	@Override
 	public Map<String, Object> getDefaultConfiguration() {
 		Map<String, Object> map = DataStructureUtils.createConfigurationMap();

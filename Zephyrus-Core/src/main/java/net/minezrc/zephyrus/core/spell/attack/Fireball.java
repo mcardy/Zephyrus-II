@@ -22,8 +22,8 @@ import net.minezrc.zephyrus.user.User;
 public class Fireball extends Spell {
 
 	public Fireball() {
-		super("fireball", "Launches a ball of fire", 25, 1, AspectList.newList()
-				.setAspectTypes(Aspect.FIRE, Aspect.POWER).setAspectValues(20, 4), 1, SpellElement.FIRE,
+		super("fireball", "Launches a ball of fire", 25, 1, AspectList
+				.newList(Aspect.FIRE, 30, Aspect.MOVEMENT, 15, Aspect.WEAPON, 15), 1, SpellElement.FIRE,
 				SpellType.ATTACK);
 	}
 

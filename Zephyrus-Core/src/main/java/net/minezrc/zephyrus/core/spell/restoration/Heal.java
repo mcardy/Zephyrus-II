@@ -26,7 +26,7 @@ import org.bukkit.entity.Player;
 public class Heal extends Spell {
 
 	public Heal() {
-		super("heal", "Quickly regenerate health", 10, 1, AspectList.newList(Aspect.LIFE, 8), 1, SpellElement.NEUTREAL,
+		super("heal", "Quickly regenerate health", 10, 1, AspectList.newList(Aspect.LIFE, 30, Aspect.BEAST, 15), 1, SpellElement.NEUTREAL,
 				SpellType.RESTORATION);
 	}
 

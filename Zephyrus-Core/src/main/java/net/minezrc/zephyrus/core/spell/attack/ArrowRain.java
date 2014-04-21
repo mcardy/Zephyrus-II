@@ -23,9 +23,8 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class ArrowRain extends ContinuousSpell {
 
 	public ArrowRain() {
-		super("arrowrain", "Continuously rains arrows down upon your enemy", 50, 20, AspectList.newList()
-				.setAspectTypes(Aspect.ATTACK, Aspect.WIND).setAspectValues(100, 50), 5, SpellElement.AIR,
-				SpellType.ATTACK, 2);
+		super("arrowrain", "Continuously rains arrows down upon your enemy", 50, 20, AspectList
+				.newList(Aspect.WIND, 100, Aspect.WEAPON, 100, Aspect.WOOD, 100), 5, SpellElement.AIR, SpellType.ATTACK, 2);
 	}
 
 	@Override

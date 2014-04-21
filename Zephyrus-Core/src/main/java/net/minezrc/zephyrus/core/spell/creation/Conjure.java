@@ -24,16 +24,16 @@ import org.bukkit.inventory.ItemStack;
 public class Conjure extends Spell {
 
 	public Conjure() {
-		super("conjure", "Conjures items out of mana", 0, 10, AspectList.newList()
-				.setAspectTypes(Aspect.MAGIC, Aspect.FIRE, Aspect.WATER, Aspect.DIRT, Aspect.WIND)
-				.setAspectValues(32, 8, 8, 8, 8), 8, SpellElement.ARCANE, SpellType.CREATION);
+		super("conjure", "Conjures items out of mana", 0, 10, AspectList.newList(Aspect.CONSTRUCT, 100,
+				Aspect.MYSTICAL, 50, Aspect.FIRE, 25, Aspect.WATER, 25, Aspect.WIND, 25, Aspect.EARTH, 25,
+				Aspect.STONE, 25), 8, SpellElement.ARCANE, SpellType.CREATION);
 	}
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		if (args.length == 0) {
-			Language.sendError("spell.conjure.noitem", "Specify an item to conjure! /cast conjure <id>:<data> [amount]", user
-					.getPlayer());
+			Language.sendError("spell.conjure.noitem",
+					"Specify an item to conjure! /cast conjure <id>:<data> [amount]", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 		int id = 0;
@@ -71,17 +71,17 @@ public class Conjure extends Spell {
 		}
 		int manaCost = value * amount;
 		if (user.getMana() < getValue(id) * amount) {
-			Language.sendError("spell.conjure.mana", "You do not have enough mana to conjure that item [MANA]", user
-					.getPlayer(), "[SPELL]", this.getName(), "[MANA]", ChatColor.RED + "" + user.getMana()
-					+ ChatColor.GRAY + "/" + ChatColor.GREEN + manaCost);
+			Language.sendError("spell.conjure.mana", "You do not have enough mana to conjure that item [MANA]",
+					user.getPlayer(), "[SPELL]", this.getName(), "[MANA]", ChatColor.RED + "" + user.getMana()
+							+ ChatColor.GRAY + "/" + ChatColor.GREEN + manaCost);
 			return CastResult.FAILURE;
 		}
 		@SuppressWarnings("deprecation")
 		ItemStack item = new ItemStack(Material.getMaterial(id), amount, data);
 		user.getPlayer().getInventory().addItem(item);
 		String itemName = WordUtils.capitalizeFully(item.getType().toString().replace("_", " "));
-		Language.sendMessage("spell.conjure.complete", "Successfully conjured [AMOUNT] [ITEM]", user.getPlayer(), "[AMOUNT]", ""
-				+ amount, "[ITEM]", itemName);
+		Language.sendMessage("spell.conjure.complete", "Successfully conjured [AMOUNT] [ITEM]", user.getPlayer(),
+				"[AMOUNT]", "" + amount, "[ITEM]", itemName);
 		user.drainMana(manaCost);
 		return CastResult.SUCCESS;
 	}

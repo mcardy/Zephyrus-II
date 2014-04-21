@@ -31,8 +31,7 @@ public class Punch extends Spell implements ConfigurableSpell {
 	private int damage;
 	
 	public Punch() {
-		super("punch", "Punches your target with a superpunch", 25, 2, AspectList.newList()
-				.setAspectTypes(Aspect.ATTACK, Aspect.POWER).setAspectValues(8, 8), 1, SpellElement.NEUTREAL, SpellType.ATTACK);
+		super("punch", "Punches your target with a superpunch", 25, 2, AspectList.newList(Aspect.WEAPON, 30, Aspect.FLESH, 15, Aspect.MYSTICAL, 15), 1, SpellElement.NEUTREAL, SpellType.ATTACK);
 	}
 
 	@Override

@@ -31,8 +31,8 @@ public class Track extends Spell implements ConfigurableSpell {
 	private int radius;
 
 	public Track() {
-		super("track", "Track animals in the wild", 50, 5, AspectList.newList()
-				.setAspectTypes(Aspect.ANIMAL, Aspect.TOOL).setAspectValues(32, 32), 1, SpellElement.NEUTREAL, SpellType.WORLD);
+		super("track", "Track animals in the wild", 50, 5, AspectList.newList(Aspect.BEAST, 30, Aspect.MOVEMENT, 15, Aspect.LIFE, 15), 1, SpellElement.NEUTREAL,
+				SpellType.WORLD);
 	}
 
 	@Override
@@ -55,12 +55,16 @@ public class Track extends Spell implements ConfigurableSpell {
 				double deltaX = playerLoc.getX() - entityLoc.getX();
 				double deltaY = playerLoc.getY() - entityLoc.getY();
 				double deltaZ = playerLoc.getZ() - entityLoc.getZ();
-				Language.sendMessage("spell.track.title", ChatColor.GRAY + "There is a [ENTITY] nearby", user.getPlayer(), "[ENTITY]", type
-						.toString().toLowerCase());
-				String locX = ChatColor.BLUE + (deltaX > 0 ? (int) deltaX + " blocks west" : (int) -deltaX + " blocks east");
-				String locY = ChatColor.RED + (deltaY > 0 ? (int) deltaY + " blocks down" : (int) -deltaY + " blocks up");
-				String locZ = ChatColor.GREEN + (deltaZ > 0 ? (int) deltaZ + " blocks north" : (int) -deltaZ + " blocks south");
-				Language.sendMessage("spell.track.location", ChatColor.GRAY + "Travel [X], [Y], [Z]", user.getPlayer(), "[X]", locX, "[Y]", locY, "[Z]", locZ);
+				Language.sendMessage("spell.track.title", ChatColor.GRAY + "There is a [ENTITY] nearby",
+						user.getPlayer(), "[ENTITY]", type.toString().toLowerCase());
+				String locX = ChatColor.BLUE
+						+ (deltaX > 0 ? (int) deltaX + " blocks west" : (int) -deltaX + " blocks east");
+				String locY = ChatColor.RED
+						+ (deltaY > 0 ? (int) deltaY + " blocks down" : (int) -deltaY + " blocks up");
+				String locZ = ChatColor.GREEN
+						+ (deltaZ > 0 ? (int) deltaZ + " blocks north" : (int) -deltaZ + " blocks south");
+				Language.sendMessage("spell.track.location", ChatColor.GRAY + "Travel [X], [Y], [Z]", user.getPlayer(),
+						"[X]", locX, "[Y]", locY, "[Z]", locZ);
 				return CastResult.SUCCESS;
 			}
 		}

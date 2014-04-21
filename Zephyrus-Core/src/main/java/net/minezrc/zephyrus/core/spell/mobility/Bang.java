@@ -40,8 +40,8 @@ public class Bang extends Spell implements ConfigurableSpell {
 	private int radius;
 
 	public Bang() {
-		super("bang", "Creates a shockwave knocking back all entities", 200, 10, AspectList.newList(Aspect.WIND, 8),
-				5, SpellElement.AIR, SpellType.MOBILITY);
+		super("bang", "Creates a shockwave knocking back all entities", 200, 10, AspectList.newList(Aspect.WIND, 60,
+				Aspect.ENERGY, 30, Aspect.EARTH, 30), 5, SpellElement.AIR, SpellType.MOBILITY);
 	}
 
 	@Override
@@ -97,8 +97,8 @@ public class Bang extends Spell implements ConfigurableSpell {
 
 	@Override
 	public Map<String, Object> getDefaultConfiguration() {
-		return DataStructureUtils.createMap(DataStructureUtils.createList("radius"), DataStructureUtils
-				.createList((Object) 6));
+		return DataStructureUtils.createMap(DataStructureUtils.createList("radius"),
+				DataStructureUtils.createList((Object) 6));
 	}
 
 	@Override

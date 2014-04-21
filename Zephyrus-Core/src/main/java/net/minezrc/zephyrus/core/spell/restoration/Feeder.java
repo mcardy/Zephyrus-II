@@ -30,8 +30,8 @@ import org.bukkit.entity.Player;
 public class Feeder extends Spell {
 
 	public Feeder() {
-		super("feeder", "Feeds your target", 15, 1, AspectList.newList()
-				.setAspectTypes(Aspect.ANIMAL, Aspect.LIFE).setAspectValues(32, 8), 3, SpellElement.NEUTREAL, SpellType.RESTORATION);
+		super("feeder", "Feeds your target", 15, 1, AspectList.newList(Aspect.FLESH, 50, Aspect.LIFE, 25, Aspect.BEAST,
+				25), 3, SpellElement.NEUTREAL, SpellType.RESTORATION);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class Feeder extends Spell {
 			return CastResult.SUCCESS;
 		} else {
 			Language.sendError("spell.notarget", "You do not have a target", user.getPlayer());
-			return CastResult.FAILURE;	
+			return CastResult.FAILURE;
 		}
 	}
 

@@ -22,8 +22,8 @@ import org.bukkit.World;
 public class Clock extends Spell {
 
 	public Clock() {
-		super("clock", "Change time at will", 500, 20, AspectList.newList().setAspectTypes(Aspect.LIGHT, Aspect.EVIL)
-				.setAspectValues(32, 32), 18, SpellElement.NEUTREAL, SpellType.WORLD);
+		super("clock", "Change time at will", 500, 20, AspectList.newList(Aspect.TIME, 100, Aspect.LIGHT, 50,
+				Aspect.DARKNESS, 50), 18, SpellElement.NEUTREAL, SpellType.WORLD);
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class Clock extends Spell {
 			} else {
 				color = ChatColor.GOLD;
 			}
-			long hours = time/1000;
-			long minutes = Math.round((time-(hours*1000))/16.6666666);
+			long hours = time / 1000;
+			long minutes = Math.round((time - (hours * 1000)) / 16.6666666);
 			boolean am = hours < 6 || hours >= 18;
 			if (hours >= 18) {
 				hours -= 12;
@@ -51,7 +51,8 @@ public class Clock extends Spell {
 			}
 			String min = minutes < 10 ? "0" + minutes : minutes + "";
 			String s = am ? "AM" : "PM";
-			Language.sendMessage("spell.clock.time", "It is currently [TIME]", user.getPlayer(), "[TIME]", color + "" + hours + ":" + min + " " + s);
+			Language.sendMessage("spell.clock.time", "It is currently [TIME]", user.getPlayer(), "[TIME]", color + ""
+					+ hours + ":" + min + " " + s);
 			return CastResult.FAILURE;
 		} else {
 			World world = user.getPlayer().getWorld();
@@ -68,7 +69,8 @@ public class Clock extends Spell {
 					int time = Integer.parseInt(args[0]);
 					world.setTime(time);
 				} catch (NumberFormatException ex) {
-					Language.sendError("spells.clock.usage", "Expected number or <day|night|noon|midnight>", user.getPlayer());
+					Language.sendError("spells.clock.usage", "Expected number or <day|night|noon|midnight>",
+							user.getPlayer());
 					return CastResult.FAILURE;
 				}
 			}

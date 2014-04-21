@@ -36,9 +36,8 @@ public class Confuse extends Spell implements ConfigurableSpell {
 	private int radius;
 
 	public Confuse() {
-		super("confuse", "Confuses nearby mobs to fight eachouther", 100, 5, AspectList.newList()
-				.setAspectTypes(Aspect.ANIMAL, Aspect.ATTACK).setAspectValues(16, 4), 2, SpellElement.NEUTREAL,
-				SpellType.ILLUSION);
+		super("confuse", "Confuses nearby mobs to fight eachouther", 100, 5, AspectList.newList(Aspect.BEAST, 4,
+				Aspect.FLESH, 4), 2, SpellElement.NEUTREAL, SpellType.ILLUSION);
 	}
 
 	@Override
@@ -62,7 +61,8 @@ public class Confuse extends Spell implements ConfigurableSpell {
 			Object monsterHandle = NMSUtils.getHandle(monster);
 			Object targetHandle = NMSUtils.getHandle(target);
 			ReflectionUtils.invokeMethod(monsterHandle, "setGoalTarget", targetHandle);
-			ParticleEffects.sendParticle(Particle.ANGRY_VILLAGER, monster.getTarget().getLocation().add(0, 1, 0), 0.25F, 0.25F, 0.25F, 5, 5);
+			ParticleEffects.sendParticle(Particle.ANGRY_VILLAGER, monster.getTarget().getLocation().add(0, 1, 0),
+					0.25F, 0.25F, 0.25F, 5, 5);
 		}
 		return CastResult.SUCCESS;
 	}

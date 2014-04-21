@@ -29,8 +29,8 @@ import org.bukkit.entity.LivingEntity;
 public class Healer extends Spell {
 
 	public Healer() {
-		super("healer", "Heals your target", 15, 1, AspectList.newList().setAspectTypes(Aspect.LIFE, Aspect.ANIMAL)
-				.setAspectValues(8, 8), 3, SpellElement.NEUTREAL, SpellType.RESTORATION);
+		super("healer", "Heals your target", 15, 1, AspectList.newList(Aspect.LIFE, 50, Aspect.BEAST, 25), 3,
+				SpellElement.NEUTREAL, SpellType.RESTORATION);
 	}
 
 	@Override

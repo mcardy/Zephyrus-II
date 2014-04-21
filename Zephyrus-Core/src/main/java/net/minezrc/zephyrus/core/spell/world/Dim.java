@@ -20,8 +20,8 @@ import net.minezrc.zephyrus.user.User;
 public class Dim extends Spell {
 
 	public Dim() {
-		super("dim", "Destroy the light and embrace the darkness", 500, 50, AspectList.newList()
-				.setAspectTypes(Aspect.EVIL, Aspect.MAGIC).setAspectValues(64, 32), 6, SpellElement.DARKNESS, SpellType.WORLD);
+		super("dim", "Destroy the light and embrace the darkness", 250, 50, AspectList.newList(Aspect.TIME, 50,
+				Aspect.DARKNESS, 25), 6, SpellElement.DARKNESS, SpellType.WORLD);
 	}
 
 	@Override

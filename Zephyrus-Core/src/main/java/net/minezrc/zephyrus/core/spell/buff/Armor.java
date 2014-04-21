@@ -28,11 +28,10 @@ import org.bukkit.entity.Player;
 public class Armor extends Spell implements ConfigurableSpell {
 
 	private int duration;
-	
+
 	public Armor() {
-		super("armor", "Equips arcane armor that absorbs most damage", 300, 20, AspectList.newList()
-				.setAspectTypes(Aspect.ARMOR, Aspect.VALUE, Aspect.MAGIC).setAspectValues(24, 48, 4), 8,
-				SpellElement.ARCANE, SpellType.BUFF);
+		super("armor", "Equips arcane armor that absorbs most damage", 300, 20, AspectList
+				.newList(Aspect.VALUE, 100, Aspect.DEFENSE, 50, Aspect.MYSTICAL, 50), 6, SpellElement.ARCANE, SpellType.BUFF);
 	}
 
 	@Override

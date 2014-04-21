@@ -26,8 +26,8 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class Arrow extends Spell implements Listener {
 
 	public Arrow() {
-		super("arrow", "Shoots an arrow", 30, 5, AspectList.newList().setAspectTypes(Aspect.ATTACK, Aspect.WIND)
-				.setAspectValues(10, 5), 1, SpellElement.AIR, SpellType.ATTACK);
+		super("arrow", "Shoots an arrow", 30, 5, AspectList
+				.newList(Aspect.WIND, 15, Aspect.WEAPON, 15, Aspect.WOOD, 15), 1, SpellElement.AIR, SpellType.ATTACK);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class Arrow extends Spell implements Listener {
 	}
 
 	@EventHandler
-	public void onProjectileHit(PlayerPickupItemEvent event) {
+	public void onProjectilePickup(PlayerPickupItemEvent event) {
 		if (event.getItem().hasMetadata("ignore_pickup")) {
 			event.setCancelled(true);
 		}

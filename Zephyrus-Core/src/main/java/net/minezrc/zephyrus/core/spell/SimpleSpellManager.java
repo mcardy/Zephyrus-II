@@ -191,6 +191,8 @@ public class SimpleSpellManager implements SpellManager {
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)
+		
+		// TODO Spell recipe balancing once more spells are implemented
 
 		for (Spell spell : spellList) {
 			spell.onEnable();

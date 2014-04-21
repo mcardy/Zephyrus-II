@@ -18,8 +18,8 @@ import net.minezrc.zephyrus.user.User;
 public class Firecharge extends Spell {
 
 	public Firecharge() {
-		super("firecharge", "Shoots a firecharge", 50, 4, AspectList.newList()
-				.setAspectTypes(Aspect.FIRE, Aspect.POWER).setAspectValues(8, 4), 2, SpellElement.FIRE,
+		super("firecharge", "Shoots a firecharge", 50, 4, AspectList
+				.newList(Aspect.FIRE, 30, Aspect.ENERGY, 15, Aspect.DESTRUCTION, 15), 2, SpellElement.FIRE,
 				SpellType.ATTACK);
 	}
 

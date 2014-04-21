@@ -23,9 +23,8 @@ import org.bukkit.potion.PotionEffect;
 public class Dispel extends Spell {
 
 	public Dispel() {
-		super("dispel", "Gets rid of those pesky potion effects", 50, 3, AspectList.newList()
-				.setAspectTypes(Aspect.MAGIC, Aspect.WATER, Aspect.FIRE).setAspectValues(16, 16, 16), 1,
-				SpellElement.ARCANE, SpellType.BUFF);
+		super("dispel", "Gets rid of those pesky potion effects", 50, 3, AspectList
+				.newList(Aspect.MYSTICAL, 30, Aspect.FIRE, 15, Aspect.WATER, 15, Aspect.LIFE, 15), 1, SpellElement.ARCANE, SpellType.BUFF);
 	}
 
 	@Override
