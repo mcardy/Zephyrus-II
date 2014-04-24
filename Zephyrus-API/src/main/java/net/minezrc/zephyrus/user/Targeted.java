@@ -1,4 +1,4 @@
-package net.minezrc.zephyrus.spell.annotation;
+package net.minezrc.zephyrus.user;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

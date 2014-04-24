@@ -11,8 +11,8 @@ import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
 import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
 import net.minezrc.zephyrus.spell.annotation.Bindable;
-import net.minezrc.zephyrus.spell.annotation.Targeted;
 import net.minezrc.zephyrus.user.Target;
+import net.minezrc.zephyrus.user.Targeted;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Effect;

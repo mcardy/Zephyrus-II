@@ -20,9 +20,9 @@ import net.minezrc.zephyrus.spell.ContinuousSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.TargetType;
-import net.minezrc.zephyrus.spell.annotation.Targeted;
 import net.minezrc.zephyrus.state.State;
 import net.minezrc.zephyrus.user.Target;
+import net.minezrc.zephyrus.user.Targeted;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
