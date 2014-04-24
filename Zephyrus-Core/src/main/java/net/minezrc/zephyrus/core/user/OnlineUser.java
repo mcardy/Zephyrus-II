@@ -131,6 +131,7 @@ public class OnlineUser implements User {
 				setTarget(spell.getDefaultName(), targeted.type(), targeted.range(), targeted.friendly());
 				if (targeted.type() == TargetType.ENTITY && getTarget(spell.getDefaultName()).getEntity() == null) {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
+					return;
 				}
 			}
 			String[] modArgs = null;
