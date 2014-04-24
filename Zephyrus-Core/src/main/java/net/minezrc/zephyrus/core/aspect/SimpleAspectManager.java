@@ -43,12 +43,15 @@ public class SimpleAspectManager implements AspectManager {
 	@Override
 	public AspectList getAspects(ItemStack item) {
 		if (item != null) {
-			String name = item.getType() + ":" + item.getDurability();
+			String name = item.getType().name() + ":" + item.getDurability();
 			AspectList list;
 			if (map.containsKey(name)) {
 				list = map.get(name);
 			} else {
-				list = map.get(item.getType() + ":0");
+				list = map.get(item.getType().name() + ":0");
+			}
+			if (list == null) {
+				return null;
 			}
 			List<Integer> values = new ArrayList<Integer>();
 			for (int i : list.getAmountList()) {
@@ -56,7 +59,7 @@ public class SimpleAspectManager implements AspectManager {
 			}
 			return AspectList.newList().setAspectLists(list.getTypeList(), values);
 		}
-		return AspectList.newList();
+		return null;
 	}
 
 	@Override
@@ -140,6 +143,7 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.EMERALD_ORE, Aspect.STONE, 2, Aspect.CLEAR, 4, Aspect.VALUE, 4);
 		add(Material.EMPTY_MAP, Aspect.TOOL, 8, Aspect.PLANT, 4, Aspect.KNOWLEDGE, 8);
 		add(Material.ENCHANTED_BOOK, Aspect.MYSTICAL, 8, Aspect.KNOWLEDGE, 8);
+		add(Material.ENCHANTMENT_TABLE, Aspect.MYSTICAL, 16, Aspect.KNOWLEDGE, 16);
 		add(Material.ENDER_CHEST, Aspect.VOID, 8, Aspect.ENDER, 8);
 		add(Material.ENDER_PEARL, Aspect.ENDER, 8);
 		add(Material.ENDER_STONE, Aspect.ENDER, 1, Aspect.STONE, 1);
