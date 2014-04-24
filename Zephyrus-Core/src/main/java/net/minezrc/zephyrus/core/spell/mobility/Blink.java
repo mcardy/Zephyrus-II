@@ -41,7 +41,7 @@ public class Blink extends Spell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
-		Target target = user.getTarget(this);
+		Target target = user.getTarget(this.getDefaultName());
 		if (target != null && target.getBlock() != null && target.getBlock().getType() != Material.AIR) {
 			Block block = target.getBlock();
 			Location bottom = block.getLocation().add(0, 1, 0);

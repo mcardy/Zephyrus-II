@@ -35,7 +35,7 @@ public class Healer extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		LivingEntity target = user.getTarget(this).getEntity();
+		LivingEntity target = user.getTarget(this.getDefaultName()).getEntity();
 		target.setHealth(target.getHealth() < target.getMaxHealth() ? target.getHealth() + 1 : target.getMaxHealth());
 		Location loc = target.getEyeLocation();
 		for (double[] pos : MathUtils.getCircleMap()) {

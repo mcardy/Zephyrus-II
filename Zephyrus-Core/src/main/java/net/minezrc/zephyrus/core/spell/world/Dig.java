@@ -42,7 +42,7 @@ public class Dig extends Spell implements ConfigurableSpell {
 	@Override
 	@SuppressWarnings("deprecation")
 	public CastResult onCast(User user, int power, String[] args) {
-		Block block = user.getTarget(this).getBlock();
+		Block block = user.getTarget(this.getDefaultName()).getBlock();
 		if (blacklist.contains(block.getTypeId()) || block.getType() == Material.AIR) {
 			Language.sendError("spell.dig.blacklist", "You cannot break that block", user.getPlayer());
 			return CastResult.FAILURE;

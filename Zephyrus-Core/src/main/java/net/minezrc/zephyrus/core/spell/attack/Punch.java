@@ -36,7 +36,7 @@ public class Punch extends Spell implements ConfigurableSpell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		user.getTarget(this).getEntity().damage(damage * power, user.getPlayer());
+		user.getTarget(this.getDefaultName()).getEntity().damage(damage * power, user.getPlayer());
 		return CastResult.SUCCESS;
 	}
 

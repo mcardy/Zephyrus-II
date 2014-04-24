@@ -60,7 +60,7 @@ public class OnlineUser implements User {
 
 	private Target target;
 	private int targetTime;
-	private String targetSpell;
+	private String targetKey;
 
 	private ContinuousSpell continuousSpell;
 	private int continuousPower;
@@ -71,7 +71,7 @@ public class OnlineUser implements User {
 		this.playerName = player.getName();
 		this.target = new Target(null);
 		this.targetTime = 0;
-		this.targetSpell = "";
+		this.targetKey = "";
 		load();
 	}
 
@@ -128,8 +128,8 @@ public class OnlineUser implements User {
 			}
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
 				Targeted targeted = spell.getClass().getAnnotation(Targeted.class);
-				setTarget(spell, targeted.type(), targeted.range(), targeted.friendly());
-				if (targeted.type() == TargetType.ENTITY && getTarget(spell).getEntity() == null) {
+				setTarget(spell.getDefaultName(), targeted.type(), targeted.range(), targeted.friendly());
+				if (targeted.type() == TargetType.ENTITY && getTarget(spell.getDefaultName()).getEntity() == null) {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
 				}
 			}
@@ -211,8 +211,8 @@ public class OnlineUser implements User {
 	}
 
 	@Override
-	public Target getTarget(Spell spell) {
-		if (spell.getName().equals(targetSpell)) {
+	public Target getTarget(String key) {
+		if (key.equals(targetKey)) {
 			return target;
 		}
 		return null;
@@ -278,7 +278,7 @@ public class OnlineUser implements User {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public void setTarget(Spell spell, TargetType type, int range, boolean friendly) {
+	public void setTarget(String key, TargetType type, int range, boolean friendly) {
 		if (type == TargetType.BLOCK) {
 			Block target = player.getTargetBlock(null, range);
 			if (Zephyrus.getHookManager().canBuild(player, target)) {
@@ -286,18 +286,18 @@ public class OnlineUser implements User {
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled()) {
 					this.target = new Target(target);
-					this.targetSpell = spell.getName();
+					this.targetKey = key;
 				}
 			}
 		} else if (type == TargetType.ENTITY) {
 			LivingEntity target = getTargetEntity(range);
-			if (!targetSpell.equals(spell.getName()) || this.target.getEntity() == null || target != null) {
+			if (!targetKey.equals(key) || this.target.getEntity() == null || target != null) {
 				if (Zephyrus.getHookManager().canTarget(player, target, friendly)) {
 					UserTargetEntityEvent event = new UserTargetEntityEvent(this, target, friendly);
 					Bukkit.getPluginManager().callEvent(event);
 					if (!event.isCancelled()) {
 						this.target = new Target(target);
-						this.targetSpell = spell.getName();
+						this.targetKey = key;
 					}
 				}
 			}

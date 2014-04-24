@@ -55,7 +55,7 @@ public class Bang extends Spell implements ConfigurableSpell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		Location loc = user.getTarget(this).getBlock().getLocation();
+		Location loc = user.getTarget(this.getDefaultName()).getBlock().getLocation();
 		for (Entity entity : getNearbyEntities(loc, radius)) {
 			if (entity != user.getPlayer()) {
 				entity.setVelocity(entity.getLocation().toVector().subtract(loc.toVector()).normalize().setY(0.4)

@@ -125,10 +125,10 @@ public interface User {
 	/**
 	 * Gets the user's target for the given spell
 	 * 
-	 * @param spell The spell to get the target for
+	 * @param key The key to get the target of (Spell default name or item name)
 	 * @return The target of the user
 	 */
-	public Target getTarget(Spell spell);
+	public Target getTarget(String key);
 
 	/**
 	 * Gets whether or not the user is currently casting a continuous spell
@@ -156,12 +156,12 @@ public interface User {
 	/**
 	 * Sets the target for the given spell
 	 * 
-	 * @param spell The spell setting the target
+	 * @param key The key of the cast (spell name or item name)
 	 * @param type The TargetType of the spell
 	 * @param range The max distance of the target
 	 * @param friendly Whether or not the spell is benificial
 	 */
-	public void setTarget(Spell spell, TargetType type, int range, boolean friendly);
+	public void setTarget(String key, TargetType type, int range, boolean friendly);
 
 	/**
 	 * Stops the current spell from being cast

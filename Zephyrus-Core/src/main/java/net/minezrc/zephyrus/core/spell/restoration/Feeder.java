@@ -36,8 +36,8 @@ public class Feeder extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		if (user.getTarget(this).getEntity() instanceof Player) {
-			Player target = (Player) user.getTarget(this).getEntity();
+		if (user.getTarget(this.getDefaultName()).getEntity() instanceof Player) {
+			Player target = (Player) user.getTarget(this.getDefaultName()).getEntity();
 			target.setFoodLevel(target.getFoodLevel() < 20 ? target.getFoodLevel() + 1 : 20);
 			Location loc = target.getEyeLocation();
 			for (double[] pos : MathUtils.getCircleMap()) {
