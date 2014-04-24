@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.minezrc.zephyrus.Zephyrus;
+import net.minezrc.zephyrus.core.item.action.BlinkPearl;
 import net.minezrc.zephyrus.core.item.wand.AdvancedWand;
 import net.minezrc.zephyrus.core.item.wand.BasicFireWand;
 import net.minezrc.zephyrus.core.item.wand.BasicObsidianWand;
@@ -12,6 +13,7 @@ import net.minezrc.zephyrus.core.item.wand.BasicWand;
 import net.minezrc.zephyrus.core.item.wand.StandardWand;
 import net.minezrc.zephyrus.item.Item;
 import net.minezrc.zephyrus.item.ItemManager;
+import net.minezrc.zephyrus.item.LevelledItem;
 
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
@@ -61,6 +63,7 @@ public class SimpleItemManager implements ItemManager {
 		registerItem(new StandardWand());
 		registerItem(new AdvancedWand());
 		registerItem(new SpellBook());
+		registerItem(new BlinkPearl());
 	}
 
 	@Override
@@ -76,7 +79,11 @@ public class SimpleItemManager implements ItemManager {
 		ItemStack stack = new ItemStack(item.getMaterial());
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName(item.getName());
-		meta.setLore(item.getLore());
+		if (item instanceof LevelledItem) {
+			meta.setLore(((LevelledItem)item).getLevelledLore(1));
+		} else {
+			meta.setLore(item.getLore());
+		}
 		for (Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
 			meta.addEnchant(entry.getKey(), entry.getValue(), true);
 		}

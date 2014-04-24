@@ -67,6 +67,14 @@ public interface User {
 	public float drainMana(float mana);
 
 	/**
+	 * Gets the delay for the given key in seconds
+	 * 
+	 * @param key The delay key to get
+	 * @return The delay amount of that key in seconds
+	 */
+	public int getDelay(String key);
+
+	/**
 	 * Gets the list of the player's learned spells
 	 * 
 	 * @return A list of spell names
@@ -152,6 +160,14 @@ public interface User {
 	 * @return
 	 */
 	public boolean isStateApplied(State state);
+
+	/**
+	 * Sets the delay for the given key. This will be reduced every second
+	 * 
+	 * @param key The key to set
+	 * @param time The time in seconds to set
+	 */
+	public void setDelay(String key, int time);
 
 	/**
 	 * Sets the target for the given spell

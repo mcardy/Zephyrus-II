@@ -12,6 +12,7 @@ import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.core.util.Language;
+import net.minezrc.zephyrus.core.util.map.MultiMap;
 import net.minezrc.zephyrus.event.UserPostCastEvent;
 import net.minezrc.zephyrus.event.UserPreCastEvent;
 import net.minezrc.zephyrus.event.UserTargetBlockEvent;
@@ -58,9 +59,9 @@ public class OnlineUser implements User {
 	private int progress;
 	private int tick;
 
-	private Target target;
-	private int targetTime;
-	private String targetKey;
+	private MultiMap<String, Integer, Target> targetMap;
+	
+	private Map<String, Integer> delayMap;
 
 	private ContinuousSpell continuousSpell;
 	private int continuousPower;
@@ -69,9 +70,6 @@ public class OnlineUser implements User {
 	protected OnlineUser(Player player) {
 		this.player = player;
 		this.playerName = player.getName();
-		this.target = new Target(null);
-		this.targetTime = 0;
-		this.targetKey = "";
 		load();
 	}
 
@@ -86,8 +84,8 @@ public class OnlineUser implements User {
 		while (this.progress >= (level * level * level + 100)) {
 			this.progress -= (level * level * level + 100);
 			level++;
-			Language.sendMessage("game.levelup", ChatColor.AQUA + "You leveled up to level [LEVEL]", player, "[LEVEL]", getLevel()
-					+ "");
+			Language.sendMessage("game.levelup", ChatColor.AQUA + "You leveled up to level [LEVEL]", player, "[LEVEL]",
+					getLevel() + "");
 			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 2, 1);
 			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 2, 8);
 			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 2, -1);
@@ -117,13 +115,14 @@ public class OnlineUser implements User {
 		}
 		if (Zephyrus.getHookManager().canCast(player, spell)) {
 			if (spell == null || !isSpellLearned(spell)) {
-				Language.sendError("command.cast.learn", "You have not learned [SPELL]", getPlayer(), "[SPELL]", args[0]);
+				Language.sendError("command.cast.learn", "You have not learned [SPELL]", getPlayer(), "[SPELL]",
+						args[0]);
 				return;
 			}
 			if (getMana() < spell.getManaCost()) {
-				Language.sendError("command.cast.mana", "You do not have enough mana to cast [SPELL] [MANA]", getPlayer(), "[SPELL]", spell
-						.getName(), "[MANA]", ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/" + ChatColor.GREEN
-						+ spell.getManaCost());
+				Language.sendError("command.cast.mana", "You do not have enough mana to cast [SPELL] [MANA]",
+						getPlayer(), "[SPELL]", spell.getName(), "[MANA]", ChatColor.RED + "" + getMana()
+								+ ChatColor.GRAY + "/" + ChatColor.GREEN + spell.getManaCost());
 				return;
 			}
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
@@ -136,9 +135,9 @@ public class OnlineUser implements User {
 			}
 			String[] modArgs = null;
 			if (args != null) {
-				modArgs = new String[args.length-1];
+				modArgs = new String[args.length - 1];
 				for (int i = 1; i < args.length; i++) {
-					modArgs[i-1] = args[i];
+					modArgs[i - 1] = args[i];
 				}
 			}
 			UserPreCastEvent preCast = new UserPreCastEvent(this, spell, power, modArgs);
@@ -165,10 +164,20 @@ public class OnlineUser implements User {
 		if (getManaDisplay()) {
 			Zephyrus.getUserManager()
 					.getBarDisplay()
-					.setBar(getPlayer(), ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD + ChatColor.AQUA + getMana()
-							+ "/" + getMaxMana() + ChatColor.RESET + ChatColor.DARK_AQUA + "}---", (int) (((float) getMana() / (float) getMaxMana()) * 200));
+					.setBar(getPlayer(),
+							ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD + ChatColor.AQUA + getMana() + "/"
+									+ getMaxMana() + ChatColor.RESET + ChatColor.DARK_AQUA + "}---",
+							(int) (((float) getMana() / (float) getMaxMana()) * 200));
 		}
 		return this.mana;
+	}
+
+	@Override
+	public int getDelay(String key) {
+		if (delayMap.containsKey(key)) {
+			return delayMap.get(key);
+		}
+		return 0;
 	}
 
 	@Override
@@ -213,8 +222,8 @@ public class OnlineUser implements User {
 
 	@Override
 	public Target getTarget(String key) {
-		if (key.equals(targetKey)) {
-			return target;
+		if (targetMap.containsKey(key)) {
+			return targetMap.getSecondValue(key);
 		}
 		return null;
 	}
@@ -260,9 +269,13 @@ public class OnlineUser implements User {
 		if (getManaDisplay()) {
 			Zephyrus.getUserManager()
 					.getBarDisplay()
-					.setBar(getPlayer(), ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD + ChatColor.AQUA + getMana()
-							+ "/" + getMaxMana() + ChatColor.RESET + ChatColor.DARK_AQUA + "}---", (int) (((float) getMana() / (float) getMaxMana()) * 200));
+					.setBar(getPlayer(),
+							ChatColor.DARK_AQUA + "---{" + ChatColor.BOLD + ChatColor.AQUA + getMana() + "/"
+									+ getMaxMana() + ChatColor.RESET + ChatColor.DARK_AQUA + "}---",
+							(int) (((float) getMana() / (float) getMaxMana()) * 200));
 		}
+		this.targetMap = new MultiMap<String, Integer, Target>();
+		this.delayMap = new HashMap<String, Integer>();
 	}
 
 	protected synchronized void save() {
@@ -278,6 +291,11 @@ public class OnlineUser implements User {
 	}
 
 	@Override
+	public void setDelay(String key, int time) {
+		this.delayMap.put(key, time);
+	}
+
+	@Override
 	@SuppressWarnings("deprecation")
 	public void setTarget(String key, TargetType type, int range, boolean friendly) {
 		if (type == TargetType.BLOCK) {
@@ -286,19 +304,17 @@ public class OnlineUser implements User {
 				UserTargetBlockEvent event = new UserTargetBlockEvent(this, target);
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled()) {
-					this.target = new Target(target);
-					this.targetKey = key;
+					targetMap.put(key, 0, new Target(target));
 				}
 			}
 		} else if (type == TargetType.ENTITY) {
 			LivingEntity target = getTargetEntity(range);
-			if (!targetKey.equals(key) || this.target.getEntity() == null || target != null) {
+			if (!targetMap.containsKey(key) || targetMap.getSecondValue(key).getEntity() == null || target != null) {
 				if (Zephyrus.getHookManager().canTarget(player, target, friendly)) {
 					UserTargetEntityEvent event = new UserTargetEntityEvent(this, target, friendly);
 					Bukkit.getPluginManager().callEvent(event);
 					if (!event.isCancelled()) {
-						this.target = new Target(target);
-						this.targetKey = key;
+						targetMap.put(key, 0, new Target(target));
 					}
 				}
 			}
@@ -349,9 +365,10 @@ public class OnlineUser implements User {
 		}
 		if (isCastingSpell()) {
 			if (getMana() < continuousSpell.getManaCostPerTick()) {
-				Language.sendError("command.cast.continuous.mana", "You do not have enough mana to continue cast [SPELL] [MANA]", getPlayer(), "[SPELL]", continuousSpell
-						.getName(), "[MANA]", ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/" + ChatColor.GREEN
-						+ continuousSpell.getManaCost());
+				Language.sendError("command.cast.continuous.mana",
+						"You do not have enough mana to continue cast [SPELL] [MANA]", getPlayer(), "[SPELL]",
+						continuousSpell.getName(), "[MANA]", ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/"
+								+ ChatColor.GREEN + continuousSpell.getManaCost());
 				stopCasting();
 				return;
 			}
@@ -383,11 +400,21 @@ public class OnlineUser implements User {
 					this.states.put(state, time);
 				}
 			}
-			if (target != null) {
-				targetTime++;
-				if (targetTime == 10) {
-					targetTime = 0;
-					target = new Target(null);
+			for (String key : targetMap.keySet()) {
+				int time = targetMap.getFirstValue(key) +1;
+				if (time == 10) {
+					targetMap.remove(key);
+				} else {
+					targetMap.put(key, time, targetMap.getSecondValue(key));
+				}
+				
+			}
+			for (String key : delayMap.keySet()) {
+				int time = delayMap.get(key) -1;
+				if (time == 0) {
+					delayMap.remove(key);
+				} else {
+					delayMap.put(key, time);
 				}
 			}
 		}

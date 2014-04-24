@@ -1,8 +1,10 @@
 package net.minezrc.zephyrus.core.item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.minezrc.zephyrus.Zephyrus;
@@ -14,9 +16,12 @@ import net.minezrc.zephyrus.core.util.ParticleEffects.Particle;
 import net.minezrc.zephyrus.event.UserCraftSpellEvent;
 import net.minezrc.zephyrus.item.ActionItem;
 import net.minezrc.zephyrus.item.Item;
+import net.minezrc.zephyrus.item.LevelledItem;
 import net.minezrc.zephyrus.item.Wand;
+import net.minezrc.zephyrus.nms.UpgradeTrade;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.annotation.Prerequisite;
+import net.minezrc.zephyrus.user.Targeted;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.Bukkit;
@@ -32,9 +37,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 /**
@@ -46,15 +56,48 @@ import org.bukkit.util.Vector;
 
 public class ItemListener implements Listener {
 
+	private Map<String, UpgradeTrade> traders;
+	
+	protected ItemListener() {
+		traders = new HashMap<String, UpgradeTrade>();
+	}
+
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
+		ItemStack stack = player.getItemInHand();
 		Item item = Zephyrus.getItemManager().getItem(player.getItemInHand());
 		User user = Zephyrus.getUser(player);
 		if (item != null) {
-			if (item != null && item instanceof ActionItem) {
+			event.setCancelled(true);
+			if (item != null && item instanceof LevelledItem && event.getAction() == Action.RIGHT_CLICK_BLOCK
+					&& event.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE
+					&& event.getClickedBlock().getData() == 10) {
+				LevelledItem levelled = (LevelledItem) item;
+				int level = levelled.getLevel(stack.getItemMeta().getLore());
+				if (level < levelled.getMaxLevel()) {
+					level++;
+					UpgradeTrade trade = Zephyrus.getNMSManager().getItemUpgradeTrade();
+					ItemStack input = stack.clone();
+					input.setAmount(1);
+					ItemStack output = input.clone();
+					ItemMeta meta = output.getItemMeta();
+					meta.setLore(levelled.getLevelledLore(level));
+					output.setItemMeta(meta);
+					trade.setOffer(input, new ItemStack(levelled.getMaterialCost(), level), output);
+					trade.openTrade(player);
+					this.traders.put(player.getName(), trade);
+				} else {
+					Language.sendError("item.arcane.max", "This item is already at max level", player);
+				}
+			} else if (item != null && item instanceof ActionItem) {
 				ActionItem action = (ActionItem) item;
 				if (action.getActions().contains(event.getAction())) {
+					if (action.getClass().isAnnotationPresent(Targeted.class)) {
+						Targeted targeted = action.getClass().getAnnotation(Targeted.class);
+						user.setTarget(item.getName(), targeted.type(), targeted.range(), targeted.friendly());
+					}
 					action.onInteract(event);
 				}
 			} else if (item != null && item instanceof Wand) {
@@ -106,18 +149,27 @@ public class ItemListener implements Listener {
 						InventoryGUI gui = new InventoryGUI(
 								Language.get("crafting.selectionname", "Craft which spell?"));
 						for (int i = 0; i < spells.size(); i++) {
-							gui.setSlot(i + 1, SpellTome.createSpellTome(spells.get(i)), getButton(spells.get(i), event
-									.getClickedBlock(), itemEntity));
+							gui.setSlot(i + 1, SpellTome.createSpellTome(spells.get(i)),
+									getButton(spells.get(i), event.getClickedBlock(), itemEntity));
 						}
 						gui.open(player);
 					} else {
-						Language.sendError("crafting.nospell", "You cannot craft any spells with those aspects. Consult the SpellBook for more information.", player);
+						Language.sendError(
+								"crafting.nospell",
+								"You cannot craft any spells with those aspects. Consult the SpellBook for more information.",
+								player);
 					}
 					// Checking Bound Spell
+				} else if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+						&& event.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
+					event.getClickedBlock().setData((byte) 10);
+					Language.sendMessage("item.arcane.create", ChatColor.GOLD + "You have created an Arcane Leveller",
+							player);
+					return;
 				} else if (player.isSneaking()
 						&& (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
-					Language.sendMessage("item.wand.bound", "Current bound spell: " + ChatColor.GOLD + "[SPELL]", player, "[SPELL]", bound != null ? bound
-							: "none");
+					Language.sendMessage("item.wand.bound", "Current bound spell: " + ChatColor.GOLD + "[SPELL]",
+							player, "[SPELL]", bound != null ? bound : "none");
 					// Casting Bound Spell
 				} else if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 					if (user.isCastingSpell()) {
@@ -126,13 +178,62 @@ public class ItemListener implements Listener {
 						Spell spell = Zephyrus.getSpell(bound);
 						user.castSpell(spell, wand.getPowerIncrease(spell), null);
 					} else {
-						Language.sendError("item.wand.nobound", "There is no spell bound to this wand! Bind one with /bind <spell>", player);
+						Language.sendError("item.wand.nobound",
+								"There is no spell bound to this wand! Bind one with /bind <spell>", player);
 					}
 				}
 			}
 		}
 		if (user.isCastingSpell()) {
 			user.stopCasting();
+		}
+	}
+
+	@EventHandler
+	public void onInventoryClose(InventoryCloseEvent e) {
+		if (this.traders.containsKey(e.getPlayer().getName())) {
+			this.traders.remove(e.getPlayer().getName());
+		}
+	}
+
+	@EventHandler
+	public void onInventoryClick(InventoryClickEvent e) {
+		if (this.traders.containsKey(e.getWhoClicked().getName())) {
+			if (e.getInventory().getType() == InventoryType.MERCHANT) {
+				UpgradeTrade m = this.traders.get(e.getWhoClicked().getName());
+				ItemStack i = e.getCurrentItem();
+				ItemStack i2 = e.getCursor();
+				ItemStack mi = m.getFirstInput();
+				ItemStack m2 = m.getOutput();
+				if (e.getRawSlot() != 0 && e.getRawSlot() != 1 && i != null && i2 != null && e.getRawSlot() != 2
+						&& !i.equals(mi) && !i.equals(m2) && !i2.equals(mi) && !i2.equals(m2)
+						&& i.getType() != m.getSecondInput().getType() && i2.getType() != m.getSecondInput().getType()) {
+					e.setCancelled(true);
+				}
+				if (i != null && i.getType() == m.getSecondInput().getType() || i != null
+						&& i2.getType() == m.getSecondInput().getType()) {
+					if ((i.hasItemMeta() || i2.hasItemMeta()) && (!i.equals(mi) && !i2.equals(mi))
+							&& (!i.equals(m2) && !i2.equals(m2))) {
+						e.setCancelled(true);
+					}
+				}
+				if (i2 != null && i2.equals(m2)) {
+					new CloseInv(e.getViewers().get(0)).runTaskLater(Zephyrus.getPlugin(), 2);
+				}
+			}
+		}
+	}
+
+	private class CloseInv extends BukkitRunnable {
+		HumanEntity e;
+
+		CloseInv(HumanEntity e) {
+			this.e = e;
+		}
+
+		@Override
+		public void run() {
+			e.closeInventory();
 		}
 	}
 
@@ -179,8 +280,9 @@ public class ItemListener implements Listener {
 					Player player = (Player) human;
 					if (Zephyrus.getUser(player).getLevel() < item.getCraftingLevel()) {
 						event.getInventory().setResult(null);
-						Language.sendError("crafting.item.requiredlevel", "You lack the knowledge of level [LEVEL] required to craft [ITEM]", player, "[LEVEL]", item
-								.getCraftingLevel() + "", "[ITEM]", item.getName());
+						Language.sendError("crafting.item.requiredlevel",
+								"You lack the knowledge of level [LEVEL] required to craft [ITEM]", player, "[LEVEL]",
+								item.getCraftingLevel() + "", "[ITEM]", item.getName());
 					}
 				}
 			}
