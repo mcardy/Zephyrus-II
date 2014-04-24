@@ -99,6 +99,10 @@ public class ItemCommand {
 			}
 			AspectList list = Zephyrus.getAspectManager().getAspects(args.getPlayer().getItemInHand());
 			Language.sendMessage("command.aspects.aspecttitle", "Aspects: ", args.getSender());
+			if (list == null) {
+				Language.sendError("command.aspects.none", "None", args.getSender());
+				return;
+			}
 			for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
 				Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(), "[NAME]", entry
 						.getKey().getColor()
@@ -112,6 +116,10 @@ public class ItemCommand {
 			if (mat != null) {
 				AspectList list = Zephyrus.getAspectManager().getAspects(new ItemStack(mat));
 				Language.sendMessage("command.aspects.aspecttitle", "Aspects: ", args.getSender());
+				if (list == null) {
+					Language.sendError("command.aspects.none", "None", args.getSender());
+					return;
+				}
 				for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
 					Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(), "[NAME]", Language
 							.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry.getKey()
