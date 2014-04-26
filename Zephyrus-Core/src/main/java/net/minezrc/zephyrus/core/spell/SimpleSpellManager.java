@@ -10,8 +10,8 @@ import java.util.Set;
 import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.item.SpellTome;
-import net.minezrc.zephyrus.core.spell.attack.ArrowSpell;
 import net.minezrc.zephyrus.core.spell.attack.ArrowRainSpell;
+import net.minezrc.zephyrus.core.spell.attack.ArrowSpell;
 import net.minezrc.zephyrus.core.spell.attack.ArrowStormSpell;
 import net.minezrc.zephyrus.core.spell.attack.BoltSpell;
 import net.minezrc.zephyrus.core.spell.attack.ButcherSpell;
@@ -40,6 +40,7 @@ import net.minezrc.zephyrus.core.spell.world.DetectSpell;
 import net.minezrc.zephyrus.core.spell.world.DigSpell;
 import net.minezrc.zephyrus.core.spell.world.DimSpell;
 import net.minezrc.zephyrus.core.spell.world.ExplodeSpell;
+import net.minezrc.zephyrus.core.spell.world.FireRingSpell;
 import net.minezrc.zephyrus.core.spell.world.SmiteSpell;
 import net.minezrc.zephyrus.core.spell.world.TrackSpell;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
@@ -193,6 +194,7 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new DigSpell());
 		registerSpell(new DimSpell());
 		registerSpell(new ExplodeSpell());
+		registerSpell(new FireRingSpell());
 		registerSpell(new SmiteSpell());
 		registerSpell(new TrackSpell());
 
