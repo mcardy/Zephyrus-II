@@ -55,7 +55,7 @@ public class DamagingBallProjectile implements Projectile {
 	}
 
 	@Override
-	public void onParticleDisplay(Location loc) {
+	public void onProjectileTick(Location loc) {
 		ParticleEffects.sendParticle(particle, loc, amount);
 	}
 

@@ -16,7 +16,7 @@ public interface Projectile {
 
 	public Entity getEntity();
 	public void launchProjectile(Player player);
-	public void onParticleDisplay(Location loc);
+	public void onProjectileTick(Location loc);
 	public void onHitBlock(Location loc);
 	public void onHitEntity(LivingEntity entity);
 	

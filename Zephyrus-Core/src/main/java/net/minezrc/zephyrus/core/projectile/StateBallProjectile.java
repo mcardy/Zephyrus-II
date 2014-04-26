@@ -61,7 +61,7 @@ public class StateBallProjectile implements Projectile {
 	}
 
 	@Override
-	public void onParticleDisplay(Location loc) {
+	public void onProjectileTick(Location loc) {
 		ParticleEffects.sendParticle(particle, loc, amount);
 	}
 

@@ -7,7 +7,6 @@ import net.minezrc.zephyrus.Zephyrus;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -43,8 +42,8 @@ public class ProjectileHandler implements Listener {
 		Bukkit.getScheduler().runTask(Zephyrus.getPlugin(), new BukkitRunnable() {
 			@Override
 			public void run() {
-				if (projectileData.containsKey(projectile.getEntity())) {
-					projectile.onParticleDisplay(projectile.getEntity().getLocation());
+				if (ProjectileHandler.getInstance().projectileData.containsKey(projectile.getEntity())) {
+					projectile.onProjectileTick(projectile.getEntity().getLocation());
 					Bukkit.getScheduler().runTaskLater(Zephyrus.getPlugin(), this, 1);
 				}
 			}
@@ -53,23 +52,19 @@ public class ProjectileHandler implements Listener {
 
 	@EventHandler
 	public void onProjectileHitEntity(EntityDamageByEntityEvent event) {
-		if (event.getEntity() instanceof LivingEntity && event.getDamager() instanceof Snowball) {
-			if (projectileData.containsKey(event.getDamager())) {
-				Projectile projectile = projectileData.get(event.getDamager());
-				projectile.onHitEntity((LivingEntity) event.getEntity());
-				projectileData.remove(event.getDamager());
-			}
+		if (projectileData.containsKey(event.getDamager())) {
+			Projectile projectile = projectileData.get(event.getDamager());
+			projectile.onHitEntity((LivingEntity) event.getEntity());
+			projectileData.remove(event.getDamager());
 		}
 	}
 
 	@EventHandler
 	public void onProjectileHitBlock(ProjectileHitEvent event) {
-		if (event.getEntity() instanceof Snowball) {
-			if (projectileData.containsKey(event.getEntity())) {
-				Projectile projectile = projectileData.get(event.getEntity());
-				projectile.onHitBlock(event.getEntity().getLocation());
-				projectileData.remove(event.getEntity());
-			}
+		if (projectileData.containsKey(event.getEntity())) {
+			Projectile projectile = projectileData.get(event.getEntity());
+			projectile.onHitBlock(event.getEntity().getLocation());
+			projectileData.remove(event.getEntity());
 		}
 	}
 

@@ -17,6 +17,7 @@ import net.minezrc.zephyrus.core.spell.attack.Bolt;
 import net.minezrc.zephyrus.core.spell.attack.Butcher;
 import net.minezrc.zephyrus.core.spell.attack.Fireball;
 import net.minezrc.zephyrus.core.spell.attack.Firecharge;
+import net.minezrc.zephyrus.core.spell.attack.HomingArrow;
 import net.minezrc.zephyrus.core.spell.attack.Punch;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
 import net.minezrc.zephyrus.core.spell.buff.Dispel;
@@ -157,6 +158,7 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new Butcher());
 		registerSpell(new Fireball());
 		registerSpell(new Firecharge());
+		registerSpell(new HomingArrow());
 		registerSpell(new Punch());
 
 		// Buff

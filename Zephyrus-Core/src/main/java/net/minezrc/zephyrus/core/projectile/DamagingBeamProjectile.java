@@ -59,7 +59,7 @@ public class DamagingBeamProjectile implements Projectile {
 	}
 	
 	@Override
-	public void onParticleDisplay(Location loc) {
+	public void onProjectileTick(Location loc) {
 		locs.add(loc);
 		for (Location pos : locs) {
 			ParticleEffects.sendParticle(particle, pos, 4);
