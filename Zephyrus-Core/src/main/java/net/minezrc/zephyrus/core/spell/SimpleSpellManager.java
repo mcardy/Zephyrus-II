@@ -19,7 +19,9 @@ import net.minezrc.zephyrus.core.spell.attack.Fireball;
 import net.minezrc.zephyrus.core.spell.attack.Firecharge;
 import net.minezrc.zephyrus.core.spell.attack.Punch;
 import net.minezrc.zephyrus.core.spell.buff.Armor;
+import net.minezrc.zephyrus.core.spell.buff.Dispel;
 import net.minezrc.zephyrus.core.spell.buff.Feather;
+import net.minezrc.zephyrus.core.spell.buff.Shield;
 import net.minezrc.zephyrus.core.spell.creation.Conjure;
 import net.minezrc.zephyrus.core.spell.creation.Enderchest;
 import net.minezrc.zephyrus.core.spell.illusion.Confuse;
@@ -31,9 +33,13 @@ import net.minezrc.zephyrus.core.spell.restoration.Feed;
 import net.minezrc.zephyrus.core.spell.restoration.Feeder;
 import net.minezrc.zephyrus.core.spell.restoration.Heal;
 import net.minezrc.zephyrus.core.spell.restoration.Healer;
+import net.minezrc.zephyrus.core.spell.world.Bright;
 import net.minezrc.zephyrus.core.spell.world.Clock;
 import net.minezrc.zephyrus.core.spell.world.Detect;
 import net.minezrc.zephyrus.core.spell.world.Dig;
+import net.minezrc.zephyrus.core.spell.world.Dim;
+import net.minezrc.zephyrus.core.spell.world.Explode;
+import net.minezrc.zephyrus.core.spell.world.Smite;
 import net.minezrc.zephyrus.core.spell.world.Track;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
@@ -129,8 +135,8 @@ public class SimpleSpellManager implements SpellManager {
 		if (spellConfig.getConfig().getBoolean(spell.getDefaultName() + ".Enabled")) {
 			this.spellList.add(spell);
 			if (spell instanceof ConfigurableSpell) {
-				((ConfigurableSpell) spell).loadConfiguration(spellConfig.getConfig().getConfigurationSection(spell
-						.getDefaultName()));
+				((ConfigurableSpell) spell).loadConfiguration(spellConfig.getConfig().getConfigurationSection(
+						spell.getDefaultName()));
 			}
 			if (spell instanceof Listener) {
 				Bukkit.getPluginManager().registerEvents((Listener) spell, Zephyrus.getPlugin());
@@ -152,11 +158,13 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new Fireball());
 		registerSpell(new Firecharge());
 		registerSpell(new Punch());
-		
+
 		// Buff
 		registerSpell(new Armor());
+		registerSpell(new Dispel());
 		registerSpell(new Feather());
-		
+		registerSpell(new Shield());
+
 		// Creation
 		registerSpell(new Conjure());
 		registerSpell(new Enderchest());
@@ -177,23 +185,26 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new Healer());
 
 		// World
+		registerSpell(new Bright());
 		registerSpell(new Clock());
 		registerSpell(new Detect());
 		registerSpell(new Dig());
+		registerSpell(new Dim());
+		registerSpell(new Explode());
+		registerSpell(new Smite());
 		registerSpell(new Track());
 
 		// TODO Re-implement:
-		// Enderchest, Explode,
-		// Feather, FireRing, FireShield, FlameStep, Flare, Fly,
-		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight, Mana,
+		// FireRing, FireShield, FlameStep, Flare, Fly,
+		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight,
 		// MassParalyze, Paralyze, Phase, Prospect, Repair, Satisfy,
-		// Shield, Shine, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
+		// Shield, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
 		// VIsion, Zap, Zephyr
 
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)
-		
+
 		// TODO Spell recipe balancing once more spells are implemented
 
 		for (Spell spell : spellList) {

@@ -41,6 +41,7 @@ public class SimpleStateManager implements StateManager {
 	public void load() {
 		registerState(StateList.ARMOR);
 		registerState(StateList.FEATHER);
+		registerState(StateList.SHIELD);
 	}
 
 	@Override

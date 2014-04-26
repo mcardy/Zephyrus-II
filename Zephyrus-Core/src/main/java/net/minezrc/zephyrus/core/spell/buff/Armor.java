@@ -30,8 +30,8 @@ public class Armor extends Spell implements ConfigurableSpell {
 	private int duration;
 
 	public Armor() {
-		super("armor", "Equips arcane armor that absorbs most damage", 300, 20, AspectList
-				.newList(Aspect.VALUE, 100, Aspect.DEFENSE, 50, Aspect.MYSTICAL, 50), 6, SpellElement.ARCANE, SpellType.BUFF);
+		super("armor", "Equips arcane armor that absorbs most damage", 300, 20, AspectList.newList(Aspect.VALUE, 100,
+				Aspect.DEFENSE, 50, Aspect.MYSTICAL, 50), 6, SpellElement.ARCANE, SpellType.BUFF);
 	}
 
 	@Override
@@ -41,11 +41,13 @@ public class Armor extends Spell implements ConfigurableSpell {
 		if (player.getInventory().getHelmet() == null && player.getInventory().getChestplate() == null
 				&& player.getInventory().getLeggings() == null && player.getInventory().getBoots() == null) {
 			user.addState(StateList.ARMOR, duration);
-			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold", player);
+			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold",
+					player);
 			return CastResult.SUCCESS;
 		} else if (user.isStateApplied(StateList.ARMOR)) {
 			user.addState(StateList.ARMOR, duration);
-			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold", player);
+			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold",
+					player);
 			return CastResult.SUCCESS;
 		} else {
 			Language.sendError("spell.armor.fail", "You cannot be waring armour when casting this spell", player);
