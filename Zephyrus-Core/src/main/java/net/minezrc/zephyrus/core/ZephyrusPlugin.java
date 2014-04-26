@@ -2,7 +2,9 @@ package net.minezrc.zephyrus.core;
 
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.aspect.SimpleAspectManager;
-import net.minezrc.zephyrus.core.command.SimpleCommandManager;
+import net.minezrc.zephyrus.core.command.ItemCommand;
+import net.minezrc.zephyrus.core.command.SpellCommand;
+import net.minezrc.zephyrus.core.command.UserCommand;
 import net.minezrc.zephyrus.core.config.ConfigOptions;
 import net.minezrc.zephyrus.core.enchant.SimpleEnchantManager;
 import net.minezrc.zephyrus.core.hook.SimpleHookManager;
@@ -15,6 +17,7 @@ import net.minezrc.zephyrus.core.util.Metrics;
 import net.minezrc.zephyrus.core.util.Updater;
 import net.minezrc.zephyrus.core.util.Updater.UpdateResult;
 import net.minezrc.zephyrus.core.util.VersionInfo;
+import net.minezrc.zephyrus.core.util.command.CommandFramework;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -35,12 +38,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ZephyrusPlugin extends JavaPlugin {
 
+	private CommandFramework command;
+
 	@Override
 	public void onLoad() {
+		command = new CommandFramework(this);
 		saveDefaultConfig();
 		Zephyrus.setPlugin(this);
 		Zephyrus.setAspectManager(new SimpleAspectManager());
-		Zephyrus.setCommandManager(new SimpleCommandManager());
 		Zephyrus.setEnchantmentManager(new SimpleEnchantManager());
 		Zephyrus.setHookManager(new SimpleHookManager());
 		Zephyrus.setItemManager(new SimpleItemManager());
@@ -52,28 +57,29 @@ public class ZephyrusPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		try {
-			new Metrics(this).start();
-			ConfigOptions.loadOptions(getConfig());
-			Zephyrus.getAspectManager().load();
-			Zephyrus.getCommandManager().load();
-			Zephyrus.getEnchantmentManager().load();
-			Zephyrus.getHookManager().load();
-			Zephyrus.getItemManager().load();
-			Zephyrus.getNMSManager().load();
-			Zephyrus.getSpellManager().load();
-			Zephyrus.getStateManager().load();
-			Zephyrus.getUserManager().load();
-			schedulePostLoadTask(Updater.update());
-			getLogger().info("Fully loaded Zephyrus v" + getDescription().getVersion());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		new Metrics(this).start();
+		ConfigOptions.loadOptions(getConfig());
+
+		command.registerCommands(new SpellCommand());
+		command.registerCommands(new ItemCommand());
+		command.registerCommands(new UserCommand());
+		command.registerHelp();
+
+		Zephyrus.getAspectManager().load();
+		Zephyrus.getEnchantmentManager().load();
+		Zephyrus.getHookManager().load();
+		Zephyrus.getItemManager().load();
+		Zephyrus.getNMSManager().load();
+		Zephyrus.getSpellManager().load();
+		Zephyrus.getStateManager().load();
+		Zephyrus.getUserManager().load();
+
+		schedulePostLoadTask(Updater.update());
+		getLogger().info("Fully loaded Zephyrus v" + getDescription().getVersion());
 	}
 
 	@Override
 	public void onDisable() {
-		Zephyrus.getCommandManager().unload();
 		Zephyrus.getEnchantmentManager().unload();
 		Zephyrus.getHookManager().unload();
 		Zephyrus.getItemManager().unload();
@@ -86,7 +92,8 @@ public class ZephyrusPlugin extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String name, String[] args) {
-		return Zephyrus.getCommandManager().handle(sender, command, name, args);
+		this.command.handleCommand(sender, command, name, args);
+		return true;
 	}
 
 	public void schedulePostLoadTask(final Updater updater) {

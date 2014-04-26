@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import net.minezrc.zephyrus.aspect.AspectManager;
-import net.minezrc.zephyrus.command.CommandManager;
 import net.minezrc.zephyrus.enchant.EnchantManager;
 import net.minezrc.zephyrus.hook.PluginHookManager;
 import net.minezrc.zephyrus.item.Item;
@@ -32,7 +31,6 @@ import org.bukkit.plugin.Plugin;
 public class Zephyrus {
 
 	private static AspectManager aspectManager;
-	private static CommandManager commandManager;
 	private static EnchantManager enchantmentManager;
 	private static PluginHookManager hookManager;
 	private static ItemManager itemManager;
@@ -49,15 +47,6 @@ public class Zephyrus {
 	 */
 	public static AspectManager getAspectManager() {
 		return aspectManager;
-	}
-
-	/**
-	 * Gets the CommandManager singleton
-	 * 
-	 * @return The CommandManager instance
-	 */
-	public static CommandManager getCommandManager() {
-		return commandManager;
 	}
 
 	/**
@@ -273,19 +262,6 @@ public class Zephyrus {
 	}
 
 	/**
-	 * Attempts to set the CommandManager singleton
-	 * 
-	 * @param manager The manager to set
-	 * @throws IllegalStateException when the manager is already set
-	 */
-	public static void setCommandManager(CommandManager manager) {
-		if (Zephyrus.commandManager != null) {
-			throw new IllegalStateException("Zephyrus command manager already set! It cannot be set twice!");
-		}
-		commandManager = manager;
-	}
-
-	/**
 	 * Attempts to set the EnchantManager singleton
 	 * 
 	 * @param manager The manager to set
@@ -395,7 +371,6 @@ public class Zephyrus {
 	 * A method to null all static variables to avoid memory leaks on reloads
 	 */
 	public static void unload() {
-		Zephyrus.commandManager = null;
 		Zephyrus.enchantmentManager = null;
 		Zephyrus.itemManager = null;
 		Zephyrus.nmsManager = null;
