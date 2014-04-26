@@ -131,7 +131,7 @@ public class OnlineUser implements User {
 				if (!success) {
 					return;
 				}
-				if (targeted.type() == TargetType.ENTITY && getTarget(spell.getDefaultName()).getEntity() == null) {
+				if (targeted.type() == TargetType.ENTITY && (getTarget(spell.getDefaultName()).getEntity() == null || getTarget(spell.getDefaultName()).getEntity().isDead())) {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
 					return;
 				}
