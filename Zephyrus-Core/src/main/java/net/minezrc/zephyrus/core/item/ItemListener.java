@@ -69,6 +69,7 @@ public class ItemListener implements Listener {
 		ItemStack stack = player.getItemInHand();
 		Item item = Zephyrus.getItemManager().getItem(player.getItemInHand());
 		User user = Zephyrus.getUser(player);
+		boolean didCast = false;
 		if (item != null) {
 			event.setCancelled(true);
 			if (item != null && item instanceof LevelledItem && event.getAction() == Action.RIGHT_CLICK_BLOCK
@@ -176,6 +177,7 @@ public class ItemListener implements Listener {
 						user.stopCasting();
 					} else if (bound != null) {
 						Spell spell = Zephyrus.getSpell(bound);
+						didCast = true;
 						user.castSpell(spell, wand.getPowerIncrease(spell), null);
 					} else {
 						Language.sendError("item.wand.nobound",
@@ -184,7 +186,7 @@ public class ItemListener implements Listener {
 				}
 			}
 		}
-		if (user.isCastingSpell()) {
+		if (user.isCastingSpell() && !didCast) {
 			user.stopCasting();
 		}
 	}
