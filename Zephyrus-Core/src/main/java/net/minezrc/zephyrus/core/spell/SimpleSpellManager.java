@@ -199,7 +199,7 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new TrackSpell());
 
 		// TODO Re-implement:
-		// FireRing, FireShield, FlameStep, Flare, Fly,
+		// FireShield, FlameStep, Flare, Fly,
 		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight,
 		// MassParalyze, Paralyze, Phase, Prospect, Repair, Satisfy,
 		// Shield, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,

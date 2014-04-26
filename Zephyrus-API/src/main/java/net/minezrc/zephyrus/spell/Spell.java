@@ -30,15 +30,15 @@ public abstract class Spell {
 
 	private final String defaultName;
 
-	private String name;
 	private String description;
+	private SpellElement element;
 	private int manaCost;
-	private int xpReward;
+	private String name;
 	private AspectList recipe;
 	private int requiredLevel;
 
-	private SpellElement element;
 	private SpellType type;
+	private int xpReward;
 
 	public Spell(String name, String description, int manaCost, int xpReward, AspectList recipe, int requiredLevel,
 			SpellElement element, SpellType type) {
@@ -76,13 +76,21 @@ public abstract class Spell {
 		this.type = type;
 	}
 
-	/**
-	 * Gets the name of the spell configured by the user
-	 * 
-	 * @return The name of the spell
-	 */
-	public String getName() {
-		return this.name;
+	private AspectList fromList(List<String> list) {
+		List<Aspect> aspectType = new ArrayList<Aspect>();
+		List<Integer> aspectValue = new ArrayList<Integer>();
+		for (String s : list) {
+			String[] split = s.split("-");
+			try {
+				Aspect aspect = Aspect.valueOf(split[0]);
+				int value = Integer.parseInt(split[1]);
+				aspectType.add(aspect);
+				aspectValue.add(value);
+			} catch (Exception ex) {
+				// Catch any syntax errors caused by the user
+			}
+		}
+		return AspectList.newList().setAspectLists(aspectType, aspectValue);
 	}
 
 	/**
@@ -104,6 +112,15 @@ public abstract class Spell {
 	}
 
 	/**
+	 * Gets the element of the spell
+	 * 
+	 * @return The SpellElement of the spell
+	 */
+	public SpellElement getElement() {
+		return this.element;
+	}
+
+	/**
 	 * Gets the mana cost of the spell configured by the user
 	 * 
 	 * @return The mana cost of the spell
@@ -113,12 +130,12 @@ public abstract class Spell {
 	}
 
 	/**
-	 * Gets the xp reward of the spell configured by the user
+	 * Gets the name of the spell configured by the user
 	 * 
-	 * @return The xp reward of the spell
+	 * @return The name of the spell
 	 */
-	public int getXpReward() {
-		return this.xpReward;
+	public String getName() {
+		return this.name;
 	}
 
 	/**
@@ -140,15 +157,6 @@ public abstract class Spell {
 	}
 
 	/**
-	 * Gets the element of the spell
-	 * 
-	 * @return The SpellElement of the spell
-	 */
-	public SpellElement getElement() {
-		return this.element;
-	}
-
-	/**
 	 * Gets the type of the spell
 	 * 
 	 * @return The SpellType of the spell
@@ -158,15 +166,12 @@ public abstract class Spell {
 	}
 
 	/**
-	 * Called when Zephyrus is enabled
+	 * Gets the xp reward of the spell configured by the user
+	 * 
+	 * @return The xp reward of the spell
 	 */
-	public void onDisable() {
-	}
-
-	/**
-	 * Called when Zephyrus is disabled
-	 */
-	public void onEnable() {
+	public int getXpReward() {
+		return this.xpReward;
 	}
 
 	/**
@@ -180,21 +185,16 @@ public abstract class Spell {
 	 */
 	public abstract CastResult onCast(User user, int power, String[] args);
 
-	private AspectList fromList(List<String> list) {
-		List<Aspect> aspectType = new ArrayList<Aspect>();
-		List<Integer> aspectValue = new ArrayList<Integer>();
-		for (String s : list) {
-			String[] split = s.split("-");
-			try {
-				Aspect aspect = Aspect.valueOf(split[0]);
-				int value = Integer.parseInt(split[1]);
-				aspectType.add(aspect);
-				aspectValue.add(value);
-			} catch (Exception ex) {
-				// Catch any syntax errors caused by the user
-			}
-		}
-		return AspectList.newList().setAspectLists(aspectType, aspectValue);
+	/**
+	 * Called when Zephyrus is enabled
+	 */
+	public void onDisable() {
+	}
+
+	/**
+	 * Called when Zephyrus is disabled
+	 */
+	public void onEnable() {
 	}
 
 	private List<String> toList(AspectList recipe) {

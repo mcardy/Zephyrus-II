@@ -34,7 +34,7 @@ public class SpellRecipe {
 	/**
 	 * Gets the list of aspects in this recipe
 	 * 
-	 * @return
+	 * @return The list of this recipe
 	 */
 	public AspectList getList() {
 		return list;

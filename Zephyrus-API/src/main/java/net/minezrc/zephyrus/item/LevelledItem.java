@@ -15,18 +15,12 @@ import org.bukkit.Material;
 public interface LevelledItem extends Item {
 
 	/**
-	 * Gets the maximum allowed level of this item
+	 * Gets the level of the item from the given lore.
 	 * 
-	 * @return The max allowed level
+	 * @param lore The lore of the item
+	 * @return The level of the item
 	 */
-	public int getMaxLevel();
-
-	/**
-	 * Gets the cost to level up (amount per level)
-	 * 
-	 * @return The material when upgrading
-	 */
-	public Material getMaterialCost();
+	public int getLevel(List<String> lore);
 
 	/**
 	 * Gets the lore of the item for the given level. Will replace getLore in
@@ -38,11 +32,17 @@ public interface LevelledItem extends Item {
 	public List<String> getLevelledLore(int level);
 
 	/**
-	 * Gets the level of the item from the given lore.
+	 * Gets the cost to level up (amount per level)
 	 * 
-	 * @param lore The lore of the item
-	 * @return The level of the item
+	 * @return The material when upgrading
 	 */
-	public int getLevel(List<String> lore);
+	public Material getMaterialCost();
+
+	/**
+	 * Gets the maximum allowed level of this item
+	 * 
+	 * @return The max allowed level
+	 */
+	public int getMaxLevel();
 
 }

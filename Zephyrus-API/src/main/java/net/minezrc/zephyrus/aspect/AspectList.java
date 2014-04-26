@@ -15,9 +15,6 @@ import java.util.Map;
 
 public class AspectList {
 
-	private List<Aspect> aspectTypes;
-	private List<Integer> aspectAmounts;
-
 	/**
 	 * Creates a new AspectList object with given aspects and values
 	 * 
@@ -26,7 +23,6 @@ public class AspectList {
 	public static AspectList newList() {
 		return new AspectList();
 	}
-
 	/**
 	 * Creates a new AspectList object with given aspects and values
 	 * 
@@ -44,6 +40,49 @@ public class AspectList {
 			amounts.add((Integer) values[i + 1]);
 		}
 		return new AspectList().setAspectLists(aspects, amounts);
+	}
+
+	private List<Integer> aspectAmounts;
+
+	private List<Aspect> aspectTypes;
+
+	/**
+	 * Gets the value list
+	 */
+	public List<Integer> getAmountList() {
+		return aspectAmounts;
+	}
+
+	/**
+	 * Gets the aspect map
+	 */
+	public Map<Aspect, Integer> getAspectMap() {
+		Map<Aspect, Integer> map = new HashMap<Aspect, Integer>();
+		for (int i = 0; i < aspectTypes.size(); i++) {
+			if (i < aspectAmounts.size()) {
+				map.put(aspectTypes.get(i), aspectAmounts.get(i));
+			}
+		}
+		return map;
+	}
+
+	/**
+	 * Gets the aspect list
+	 */
+	public List<Aspect> getTypeList() {
+		return aspectTypes;
+	}
+
+	/**
+	 * Sets the lists that this AspectList should contain
+	 * 
+	 * @param types The list of aspects
+	 * @param values The list of values
+	 */
+	public AspectList setAspectLists(List<Aspect> types, List<Integer> values) {
+		this.aspectTypes = types;
+		this.aspectAmounts = values;
+		return this;
 	}
 
 	/**
@@ -68,7 +107,6 @@ public class AspectList {
 	 * and 1 water
 	 * 
 	 * @param aspects The aspect values this list should contain
-	 * @return
 	 */
 	public AspectList setAspectValues(int... aspects) {
 		if (aspectAmounts != null) {
@@ -79,45 +117,6 @@ public class AspectList {
 			aspectAmounts.add(aspect);
 		}
 		return this;
-	}
-
-	/**
-	 * Sets the lists that this AspectList should contain
-	 * 
-	 * @param types The list of aspects
-	 * @param values The list of values
-	 */
-	public AspectList setAspectLists(List<Aspect> types, List<Integer> values) {
-		this.aspectTypes = types;
-		this.aspectAmounts = values;
-		return this;
-	}
-
-	/**
-	 * Gets the aspect list
-	 */
-	public List<Aspect> getTypeList() {
-		return aspectTypes;
-	}
-
-	/**
-	 * Gets the value list
-	 */
-	public List<Integer> getAmountList() {
-		return aspectAmounts;
-	}
-
-	/**
-	 * Gets the aspect map
-	 */
-	public Map<Aspect, Integer> getAspectMap() {
-		Map<Aspect, Integer> map = new HashMap<Aspect, Integer>();
-		for (int i = 0; i < aspectTypes.size(); i++) {
-			if (i < aspectAmounts.size()) {
-				map.put(aspectTypes.get(i), aspectAmounts.get(i));
-			}
-		}
-		return map;
 	}
 
 }

@@ -24,9 +24,9 @@ public class UserBindSpellEvent extends UserEvent implements Cancellable {
 		return handlers;
 	}
 
+	private boolean cancelled = false;
 	private Spell spell;
 	private Wand wand;
-	private boolean cancelled = false;
 
 	public UserBindSpellEvent(Player player, Spell spell, Wand wand) {
 		super(player);

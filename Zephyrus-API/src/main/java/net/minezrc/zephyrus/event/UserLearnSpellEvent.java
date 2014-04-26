@@ -23,9 +23,9 @@ public class UserLearnSpellEvent extends UserEvent implements Cancellable {
 		return handlers;
 	}
 
-	private Spell spell;
-
 	private boolean cancelled = false;
+
+	private Spell spell;
 
 	public UserLearnSpellEvent(Player player, Spell spell) {
 		super(player);

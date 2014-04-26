@@ -13,38 +13,38 @@ import org.bukkit.enchantments.Enchantment;
 public interface Enchant {
 
 	/**
-	 * Gets the cost in xp per level of availability
-	 * 
-	 * @return
-	 */
-	public int getCostPerLevel();
-
-	/**
 	 * Gets the chance that this enchantment has to be applied (will be 1 in
 	 * however many)
 	 * 
-	 * @return
+	 * @return The chance of the enchant
 	 */
 	public int getChance();
 
 	/**
+	 * Gets the cost in xp per level of availability
+	 * 
+	 * @return The cost per level
+	 */
+	public int getCostPerLevel();
+
+	/**
 	 * Gets the level that this enchantment maxes out at
 	 * 
-	 * @return
+	 * @return The max level of the enchant
 	 */
 	public int getMaxLevel();
 
 	/**
 	 * Gets the name of the enchantment that will appear on the item
 	 * 
-	 * @return
+	 * @return The name of the enchant
 	 */
 	public String getName();
 
 	/**
 	 * Gets the target items that this enchantment can be applied to
 	 * 
-	 * @return
+	 * @return The target of the enchant
 	 */
 	public EnchantTarget getTarget();
 

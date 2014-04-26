@@ -157,7 +157,7 @@ public interface User {
 	 * Checks whether or not the user has the given state applied
 	 * 
 	 * @param state The state to check
-	 * @return
+	 * @return Whether or not the state is applied
 	 */
 	public boolean isStateApplied(State state);
 

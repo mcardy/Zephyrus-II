@@ -22,8 +22,8 @@ public enum Aspect {
 	ENDER("Endrich", "Ender, Strange", ChatColor.DARK_PURPLE),
 	ENERGY("Energia", "Energy, Power", ChatColor.GRAY),
 	EVIL("Malum", "Evil", ChatColor.DARK_RED),
-	FLESH("Carnem", "Flesh, Bones", ChatColor.RED),
 	FIRE("Ignis", "Fire, Heat", ChatColor.RED),
+	FLESH("Carnem", "Flesh, Bones", ChatColor.RED),
 	ICE("Glaciem", "Ice, Cold", ChatColor.AQUA),
 	KNOWLEDGE("Cognitio", "Knowledge", ChatColor.GOLD),
 	LIFE("Vita", "Life, Sustanance", ChatColor.GREEN),
@@ -39,8 +39,8 @@ public enum Aspect {
 	VALUE("Valore", "Value, Expensive", ChatColor.GOLD),
 	VOID("Vuoto", "Void, Empty", ChatColor.BLACK),
 	WATER("Aqua", "Water", ChatColor.BLUE),
-	WIND("Ventum", "Wind, Air", ChatColor.WHITE),
 	WEAPON("Impetum", "Attack, Harmful, Weapon", ChatColor.RED),
+	WIND("Ventum", "Wind, Air", ChatColor.WHITE),
 	WOOD("Legno", "Wooden, Solid", ChatColor.DARK_GREEN);
 
 	private ChatColor color;

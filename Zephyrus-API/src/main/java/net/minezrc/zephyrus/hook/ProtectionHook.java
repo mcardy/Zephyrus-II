@@ -15,10 +15,13 @@ import org.bukkit.entity.Player;
  */
 
 public interface ProtectionHook extends PluginHook {
-	
+
 	public boolean canBuild(Player player, Block block);
+
 	public boolean canBuild(Player player, Location loc);
+
 	public boolean canCast(Player player, Spell spell);
+
 	public boolean canTarget(Player player, LivingEntity entity, boolean friendly);
-	
+
 }

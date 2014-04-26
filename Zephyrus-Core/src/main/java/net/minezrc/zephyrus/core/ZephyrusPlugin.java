@@ -13,8 +13,8 @@ import net.minezrc.zephyrus.core.state.SimpleStateManager;
 import net.minezrc.zephyrus.core.user.SimpleUserManager;
 import net.minezrc.zephyrus.core.util.Metrics;
 import net.minezrc.zephyrus.core.util.Updater;
-import net.minezrc.zephyrus.core.util.VersionInfo;
 import net.minezrc.zephyrus.core.util.Updater.UpdateResult;
+import net.minezrc.zephyrus.core.util.VersionInfo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -25,10 +25,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 /**
  * Zephyrus - ZephyrusPlugin.java
  * 
- * TODO Re-implement all spells and items TODO Item
- * level and upgrades
+ * TODO Re-implement all spells and items TODO Item level and upgrades
  * 
- * TODO Implement Combo-Spells - Later release 
+ * TODO Implement Combo-Spells - Later release
  * 
  * @author minnymin3
  * 
@@ -119,12 +118,14 @@ public class ZephyrusPlugin extends JavaPlugin {
 					getLogger().info("[Updater] Zephyrus is up to date.");
 					break;
 				case UPDATE_AVAILABLE:
-					getLogger().info("[Updater] An update is available for Zephyrus: " + updater.getLatestName() + " "
-							+ updater.getLatestType() + ". Get it here:");
+					getLogger().info(
+							"[Updater] An update is available for Zephyrus: " + updater.getLatestName() + " "
+									+ updater.getLatestType() + ". Get it here:");
 					getLogger().info(updater.getLatestFileLink());
 					break;
 				case DEVELOPMENT:
-					getLogger().info("[Updater] You are running a development version of Zephyrus. No update was checked");
+					getLogger().info(
+							"[Updater] You are running a development version of Zephyrus. No update was checked");
 				default:
 					break;
 				}

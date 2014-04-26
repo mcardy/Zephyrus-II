@@ -44,14 +44,16 @@ public class Zephyrus {
 
 	/**
 	 * Gets the AspectManager singleton
+	 * 
 	 * @return The AspectManager instance
 	 */
 	public static AspectManager getAspectManager() {
 		return aspectManager;
 	}
-	
+
 	/**
 	 * Gets the CommandManager singleton
+	 * 
 	 * @return The CommandManager instance
 	 */
 	public static CommandManager getCommandManager() {
@@ -60,31 +62,35 @@ public class Zephyrus {
 
 	/**
 	 * Gets the EnchantManager singleton
+	 * 
 	 * @return The EnchantManager instance
 	 */
 	public static EnchantManager getEnchantmentManager() {
 		return enchantmentManager;
 	}
-	
+
 	/**
 	 * Gets the PluginHookManager singleton
+	 * 
 	 * @return The PluginHookManager instance
 	 */
 	public static PluginHookManager getHookManager() {
 		return hookManager;
 	}
-	
+
 	/**
 	 * Gets an item registered with Zephyrus by the given itemstack
+	 * 
 	 * @param item The itemstack of the item
 	 * @return An item registered or Zephyrus or null if no item was found
 	 */
 	public static Item getItem(ItemStack item) {
 		return itemManager.getItem(item);
 	}
-	
+
 	/**
 	 * Gets an item registered with Zephyrus by the given name
+	 * 
 	 * @param name The name of the item
 	 * @return An item registered with Zephyrus or null if no item was found
 	 */
@@ -94,6 +100,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets the ItemManager singleton
+	 * 
 	 * @return The ItemManager instance
 	 */
 	public static ItemManager getItemManager() {
@@ -102,6 +109,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets the NetMinecraftSource Manager singleton
+	 * 
 	 * @return The NMSManager instance
 	 */
 	public static NMSManager getNMSManager() {
@@ -110,6 +118,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets the Zephyrus plugin instance loaded by Bukkit
+	 * 
 	 * @return The Zephyrus plugin instance
 	 */
 	public static Plugin getPlugin() {
@@ -118,6 +127,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets a spell from its class
+	 * 
 	 * @param spellClass The class of the spell
 	 * @return A spell loaded by Zephyrus or null if no spell is found
 	 */
@@ -127,6 +137,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets a spell from its recipe
+	 * 
 	 * @param recipe The recipe to get
 	 * @return A spell loaded by Zephyrus or null if no spell is found
 	 */
@@ -136,6 +147,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets a spell from its name
+	 * 
 	 * @param name The name to get
 	 * @return A spell loaded by Zephyrus or null if no spell is found
 	 */
@@ -145,14 +157,16 @@ public class Zephyrus {
 
 	/**
 	 * Gets the spell config
+	 * 
 	 * @return A YmlConfigFile for spells.yml
 	 */
 	public static YmlConfigFile getSpellConfig() {
 		return spellManager.getConfig();
 	}
-	
+
 	/**
 	 * Gets the SpellManager singleton
+	 * 
 	 * @return The SpellManager instance
 	 */
 	public static SpellManager getSpellManager() {
@@ -161,6 +175,7 @@ public class Zephyrus {
 
 	/**
 	 * Creates a set full of all the names of all registered spells
+	 * 
 	 * @return A set filled with the names of all the registered spells
 	 */
 	public static Set<String> getSpellNameSet() {
@@ -169,6 +184,7 @@ public class Zephyrus {
 
 	/**
 	 * Creates a set full of all registered spells
+	 * 
 	 * @return A set filled with all the registered spells
 	 */
 	public static Set<Spell> getSpellSet() {
@@ -177,6 +193,7 @@ public class Zephyrus {
 
 	/**
 	 * Creates a spelltome ItemStack with the given spell attached
+	 * 
 	 * @param spell The spell to attach
 	 * @return A new ItemStack with all required attributes for a spelltome
 	 */
@@ -186,6 +203,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets the StateManager singleton
+	 * 
 	 * @return The StateManager instance
 	 */
 	public static StateManager getStateManager() {
@@ -194,8 +212,10 @@ public class Zephyrus {
 
 	/**
 	 * Gets a user from the given player
+	 * 
 	 * @param player The player to get
-	 * @return A user linked to the provided player or null if that player is not online
+	 * @return A user linked to the provided player or null if that player is
+	 *         not online
 	 */
 	public static User getUser(Player player) {
 		return userManager.getUser(player);
@@ -203,8 +223,10 @@ public class Zephyrus {
 
 	/**
 	 * Gets a user from the given name
-	 * @param player The name of the player to get
-	 * @return A user linked to the provided player or null if that player is not online
+	 * 
+	 * @param playerName The name of the player to get
+	 * @return A user linked to the provided player or null if that player is
+	 *         not online
 	 */
 	public static User getUser(String playerName) {
 		return userManager.getUser(playerName);
@@ -212,6 +234,7 @@ public class Zephyrus {
 
 	/**
 	 * Gets the UserManager singleton
+	 * 
 	 * @return The UserManager instance
 	 */
 	public static UserManager getUserManager() {
@@ -220,6 +243,7 @@ public class Zephyrus {
 
 	/**
 	 * Registers the given item with Zephyrus
+	 * 
 	 * @param item The item to register
 	 */
 	public static void registerItem(Item item) {
@@ -228,15 +252,17 @@ public class Zephyrus {
 
 	/**
 	 * Registers the given spell with Zephyrus
+	 * 
 	 * @param spell The spell to register
 	 */
 	public static void registerSpell(Spell spell) {
 		spellManager.registerSpell(spell);
 	}
-	
+
 	/**
 	 * Attempts to set the AspectManager singleton
-	 * @param aspectManager The manager to set
+	 * 
+	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
 	public static void setAspectManager(AspectManager manager) {
@@ -245,9 +271,10 @@ public class Zephyrus {
 		}
 		aspectManager = manager;
 	}
-	
+
 	/**
 	 * Attempts to set the CommandManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
@@ -260,6 +287,7 @@ public class Zephyrus {
 
 	/**
 	 * Attempts to set the EnchantManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
@@ -269,9 +297,10 @@ public class Zephyrus {
 		}
 		enchantmentManager = manager;
 	}
-	
+
 	/**
 	 * Attempts to set the PluginHookManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
@@ -281,9 +310,10 @@ public class Zephyrus {
 		}
 		hookManager = manager;
 	}
-	
+
 	/**
 	 * Attempts to set the ItemManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
@@ -296,6 +326,7 @@ public class Zephyrus {
 
 	/**
 	 * Attempts to set the NMSManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
@@ -308,6 +339,7 @@ public class Zephyrus {
 
 	/**
 	 * Attempts to set the plugin instance loaded by Bukkit
+	 * 
 	 * @param plugin The plugin to set
 	 * @throws IllegalStateException when the plugin is already set
 	 */
@@ -322,6 +354,7 @@ public class Zephyrus {
 
 	/**
 	 * Attempts to set the SpellManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
@@ -334,6 +367,7 @@ public class Zephyrus {
 
 	/**
 	 * Attempts to set the StateManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */
@@ -346,6 +380,7 @@ public class Zephyrus {
 
 	/**
 	 * Attempts to set the UserManager singleton
+	 * 
 	 * @param manager The manager to set
 	 * @throws IllegalStateException when the manager is already set
 	 */

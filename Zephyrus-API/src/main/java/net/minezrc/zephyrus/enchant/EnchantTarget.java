@@ -14,47 +14,52 @@ import org.bukkit.inventory.ItemStack;
 public enum EnchantTarget {
 
 	/**
-	 * Represents all swords
+	 * Represents all helmets, chestplates, leggings and boots
 	 */
-	SWORD(Material.WOOD_SWORD, Material.STONE_SWORD, Material.IRON_SWORD, Material.GOLD_SWORD, Material.DIAMOND_SWORD),
+	ARMOR(Material.IRON_HELMET, Material.GOLD_HELMET, Material.DIAMOND_HELMET, Material.IRON_CHESTPLATE,
+			Material.GOLD_CHESTPLATE, Material.DIAMOND_CHESTPLATE, Material.IRON_LEGGINGS, Material.GOLD_LEGGINGS,
+			Material.DIAMOND_CHESTPLATE, Material.IRON_BOOTS, Material.GOLD_BOOTS, Material.DIAMOND_BOOTS),
 	/**
 	 * Represents all axes
 	 */
 	AXE(Material.WOOD_AXE, Material.STONE_AXE, Material.IRON_AXE, Material.GOLD_AXE, Material.DIAMOND_AXE),
 	/**
-	 * Represents all shovels
+	 * Represents all boots
 	 */
-	SHOVEL(Material.WOOD_SPADE, Material.STONE_SPADE, Material.IRON_SPADE, Material.GOLD_SPADE, Material.DIAMOND_SPADE),
+	BOOTS(Material.IRON_BOOTS, Material.GOLD_BOOTS, Material.DIAMOND_BOOTS),
+	/**
+	 * Represents bows
+	 */
+	BOW(Material.BOW),
+	/**
+	 * Represents all chestplates
+	 */
+	CHEST(Material.IRON_CHESTPLATE, Material.GOLD_CHESTPLATE, Material.DIAMOND_CHESTPLATE),
+	/**
+	 * Represents all helmets
+	 */
+	HELMET(Material.IRON_HELMET, Material.GOLD_HELMET, Material.DIAMOND_HELMET),
+	/**
+	 * Represents all leggings
+	 */
+	LEGS(Material.IRON_LEGGINGS, Material.GOLD_LEGGINGS, Material.DIAMOND_CHESTPLATE),
+	/**
+	 * Represents an enchantment that cannot be applied to anything
+	 */
+	NONE,
 	/**
 	 * Represents all pickaxes
 	 */
 	PICKAXE(Material.WOOD_PICKAXE, Material.STONE_PICKAXE, Material.IRON_PICKAXE, Material.GOLD_PICKAXE,
 			Material.DIAMOND_PICKAXE),
 	/**
-	 * Represents bows
+	 * Represents all shovels
 	 */
-	BOW(Material.BOW),
+	SHOVEL(Material.WOOD_SPADE, Material.STONE_SPADE, Material.IRON_SPADE, Material.GOLD_SPADE, Material.DIAMOND_SPADE),
 	/**
-	 * Represents all helmets
+	 * Represents all swords
 	 */
-	HELMET(Material.IRON_HELMET, Material.GOLD_HELMET, Material.DIAMOND_HELMET),
-	/**
-	 * Represents all chestplates
-	 */
-	CHEST(Material.IRON_CHESTPLATE, Material.GOLD_CHESTPLATE, Material.DIAMOND_CHESTPLATE),
-	/**
-	 * Represents all leggings
-	 */
-	LEGS(Material.IRON_LEGGINGS, Material.GOLD_LEGGINGS, Material.DIAMOND_CHESTPLATE),
-	/**
-	 * Represents all boots
-	 */
-	BOOTS(Material.IRON_BOOTS, Material.GOLD_BOOTS, Material.DIAMOND_BOOTS),
-	/**
-	 * Represents all swords and bows
-	 */
-	WEAPON(Material.WOOD_SWORD, Material.STONE_SWORD, Material.IRON_SWORD, Material.GOLD_SWORD, Material.DIAMOND_SWORD,
-			Material.BOW),
+	SWORD(Material.WOOD_SWORD, Material.STONE_SWORD, Material.IRON_SWORD, Material.GOLD_SWORD, Material.DIAMOND_SWORD),
 	/**
 	 * Represents all pickaxes, shovels and axes
 	 */
@@ -63,15 +68,10 @@ public enum EnchantTarget {
 			Material.DIAMOND_SPADE, Material.WOOD_PICKAXE, Material.STONE_PICKAXE, Material.IRON_PICKAXE,
 			Material.GOLD_PICKAXE, Material.DIAMOND_PICKAXE),
 	/**
-	 * Represents all helmets, chestplates, leggings and boots
+	 * Represents all swords and bows
 	 */
-	ARMOR(Material.IRON_HELMET, Material.GOLD_HELMET, Material.DIAMOND_HELMET, Material.IRON_CHESTPLATE,
-			Material.GOLD_CHESTPLATE, Material.DIAMOND_CHESTPLATE, Material.IRON_LEGGINGS, Material.GOLD_LEGGINGS,
-			Material.DIAMOND_CHESTPLATE, Material.IRON_BOOTS, Material.GOLD_BOOTS, Material.DIAMOND_BOOTS),
-	/**
-	 * Represents an enchantment that cannot be applied to anything
-	 */
-	NONE;
+	WEAPON(Material.WOOD_SWORD, Material.STONE_SWORD, Material.IRON_SWORD, Material.GOLD_SWORD, Material.DIAMOND_SWORD,
+			Material.BOW);
 
 	private Material[] items;
 

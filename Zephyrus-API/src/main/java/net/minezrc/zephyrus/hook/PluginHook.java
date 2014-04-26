@@ -12,6 +12,7 @@ public interface PluginHook {
 
 	/**
 	 * Checks if the plugin is available
+	 * 
 	 * @return True if the plugin is available
 	 */
 	public boolean checkHook();

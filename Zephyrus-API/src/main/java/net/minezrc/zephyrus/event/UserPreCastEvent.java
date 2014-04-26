@@ -23,11 +23,11 @@ public class UserPreCastEvent extends UserEvent implements Cancellable {
 		return handlers;
 	}
 
-	private Spell spell;
 	private String[] args;
+	private boolean cancelled = false;
 	private int power;
 
-	private boolean cancelled = false;
+	private Spell spell;
 
 	public UserPreCastEvent(Player player, Spell spell, int power, String[] args) {
 		super(player);

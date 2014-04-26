@@ -17,6 +17,34 @@ import org.bukkit.enchantments.Enchantment;
 public interface Item {
 
 	/**
+	 * The minimum required level to craft the item
+	 * 
+	 * @return An int of the crafting level
+	 */
+	public int getCraftingLevel();
+
+	/**
+	 * The enchantments applied to the item
+	 * 
+	 * @return A map of Enchantment and Integer
+	 */
+	public Map<Enchantment, Integer> getEnchantments();
+
+	/**
+	 * The lore of the item
+	 * 
+	 * @return The ItemStack lore
+	 */
+	public List<String> getLore();
+
+	/**
+	 * The material of the item
+	 * 
+	 * @return The ItemStack's material
+	 */
+	public Material getMaterial();
+
+	/**
 	 * The display name of the item
 	 * 
 	 * @return The ItemStack name
@@ -29,33 +57,5 @@ public interface Item {
 	 * @return An ItemRecipe object
 	 */
 	public ItemRecipe getRecipe();
-
-	/**
-	 * The material of the item
-	 * 
-	 * @return The ItemStack's material
-	 */
-	public Material getMaterial();
-
-	/**
-	 * The lore of the item
-	 * 
-	 * @return The ItemStack lore
-	 */
-	public List<String> getLore();
-
-	/**
-	 * The enchantments applied to the item
-	 * 
-	 * @return A map of Enchantment and Integer
-	 */
-	public Map<Enchantment, Integer> getEnchantments();
-
-	/**
-	 * The minimum required level to craft the item
-	 * 
-	 * @return An int of the crafting level
-	 */
-	public int getCraftingLevel();
 
 }

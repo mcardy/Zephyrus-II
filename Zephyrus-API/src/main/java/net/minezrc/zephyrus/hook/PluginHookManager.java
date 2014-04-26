@@ -19,6 +19,13 @@ import org.bukkit.entity.Player;
 public interface PluginHookManager extends Manager {
 
 	/**
+	 * Adds the specified ProtectionHook to the list of protections
+	 * 
+	 * @param hook The ProtectionHook to add
+	 */
+	public void addProtectionHook(ProtectionHook hook);
+
+	/**
 	 * Checks all protections hooks to see if the player can build at the
 	 * specified block
 	 * 
@@ -58,13 +65,6 @@ public interface PluginHookManager extends Manager {
 	 * @return Trie if the player can target
 	 */
 	public boolean canTarget(Player player, LivingEntity target, boolean friendly);
-
-	/**
-	 * Adds the specified ProtectionHook to the list of protections
-	 * 
-	 * @param hook The ProtectionHook to add
-	 */
-	public void addProtectionHook(ProtectionHook hook);
 
 	/**
 	 * Retrieves the EconomyHook for the current server instance

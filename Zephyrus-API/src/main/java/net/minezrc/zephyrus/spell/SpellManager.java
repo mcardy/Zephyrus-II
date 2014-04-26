@@ -34,14 +34,6 @@ public interface SpellManager extends Manager {
 	public Spell getSpell(Class<? extends Spell> spellClass);
 
 	/**
-	 * Gets all spells that can be crafted with the given list of items
-	 * 
-	 * @param recipe The items to find
-	 * @return A list of spells that can be crafted
-	 */
-	public List<Spell> getSpells(Set<ItemStack> recipe);
-
-	/**
 	 * Gets the spell from the name of the spell
 	 * 
 	 * @param name The name of the spell
@@ -55,6 +47,14 @@ public interface SpellManager extends Manager {
 	 * @return A cloned set of spells
 	 */
 	public Set<String> getSpellNameSet();
+
+	/**
+	 * Gets all spells that can be crafted with the given list of items
+	 * 
+	 * @param recipe The items to find
+	 * @return A list of spells that can be crafted
+	 */
+	public List<Spell> getSpells(Set<ItemStack> recipe);
 
 	/**
 	 * Gets the set of the names of all registered spells

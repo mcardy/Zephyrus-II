@@ -23,9 +23,9 @@ public class UserTargetEntityEvent extends UserEvent implements Cancellable {
 		return handlers;
 	}
 
-	private LivingEntity target;
-	private boolean friendly;
 	private boolean cancelled = false;
+	private boolean friendly;
+	private LivingEntity target;
 
 	public UserTargetEntityEvent(Player player, LivingEntity target, boolean friendly) {
 		super(player);
@@ -38,19 +38,10 @@ public class UserTargetEntityEvent extends UserEvent implements Cancellable {
 		this.target = target;
 		this.friendly = friendly;
 	}
-	
+
 	@Override
 	public HandlerList getHandlers() {
 		return handlers;
-	}
-
-	/**
-	 * Gets the entity the user is trying to target
-	 * 
-	 * @return A LivingEntity target
-	 */
-	public LivingEntity getTarget() {
-		return target;
 	}
 
 	/**
@@ -60,6 +51,15 @@ public class UserTargetEntityEvent extends UserEvent implements Cancellable {
 	 */
 	public boolean getIsFriendly() {
 		return friendly;
+	}
+
+	/**
+	 * Gets the entity the user is trying to target
+	 * 
+	 * @return A LivingEntity target
+	 */
+	public LivingEntity getTarget() {
+		return target;
 	}
 
 	@Override

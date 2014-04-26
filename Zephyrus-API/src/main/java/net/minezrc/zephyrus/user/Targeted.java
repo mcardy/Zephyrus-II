@@ -25,7 +25,7 @@ public @interface Targeted {
 	 * @return A boolean
 	 */
 	public boolean friendly() default false;
-	
+
 	/**
 	 * Determines the range of the target
 	 * 

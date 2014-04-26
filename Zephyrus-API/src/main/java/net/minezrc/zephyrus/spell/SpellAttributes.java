@@ -19,13 +19,13 @@ public class SpellAttributes {
 		 */
 		HIGH,
 		/**
-		 * Medium priority, cast before low but after high
-		 */
-		MEDIUM,
-		/**
 		 * Low priority, cast last
 		 */
-		LOW;
+		LOW,
+		/**
+		 * Medium priority, cast before low but after high
+		 */
+		MEDIUM;
 	}
 
 	/**
@@ -33,13 +33,13 @@ public class SpellAttributes {
 	 */
 	public enum CastResult {
 		/**
-		 * A cast success
-		 */
-		SUCCESS,
-		/**
 		 * A cast failure
 		 */
 		FAILURE,
+		/**
+		 * A cast success
+		 */
+		SUCCESS,
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class SpellAttributes {
 	 * An identifier for the type of target for a targeted spell
 	 */
 	public enum TargetType {
-		ENTITY, BLOCK;
+		BLOCK, ENTITY;
 	}
 
 }

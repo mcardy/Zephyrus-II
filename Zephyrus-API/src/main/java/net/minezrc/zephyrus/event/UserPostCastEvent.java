@@ -22,10 +22,10 @@ public class UserPostCastEvent extends UserEvent {
 		return handlers;
 	}
 
-	private Spell spell;
 	private String[] args;
-
 	private int power;
+
+	private Spell spell;
 
 	public UserPostCastEvent(Player player, Spell spell, int power, String[] args) {
 		super(player);

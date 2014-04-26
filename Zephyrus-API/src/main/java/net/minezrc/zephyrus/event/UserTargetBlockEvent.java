@@ -23,8 +23,8 @@ public class UserTargetBlockEvent extends UserEvent implements Cancellable {
 		return handlers;
 	}
 
-	private Block target;
 	private boolean cancelled = false;
+	private Block target;
 
 	public UserTargetBlockEvent(Player player, Block target) {
 		super(player);

@@ -35,7 +35,7 @@ public interface State extends Listener {
 	 * Called when a player first logs in to remove reminants of effect
 	 */
 	public void onStartup(User user);
-	
+
 	/**
 	 * Method called to tick the effect every time the tick time is achieved
 	 * 

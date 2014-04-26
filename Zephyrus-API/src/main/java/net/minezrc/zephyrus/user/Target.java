@@ -28,15 +28,6 @@ public class Target {
 	}
 
 	/**
-	 * Gets the type of target
-	 * 
-	 * @return A TargetType target
-	 */
-	public TargetType getType() {
-		return type;
-	}
-
-	/**
 	 * Gets the block target
 	 * 
 	 * @return Null if not targeting a block
@@ -58,6 +49,15 @@ public class Target {
 			return (LivingEntity) value;
 		}
 		return null;
+	}
+
+	/**
+	 * Gets the type of target
+	 * 
+	 * @return A TargetType target
+	 */
+	public TargetType getType() {
+		return type;
 	}
 
 }

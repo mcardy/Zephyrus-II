@@ -18,8 +18,8 @@ import org.bukkit.inventory.ShapedRecipe;
 
 public class ItemRecipe {
 
-	private String[] shape;
 	private Map<Character, Material> ingredients;
+	private String[] shape;
 
 	public ItemRecipe() {
 		ingredients = new HashMap<Character, Material>();
