@@ -127,7 +127,10 @@ public class OnlineUser implements User {
 			}
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
 				Targeted targeted = spell.getClass().getAnnotation(Targeted.class);
-				setTarget(spell.getDefaultName(), targeted.type(), targeted.range(), targeted.friendly());
+				boolean success = setTarget(spell.getDefaultName(), targeted.type(), targeted.range(), targeted.friendly());
+				if (!success) {
+					return;
+				}
 				if (targeted.type() == TargetType.ENTITY && getTarget(spell.getDefaultName()).getEntity() == null) {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
 					return;
@@ -297,7 +300,7 @@ public class OnlineUser implements User {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public void setTarget(String key, TargetType type, int range, boolean friendly) {
+	public boolean setTarget(String key, TargetType type, int range, boolean friendly) {
 		if (type == TargetType.BLOCK) {
 			Block target = player.getTargetBlock(null, range);
 			if (Zephyrus.getHookManager().canBuild(player, target)) {
@@ -305,6 +308,7 @@ public class OnlineUser implements User {
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled()) {
 					targetMap.put(key, 0, new Target(target));
+					return true;
 				}
 			}
 		} else if (type == TargetType.ENTITY) {
@@ -315,10 +319,12 @@ public class OnlineUser implements User {
 					Bukkit.getPluginManager().callEvent(event);
 					if (!event.isCancelled()) {
 						targetMap.put(key, 0, new Target(target));
+						return true;
 					}
 				}
 			}
 		}
+		return true;
 	}
 
 	@Override
