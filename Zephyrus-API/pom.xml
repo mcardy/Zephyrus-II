@@ -21,14 +21,12 @@
             <phase>package</phase>
             <goals>
               <goal>javadoc</goal>
-              <goal>jar</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
           <quiet>true</quiet>
           <outputDirectory>${project.build.directory}/site/apidocs</outputDirectory>
-          <finalName>API</finalName>
         </configuration>
       </plugin>
     </plugins>
