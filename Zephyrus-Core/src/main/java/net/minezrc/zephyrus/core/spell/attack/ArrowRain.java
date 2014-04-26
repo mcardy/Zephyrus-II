@@ -8,6 +8,7 @@ import net.minezrc.zephyrus.spell.SpellAttributes.CastResult;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellElement;
 import net.minezrc.zephyrus.spell.SpellAttributes.SpellType;
 import net.minezrc.zephyrus.spell.annotation.Bindable;
+import net.minezrc.zephyrus.spell.annotation.Prerequisite;
 import net.minezrc.zephyrus.user.User;
 
 import org.bukkit.metadata.FixedMetadataValue;
@@ -20,6 +21,7 @@ import org.bukkit.metadata.FixedMetadataValue;
  */
 
 @Bindable
+@Prerequisite(requiredSpell = ArrowStorm.class)
 public class ArrowRain extends ContinuousSpell {
 
 	public ArrowRain() {
