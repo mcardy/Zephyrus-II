@@ -10,38 +10,38 @@ import java.util.Set;
 import net.minezrc.zephyrus.YmlConfigFile;
 import net.minezrc.zephyrus.Zephyrus;
 import net.minezrc.zephyrus.core.item.SpellTome;
-import net.minezrc.zephyrus.core.spell.attack.Arrow;
-import net.minezrc.zephyrus.core.spell.attack.ArrowRain;
-import net.minezrc.zephyrus.core.spell.attack.ArrowStorm;
-import net.minezrc.zephyrus.core.spell.attack.Bolt;
-import net.minezrc.zephyrus.core.spell.attack.Butcher;
-import net.minezrc.zephyrus.core.spell.attack.Fireball;
-import net.minezrc.zephyrus.core.spell.attack.Firecharge;
-import net.minezrc.zephyrus.core.spell.attack.HomingArrow;
-import net.minezrc.zephyrus.core.spell.attack.Punch;
-import net.minezrc.zephyrus.core.spell.buff.Armor;
-import net.minezrc.zephyrus.core.spell.buff.Dispel;
-import net.minezrc.zephyrus.core.spell.buff.Feather;
-import net.minezrc.zephyrus.core.spell.buff.Shield;
-import net.minezrc.zephyrus.core.spell.creation.Conjure;
-import net.minezrc.zephyrus.core.spell.creation.Enderchest;
-import net.minezrc.zephyrus.core.spell.illusion.Confuse;
-import net.minezrc.zephyrus.core.spell.illusion.Disorient;
-import net.minezrc.zephyrus.core.spell.mobility.Bang;
-import net.minezrc.zephyrus.core.spell.mobility.Blink;
-import net.minezrc.zephyrus.core.spell.mobility.Woosh;
-import net.minezrc.zephyrus.core.spell.restoration.Feed;
-import net.minezrc.zephyrus.core.spell.restoration.Feeder;
-import net.minezrc.zephyrus.core.spell.restoration.Heal;
-import net.minezrc.zephyrus.core.spell.restoration.Healer;
-import net.minezrc.zephyrus.core.spell.world.Bright;
-import net.minezrc.zephyrus.core.spell.world.Clock;
-import net.minezrc.zephyrus.core.spell.world.Detect;
-import net.minezrc.zephyrus.core.spell.world.Dig;
-import net.minezrc.zephyrus.core.spell.world.Dim;
-import net.minezrc.zephyrus.core.spell.world.Explode;
-import net.minezrc.zephyrus.core.spell.world.Smite;
-import net.minezrc.zephyrus.core.spell.world.Track;
+import net.minezrc.zephyrus.core.spell.attack.ArrowSpell;
+import net.minezrc.zephyrus.core.spell.attack.ArrowRainSpell;
+import net.minezrc.zephyrus.core.spell.attack.ArrowStormSpell;
+import net.minezrc.zephyrus.core.spell.attack.BoltSpell;
+import net.minezrc.zephyrus.core.spell.attack.ButcherSpell;
+import net.minezrc.zephyrus.core.spell.attack.FireballSpell;
+import net.minezrc.zephyrus.core.spell.attack.FirechargeSpell;
+import net.minezrc.zephyrus.core.spell.attack.HomingArrowSpell;
+import net.minezrc.zephyrus.core.spell.attack.PunchSpell;
+import net.minezrc.zephyrus.core.spell.buff.ArmorSpell;
+import net.minezrc.zephyrus.core.spell.buff.DispelSpell;
+import net.minezrc.zephyrus.core.spell.buff.FeatherSpell;
+import net.minezrc.zephyrus.core.spell.buff.ShieldSpell;
+import net.minezrc.zephyrus.core.spell.creation.ConjureSpell;
+import net.minezrc.zephyrus.core.spell.creation.EnderchestSpell;
+import net.minezrc.zephyrus.core.spell.illusion.ConfuseSpell;
+import net.minezrc.zephyrus.core.spell.illusion.DisorientSpell;
+import net.minezrc.zephyrus.core.spell.mobility.BangSpell;
+import net.minezrc.zephyrus.core.spell.mobility.BlinkSpell;
+import net.minezrc.zephyrus.core.spell.mobility.WooshSpell;
+import net.minezrc.zephyrus.core.spell.restoration.FeedSpell;
+import net.minezrc.zephyrus.core.spell.restoration.FeederSpell;
+import net.minezrc.zephyrus.core.spell.restoration.HealSpell;
+import net.minezrc.zephyrus.core.spell.restoration.HealerSpell;
+import net.minezrc.zephyrus.core.spell.world.BrightSpell;
+import net.minezrc.zephyrus.core.spell.world.ClockSpell;
+import net.minezrc.zephyrus.core.spell.world.DetectSpell;
+import net.minezrc.zephyrus.core.spell.world.DigSpell;
+import net.minezrc.zephyrus.core.spell.world.DimSpell;
+import net.minezrc.zephyrus.core.spell.world.ExplodeSpell;
+import net.minezrc.zephyrus.core.spell.world.SmiteSpell;
+import net.minezrc.zephyrus.core.spell.world.TrackSpell;
 import net.minezrc.zephyrus.spell.ConfigurableSpell;
 import net.minezrc.zephyrus.spell.Spell;
 import net.minezrc.zephyrus.spell.SpellManager;
@@ -151,50 +151,50 @@ public class SimpleSpellManager implements SpellManager {
 		spellConfig.saveDefaultConfig();
 
 		// Attack
-		registerSpell(new Arrow());
-		registerSpell(new ArrowRain());
-		registerSpell(new ArrowStorm());
-		registerSpell(new Bolt());
-		registerSpell(new Butcher());
-		registerSpell(new Fireball());
-		registerSpell(new Firecharge());
-		registerSpell(new HomingArrow());
-		registerSpell(new Punch());
+		registerSpell(new ArrowSpell());
+		registerSpell(new ArrowRainSpell());
+		registerSpell(new ArrowStormSpell());
+		registerSpell(new BoltSpell());
+		registerSpell(new ButcherSpell());
+		registerSpell(new FireballSpell());
+		registerSpell(new FirechargeSpell());
+		registerSpell(new HomingArrowSpell());
+		registerSpell(new PunchSpell());
 
 		// Buff
-		registerSpell(new Armor());
-		registerSpell(new Dispel());
-		registerSpell(new Feather());
-		registerSpell(new Shield());
+		registerSpell(new ArmorSpell());
+		registerSpell(new DispelSpell());
+		registerSpell(new FeatherSpell());
+		registerSpell(new ShieldSpell());
 
 		// Creation
-		registerSpell(new Conjure());
-		registerSpell(new Enderchest());
+		registerSpell(new ConjureSpell());
+		registerSpell(new EnderchestSpell());
 
 		// Illusion
-		registerSpell(new Confuse());
-		registerSpell(new Disorient());
+		registerSpell(new ConfuseSpell());
+		registerSpell(new DisorientSpell());
 
 		// Mobility
-		registerSpell(new Bang());
-		registerSpell(new Blink());
-		registerSpell(new Woosh());
+		registerSpell(new BangSpell());
+		registerSpell(new BlinkSpell());
+		registerSpell(new WooshSpell());
 
 		// Restoration
-		registerSpell(new Feed());
-		registerSpell(new Feeder());
-		registerSpell(new Heal());
-		registerSpell(new Healer());
+		registerSpell(new FeedSpell());
+		registerSpell(new FeederSpell());
+		registerSpell(new HealSpell());
+		registerSpell(new HealerSpell());
 
 		// World
-		registerSpell(new Bright());
-		registerSpell(new Clock());
-		registerSpell(new Detect());
-		registerSpell(new Dig());
-		registerSpell(new Dim());
-		registerSpell(new Explode());
-		registerSpell(new Smite());
-		registerSpell(new Track());
+		registerSpell(new BrightSpell());
+		registerSpell(new ClockSpell());
+		registerSpell(new DetectSpell());
+		registerSpell(new DigSpell());
+		registerSpell(new DimSpell());
+		registerSpell(new ExplodeSpell());
+		registerSpell(new SmiteSpell());
+		registerSpell(new TrackSpell());
 
 		// TODO Re-implement:
 		// FireRing, FireShield, FlameStep, Flare, Fly,
