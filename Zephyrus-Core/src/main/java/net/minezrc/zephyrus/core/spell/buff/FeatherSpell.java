@@ -27,10 +27,10 @@ import org.bukkit.configuration.ConfigurationSection;
 public class FeatherSpell extends Spell implements ConfigurableSpell {
 
 	private int duration;
-	
+
 	public FeatherSpell() {
-		super("feather", "Lets you float like a feather", 100, 10, AspectList.newList(Aspect.WIND, 32), 3,
-				SpellElement.AIR, SpellType.BUFF);
+		super("feather", "Lets you float like a feather", 100, 10, AspectList.newList(Aspect.WIND, 50, Aspect.MOVEMENT,
+				25), 3, SpellElement.AIR, SpellType.BUFF);
 	}
 
 	@Override

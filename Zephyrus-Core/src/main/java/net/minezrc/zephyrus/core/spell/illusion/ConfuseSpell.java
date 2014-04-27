@@ -36,8 +36,8 @@ public class ConfuseSpell extends Spell implements ConfigurableSpell {
 	private int radius;
 
 	public ConfuseSpell() {
-		super("confuse", "Confuses nearby mobs to fight eachouther", 100, 5, AspectList.newList(Aspect.BEAST, 4,
-				Aspect.FLESH, 4), 2, SpellElement.NEUTREAL, SpellType.ILLUSION);
+		super("confuse", "Confuses nearby mobs to fight eachouther", 100, 5, AspectList.newList(Aspect.BEAST, 40,
+				Aspect.FLESH, 20), 2, SpellElement.NEUTREAL, SpellType.ILLUSION);
 	}
 
 	@Override
