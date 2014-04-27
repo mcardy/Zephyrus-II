@@ -37,6 +37,7 @@ public class SimpleHookManager implements PluginHookManager {
 			this.vault = vault;
 		}
 		addProtectionHook(new FactionsHook());
+		addProtectionHook(new ResidenceHook());
 		addProtectionHook(new TownyHook());
 		addProtectionHook(new WorldGuardHook());
 	}
