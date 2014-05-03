@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>Zephyrus-NMS</artifactId>
   <version>2.0.0-SNAPSHOT</version>
-  <groupId>net.minezrc.zephyrus.nms</groupId>
+  <groupId>com.minnymin.zephyrus.nms</groupId>
   <packaging>pom</packaging>
   <name>Zephyrus NMS</name>
   <modules>
@@ -13,7 +13,7 @@
   </modules>
   
   <parent>
-    <groupId>net.minezrc.zephyrus</groupId>
+    <groupId>com.minnymin.zephyrus</groupId>
     <artifactId>Zephyrus</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -29,7 +29,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>net.minezrc.zephyrus</groupId>
+      <groupId>com.minnymin.zephyrus</groupId>
       <artifactId>Zephyrus-API</artifactId>
       <version>${project.parent.version}</version>
       <scope>compile</scope>

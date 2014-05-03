@@ -5,7 +5,7 @@
   <name>Zephyrus NMS 1.7.8</name>
   
   <parent>
-    <groupId>net.minezrc.zephyrus.nms</groupId>
+    <groupId>com.minnymin.zephyrus.nms</groupId>
     <artifactId>Zephyrus-NMS</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>

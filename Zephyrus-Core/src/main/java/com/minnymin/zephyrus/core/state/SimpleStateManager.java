@@ -1,0 +1,51 @@
+package com.minnymin.zephyrus.core.state;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import org.bukkit.Bukkit;
+
+import com.google.common.collect.Lists;
+import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.state.State;
+import com.minnymin.zephyrus.state.StateManager;
+
+/**
+ * Zephyrus - StateManager.java
+ * 
+ * @author minnymin3
+ * 
+ */
+
+public class SimpleStateManager implements StateManager {
+		
+	private List<State> states;
+	
+	public SimpleStateManager() {
+		states = new ArrayList<State>();
+	}
+	
+	@Override
+	public List<State> getStates() {
+		return Lists.newArrayList(states);
+	}
+	
+	@Override
+	public void registerState(State state) {
+		Bukkit.getPluginManager().registerEvents(state, Zephyrus.getPlugin());
+		states.add(state);
+	}
+	
+	@Override
+	public void load() {
+		registerState(StateList.ARMOR);
+		registerState(StateList.FEATHER);
+		registerState(StateList.SHIELD);
+	}
+
+	@Override
+	public void unload() {
+	}
+
+}

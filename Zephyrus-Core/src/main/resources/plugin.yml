@@ -4,6 +4,6 @@ description: Zephyrus is an all-in-one magic plugin providing magic spells and i
 
 author: minnymin3
 
-main: net.minezrc.zephyrus.core.ZephyrusPlugin
+main: com.minnymin.zephyrus.core.ZephyrusPlugin
 load: STARTUP
 website: http://dev.bukkit.org/bukkit-plugins/zephyrus/
