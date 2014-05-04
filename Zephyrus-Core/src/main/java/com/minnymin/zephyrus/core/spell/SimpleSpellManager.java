@@ -33,6 +33,7 @@ import com.minnymin.zephyrus.core.spell.illusion.ConfuseSpell;
 import com.minnymin.zephyrus.core.spell.illusion.DisorientSpell;
 import com.minnymin.zephyrus.core.spell.mobility.BangSpell;
 import com.minnymin.zephyrus.core.spell.mobility.BlinkSpell;
+import com.minnymin.zephyrus.core.spell.mobility.HomeSpell;
 import com.minnymin.zephyrus.core.spell.mobility.WooshSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeedSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeederSpell;
@@ -180,6 +181,7 @@ public class SimpleSpellManager implements SpellManager {
 		// Mobility
 		registerSpell(new BangSpell());
 		registerSpell(new BlinkSpell());
+		registerSpell(new HomeSpell());
 		registerSpell(new WooshSpell());
 
 		// Restoration
@@ -202,7 +204,7 @@ public class SimpleSpellManager implements SpellManager {
 
 		// TODO Re-implement:
 		// FireShield, FlameStep, Flare, Fly,
-		// Frenzy, Gernade, Grow, Heal, Home, Jail, LifeSteal, MageLight,
+		// Frenzy, Gernade, Home, Jail, LifeSteal, MageLight,
 		// MassParalyze, Paralyze, Phase, Prospect, Repair, Satisfy,
 		// Shield, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
 		// VIsion, Zap, Zephyr
