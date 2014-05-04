@@ -29,15 +29,15 @@ import com.minnymin.zephyrus.user.User;
 public class InstaMine implements Enchant, Listener {
 
 	protected List<String> blacklist;
-	
+
 	@Override
 	public int getChance() {
-		return 3;
+		return 8;
 	}
 
 	@Override
 	public int getCostPerLevel() {
-		return 10;
+		return 25;
 	}
 
 	@Override
@@ -75,8 +75,9 @@ public class InstaMine implements Enchant, Listener {
 					User user = Zephyrus.getUser(player);
 					user.setTarget("instamine", TargetType.BLOCK, 5, false);
 					Block block = user.getTarget("instamine").getBlock();
-					if (!blacklist.contains(block.getTypeId()) && block.getType() != Material.AIR) {
+					if (block.getType() != Material.BEDROCK) {
 						block.breakNaturally();
+						item.setDurability((short) (item.getDurability() - 1));
 					}
 				}
 			}

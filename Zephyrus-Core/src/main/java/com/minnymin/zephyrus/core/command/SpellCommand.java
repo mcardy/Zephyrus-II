@@ -89,7 +89,7 @@ public class SpellCommand {
 				.getName());
 	}
 
-	@Completer(name = "cast")
+	@Completer(name = "cast", aliases = { "bind" })
 	public List<String> onCastComplete(CommandArgs args) {
 		if (args.isPlayer()) {
 			List<String> list = Zephyrus.getUser(args.getPlayer().getName()).getLearnedSpells();

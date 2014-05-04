@@ -91,17 +91,17 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 
 	@SuppressWarnings("deprecation")
 	private int registerEnchantment(Enchant enchantment, int id) {
+		enchantmentMap.put(id, enchantment);
+		if (enchantment instanceof Listener) {
+			Bukkit.getPluginManager().registerEvents((Listener) enchantment, Zephyrus.getPlugin());
+		}
 		if (Enchantment.getById(id) == null) {
-			enchantmentMap.put(id, enchantment);
 			if (accepting) {
 				Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
 			} else {
 				setAccepting(true);
 				Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
 				setAccepting(false);
-			}
-			if (enchantment instanceof Listener) {
-				Bukkit.getPluginManager().registerEvents((Listener) enchantment, Zephyrus.getPlugin());
 			}
 		}
 		return id;
@@ -183,20 +183,48 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEnchant(EnchantItemEvent event) {
-		for (Enchant ench : enchantmentMap.values()) {
+		for (Entry<Integer, Enchant> entry : enchantmentMap.entrySet()) {
+			Enchant ench = entry.getValue();
 			if (ench.getTarget().isTypeCompatible(event.getItem())) {
 				int chance = new Random().nextInt(ench.getChance());
 				if (chance == 0) {
 					int level = event.getExpLevelCost() / ench.getCostPerLevel();
 					level = level <= ench.getMaxLevel() ? level : ench.getMaxLevel();
-					event.getEnchantsToAdd().put(Enchantment.getById(120), level);
+					event.getEnchantsToAdd().put(Enchantment.getById(entry.getKey()), level);
 					ItemMeta meta = event.getItem().getItemMeta();
 					List<String> lore = meta.getLore() != null ? meta.getLore() : new ArrayList<String>();
-					lore.add(ChatColor.GRAY + ench.getName());
+					lore.add(ChatColor.GRAY + ench.getName() + " " + numeral(level));
 					meta.setLore(lore);
 					event.getItem().setItemMeta(meta);
 				}
 			}
+		}
+	}
+	
+	private String numeral(int i) {
+		switch (i) {
+		case 1:
+			return "I";
+		case 2:
+			return "II";
+		case 3:
+			return "III";
+		case 4:
+			return "IV";
+		case 5:
+			return "V";
+		case 6:
+			return "VI";
+		case 7:
+			return "VII";
+		case 8:
+			return "VIII";
+		case 9:
+			return "IX";
+		case 10:
+			return "X";
+		default:
+			return "";
 		}
 	}
 
