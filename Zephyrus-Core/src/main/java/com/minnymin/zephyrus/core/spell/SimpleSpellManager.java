@@ -7,7 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -46,6 +45,7 @@ import com.minnymin.zephyrus.core.spell.world.DigSpell;
 import com.minnymin.zephyrus.core.spell.world.DimSpell;
 import com.minnymin.zephyrus.core.spell.world.ExplodeSpell;
 import com.minnymin.zephyrus.core.spell.world.FireRingSpell;
+import com.minnymin.zephyrus.core.spell.world.GrowSpell;
 import com.minnymin.zephyrus.core.spell.world.SmiteSpell;
 import com.minnymin.zephyrus.core.spell.world.TrackSpell;
 import com.minnymin.zephyrus.spell.ConfigurableSpell;
@@ -87,7 +87,7 @@ public class SimpleSpellManager implements SpellManager {
 	}
 
 	@Override
-	public List<Spell> getSpells(Set<ItemStack> recipe) {
+	public List<Spell> getSpells(List<ItemStack> recipe) {
 		List<Spell> spellSet = new ArrayList<Spell>();
 		Iterator<Spell> spells = spellList.iterator();
 		while (spells.hasNext()) {
@@ -196,6 +196,7 @@ public class SimpleSpellManager implements SpellManager {
 		registerSpell(new DimSpell());
 		registerSpell(new ExplodeSpell());
 		registerSpell(new FireRingSpell());
+		registerSpell(new GrowSpell());
 		registerSpell(new SmiteSpell());
 		registerSpell(new TrackSpell());
 
@@ -209,8 +210,6 @@ public class SimpleSpellManager implements SpellManager {
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)
-
-		// TODO Spell recipe balancing once more spells are implemented
 
 		for (Spell spell : spellList) {
 			spell.onEnable();
