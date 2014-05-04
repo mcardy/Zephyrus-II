@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -67,6 +66,8 @@ public class OnlineUser implements User {
 	private ContinuousSpell continuousSpell;
 	private int continuousPower;
 	private String[] continuousArgs;
+	
+	private Map<String, Object> dataMap;
 
 	protected OnlineUser(Player player) {
 		this.player = player;
@@ -177,6 +178,15 @@ public class OnlineUser implements User {
 	}
 
 	@Override
+	public String getData(String key) {
+		Object value = dataMap.get(key);
+		if (value != null && value instanceof String) {
+			return (String) value;
+		}
+		return null;
+	}
+	
+	@Override
 	public int getDelay(String key) {
 		if (delayMap.containsKey(key)) {
 			return delayMap.get(key);
@@ -280,6 +290,11 @@ public class OnlineUser implements User {
 		}
 		this.targetMap = new MultiMap<String, Integer, Target>();
 		this.delayMap = new HashMap<String, Integer>();
+		if (config.contains("data")) {
+			this.dataMap = config.getConfigurationSection("data").getValues(true);
+		} else {
+			this.dataMap = new HashMap<String, Object>();
+		}
 	}
 
 	protected synchronized void save() {
@@ -291,9 +306,17 @@ public class OnlineUser implements User {
 		config.getConfig().set("level", this.level);
 		config.getConfig().set("progress", this.progress);
 		config.getConfig().set("display", this.display);
+		for (Entry<String, Object> entry : this.dataMap.entrySet()) {
+			config.getConfig().set("data." + entry.getKey(), entry.getValue());
+		}
 		config.saveConfig();
 	}
 
+	@Override
+	public void setData(String key, String value) {
+		this.dataMap.put(key, value);
+	}
+	
 	@Override
 	public void setDelay(String key, int time) {
 		this.delayMap.put(key, time);

@@ -3,7 +3,6 @@ package com.minnymin.zephyrus.user;
 import java.util.Collection;
 import java.util.List;
 
-
 import org.bukkit.entity.Player;
 
 import com.minnymin.zephyrus.spell.Spell;
@@ -66,6 +65,14 @@ public interface User {
 	 * @return The remaining mana
 	 */
 	public float drainMana(float mana);
+
+	/**
+	 * Gets data from the config
+	 * 
+	 * @param key The path of the data
+	 * @return A string set at that data or null if no data was found
+	 */
+	public String getData(String key);
 
 	/**
 	 * Gets the delay for the given key in seconds
@@ -161,6 +168,14 @@ public interface User {
 	 * @return Whether or not the state is applied
 	 */
 	public boolean isStateApplied(State state);
+
+	/**
+	 * Sets the data for the given key
+	 * 
+	 * @param key The key to set
+	 * @param value The value to set
+	 */
+	public void setData(String key, String value);
 
 	/**
 	 * Sets the delay for the given key. This will be reduced every second
