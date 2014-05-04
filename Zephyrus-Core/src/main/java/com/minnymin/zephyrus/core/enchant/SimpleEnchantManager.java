@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
@@ -23,6 +22,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.core.enchant.pickaxe.InstaMine;
+import com.minnymin.zephyrus.core.enchant.sword.BattleAxe;
+import com.minnymin.zephyrus.core.enchant.sword.LifeSuck;
+import com.minnymin.zephyrus.core.enchant.sword.ToxicStrike;
 import com.minnymin.zephyrus.core.util.reflection.ReflectionUtils;
 import com.minnymin.zephyrus.enchant.ArmorEnchant;
 import com.minnymin.zephyrus.enchant.BowEnchant;
@@ -39,7 +42,7 @@ import com.minnymin.zephyrus.enchant.SwordEnchant;
  */
 
 public class SimpleEnchantManager implements EnchantManager, Listener {
-	
+
 	private Map<Integer, Enchant> enchantmentMap;
 	private int id;
 	private boolean accepting;
@@ -53,7 +56,7 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 	public Enchant getEnchant(int id) {
 		return enchantmentMap.get(id);
 	}
-	
+
 	@Override
 	public int getEnchant(String name) {
 		for (Entry<Integer, Enchant> entry : enchantmentMap.entrySet()) {
@@ -69,7 +72,12 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 		Bukkit.getPluginManager().registerEvents(this, Zephyrus.getPlugin());
 		setAccepting(true);
 		registerEnchantment(new GlowEnchant(), 120);
+		registerEnchantment(new InstaMine(), 123);
+		registerEnchantment(new LifeSuck(), 124);
+		registerEnchantment(new ToxicStrike(), 125);
+		registerEnchantment(new BattleAxe(), 126);
 		setAccepting(false);
+		// TODO Add: Decapatator
 	}
 
 	@Override
@@ -84,24 +92,26 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 	@SuppressWarnings("deprecation")
 	private int registerEnchantment(Enchant enchantment, int id) {
 		if (Enchantment.getById(id) == null) {
+			enchantmentMap.put(id, enchantment);
 			if (accepting) {
-				enchantmentMap.put(id, enchantment);
 				Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
 			} else {
 				setAccepting(true);
-				enchantmentMap.put(id, enchantment);
 				Enchantment.registerEnchantment(new RegisteredEnchant(id, enchantment));
 				setAccepting(false);
+			}
+			if (enchantment instanceof Listener) {
+				Bukkit.getPluginManager().registerEvents((Listener) enchantment, Zephyrus.getPlugin());
 			}
 		}
 		return id;
 	}
-	
+
 	private void setAccepting(boolean value) {
 		ReflectionUtils.setStaticField(Enchantment.class, value, "acceptingNew");
 		accepting = value;
 	}
-	
+
 	@EventHandler
 	@SuppressWarnings("deprecation")
 	public void onDamage(EntityDamageEvent event) {
@@ -150,13 +160,14 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 			}
 		}
 	}
-	
+
 	@EventHandler
 	@SuppressWarnings("deprecation")
-	public void onDamage(EntityDamageByEntityEvent event) {
+	public void onAttack(EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof Player) {
 			Player player = (Player) event.getDamager();
-			for (ItemStack item : player.getInventory().getArmorContents()) {
+			ItemStack item = player.getItemInHand();
+			if (item != null) {
 				for (Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
 					if (enchantmentMap.containsKey(entry.getKey().getId())) {
 						Enchant ench = getEnchant(entry.getKey().getId());
@@ -168,7 +179,7 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEnchant(EnchantItemEvent event) {
@@ -188,5 +199,5 @@ public class SimpleEnchantManager implements EnchantManager, Listener {
 			}
 		}
 	}
-	
+
 }
