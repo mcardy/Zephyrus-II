@@ -32,11 +32,66 @@ public class MagicBooks {
 				+ "Your encyclopedia to all things magic")));
 
 		meta.addPage(Language.get("item.zephyronomicon.pg1", ChatColor.DARK_AQUA + "" + ChatColor.BOLD
-				+ "Welcome to the magical world of Zephyrus.\n\n" + ChatColor.BLACK + ChatColor.RESET
-				+ " This book is a quick start guide meant get you casting spells as quickly as possible.\n\n"
-				+ ChatColor.GOLD + "Next Page"));
-		// TODO Write brief tutorial
-
+				+ "Welcome to the magical world of Zephyrus." + ChatColor.BLACK + ChatColor.RESET
+				+ "\n\nThis book is a quick start guide meant get you casting spells as quickly as possible.\n\n"
+				+ ChatColor.BOLD + "     Next Page"));
+		meta.addPage(Language.get("item.zephyronomicon.pg2", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
+				+ ChatColor.BOLD + "First Wand" + ChatColor.RESET + ChatColor.BLACK
+				+ "\nThe wand is the core feature of Zephyrus.\n" + ChatColor.GRAY + "  Crafting:\n" + ChatColor.GRAY
+				+ "    \u2588\u2588" + ChatColor.RED + "\u2588\n" + ChatColor.GRAY + "    \u2588" + ChatColor.GREEN
+				+ "\u2588" + ChatColor.GRAY + "\u2588\n" + ChatColor.BLUE + "    \u2588" + ChatColor.GRAY
+				+ "\u2588\u2588\n\n" + ChatColor.RED + "\u2588" + ChatColor.BLACK + " Redstone\n" + ChatColor.GREEN
+				+ "\u2588" + ChatColor.BLACK + " Stick\n" + ChatColor.BLUE + "\u2588" + ChatColor.BLACK
+				+ " Iron Ingot\n" + ChatColor.GRAY + "\u2588" + ChatColor.BLACK + " Nothing"));
+		meta.addPage(Language
+				.get("item.zephyronomicon.pg3",
+						ChatColor.DARK_AQUA
+								+ ""
+								+ ChatColor.UNDERLINE
+								+ ""
+								+ ChatColor.BOLD
+								+ "Wands"
+								+ ChatColor.RESET
+								+ ChatColor.BLACK
+								+ "\nWands are used for many of Zephyrus's features. "
+								+ "They are used to craft spells and can be used to cast spells. "
+								+ "There are many types of wands that can be found on the wiki:\n http://wiki.minnymin.com/Portal:Wands"));
+		meta.addPage(Language.get("item.zephyronomicon.pg4", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
+				+ ChatColor.BOLD + "Spell Crafting" + ChatColor.RESET + ChatColor.BLACK
+				+ "\nSpell crafting is done by dropping items onto a bookshelf and clicking the shelf with your wand. "
+				+ "Each spell has a special recipe composed of aspects. "
+				+ "A book of all recipes can be obtained with '/book recipe'."));
+		meta.addPage(Language.get("item.zephyronomicon.pg5", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
+				+ ChatColor.BOLD + "Spell Crafting Continued" + ChatColor.RESET + ChatColor.BLACK
+				+ "\nSome spells require you to be a certain level to craft them (see levelling). "
+				+ "Once you craft a spell, you can pickup a spelltome and view the spell's information. "
+				+ "Left click a spelltome to learn the spell."));
+		meta.addPage(Language.get("item.zephyronomicon.pg6", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
+				+ ChatColor.BOLD + "Aspects" + ChatColor.RESET + ChatColor.BLACK
+				+ "\nEach item in the game has aspects on it. "
+				+ "You can view the aspects of an item by typing '/aspects' when holding the item in your hand. "
+				+ "A list of all aspects can be obtained by typing '/aspects list'."));
+		meta.addPage(Language.get("item.zephyronomicon.pg7", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
+				+ ChatColor.BOLD + "Casting" + ChatColor.RESET + ChatColor.BLACK + "\nSpells can be cast in two ways: "
+				+ "by binding them to a wand with '/bind <spell>' when holding a wand and right clicking "
+				+ "or by typing '/cast <spell>'."));
+		meta.addPage(Language
+				.get("item.zephyronomicon.pg8",
+						ChatColor.DARK_AQUA
+								+ ""
+								+ ChatColor.UNDERLINE
+								+ ""
+								+ ChatColor.BOLD
+								+ "Mana"
+								+ ChatColor.RESET
+								+ ChatColor.BLACK
+								+ "\nWhen you cast spells, some mana is drained. This mana regenerates slowly over time. "
+								+ "Your mana can either be viewed on your HUD where the boss health bar would be or by typing '/mana'."));
+		meta.addPage(Language.get("item.zephyronomicon.pg9", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
+				+ ChatColor.BOLD + "Levelling" + ChatColor.RESET + ChatColor.BLACK
+				+ "\nSome spells require you to be a higher level. You level up by casting spells. "
+				+ "Each spell gives you a certain amount of XP when you successfully cast them. "
+				+ "You can view your current level and progress by typing '/level'."));
 		item.setItemMeta(meta);
 		return item;
 	}
@@ -54,14 +109,13 @@ public class MagicBooks {
 
 		for (Spell spell : Zephyrus.getSpellSet()) {
 			if (spell.getRequiredLevel() > startLevel && spell.getRequiredLevel() < endLevel) {
-				currentText
-						.append(ChatColor.GOLD
-								+ WordUtils.capitalize(spell.getName())
-								+ ChatColor.DARK_GRAY
-								+ " - "
-								+ Language.get("item.recipebook.level", "Level: [LEVEL]", "[LEVEL]",
-										String.valueOf(spell.getRequiredLevel())) + "\n "
-								+ Language.get("item.recipebook.recipe", "Recipe") + ":" + ChatColor.GRAY);
+				currentText.append(ChatColor.GOLD
+						+ WordUtils.capitalize(spell.getName())
+						+ ChatColor.DARK_GRAY
+						+ " - "
+						+ Language.get("item.recipebook.level", "Level: [LEVEL]", "[LEVEL]",
+								String.valueOf(spell.getRequiredLevel())) + "\n "
+						+ Language.get("item.recipebook.recipe", "Recipe") + ":" + ChatColor.GRAY);
 				if (spell.getRecipe().getAspectMap().size() <= 4) {
 					for (Entry<Aspect, Integer> recipe : spell.getRecipe().getAspectMap().entrySet()) {
 						currentText.append("\n  "
