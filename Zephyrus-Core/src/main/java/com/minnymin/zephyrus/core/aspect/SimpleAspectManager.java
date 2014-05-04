@@ -310,6 +310,7 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.REDSTONE_LAMP_ON, Aspect.MACHINE, 4, Aspect.LIGHT, 4);
 		add(Material.REDSTONE_ORE, Aspect.STONE, 2, Aspect.ENERGY, 4);
 		add(Material.REDSTONE_TORCH_ON, Aspect.ENERGY, 2);
+		add(Material.ROTTEN_FLESH, Aspect.FLESH, 4, Aspect.EVIL, 1);
 
 		add(Material.SADDLE, Aspect.BEAST, 4);
 		add(Material.SAND, Aspect.EARTH, 1);

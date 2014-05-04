@@ -9,6 +9,7 @@ import java.util.TreeSet;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -82,7 +83,7 @@ public class CommandFramework {
 				Object methodObject = commandMap.getSecondValue(cmdLabel);
 				Command command = method.getAnnotation(Command.class);
 				if (!sender.hasPermission(command.permission())) {
-					sender.sendMessage(command.noPerm());
+					sender.sendMessage(ChatColor.DARK_RED + command.noPerm());
 					return true;
 				}
 				try {
