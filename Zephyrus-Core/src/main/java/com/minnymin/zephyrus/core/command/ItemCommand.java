@@ -44,7 +44,7 @@ public class ItemCommand {
 
 	@Command(name = "spelltome",
 			aliases = { "tome" },
-			permission = "zephyrus.command.spelltome.give",
+			permission = "zephyrus.command.spelltome",
 			description = "Gives a spelltome to the designated player",
 			usage = "/spelltome <spell> [player]")
 	public void onTomeCommand(CommandArgs args) {
@@ -225,7 +225,7 @@ public class ItemCommand {
 				.getSender());
 	}
 
-	@Completer(name = "spelltome", aliases = { "tome" })
+	@Completer(name = "spelltome", aliases = { "tome", "learn", "teach" })
 	public List<String> onTomeComplete(CommandArgs cmd) {
 		List<String> list = new ArrayList<String>();
 		for (String s : Zephyrus.getSpellNameSet()) {

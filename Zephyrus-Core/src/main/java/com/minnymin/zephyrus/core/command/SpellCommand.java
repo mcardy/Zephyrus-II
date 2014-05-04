@@ -109,23 +109,4 @@ public class SpellCommand {
 		}
 	}
 
-	@Completer(name = "learn", aliases = { "teach" })
-	public List<String> spelltomeComplete(CommandArgs cmd) {
-		List<String> list = new ArrayList<String>();
-		for (String s : Zephyrus.getSpellNameSet()) {
-			list.add(s);
-		}
-		if (cmd.getArgs().length == 0) {
-			return list;
-		}
-		String spell = cmd.getArgs()[0];
-		List<String> newList = new ArrayList<String>();
-		for (String s : list) {
-			if (s.startsWith(spell.toLowerCase())) {
-				newList.add(s);
-			}
-		}
-		return newList;
-	}
-
 }

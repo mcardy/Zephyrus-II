@@ -1,6 +1,5 @@
 package com.minnymin.zephyrus.core.command;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -20,7 +19,10 @@ import com.minnymin.zephyrus.user.User;
 
 public class UserCommand {
 
-	@Command(name = "level")
+	@Command(name = "level",
+			description = "View your level and progress",
+			permission = "zephyrus.command.level",
+			usage = "/level [player]")
 	public void onLevelCommand(CommandArgs args) {
 		if (args.getArgs().length < 1) {
 			if (args.isPlayer()) {
@@ -37,50 +39,55 @@ public class UserCommand {
 					builder.append("=");
 				}
 				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage("command.level.display", ChatColor.GRAY + "Level [LEVEL], [AMOUNT] {[BAR]}", args
-						.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.RED + ""
-						+ user.getLevelProgress() + ChatColor.GRAY + " / " + next + ChatColor.DARK_GRAY, "[BAR]", builder
-						.toString());
+				Language.sendMessage("command.level.display", ChatColor.GRAY + "Level [LEVEL], [AMOUNT] {[BAR]}",
+						args.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]",
+						ChatColor.RED + "" + user.getLevelProgress() + ChatColor.GRAY + " / " + next
+								+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
 			} else {
 				Language.sendError("command.player", "No player specified", args.getSender());
 			}
 		} else {
-			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
-				User user = Zephyrus.getUser(args.getArgs()[0]);
-				StringBuilder builder = new StringBuilder();
-				int level = user.getLevel();
-				int next = (level * level * level + 100);
-				int percent = (int) (((float) user.getLevelProgress() / (float) next) * 10);
-				builder.append(ChatColor.GOLD);
-				for (int i = 0; i < 10; i++) {
-					if (i == percent) {
-						builder.append(ChatColor.GRAY);
+			if (args.getSender().hasPermission("zephyrus.command.level.other")) {
+				if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
+					User user = Zephyrus.getUser(args.getArgs()[0]);
+					StringBuilder builder = new StringBuilder();
+					int level = user.getLevel();
+					int next = (level * level * level + 100);
+					int percent = (int) (((float) user.getLevelProgress() / (float) next) * 10);
+					builder.append(ChatColor.GOLD);
+					for (int i = 0; i < 10; i++) {
+						if (i == percent) {
+							builder.append(ChatColor.GRAY);
+						}
+						builder.append("=");
 					}
-					builder.append("=");
+					builder.append(ChatColor.DARK_GRAY);
+					Language.sendMessage("command.level.display", ChatColor.GRAY + "Level [LEVEL], [AMOUNT] {[BAR]}",
+							args.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]",
+							ChatColor.GOLD + "" + user.getLevelProgress() + ChatColor.GRAY + " / " + next
+									+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
+				} else {
+					Language.sendError("command.offline", "That player is offline", args.getSender());
 				}
-				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage("command.level.display", ChatColor.GRAY + "Level [LEVEL], [AMOUNT] {[BAR]}", args
-						.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.GOLD + ""
-						+ user.getLevelProgress() + ChatColor.GRAY + " / " + next + ChatColor.DARK_GRAY, "[BAR]", builder
-						.toString());
 			} else {
-				Language.sendError("command.offline", "That player is offline", args.getSender());
+				Language.sendError("command.noperm", "You do not have permission to perform that action",
+						args.getSender());
 			}
 		}
 	}
 
 	@Command(name = "level.add",
-			permission = "zephyrus.level.add",
+			permission = "zephyrus.command.level.add",
 			description = "Levels up you or someone else",
-			usage = "/level add [player]")
+			usage = "/level add [amount] [player]")
 	public void onLevelAdd(CommandArgs args) {
 		if (args.getArgs().length == 0) {
 			if (args.isPlayer()) {
 				User user = Zephyrus.getUser(args.getPlayer().getName());
 				int level = user.getLevel();
 				user.addLevelProgress((level * level * level + 100));
-				Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(), "[PLAYER]", args
-						.getSender().getName());
+				Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
+						"[PLAYER]", args.getSender().getName());
 			} else {
 				Language.sendError("command.player", "No player specified", args.getSender());
 			}
@@ -90,8 +97,8 @@ public class UserCommand {
 				User user = Zephyrus.getUser(target.getName());
 				int level = user.getLevel();
 				user.addLevelProgress((level * level * level + 100));
-				Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(), "[PLAYER]", args
-						.getSender().getName());
+				Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
+						"[PLAYER]", args.getSender().getName());
 			} else if (args.isPlayer()) {
 				try {
 					int levels = Integer.parseInt(args.getArgs()[0]);
@@ -100,11 +107,11 @@ public class UserCommand {
 						int level = user.getLevel();
 						user.addLevelProgress((level * level * level + 100));
 					}
-					Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(), "[PLAYER]", args
-							.getSender().getName());
+					Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
+							"[PLAYER]", args.getSender().getName());
 				} catch (NumberFormatException ex) {
-					Language.sendError("command.number", "Got [STRING] but expected a number", args.getSender(), "[STRING]", args
-							.getArgs()[2]);
+					Language.sendError("command.number", "Got [STRING] but expected a number", args.getSender(),
+							"[STRING]", args.getArgs()[2]);
 				}
 			} else {
 				Language.sendError("command.player", "No player specified", args.getSender());
@@ -119,11 +126,11 @@ public class UserCommand {
 						int level = user.getLevel();
 						user.addLevelProgress((level * level * level + 100));
 					}
-					Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(), "[PLAYER]", args
-							.getSender().getName());
+					Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
+							"[PLAYER]", args.getSender().getName());
 				} catch (NumberFormatException ex) {
-					Language.sendError("command.number", "Got [STRING] but expected a number", args.getSender(), "[STRING]", args
-							.getArgs()[2]);
+					Language.sendError("command.number", "Got [STRING] but expected a number", args.getSender(),
+							"[STRING]", args.getArgs()[2]);
 				}
 			} else {
 				Language.sendError("command.offline", "That player is offline", args.getSender());
@@ -131,7 +138,10 @@ public class UserCommand {
 		}
 	}
 
-	@Command(name = "mana")
+	@Command(name = "mana",
+			description = "View your mana amount",
+			permission = "zephyrus.command.mana",
+			usage = "/mana [player]")
 	public void onManaCommand(CommandArgs args) {
 		if (args.getArgs().length < 1) {
 			if (args.isPlayer()) {
@@ -146,38 +156,48 @@ public class UserCommand {
 					builder.append("=");
 				}
 				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}", args
-						.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + ""
-						+ user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN + user.getMaxMana()
-						+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
+				Language.sendMessage(
+						"command.mana.display",
+						ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}",
+						args.getSender(),
+						"[LEVEL]",
+						user.getLevel() + "",
+						"[AMOUNT]",
+						ChatColor.DARK_AQUA + "" + user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN
+								+ user.getMaxMana() + ChatColor.DARK_GRAY, "[BAR]", builder.toString());
 			} else {
 				Language.sendError("command.player", "No player specified", args.getSender());
 			}
 		} else {
-			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
-				User user = Zephyrus.getUser(args.getSender().getName());
-				StringBuilder builder = new StringBuilder();
-				int percent = (int) (((float) user.getMana() / (float) user.getMaxMana()) * 10);
-				builder.append(ChatColor.DARK_AQUA);
-				for (int i = 0; i < 10; i++) {
-					if (i == percent) {
-						builder.append(ChatColor.GRAY);
+			if (args.getSender().hasPermission("zephyrus.command.mana.other")) {
+				if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
+					User user = Zephyrus.getUser(args.getSender().getName());
+					StringBuilder builder = new StringBuilder();
+					int percent = (int) (((float) user.getMana() / (float) user.getMaxMana()) * 10);
+					builder.append(ChatColor.DARK_AQUA);
+					for (int i = 0; i < 10; i++) {
+						if (i == percent) {
+							builder.append(ChatColor.GRAY);
+						}
+						builder.append("=");
 					}
-					builder.append("=");
+					builder.append(ChatColor.DARK_GRAY);
+					Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}",
+							args.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + ""
+									+ user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN + user.getMaxMana()
+									+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
+				} else {
+					Language.sendError("command.offline", "That player is offline", args.getSender());
 				}
-				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}", args
-						.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + ""
-						+ user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN + user.getMaxMana()
-						+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
 			} else {
-				Language.sendError("command.offline", "That player is offline", args.getSender());
+				Language.sendError("command.noperm", "You do not have permission to perform that action",
+						args.getSender());
 			}
 		}
 	}
 
 	@Command(name = "mana.restore",
-			permission = "zephyrus.mana.restore",
+			permission = "zephyrus.command.mana.restore",
 			description = "Restores your's or someone else's mana",
 			usage = "/mana restore [player]")
 	public void onManaRestoreCommand(CommandArgs args) {
@@ -204,7 +224,7 @@ public class UserCommand {
 
 	@Command(name = "effects")
 	public void onEffectsCommand(CommandArgs args) {
-
+		//TODO Effects command
 	}
 
 }

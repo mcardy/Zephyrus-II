@@ -17,13 +17,14 @@ import com.minnymin.zephyrus.core.enchant.SimpleEnchantManager;
 import com.minnymin.zephyrus.core.hook.SimpleHookManager;
 import com.minnymin.zephyrus.core.item.SimpleItemManager;
 import com.minnymin.zephyrus.core.nms.SimpleNMSManager;
+import com.minnymin.zephyrus.core.permissions.PermissionsManager;
 import com.minnymin.zephyrus.core.spell.SimpleSpellManager;
 import com.minnymin.zephyrus.core.state.SimpleStateManager;
 import com.minnymin.zephyrus.core.user.SimpleUserManager;
 import com.minnymin.zephyrus.core.util.Metrics;
 import com.minnymin.zephyrus.core.util.Updater;
-import com.minnymin.zephyrus.core.util.VersionInfo;
 import com.minnymin.zephyrus.core.util.Updater.UpdateResult;
+import com.minnymin.zephyrus.core.util.VersionInfo;
 import com.minnymin.zephyrus.core.util.command.CommandFramework;
 
 /**
@@ -58,12 +59,13 @@ public class ZephyrusPlugin extends JavaPlugin {
 	public void onEnable() {
 		new Metrics(this).start();
 		ConfigOptions.loadOptions(getConfig());
+		PermissionsManager.registerPermissions();
 
 		command.registerCommands(new SpellCommand());
 		command.registerCommands(new ItemCommand());
 		command.registerCommands(new UserCommand());
 		command.registerHelp();
-
+		
 		Zephyrus.getAspectManager().load();
 		Zephyrus.getEnchantmentManager().load();
 		Zephyrus.getHookManager().load();
