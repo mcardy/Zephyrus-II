@@ -1,9 +1,8 @@
 package com.minnymin.zephyrus.spell;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 
 import org.bukkit.inventory.ItemStack;
 
@@ -47,7 +46,7 @@ public class SpellRecipe {
 	 * @param items The items to check
 	 * @return True if the recipe is satisfied
 	 */
-	public boolean isSatisfied(Set<ItemStack> items) {
+	public boolean isSatisfied(List<ItemStack> items) {
 		Map<Aspect, Integer> map = new HashMap<Aspect, Integer>();
 		for (ItemStack i : items) {
 			Map<Aspect, Integer> itemMap = Zephyrus.getAspectManager().getAspects(i).getAspectMap();

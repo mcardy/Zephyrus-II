@@ -25,7 +25,7 @@ public class BasicObsidianWand implements Wand {
 	
 	@Override
 	public String getName() {
-		return ChatColor.GRAY + "Simple Wand";
+		return ChatColor.GRAY + "Simple " + ChatColor.DARK_PURPLE + "Obsidian " + ChatColor.GRAY + "Wand";
 	}
 
 	@Override

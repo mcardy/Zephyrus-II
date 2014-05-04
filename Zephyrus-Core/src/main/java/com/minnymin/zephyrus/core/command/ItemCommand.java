@@ -78,8 +78,6 @@ public class ItemCommand {
 			Language.sendMessage("command.spelltome.complete", "[PLAYER] has been given a [SPELL] spelltome", args
 					.getSender(), "[PLAYER]", player.getName(), "[SPELL]", ChatColor.GOLD
 					+ WordUtils.capitalize(spell.getName()));
-			Language.sendMessage("command.spelltome.complete.self", "You have been given a [SPELL] spelltome", args
-					.getSender(), "[SPELL]", ChatColor.GOLD + WordUtils.capitalize(spell.getName()));
 		}
 	}
 

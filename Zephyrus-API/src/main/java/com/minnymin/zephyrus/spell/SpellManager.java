@@ -55,7 +55,7 @@ public interface SpellManager extends Manager {
 	 * @param recipe The items to find
 	 * @return A list of spells that can be crafted
 	 */
-	public List<Spell> getSpells(Set<ItemStack> recipe);
+	public List<Spell> getSpells(List<ItemStack> recipe);
 
 	/**
 	 * Gets the set of the names of all registered spells

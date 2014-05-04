@@ -17,8 +17,10 @@ import org.bukkit.block.Block;
 public class PlantRegistry {
 
 	private static Set<Plant> plantSet = new HashSet<Plant>();
+	private static boolean init;
 
-	public static void init() {
+	private static void init() {
+		init = true;
 		add(new Plant(Material.MELON_STEM));
 		add(new Plant(Material.CROPS));
 		add(new Plant(Material.PUMPKIN_STEM));
@@ -28,8 +30,11 @@ public class PlantRegistry {
 		add(new Plant(Material.DIRT) {
 			@Override
 			public boolean grow(Block block) {
-				block.setType(Material.GRASS);
-				return true;
+				if (block.getType() == Material.DIRT) {
+					block.setType(Material.GRASS);
+					return true;
+				}
+				return false;
 			}
 		});
 		add(new Plant(Material.SUGAR_CANE_BLOCK) {
@@ -54,6 +59,9 @@ public class PlantRegistry {
 	}
 
 	public static boolean grow(Block block) {
+		if (!init) {
+			init();
+		}
 		for (Plant plant : plantSet) {
 			if (plant.grow(block)) {
 				return true;

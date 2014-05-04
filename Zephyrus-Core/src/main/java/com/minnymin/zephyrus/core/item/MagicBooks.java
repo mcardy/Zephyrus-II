@@ -3,7 +3,6 @@ package com.minnymin.zephyrus.core.item;
 import java.util.Arrays;
 import java.util.Map.Entry;
 
-
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -45,29 +44,34 @@ public class MagicBooks {
 	public static ItemStack createZephyricRecipeBook(int startLevel, int endLevel) {
 		ItemStack item = new ItemStack(Material.WRITTEN_BOOK);
 		BookMeta meta = (BookMeta) item.getItemMeta();
-
 		meta.setTitle(Language.get("item.recipebook.name", ChatColor.GOLD + "Mystic Recipe Book"));
 		meta.setLore(Arrays.asList(Language.get("item.recipebook.lore", ChatColor.GRAY
-				+ "Recipes for all spells from level " + startLevel + " to level " + endLevel)));
+				+ "Recipes for all spells from level [START] to level [END]", "[START]", String.valueOf(startLevel),
+				"[END]", String.valueOf(endLevel))));
 
 		StringBuilder currentText = new StringBuilder();
 		int pos = 0;
 
 		for (Spell spell : Zephyrus.getSpellSet()) {
 			if (spell.getRequiredLevel() > startLevel && spell.getRequiredLevel() < endLevel) {
-				currentText.append(ChatColor.GOLD + WordUtils.capitalize(spell.getName()) + ChatColor.DARK_GRAY + "\n "
-						+ Language.get("item.recipebook.recipe", "Recipe") + ":" + ChatColor.GRAY);
+				currentText
+						.append(ChatColor.GOLD
+								+ WordUtils.capitalize(spell.getName())
+								+ ChatColor.DARK_GRAY
+								+ " - "
+								+ Language.get("item.recipebook.level", "Level: [LEVEL]", "[LEVEL]",
+										String.valueOf(spell.getRequiredLevel())) + "\n "
+								+ Language.get("item.recipebook.recipe", "Recipe") + ":" + ChatColor.GRAY);
 				if (spell.getRecipe().getAspectMap().size() <= 4) {
 					for (Entry<Aspect, Integer> recipe : spell.getRecipe().getAspectMap().entrySet()) {
 						currentText.append("\n  "
-								+ Language.get("aspect." + recipe.getKey().name().toLowerCase() + ".name", recipe.getKey()
-										.getDefaultName()) + " x" + recipe.getValue());
+								+ Language.get("aspect." + recipe.getKey().name().toLowerCase() + ".name", recipe
+										.getKey().getDefaultName()) + " x" + recipe.getValue());
 					}
 				} else {
 					for (Entry<Aspect, Integer> recipe : spell.getRecipe().getAspectMap().entrySet()) {
-						currentText.append(Language.get("aspect." + recipe.getKey().name().toLowerCase() + ".name", recipe
-								.getKey().getDefaultName())
-								+ " x" + recipe.getValue());
+						currentText.append(Language.get("aspect." + recipe.getKey().name().toLowerCase() + ".name",
+								recipe.getKey().getDefaultName()) + " x" + recipe.getValue());
 						currentText.append(", ");
 					}
 				}

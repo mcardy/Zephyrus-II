@@ -55,8 +55,8 @@ public class SimpleAspectManager implements AspectManager {
 				return null;
 			}
 			List<Integer> values = new ArrayList<Integer>();
-			for (int i : list.getAmountList()) {
-				values.add(i * item.getAmount());
+			for (int i = 0; i < list.getAmountList().size(); i++) {
+				values.add(i, list.getAmountList().get(i) * item.getAmount());
 			}
 			return AspectList.newList().setAspectLists(list.getTypeList(), values);
 		}
@@ -120,7 +120,7 @@ public class SimpleAspectManager implements AspectManager {
 		add(Material.DETECTOR_RAIL, Aspect.MACHINE, 4, Aspect.METAL, 1);
 		add(Material.DIAMOND, Aspect.CLEAR, 8, Aspect.VALUE, 8);
 		add(Material.DIAMOND_AXE, Aspect.CLEAR, 24, Aspect.VALUE, 24, Aspect.TOOL, 8);
-		add(Material.DIAMOND, Aspect.CLEAR, 48, Aspect.VALUE, 48, Aspect.DEFENSE, 8);
+		add(Material.DIAMOND, Aspect.CLEAR, 8, Aspect.VALUE, 8);
 		add(Material.DIAMOND_BLOCK, Aspect.CLEAR, 72, Aspect.VALUE, 72);
 		add(Material.DIAMOND_BOOTS, Aspect.CLEAR, 32, Aspect.VALUE, 32, Aspect.DEFENSE, 8);
 		add(Material.DIAMOND_CHESTPLATE, Aspect.CLEAR, 64, Aspect.VALUE, 64, Aspect.DEFENSE, 8);

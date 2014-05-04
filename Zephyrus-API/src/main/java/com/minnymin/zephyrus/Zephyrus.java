@@ -131,7 +131,7 @@ public class Zephyrus {
 	 * @param recipe The recipe to get
 	 * @return A spell loaded by Zephyrus or null if no spell is found
 	 */
-	public static List<Spell> getSpell(Set<ItemStack> recipe) {
+	public static List<Spell> getSpell(List<ItemStack> recipe) {
 		return spellManager.getSpells(recipe);
 	}
 

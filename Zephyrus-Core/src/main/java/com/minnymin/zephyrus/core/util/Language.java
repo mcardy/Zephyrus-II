@@ -30,20 +30,7 @@ public class Language {
 		config.addDefaults(key, desc.replace(ChatColor.COLOR_CHAR + "", "$"));
 		config.saveConfig();
 	}
-
-	/**
-	 * Gets the specified section from the language configurations and
-	 * translates all color codes
-	 * 
-	 * @param key The object's key
-	 * @return The String found at that location
-	 */
-	public static String get(String key) {
-		if (config == null)
-			config = new YmlConfigFile("locale.yml");
-		return ChatColor.translateAlternateColorCodes('$', config.getConfig().getString(key));
-	}
-
+	
 	/**
 	 * Gets the specified section from the language configurations and
 	 * translates all color codes
@@ -58,15 +45,30 @@ public class Language {
 		add(key, def);
 		return ChatColor.translateAlternateColorCodes('$', config.getConfig().getString(key));
 	}
+	
 
 	/**
-	 * Sends an error message to the specified CommandSender
+	 * Gets the specified section from the language configurations and
+	 * translates all color codes with default and replacement
 	 * 
 	 * @param key The key to get
-	 * @param sender The CommandSender to send the message to
+	 * @param def The default text
+	 * @param replace The group of replacements (what to replace followed by
+	 *            replacement)
 	 */
-	public static void sendError(String key, CommandSender sender) {
-		sender.sendMessage(ChatColor.DARK_RED + get(key));
+	public static String get(String key, String def, String... replace) {
+		String msg = get(key, def);
+		int i = 0;
+		while (i < replace.length) {
+			String from = replace[i];
+			i++;
+			String to = replace[i];
+			i++;
+			if (from != null && to != null) {
+				msg = msg.replace(from, to);
+			}
+		}
+		return msg;
 	}
 
 	/**
@@ -81,29 +83,6 @@ public class Language {
 	}
 
 	/**
-	 * Sends an error message to the specified CommandSender with replacements
-	 * 
-	 * @param key The key to get
-	 * @param sender The CommandSender to send the message to
-	 * @param replace The group of replacements (what to replace followed by
-	 *            replacement)
-	 */
-	public static void sendError(String key, CommandSender sender, String... replace) {
-		String msg = get(key);
-		int i = 0;
-		while (i < replace.length) {
-			String from = replace[i];
-			i++;
-			String to = replace[i];
-			i++;
-			if (from != null && to != null) {
-				msg = msg.replace(from, to);
-			}
-		}
-		sender.sendMessage(ChatColor.DARK_RED + msg);
-	}
-
-	/**
 	 * Sends an error message to the specified CommandSender with default text
 	 * and replacements
 	 * 
@@ -114,28 +93,7 @@ public class Language {
 	 *            replacement)
 	 */
 	public static void sendError(String key, String def, CommandSender sender, String... replace) {
-		String msg = get(key, def);
-		int i = 0;
-		while (i < replace.length) {
-			String from = replace[i];
-			i++;
-			String to = replace[i];
-			i++;
-			if (from != null && to != null) {
-				msg = msg.replace(from, to);
-			}
-		}
-		sender.sendMessage(ChatColor.DARK_RED + msg);
-	}
-
-	/**
-	 * Sends a message to the specified CommandSender
-	 * 
-	 * @param key The key to get
-	 * @param sender The CommandSender to send the message to
-	 */
-	public static void sendMessage(String key, CommandSender sender) {
-		sender.sendMessage(get(key));
+		sender.sendMessage(ChatColor.DARK_RED + get(key, def, replace));
 	}
 
 	/**
@@ -150,29 +108,6 @@ public class Language {
 	}
 
 	/**
-	 * Sends a message to the specified CommandSender with replacements
-	 * 
-	 * @param key The key to get
-	 * @param sender The CommandSender to send the message to
-	 * @param replace The group of replacements (what to replace followed by
-	 *            replacement)
-	 */
-	public static void sendMessage(String key, CommandSender sender, String... replace) {
-		String msg = get(key);
-		int i = 0;
-		while (i < replace.length) {
-			String from = replace[i];
-			i++;
-			String to = replace[i];
-			i++;
-			if (from != null && to != null) {
-				msg = msg.replace(from, to);
-			}
-		}
-		sender.sendMessage(msg);
-	}
-
-	/**
 	 * Sends a message to the specified CommandSender with default text and
 	 * replacements
 	 * 
@@ -183,18 +118,7 @@ public class Language {
 	 *            replacement)
 	 */
 	public static void sendMessage(String key, String def, CommandSender sender, String... replace) {
-		String msg = get(key, def);
-		int i = 0;
-		while (i < replace.length) {
-			String from = replace[i];
-			i++;
-			String to = replace[i];
-			i++;
-			if (from != null && to != null) {
-				msg = msg.replace(from, to);
-			}
-		}
-		sender.sendMessage(msg);
+		sender.sendMessage(get(key, def, replace));
 	}
 
 }

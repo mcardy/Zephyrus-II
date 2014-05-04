@@ -29,8 +29,6 @@ import com.minnymin.zephyrus.core.util.command.CommandFramework;
 /**
  * Zephyrus - ZephyrusPlugin.java
  * 
- * TODO Re-implement all spells and items TODO Item level and upgrades
- * 
  * TODO Implement Combo-Spells - Later release
  * 
  * @author minnymin3

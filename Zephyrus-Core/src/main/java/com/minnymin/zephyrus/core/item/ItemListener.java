@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -32,6 +31,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.core.util.DataStructureUtils;
 import com.minnymin.zephyrus.core.util.InventoryGUI;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.ParticleEffects;
@@ -58,9 +58,15 @@ import com.minnymin.zephyrus.user.User;
 public class ItemListener implements Listener {
 
 	private Map<String, UpgradeTrade> traders;
-	
+	private Set<Material> actionMaterials;
+
 	protected ItemListener() {
 		traders = new HashMap<String, UpgradeTrade>();
+		actionMaterials = DataStructureUtils.createSet(Material.ANVIL, Material.BED_BLOCK, Material.CHEST,
+				Material.FURNACE, Material.BURNING_FURNACE, Material.WOOD_DOOR, Material.WOODEN_DOOR, Material.LEVER,
+				Material.IRON_DOOR_BLOCK, Material.STONE_BUTTON, Material.JUKEBOX, Material.ENCHANTMENT_TABLE,
+				Material.BREWING_STAND, Material.ENDER_CHEST, Material.COMMAND, Material.BEACON,
+				Material.TRAPPED_CHEST, Material.HOPPER, Material.TRAP_DOOR, Material.DISPENSER, Material.DROPPER);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -71,7 +77,7 @@ public class ItemListener implements Listener {
 		Item item = Zephyrus.getItemManager().getItem(player.getItemInHand());
 		User user = Zephyrus.getUser(player);
 		boolean didCast = false;
-		if (item != null) {
+		if (item != null && !(event.getClickedBlock() != null && actionMaterials.contains(event.getClickedBlock().getType()))) {
 			event.setCancelled(true);
 			if (item != null && item instanceof LevelledItem && event.getAction() == Action.RIGHT_CLICK_BLOCK
 					&& event.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE
@@ -110,7 +116,7 @@ public class ItemListener implements Listener {
 						&& event.getClickedBlock().getType() == Material.BOOKSHELF) {
 					Set<org.bukkit.entity.Item> itemEntity = getEntities(event.getClickedBlock().getLocation()
 							.add(0.5, 1.5, 0.5));
-					Set<ItemStack> items = getItems(itemEntity);
+					List<ItemStack> items = getItems(itemEntity);
 					List<Spell> possibleSpells = Zephyrus.getSpell(items);
 					List<Spell> spells = new ArrayList<Spell>();
 					for (Spell spell : possibleSpells) {
@@ -251,9 +257,9 @@ public class ItemListener implements Listener {
 					Location loc = block.getLocation().add(0.5, 1.5, 0.5);
 					loc.getWorld().dropItem(loc, SpellTome.createSpellTome(spell)).setVelocity(new Vector(0, 0, 0));
 					int amount = 1;
-					if (user.getLevel() < 7) {
+					if (user.getLevel() < 2) {
 						amount = 1;
-					} else if (user.getLevel() < 15) {
+					} else if (user.getLevel() < 7) {
 						amount = 2;
 					} else {
 						amount = 3;
@@ -304,12 +310,12 @@ public class ItemListener implements Listener {
 		return set;
 	}
 
-	public Set<ItemStack> getItems(Set<org.bukkit.entity.Item> entities) {
-		Set<ItemStack> set = new HashSet<ItemStack>();
-		for (Entity en : entities) {
-			set.add(((org.bukkit.entity.Item) en).getItemStack());
+	public List<ItemStack> getItems(Set<org.bukkit.entity.Item> entities) {
+		List<ItemStack> list = new ArrayList<ItemStack>();
+		for (org.bukkit.entity.Item en : entities) {
+			list.add((en).getItemStack());
 		}
-		return set;
+		return list;
 	}
 
 }

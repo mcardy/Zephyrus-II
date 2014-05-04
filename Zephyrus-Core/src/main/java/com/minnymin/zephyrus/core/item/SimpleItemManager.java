@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Listener;
@@ -13,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.core.item.action.BlinkPearl;
+import com.minnymin.zephyrus.core.item.action.HoeOfGrowth;
 import com.minnymin.zephyrus.core.item.wand.AdvancedWand;
 import com.minnymin.zephyrus.core.item.wand.BasicFireWand;
 import com.minnymin.zephyrus.core.item.wand.BasicObsidianWand;
@@ -65,6 +65,7 @@ public class SimpleItemManager implements ItemManager {
 		registerItem(new AdvancedWand());
 		registerItem(new SpellBook());
 		registerItem(new BlinkPearl());
+		registerItem(new HoeOfGrowth());
 	}
 
 	@Override
