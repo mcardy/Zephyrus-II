@@ -1,9 +1,9 @@
-package com.minnymin.zephyrus.core.packet;
+package com.minnymin.zephyrus.core.nms.packet;
 
 
 import org.bukkit.entity.Player;
 
-import com.minnymin.zephyrus.core.packet.PacketType.OutgoingPacket;
+import com.minnymin.zephyrus.core.nms.packet.PacketType.OutgoingPacket;
 import com.minnymin.zephyrus.core.util.reflection.NMSUtils;
 import com.minnymin.zephyrus.core.util.reflection.ReflectionUtils;
 

@@ -10,7 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 
-import com.minnymin.zephyrus.core.packet.server.PacketEntityDestroy;
+import com.minnymin.zephyrus.core.nms.packet.server.PacketEntityDestroy;
 import com.minnymin.zephyrus.core.util.ParticleEffects;
 import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
 

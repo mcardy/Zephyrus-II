@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.minnymin.zephyrus.core.config.ConfigOptions;
-import com.minnymin.zephyrus.core.packet.server.PacketParticleEffect;
+import com.minnymin.zephyrus.core.nms.packet.server.PacketParticleEffect;
 
 /**
  * Zephyrus - ParticleEffects.java

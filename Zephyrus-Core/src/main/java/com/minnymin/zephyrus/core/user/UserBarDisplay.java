@@ -8,10 +8,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Player;
 
-import com.minnymin.zephyrus.core.packet.server.PacketEntityDestroy;
-import com.minnymin.zephyrus.core.packet.server.PacketEntityLivingSpawn;
-import com.minnymin.zephyrus.core.packet.server.PacketEntityMetadata;
-import com.minnymin.zephyrus.core.packet.server.PacketEntityTeleport;
+import com.minnymin.zephyrus.core.nms.packet.server.PacketEntityDestroy;
+import com.minnymin.zephyrus.core.nms.packet.server.PacketEntityLivingSpawn;
+import com.minnymin.zephyrus.core.nms.packet.server.PacketEntityMetadata;
+import com.minnymin.zephyrus.core.nms.packet.server.PacketEntityTeleport;
 import com.minnymin.zephyrus.core.util.reflection.NMSUtils;
 import com.minnymin.zephyrus.core.util.reflection.ReflectionUtils;
 import com.minnymin.zephyrus.user.BarDisplay;

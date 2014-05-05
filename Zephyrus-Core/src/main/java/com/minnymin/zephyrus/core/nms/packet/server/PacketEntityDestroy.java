@@ -1,7 +1,7 @@
-package com.minnymin.zephyrus.core.packet.server;
+package com.minnymin.zephyrus.core.nms.packet.server;
 
-import com.minnymin.zephyrus.core.packet.ServerPacket;
-import com.minnymin.zephyrus.core.packet.PacketType.OutgoingPacket;
+import com.minnymin.zephyrus.core.nms.packet.ServerPacket;
+import com.minnymin.zephyrus.core.nms.packet.PacketType.OutgoingPacket;
 
 /**
  * Zephyrus - PacketEntityDestroy.java

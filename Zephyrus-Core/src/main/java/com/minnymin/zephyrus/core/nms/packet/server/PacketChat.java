@@ -1,8 +1,8 @@
-package com.minnymin.zephyrus.core.packet.server;
+package com.minnymin.zephyrus.core.nms.packet.server;
 
 import com.minnymin.zephyrus.core.chat.Message;
-import com.minnymin.zephyrus.core.packet.ServerPacket;
-import com.minnymin.zephyrus.core.packet.PacketType.OutgoingPacket;
+import com.minnymin.zephyrus.core.nms.packet.ServerPacket;
+import com.minnymin.zephyrus.core.nms.packet.PacketType.OutgoingPacket;
 import com.minnymin.zephyrus.core.util.reflection.NMSUtils;
 import com.minnymin.zephyrus.core.util.reflection.ReflectionUtils;
 

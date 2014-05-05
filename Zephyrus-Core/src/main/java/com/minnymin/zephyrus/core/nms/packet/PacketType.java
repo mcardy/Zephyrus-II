@@ -1,4 +1,4 @@
-package com.minnymin.zephyrus.core.packet;
+package com.minnymin.zephyrus.core.nms.packet;
 
 import java.util.HashMap;
 import java.util.Map;

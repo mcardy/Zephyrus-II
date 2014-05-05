@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageColor;
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageFormatting;
-import com.minnymin.zephyrus.core.packet.server.PacketChat;
+import com.minnymin.zephyrus.core.nms.packet.server.PacketChat;
 import com.minnymin.zephyrus.core.util.Language;
 
 /**
