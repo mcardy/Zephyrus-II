@@ -25,15 +25,17 @@ import com.minnymin.zephyrus.item.LevelledItem;
 /**
  * Zephyrus - SimpleItemManager.java
  * 
+ * TODO Enable/disable items
+ * 
  * @author minnymin3
  * 
  */
 
-public class SimpleItemManager implements ItemManager {
+public class CoreItemManager implements ItemManager {
 
 	private Map<String, Item> itemMap;
 
-	public SimpleItemManager() {
+	public CoreItemManager() {
 		itemMap = new HashMap<String, Item>();
 	}
 

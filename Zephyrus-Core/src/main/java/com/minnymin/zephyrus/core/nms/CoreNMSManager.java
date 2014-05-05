@@ -15,11 +15,11 @@ import com.minnymin.zephyrus.nms.UpgradeTrade;
  * 
  */
 
-public class SimpleNMSManager implements NMSManager {
+public class CoreNMSManager implements NMSManager {
 
 	private String version;
 	
-	public SimpleNMSManager() {
+	public CoreNMSManager() {
 	}
 	
 	@Override

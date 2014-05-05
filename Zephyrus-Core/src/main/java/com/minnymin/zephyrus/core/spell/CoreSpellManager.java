@@ -61,12 +61,12 @@ import com.minnymin.zephyrus.spell.SpellRecipe;
  * 
  */
 
-public class SimpleSpellManager implements SpellManager {
+public class CoreSpellManager implements SpellManager {
 
 	private List<Spell> spellList;
 	private YmlConfigFile spellConfig;
 
-	public SimpleSpellManager() {
+	public CoreSpellManager() {
 		spellList = new ArrayList<Spell>();
 		spellConfig = new YmlConfigFile("spells.yml");
 	}

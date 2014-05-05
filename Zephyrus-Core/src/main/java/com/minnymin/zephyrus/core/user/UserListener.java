@@ -13,9 +13,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class UserListener implements Listener {
 
-	private SimpleUserManager manager;
+	private CoreUserManager manager;
 
-	protected UserListener(SimpleUserManager manager) {
+	protected UserListener(CoreUserManager manager) {
 		this.manager = manager;
 	}
 

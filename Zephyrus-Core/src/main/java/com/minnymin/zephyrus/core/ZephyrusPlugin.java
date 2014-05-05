@@ -8,19 +8,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.minnymin.zephyrus.Zephyrus;
-import com.minnymin.zephyrus.core.aspect.SimpleAspectManager;
+import com.minnymin.zephyrus.core.aspect.CoreAspectManager;
 import com.minnymin.zephyrus.core.command.ItemCommand;
 import com.minnymin.zephyrus.core.command.SpellCommand;
 import com.minnymin.zephyrus.core.command.UserCommand;
 import com.minnymin.zephyrus.core.config.ConfigOptions;
-import com.minnymin.zephyrus.core.enchant.SimpleEnchantManager;
-import com.minnymin.zephyrus.core.hook.SimpleHookManager;
-import com.minnymin.zephyrus.core.item.SimpleItemManager;
-import com.minnymin.zephyrus.core.nms.SimpleNMSManager;
+import com.minnymin.zephyrus.core.enchant.CoreEnchantManager;
+import com.minnymin.zephyrus.core.hook.CoreHookManager;
+import com.minnymin.zephyrus.core.item.CoreItemManager;
+import com.minnymin.zephyrus.core.nms.CoreNMSManager;
 import com.minnymin.zephyrus.core.permissions.PermissionsManager;
-import com.minnymin.zephyrus.core.spell.SimpleSpellManager;
-import com.minnymin.zephyrus.core.state.SimpleStateManager;
-import com.minnymin.zephyrus.core.user.SimpleUserManager;
+import com.minnymin.zephyrus.core.spell.CoreSpellManager;
+import com.minnymin.zephyrus.core.state.CoreStateManager;
+import com.minnymin.zephyrus.core.user.CoreUserManager;
 import com.minnymin.zephyrus.core.util.Metrics;
 import com.minnymin.zephyrus.core.util.Updater;
 import com.minnymin.zephyrus.core.util.Updater.UpdateResult;
@@ -31,6 +31,7 @@ import com.minnymin.zephyrus.core.util.command.CommandFramework;
  * Zephyrus - ZephyrusPlugin.java
  * 
  * TODO Implement Combo-Spells - Later release
+ * TODO Implement Spell and Item Shops
  * 
  * @author minnymin3
  * 
@@ -45,14 +46,14 @@ public class ZephyrusPlugin extends JavaPlugin {
 		command = new CommandFramework(this);
 		saveDefaultConfig();
 		Zephyrus.setPlugin(this);
-		Zephyrus.setAspectManager(new SimpleAspectManager());
-		Zephyrus.setEnchantmentManager(new SimpleEnchantManager());
-		Zephyrus.setHookManager(new SimpleHookManager());
-		Zephyrus.setItemManager(new SimpleItemManager());
-		Zephyrus.setNMSManager(new SimpleNMSManager());
-		Zephyrus.setSpellManager(new SimpleSpellManager());
-		Zephyrus.setStateManager(new SimpleStateManager());
-		Zephyrus.setUserManager(new SimpleUserManager());
+		Zephyrus.setAspectManager(new CoreAspectManager());
+		Zephyrus.setEnchantmentManager(new CoreEnchantManager());
+		Zephyrus.setHookManager(new CoreHookManager());
+		Zephyrus.setItemManager(new CoreItemManager());
+		Zephyrus.setNMSManager(new CoreNMSManager());
+		Zephyrus.setSpellManager(new CoreSpellManager());
+		Zephyrus.setStateManager(new CoreStateManager());
+		Zephyrus.setUserManager(new CoreUserManager());
 	}
 
 	@Override

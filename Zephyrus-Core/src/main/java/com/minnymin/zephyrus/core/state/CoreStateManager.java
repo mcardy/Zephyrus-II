@@ -18,11 +18,11 @@ import com.minnymin.zephyrus.state.StateManager;
  * 
  */
 
-public class SimpleStateManager implements StateManager {
+public class CoreStateManager implements StateManager {
 		
 	private List<State> states;
 	
-	public SimpleStateManager() {
+	public CoreStateManager() {
 		states = new ArrayList<State>();
 	}
 	

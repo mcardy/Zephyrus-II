@@ -19,7 +19,7 @@ public class UserTickTask extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		Map<String, User> userMap = ((SimpleUserManager) Zephyrus.getUserManager()).getCloneMap();
+		Map<String, User> userMap = ((CoreUserManager) Zephyrus.getUserManager()).getCloneMap();
 		for (String username : userMap.keySet()) {
 			((OnlineUser) userMap.get(username)).tick();
 		}

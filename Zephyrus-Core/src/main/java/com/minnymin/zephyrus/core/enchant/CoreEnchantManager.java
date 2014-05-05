@@ -41,13 +41,13 @@ import com.minnymin.zephyrus.enchant.SwordEnchant;
  * 
  */
 
-public class SimpleEnchantManager implements EnchantManager, Listener {
+public class CoreEnchantManager implements EnchantManager, Listener {
 
 	private Map<Integer, Enchant> enchantmentMap;
 	private int id;
 	private boolean accepting;
 
-	public SimpleEnchantManager() {
+	public CoreEnchantManager() {
 		enchantmentMap = new HashMap<Integer, Enchant>();
 		id = 140;
 	}

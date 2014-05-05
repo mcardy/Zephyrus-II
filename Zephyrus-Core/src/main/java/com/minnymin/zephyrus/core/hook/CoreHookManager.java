@@ -21,12 +21,12 @@ import com.minnymin.zephyrus.spell.Spell;
  * 
  */
 
-public class SimpleHookManager implements PluginHookManager {
+public class CoreHookManager implements PluginHookManager {
 
 	private EconomyHook vault;
 	private List<ProtectionHook> hooks;
 	
-	public SimpleHookManager() {
+	public CoreHookManager() {
 		hooks = new ArrayList<ProtectionHook>();
 	}
 	

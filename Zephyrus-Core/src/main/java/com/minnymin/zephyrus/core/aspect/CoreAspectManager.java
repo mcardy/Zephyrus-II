@@ -21,11 +21,11 @@ import com.minnymin.zephyrus.aspect.AspectManager;
  * 
  */
 
-public class SimpleAspectManager implements AspectManager {
+public class CoreAspectManager implements AspectManager {
 
 	private Map<String, AspectList> map;
 
-	public SimpleAspectManager() {
+	public CoreAspectManager() {
 		map = new HashMap<String, AspectList>();
 	}
 

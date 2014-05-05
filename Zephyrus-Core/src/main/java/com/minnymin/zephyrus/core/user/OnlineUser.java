@@ -385,7 +385,7 @@ public class OnlineUser implements User {
 	protected void tick() {
 		if (Bukkit.getPlayer(playerName) == null) {
 			save();
-			((SimpleUserManager) Zephyrus.getUserManager()).removeUser(playerName);
+			((CoreUserManager) Zephyrus.getUserManager()).removeUser(playerName);
 			return;
 		}
 		for (State state : getStates()) {

@@ -18,13 +18,13 @@ import com.minnymin.zephyrus.user.UserManager;
  * 
  */
 
-public class SimpleUserManager implements UserManager {
+public class CoreUserManager implements UserManager {
 
 	protected HashMap<String, User> userMap;
 	
 	private UserBarDisplay barDisplay;
 	
-	public SimpleUserManager() {
+	public CoreUserManager() {
 		userMap = new HashMap<String, User>();
 		barDisplay = new UserBarDisplay();
 	}
