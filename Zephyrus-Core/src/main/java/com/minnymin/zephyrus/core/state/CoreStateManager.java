@@ -40,6 +40,7 @@ public class CoreStateManager implements StateManager {
 	@Override
 	public void load() {
 		registerState(StateList.ARMOR);
+		registerState(StateList.BUILD);
 		registerState(StateList.FEATHER);
 		registerState(StateList.SHIELD);
 	}

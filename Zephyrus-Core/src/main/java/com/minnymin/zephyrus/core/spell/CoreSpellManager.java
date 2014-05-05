@@ -24,6 +24,7 @@ import com.minnymin.zephyrus.core.spell.attack.FirechargeSpell;
 import com.minnymin.zephyrus.core.spell.attack.HomingArrowSpell;
 import com.minnymin.zephyrus.core.spell.attack.PunchSpell;
 import com.minnymin.zephyrus.core.spell.buff.ArmorSpell;
+import com.minnymin.zephyrus.core.spell.buff.BuildSpell;
 import com.minnymin.zephyrus.core.spell.buff.DispelSpell;
 import com.minnymin.zephyrus.core.spell.buff.FeatherSpell;
 import com.minnymin.zephyrus.core.spell.buff.ShieldSpell;
@@ -166,6 +167,7 @@ public class CoreSpellManager implements SpellManager {
 
 		// Buff
 		registerSpell(new ArmorSpell());
+		registerSpell(new BuildSpell());
 		registerSpell(new DispelSpell());
 		registerSpell(new FeatherSpell());
 		registerSpell(new ShieldSpell());

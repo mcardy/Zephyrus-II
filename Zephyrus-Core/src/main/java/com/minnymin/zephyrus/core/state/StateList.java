@@ -12,6 +12,7 @@ import com.minnymin.zephyrus.state.State;
 public class StateList {
 
 	public static final State ARMOR = new ArmorState();
+	public static final State BUILD = new BuildState();
 	public static final State FEATHER = new FeatherState();
 	public static final State SHIELD = new ShieldState();
 	
