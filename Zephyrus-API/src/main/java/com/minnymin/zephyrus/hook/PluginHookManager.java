@@ -72,6 +72,6 @@ public interface PluginHookManager extends Manager {
 	 * 
 	 * @return Null if no economy was hooked
 	 */
-	public EconomyHook getVaultHook();
+	public EconomyHook getEconomyHook();
 
 }

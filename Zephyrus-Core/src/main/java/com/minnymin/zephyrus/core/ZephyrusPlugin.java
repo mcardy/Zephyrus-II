@@ -18,6 +18,7 @@ import com.minnymin.zephyrus.core.hook.CoreHookManager;
 import com.minnymin.zephyrus.core.item.CoreItemManager;
 import com.minnymin.zephyrus.core.nms.CoreNMSManager;
 import com.minnymin.zephyrus.core.permissions.PermissionsManager;
+import com.minnymin.zephyrus.core.shop.CoreShopManager;
 import com.minnymin.zephyrus.core.spell.CoreSpellManager;
 import com.minnymin.zephyrus.core.state.CoreStateManager;
 import com.minnymin.zephyrus.core.user.CoreUserManager;
@@ -51,6 +52,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 		Zephyrus.setHookManager(new CoreHookManager());
 		Zephyrus.setItemManager(new CoreItemManager());
 		Zephyrus.setNMSManager(new CoreNMSManager());
+		Zephyrus.setShopManager(new CoreShopManager());
 		Zephyrus.setSpellManager(new CoreSpellManager());
 		Zephyrus.setStateManager(new CoreStateManager());
 		Zephyrus.setUserManager(new CoreUserManager());
@@ -72,6 +74,7 @@ public class ZephyrusPlugin extends JavaPlugin {
 		Zephyrus.getHookManager().load();
 		Zephyrus.getItemManager().load();
 		Zephyrus.getNMSManager().load();
+		Zephyrus.getShopManager().load();
 		Zephyrus.getSpellManager().load();
 		Zephyrus.getStateManager().load();
 		Zephyrus.getUserManager().load();

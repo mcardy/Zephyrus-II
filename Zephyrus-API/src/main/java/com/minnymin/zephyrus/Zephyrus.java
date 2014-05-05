@@ -3,12 +3,12 @@ package com.minnymin.zephyrus;
 import java.util.List;
 import java.util.Set;
 
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import com.minnymin.zephyrus.aspect.AspectManager;
+import com.minnymin.zephyrus.shop.ShopManager;
 import com.minnymin.zephyrus.enchant.EnchantManager;
 import com.minnymin.zephyrus.hook.PluginHookManager;
 import com.minnymin.zephyrus.item.Item;
@@ -37,6 +37,7 @@ public class Zephyrus {
 	private static ItemManager itemManager;
 	private static NMSManager nmsManager;
 	private static Plugin plugin;
+	private static ShopManager shopManager;
 	private static SpellManager spellManager;
 	private static StateManager stateManager;
 	private static UserManager userManager;
@@ -113,6 +114,15 @@ public class Zephyrus {
 	 */
 	public static Plugin getPlugin() {
 		return plugin;
+	}
+
+	/**
+	 * Gets the ShopManager singleton
+	 * 
+	 * @return The ShopManager instance
+	 */
+	public static ShopManager getShopManager() {
+		return shopManager;
 	}
 
 	/**
@@ -330,6 +340,19 @@ public class Zephyrus {
 	}
 
 	/**
+	 * Attempts to set the ShopManager singleton
+	 * 
+	 * @param manager The manager to set
+	 * @throws IllegalStateException when the manager is already set
+	 */
+	public static void setShopManager(ShopManager manager) {
+		if (Zephyrus.shopManager != null) {
+			throw new IllegalStateException("Zephyrus shop manager already set! It cannot be set twice!");
+		}
+		shopManager = manager;
+	}
+	
+	/**
 	 * Attempts to set the SpellManager singleton
 	 * 
 	 * @param manager The manager to set
@@ -372,9 +395,12 @@ public class Zephyrus {
 	 * A method to null all static variables to avoid memory leaks on reloads
 	 */
 	public static void unload() {
+		Zephyrus.aspectManager = null;
 		Zephyrus.enchantmentManager = null;
+		Zephyrus.hookManager = null;
 		Zephyrus.itemManager = null;
 		Zephyrus.nmsManager = null;
+		Zephyrus.shopManager = null;
 		Zephyrus.spellManager = null;
 		Zephyrus.stateManager = null;
 		Zephyrus.userManager = null;

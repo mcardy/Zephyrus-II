@@ -25,13 +25,14 @@ public class VaultHook implements EconomyHook {
 	@Override
 	public boolean checkHook() {
 		Plugin plugin = Bukkit.getPluginManager().getPlugin("Vault");
-		if (plugin != null && plugin instanceof Vault) {
+		if (plugin != null && plugin instanceof Vault
+				&& Bukkit.getServer().getServicesManager().getRegistration(Economy.class) != null) {
 			Zephyrus.getPlugin().getLogger().info("[Plugin Hooks] Found and hooked Vault economy");
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void drainBalance(Player player, double amount) {
 		econ.withdrawPlayer(player.getName(), amount);

@@ -63,7 +63,7 @@ public class MagicBooks {
 				+ "A book of all recipes can be obtained with '/book recipe'."));
 		meta.addPage(Language.get("item.zephyronomicon.pg5", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
 				+ ChatColor.BOLD + "Spell Crafting Continued" + ChatColor.RESET + ChatColor.BLACK
-				+ "\nSome spells require you to be a certain level to craft them (see levelling). "
+				+ "\nSome spells require you to be a certain level or already know a spell to craft them (see levelling). "
 				+ "Once you craft a spell, you can pickup a spelltome and view the spell's information. "
 				+ "Left click a spelltome to learn the spell."));
 		meta.addPage(Language.get("item.zephyronomicon.pg6", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""

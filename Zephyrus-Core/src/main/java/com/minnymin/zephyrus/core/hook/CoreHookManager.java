@@ -96,7 +96,7 @@ public class CoreHookManager implements PluginHookManager {
 	}
 
 	@Override
-	public EconomyHook getVaultHook() {
+	public EconomyHook getEconomyHook() {
 		return vault;
 	}
 

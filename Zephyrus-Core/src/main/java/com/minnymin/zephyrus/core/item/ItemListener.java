@@ -126,6 +126,7 @@ public class ItemListener implements Listener {
 										.isSpellLearned(Zephyrus.getSpell(((Prerequisite) spell.getClass()
 												.getAnnotation(Prerequisite.class)).requiredSpell())))) {
 							spells.add(spell);
+							//TODO Tell user why they can't create spell
 						}
 					}
 					if (spells.size() == 1) {
