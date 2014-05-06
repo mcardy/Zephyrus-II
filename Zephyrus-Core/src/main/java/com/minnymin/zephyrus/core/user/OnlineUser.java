@@ -21,6 +21,7 @@ import org.bukkit.util.BlockIterator;
 import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.core.config.ConfigOptions;
+import com.minnymin.zephyrus.core.util.BlockUtils;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.map.MultiMap;
 import com.minnymin.zephyrus.event.UserPostCastEvent;
@@ -326,7 +327,7 @@ public class OnlineUser implements User {
 	@SuppressWarnings("deprecation")
 	public boolean setTarget(String key, TargetType type, int range, boolean friendly) {
 		if (type == TargetType.BLOCK) {
-			Block target = player.getTargetBlock(null, range);
+			Block target = player.getTargetBlock(BlockUtils.getTransparent(), range);
 			if (Zephyrus.getHookManager().canBuild(player, target)) {
 				UserTargetBlockEvent event = new UserTargetBlockEvent(this, target);
 				Bukkit.getPluginManager().callEvent(event);

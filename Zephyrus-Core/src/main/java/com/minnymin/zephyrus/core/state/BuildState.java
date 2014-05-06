@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.core.util.BlockUtils;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.state.State;
 import com.minnymin.zephyrus.user.User;
@@ -62,7 +63,7 @@ public class BuildState implements State {
 		User user = Zephyrus.getUser(player);
 		if (user.isStateApplied(this)) {
 			if (event.getAction() == Action.RIGHT_CLICK_AIR) {
-				List<Block> blocks = player.getLastTwoTargetBlocks(null, 100); // FIXME Transparent blocks
+				List<Block> blocks = player.getLastTwoTargetBlocks(BlockUtils.getTransparent(), 100);
 				if (Zephyrus.getHookManager().canBuild(player, blocks.get(0)) && player.getItemInHand() != null
 						&& player.getItemInHand().getType().isBlock()) {
 					Block target = blocks.get(0);
@@ -74,7 +75,7 @@ public class BuildState implements State {
 					target.getWorld().playEffect(target.getLocation(), Effect.STEP_SOUND, target.getType(), 0);
 				}
 			} else if (event.getAction() == Action.LEFT_CLICK_AIR) {
-				Block block = player.getTargetBlock(null, 100);
+				Block block = player.getTargetBlock(BlockUtils.getTransparent(), 100);
 				if (Zephyrus.getHookManager().canBuild(player, block) && player.getItemInHand() != null
 						&& player.getItemInHand().getType().isBlock()) {
 					if (player.getGameMode() == GameMode.CREATIVE) {
