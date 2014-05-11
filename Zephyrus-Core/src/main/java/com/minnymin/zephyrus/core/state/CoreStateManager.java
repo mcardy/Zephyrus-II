@@ -42,7 +42,13 @@ public class CoreStateManager implements StateManager {
 		registerState(StateList.ARMOR);
 		registerState(StateList.BUILD);
 		registerState(StateList.FEATHER);
+		registerState(StateList.FIRE_SHIELD);
+		registerState(StateList.FLAME_STEP);
+		registerState(StateList.FLY);
+		registerState(StateList.LIGHT);
 		registerState(StateList.SHIELD);
+		registerState(StateList.SPEED);
+		registerState(StateList.ZEPHYR);
 	}
 
 	@Override

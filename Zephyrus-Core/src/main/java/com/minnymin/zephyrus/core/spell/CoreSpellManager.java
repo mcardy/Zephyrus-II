@@ -27,7 +27,13 @@ import com.minnymin.zephyrus.core.spell.buff.ArmorSpell;
 import com.minnymin.zephyrus.core.spell.buff.BuildSpell;
 import com.minnymin.zephyrus.core.spell.buff.DispelSpell;
 import com.minnymin.zephyrus.core.spell.buff.FeatherSpell;
+import com.minnymin.zephyrus.core.spell.buff.FireShieldSpell;
+import com.minnymin.zephyrus.core.spell.buff.FlameStepSpell;
+import com.minnymin.zephyrus.core.spell.buff.FlySpell;
+import com.minnymin.zephyrus.core.spell.buff.LightSpell;
 import com.minnymin.zephyrus.core.spell.buff.ShieldSpell;
+import com.minnymin.zephyrus.core.spell.buff.SpeedSpell;
+import com.minnymin.zephyrus.core.spell.buff.ZephyrSpell;
 import com.minnymin.zephyrus.core.spell.creation.ConjureSpell;
 import com.minnymin.zephyrus.core.spell.creation.EnderchestSpell;
 import com.minnymin.zephyrus.core.spell.illusion.ConfuseSpell;
@@ -170,7 +176,13 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new BuildSpell());
 		registerSpell(new DispelSpell());
 		registerSpell(new FeatherSpell());
+		registerSpell(new FireShieldSpell());
+		registerSpell(new FlameStepSpell());
+		registerSpell(new FlySpell());
+		registerSpell(new LightSpell());
 		registerSpell(new ShieldSpell());
+		registerSpell(new SpeedSpell());
+		registerSpell(new ZephyrSpell());
 
 		// Creation
 		registerSpell(new ConjureSpell());
@@ -205,7 +217,7 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new TrackSpell());
 
 		// TODO Re-implement:
-		// FireShield, FlameStep, Flare, Fly,
+		// Flare,
 		// Frenzy, Gernade, Home, Jail, LifeSteal, MageLight,
 		// MassParalyze, Paralyze, Phase, Prospect, Repair, Satisfy,
 		// Shield, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
@@ -215,6 +227,8 @@ public class CoreSpellManager implements SpellManager {
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)
 
+		// TODO Spell level balancing (broader range of levels
+		
 		for (Spell spell : spellList) {
 			spell.onEnable();
 		}
