@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.core.config.ConfigOptions;
 import com.minnymin.zephyrus.core.item.action.BlinkPearl;
 import com.minnymin.zephyrus.core.item.action.HoeOfGrowth;
 import com.minnymin.zephyrus.core.item.wand.AdvancedWand;
@@ -92,7 +93,9 @@ public class CoreItemManager implements ItemManager {
 			meta.addEnchant(entry.getKey(), entry.getValue(), true);
 		}
 		stack.setItemMeta(meta);
-		Bukkit.addRecipe(item.getRecipe().createRecipe(stack));
+		if (!ConfigOptions.DISABLE_ITEM_CRAFTING) {
+			Bukkit.addRecipe(item.getRecipe().createRecipe(stack));
+		}
 	}
 
 }

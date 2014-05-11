@@ -6,21 +6,54 @@
 # -  \_____/\___| .__/|_| |_|\__, |_|   \__,_|___/  -
 # -             | |           __/ |                 -
 # -             |_|          |___/                  -
+
+# ############ #
+# Plugin stuff #
+# ############ #
+
 # Enables/disables update checker
 # - Possible Values: true or false
 Update-Checking: true
 
+# Enables/disables metrics from www.mcstats.org
+# - Possible Values: true or false
+Metrics: true
+
+# ########### #
+# Spell stuff #
+# ########### #
+
 # The amount of seconds it takes to regenerate 1 mana
 # - Possible Values: Any number greater than 0
-Mana-Regen: 1
+Mana-Regeneration: 1
 
-# Enables/disables spell recipes
+# Disables crafting recipes of all spells
 # - Possible Values: true or false
-Spell-Recipes: true
+Disable-Spell-Crafting: false
+
+# ########## #
+# Item stuff #
+# ########## #
+
+# The maximum amount of each book type the player can conjure
+# - Possible Values: Any number greater than 0
+Maximum-Books: 3
+
+# Disables crafting recipes of all items (including wands)
+# - Possible Values: true or false
+Disable-Item-Crafting: false
+
+# ############# #
+# Display stuff #
+# ############# #
 
 # Enables/disables particle effects
 # - Possible Values: true or false
 Particle-Effects: true
+
+# ################ #
+# Protection Stuff #
+# ################ #
 
 # Options for disabling spell casting in town or faction that is not your own
 # - Possible values: true or false

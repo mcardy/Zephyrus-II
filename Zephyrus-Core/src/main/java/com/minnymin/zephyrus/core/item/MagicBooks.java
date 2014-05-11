@@ -108,7 +108,7 @@ public class MagicBooks {
 		int pos = 0;
 
 		for (Spell spell : Zephyrus.getSpellSet()) {
-			if (spell.getRequiredLevel() > startLevel && spell.getRequiredLevel() < endLevel) {
+			if (spell.getRequiredLevel() >= startLevel && spell.getRequiredLevel() <= endLevel) {
 				currentText.append(ChatColor.GOLD
 						+ WordUtils.capitalize(spell.getName())
 						+ ChatColor.DARK_GRAY

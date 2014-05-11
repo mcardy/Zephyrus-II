@@ -15,6 +15,7 @@ public class BlockUtils {
 	
 	public static HashSet<Byte> getTransparent() {
 		if (transparent == null) {
+			transparent = new HashSet<Byte>();
 			transparent.add((byte) 0); // Air
 			transparent.add((byte) 8); // Water
 			transparent.add((byte) 9); // Stationary Water

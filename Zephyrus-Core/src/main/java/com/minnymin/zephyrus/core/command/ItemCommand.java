@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,6 +20,8 @@ import com.minnymin.zephyrus.core.chat.MessageComponent;
 import com.minnymin.zephyrus.core.chat.MessageEvent.MessageHoverEvent;
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageColor;
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageFormatting;
+import com.minnymin.zephyrus.core.config.ConfigOptions;
+import com.minnymin.zephyrus.core.item.MagicBooks;
 import com.minnymin.zephyrus.core.item.SpellTome;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.command.Command;
@@ -61,8 +62,8 @@ public class ItemCommand {
 				return;
 			}
 			args.getPlayer().getInventory().addItem(SpellTome.createSpellTome(spell));
-			Language.sendMessage("command.spelltome.complete.self", "You have been given a [SPELL] spelltome", args
-					.getSender(), "[SPELL]", ChatColor.GOLD + WordUtils.capitalize(spell.getName()));
+			Language.sendMessage("command.spelltome.complete.self", "You have been given a [SPELL] spelltome",
+					args.getSender(), "[SPELL]", ChatColor.GOLD + WordUtils.capitalize(spell.getName()));
 		} else {
 			Spell spell = Zephyrus.getSpell(args.getArgs()[0]);
 			if (spell == null) {
@@ -75,9 +76,9 @@ public class ItemCommand {
 				return;
 			}
 			player.getInventory().addItem(SpellTome.createSpellTome(spell));
-			Language.sendMessage("command.spelltome.complete", "[PLAYER] has been given a [SPELL] spelltome", args
-					.getSender(), "[PLAYER]", player.getName(), "[SPELL]", ChatColor.GOLD
-					+ WordUtils.capitalize(spell.getName()));
+			Language.sendMessage("command.spelltome.complete", "[PLAYER] has been given a [SPELL] spelltome",
+					args.getSender(), "[PLAYER]", player.getName(), "[SPELL]",
+					ChatColor.GOLD + WordUtils.capitalize(spell.getName()));
 		}
 	}
 
@@ -92,8 +93,8 @@ public class ItemCommand {
 				return;
 			}
 			if (args.getPlayer().getItemInHand() == null) {
-				Language.sendError("command.aspects.noitem", "You need to have an item in your hand to analyze", args
-						.getSender());
+				Language.sendError("command.aspects.noitem", "You need to have an item in your hand to analyze",
+						args.getSender());
 				return;
 			}
 			AspectList list = Zephyrus.getAspectManager().getAspects(args.getPlayer().getItemInHand());
@@ -103,12 +104,16 @@ public class ItemCommand {
 				return;
 			}
 			for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
-				Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(), "[NAME]", entry
-						.getKey().getColor()
-						+ Language.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry.getKey()
-								.getDefaultName()) + ChatColor.WHITE, "[DESC]", Language.get("aspect."
-						+ entry.getKey().name() + ".desc", entry.getKey().getDefaultDescription()), "[AMOUNT]", entry
-						.getValue() + "");
+				Language.sendMessage(
+						"command.aspects.aspects",
+						"[NAME] x[AMOUNT] - [DESC]",
+						args.getSender(),
+						"[NAME]",
+						entry.getKey().getColor()
+								+ Language.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry
+										.getKey().getDefaultName()) + ChatColor.WHITE, "[DESC]", Language.get("aspect."
+								+ entry.getKey().name() + ".desc", entry.getKey().getDefaultDescription()), "[AMOUNT]",
+						entry.getValue() + "");
 			}
 		} else {
 			Material mat = Material.getMaterial(args.getArgs()[0].toUpperCase());
@@ -120,10 +125,11 @@ public class ItemCommand {
 					return;
 				}
 				for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
-					Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(), "[NAME]", Language
-							.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry.getKey()
-									.getDefaultName()), "[DESC]", Language.get("aspect." + entry.getKey().name()
-							+ ".desc", entry.getKey().getDefaultDescription()), "[AMOUNT]", entry.getValue() + "");
+					Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(),
+							"[NAME]", Language.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry
+									.getKey().getDefaultName()), "[DESC]", Language.get("aspect."
+									+ entry.getKey().name() + ".desc", entry.getKey().getDefaultDescription()),
+							"[AMOUNT]", entry.getValue() + "");
 				}
 			}
 		}
@@ -140,11 +146,87 @@ public class ItemCommand {
 			for (Aspect aspect : Aspect.values()) {
 				message.addComponent(new MessageComponent(Language.get("aspect." + aspect.name().toLowerCase()
 						+ ".name", aspect.getDefaultName()), MessageColor.valueOf(aspect.getColor().name()))
-						.setHoverEvent(MessageHoverEvent.TEXT, Language.get("aspect." + aspect.name().toLowerCase()
-								+ ".desc", aspect.getDefaultDescription())));
+						.setHoverEvent(
+								MessageHoverEvent.TEXT,
+								Language.get("aspect." + aspect.name().toLowerCase() + ".desc",
+										aspect.getDefaultDescription())));
 				message.addComponent(new MessageComponent(" - ", MessageColor.BLACK, MessageFormatting.BOLD));
 			}
 			message.sendMessage(args.getPlayer());
+		}
+	}
+
+	@Command(name = "book",
+			permission = "zephyrus.command.book",
+			description = "Allows each player to get one Zephyronomicon and a Mystic Recipe Book",
+			usage = "/book <recipe|info>")
+	public void onBookCommand(CommandArgs args) {
+		if (!args.isPlayer()) {
+			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+			return;
+		}
+		User user = Zephyrus.getUser(args.getPlayer());
+		if (args.getArgs().length == 0) {
+			String s = user.getData("book.info");
+			if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
+				Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
+						args.getSender(), "[BOOK]", "info");
+				return;
+			}
+			args.getPlayer().getInventory().addItem(MagicBooks.createZephyronomicon());
+			Language.sendMessage("command.book.info", "You recieved a Zephyronomicon", args.getSender());
+			user.setData("book.info", String.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1));
+		} else if (args.getArgs()[0].equalsIgnoreCase("info")) {
+			String s = user.getData("book.info");
+			if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
+				Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
+						args.getSender(), "[BOOK]", "info");
+				return;
+			}
+			args.getPlayer().getInventory().addItem(MagicBooks.createZephyronomicon());
+			Language.sendMessage("command.book.info", "You recieved a Zephyronomicon", args.getSender());
+			user.setData("book.info", String.valueOf(Integer.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1) + 1));
+		} else if (args.getArgs()[0].equalsIgnoreCase("recipe")) {
+			if (args.getArgs().length < 2) {
+				String s = user.getData("book.recipe1");
+				if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
+					Language.sendError("command.book.max", "You have reached the maximum amount of books allowed",
+							args.getSender());
+					return;
+				}
+				args.getPlayer().getInventory().addItem(MagicBooks.createZephyricRecipeBook(1, 5));
+				Language.sendMessage("command.book.recipe",
+						"You recieved a spell recipe book! Level [START-LEVEL] to [END-LEVEL]", args.getSender(),
+						"[START-LEVEL]", String.valueOf(1), "[END-LEVEL]", String.valueOf(5));
+				user.setData("book.recipe1", String.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1));
+			} else {
+				int teir = 1;
+				try {
+					teir = Integer.parseInt(args.getArgs()[1]);
+				} catch (Exception ex) {
+				}
+				int level = (teir - 1) * 5 + 1;
+				if (user.getLevel() < level) {
+					Language.sendError("command.book.recipe.reqlevel",
+							"You need to be level [LEVEL] to get the teir [TEIR] recipe book", args.getSender(),
+							"[LEVEL]", String.valueOf(level), "[TEIR]", String.valueOf(teir));
+					return;
+				}
+				String s = user.getData("book.recipe" + teir);
+				if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
+					Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
+							args.getSender(), "[BOOK]", "recipe teir " + teir);
+					return;
+				}
+				args.getPlayer().getInventory().addItem(MagicBooks.createZephyricRecipeBook(level, level + 4));
+				Language.sendMessage("command.book.recipe",
+						"You recieved a spell recipe book! Level [START-LEVEL] to [END-LEVEL]", args.getSender(),
+						"[START-LEVEL]", String.valueOf(level), "[END-LEVEL]", String.valueOf(level + 4));
+				user.setData("book.recipe" + teir, String.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1));
+			}
+		} else {
+			Language.sendError("command.book.unknown",
+					"Book choices are: 'recipe', 'recipe [1, 2, 3, 4, 5]' and 'info'", args.getSender());
 		}
 	}
 
@@ -165,14 +247,14 @@ public class ItemCommand {
 		Spell spell = Zephyrus.getSpell(args.getArgs()[0]);
 		Item item = Zephyrus.getItem(args.getPlayer().getItemInHand());
 		if (item == null || !(item instanceof Wand)) {
-			Language.sendError("command.bind.nowand", "You need to be equiped with a wand to bind a spell", args
-					.getSender());
+			Language.sendError("command.bind.nowand", "You need to be equiped with a wand to bind a spell",
+					args.getSender());
 			return;
 		}
 		Wand wand = (Wand) item;
 		if (spell == null || !user.isSpellLearned(spell)) {
-			Language.sendError("command.bind.learn", "You have not learned [SPELL]", args.getSender(), "[SPELL]", args
-					.getArgs()[0]);
+			Language.sendError("command.bind.learn", "You have not learned [SPELL]", args.getSender(), "[SPELL]",
+					args.getArgs()[0]);
 			return;
 		}
 		if (!spell.getClass().isAnnotationPresent(Bindable.class)) {
@@ -180,8 +262,8 @@ public class ItemCommand {
 			return;
 		}
 		if (wand.getBindingAbilityLevel() < spell.getRequiredLevel()) {
-			Language.sendError("commabd.bind.level", "That spell requires a higher level wand to bind to", args
-					.getSender());
+			Language.sendError("commabd.bind.level", "That spell requires a higher level wand to bind to",
+					args.getSender());
 			return;
 		}
 		UserBindSpellEvent event = new UserBindSpellEvent(args.getPlayer(), spell, wand);
@@ -193,8 +275,8 @@ public class ItemCommand {
 			meta.setLore(wand.getBoundLore(spell));
 			stack.setItemMeta(meta);
 			args.getPlayer().setItemInHand(stack);
-			Language.sendMessage("command.bind.complete", "Successfully bound [SPELL] to your wand", args.getSender(), "[SPELL]", ChatColor.GOLD
-					+ spell.getName() + ChatColor.WHITE);
+			Language.sendMessage("command.bind.complete", "Successfully bound [SPELL] to your wand", args.getSender(),
+					"[SPELL]", ChatColor.GOLD + spell.getName() + ChatColor.WHITE);
 		}
 	}
 
@@ -210,8 +292,8 @@ public class ItemCommand {
 		}
 		Item item = Zephyrus.getItem(args.getPlayer().getItemInHand());
 		if (item == null || !(item instanceof Wand)) {
-			Language.sendError("command.unbind.nowand", "You need to be equiped with a wand to unbind a spell", args
-					.getSender());
+			Language.sendError("command.unbind.nowand", "You need to be equiped with a wand to unbind a spell",
+					args.getSender());
 			return;
 		}
 		Wand wand = (Wand) item;
@@ -221,8 +303,8 @@ public class ItemCommand {
 		meta.setLore(wand.getLore());
 		stack.setItemMeta(meta);
 		args.getPlayer().setItemInHand(stack);
-		Language.sendMessage("command.unbind.complete", "Successfully unbound all spells from your wand", args
-				.getSender());
+		Language.sendMessage("command.unbind.complete", "Successfully unbound all spells from your wand",
+				args.getSender());
 	}
 
 	@Completer(name = "spelltome", aliases = { "tome", "learn", "teach" })

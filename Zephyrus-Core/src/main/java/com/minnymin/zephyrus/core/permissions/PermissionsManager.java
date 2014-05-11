@@ -26,6 +26,7 @@ public class PermissionsManager {
 		Bukkit.getPluginManager().addPermission(new Permission("zephyrus.command.mana", PermissionDefault.TRUE));
 		Bukkit.getPluginManager().addPermission(new Permission("zephyrus.command.mana.restore", PermissionDefault.OP));
 		Bukkit.getPluginManager().addPermission(new Permission("zephyrus.command.mana.other", PermissionDefault.TRUE));
+		Bukkit.getPluginManager().addPermission(new Permission("zephyrus.command.book.bypass", PermissionDefault.TRUE));
 	}
-	
+
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.minnymin.zephyrus.Zephyrus;
-import com.minnymin.zephyrus.core.item.MagicBooks;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.command.Command;
 import com.minnymin.zephyrus.core.util.command.CommandArgs;
@@ -21,31 +20,6 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class SpellCommand {
-
-	@Command(name = "book",
-			permission = "zephyrus.command.book",
-			description = "Allows each player to get one Zephyronomicon and a Mystic Recipe Book",
-			usage = "/book <recipe|info>")
-	public void onBookCommand(CommandArgs args) {
-		if (!args.isPlayer()) {
-			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
-			return;
-		}
-		if (args.getArgs().length == 0) {
-			args.getPlayer().getInventory().addItem(MagicBooks.createZephyronomicon());
-			Language.sendMessage("command.book.info", "You recieved a Zephyronomicon", args.getSender());
-			return;
-		}
-		if (args.getArgs()[0].equalsIgnoreCase("info")) {
-			args.getPlayer().getInventory().addItem(MagicBooks.createZephyronomicon());
-			Language.sendMessage("command.book.info", "You recieved a Zephyronomicon", args.getSender());
-		} else if (args.getArgs()[0].equalsIgnoreCase("recipe")) {
-			args.getPlayer().getInventory().addItem(MagicBooks.createZephyricRecipeBook(0, 50));
-			Language.sendMessage("command.book.recipe", "You recieved a spell recipe book!", args.getSender());
-		} else {
-			Language.sendError("command.book.unknown", "Only books are: recipe and info", args.getSender());
-		}
-	}
 
 	@Command(name = "cast",
 			permission = "zephyrus.command.cast",

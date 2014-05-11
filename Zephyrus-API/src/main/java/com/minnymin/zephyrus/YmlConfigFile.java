@@ -53,6 +53,7 @@ public class YmlConfigFile {
 	public void addDefaults(String path, Object value) {
 		if (!getConfig().contains(path)) {
 			getConfig().set(path, value);
+			saveConfig();
 		}
 	}
 

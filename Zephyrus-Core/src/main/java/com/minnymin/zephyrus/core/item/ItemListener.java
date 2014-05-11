@@ -31,6 +31,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.core.config.ConfigOptions;
 import com.minnymin.zephyrus.core.util.DataStructureUtils;
 import com.minnymin.zephyrus.core.util.InventoryGUI;
 import com.minnymin.zephyrus.core.util.Language;
@@ -77,7 +78,8 @@ public class ItemListener implements Listener {
 		Item item = Zephyrus.getItemManager().getItem(player.getItemInHand());
 		User user = Zephyrus.getUser(player);
 		boolean didCast = false;
-		if (item != null && !(event.getClickedBlock() != null && actionMaterials.contains(event.getClickedBlock().getType()))) {
+		if (item != null
+				&& !(event.getClickedBlock() != null && actionMaterials.contains(event.getClickedBlock().getType()))) {
 			event.setCancelled(true);
 			if (item != null && item instanceof LevelledItem && event.getAction() == Action.RIGHT_CLICK_BLOCK
 					&& event.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE
@@ -113,7 +115,8 @@ public class ItemListener implements Listener {
 				String bound = wand.getSpell(player.getItemInHand());
 				// Spell Crafting
 				if (event.getAction() == Action.RIGHT_CLICK_BLOCK
-						&& event.getClickedBlock().getType() == Material.BOOKSHELF) {
+						&& event.getClickedBlock().getType() == Material.BOOKSHELF
+						&& !ConfigOptions.DISABLE_SPELL_CRAFTING) {
 					Set<org.bukkit.entity.Item> itemEntity = getEntities(event.getClickedBlock().getLocation()
 							.add(0.5, 1.5, 0.5));
 					List<ItemStack> items = getItems(itemEntity);
@@ -126,7 +129,7 @@ public class ItemListener implements Listener {
 										.isSpellLearned(Zephyrus.getSpell(((Prerequisite) spell.getClass()
 												.getAnnotation(Prerequisite.class)).requiredSpell())))) {
 							spells.add(spell);
-							//TODO Tell user why they can't create spell
+							// TODO Tell user why they can't create spell
 						}
 					}
 					if (spells.size() == 1) {
