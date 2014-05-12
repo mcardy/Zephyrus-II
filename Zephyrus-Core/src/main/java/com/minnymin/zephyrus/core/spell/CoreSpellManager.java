@@ -21,7 +21,10 @@ import com.minnymin.zephyrus.core.spell.attack.BoltSpell;
 import com.minnymin.zephyrus.core.spell.attack.ButcherSpell;
 import com.minnymin.zephyrus.core.spell.attack.FireballSpell;
 import com.minnymin.zephyrus.core.spell.attack.FirechargeSpell;
+import com.minnymin.zephyrus.core.spell.attack.FlareSpell;
+import com.minnymin.zephyrus.core.spell.attack.GrenadeSpell;
 import com.minnymin.zephyrus.core.spell.attack.HomingArrowSpell;
+import com.minnymin.zephyrus.core.spell.attack.LifeStealSpell;
 import com.minnymin.zephyrus.core.spell.attack.PunchSpell;
 import com.minnymin.zephyrus.core.spell.buff.ArmorSpell;
 import com.minnymin.zephyrus.core.spell.buff.BuildSpell;
@@ -36,11 +39,13 @@ import com.minnymin.zephyrus.core.spell.buff.SpeedSpell;
 import com.minnymin.zephyrus.core.spell.buff.ZephyrSpell;
 import com.minnymin.zephyrus.core.spell.creation.ConjureSpell;
 import com.minnymin.zephyrus.core.spell.creation.EnderchestSpell;
+import com.minnymin.zephyrus.core.spell.creation.JailSpell;
 import com.minnymin.zephyrus.core.spell.illusion.ConfuseSpell;
 import com.minnymin.zephyrus.core.spell.illusion.DisorientSpell;
 import com.minnymin.zephyrus.core.spell.mobility.BangSpell;
 import com.minnymin.zephyrus.core.spell.mobility.BlinkSpell;
 import com.minnymin.zephyrus.core.spell.mobility.HomeSpell;
+import com.minnymin.zephyrus.core.spell.mobility.ParalyzeSpell;
 import com.minnymin.zephyrus.core.spell.mobility.WooshSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeedSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeederSpell;
@@ -168,7 +173,10 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new ButcherSpell());
 		registerSpell(new FireballSpell());
 		registerSpell(new FirechargeSpell());
+		registerSpell(new FlareSpell());
+		registerSpell(new GrenadeSpell());
 		registerSpell(new HomingArrowSpell());
+		registerSpell(new LifeStealSpell());
 		registerSpell(new PunchSpell());
 
 		// Buff
@@ -187,6 +195,7 @@ public class CoreSpellManager implements SpellManager {
 		// Creation
 		registerSpell(new ConjureSpell());
 		registerSpell(new EnderchestSpell());
+		registerSpell(new JailSpell());
 
 		// Illusion
 		registerSpell(new ConfuseSpell());
@@ -196,6 +205,7 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new BangSpell());
 		registerSpell(new BlinkSpell());
 		registerSpell(new HomeSpell());
+		registerSpell(new ParalyzeSpell());
 		registerSpell(new WooshSpell());
 
 		// Restoration
@@ -217,11 +227,8 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new TrackSpell());
 
 		// TODO Re-implement:
-		// Flare,
-		// Frenzy, Gernade, Home, Jail, LifeSteal, MageLight,
 		// MassParalyze, Paralyze, Phase, Prospect, Repair, Satisfy,
-		// Shield, Smite, Storm, Summon, SuperHeat, SuperSpeed, Vanish,
-		// VIsion, Zap, Zephyr
+		// Storm, SuperHeat, Vanish, Vision, Zap
 
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
