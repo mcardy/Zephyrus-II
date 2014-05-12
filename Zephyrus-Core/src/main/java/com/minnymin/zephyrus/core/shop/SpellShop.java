@@ -31,14 +31,6 @@ public class SpellShop implements Shop {
 	public boolean create(SignChangeEvent event) {
 		Player player = event.getPlayer();
 		String[] args = event.getLines();
-		if (Zephyrus.getHookManager().getEconomyHook() == null) {
-			Language.sendError("shop.create.economy", "No economy system found. Cannot create shop.", player);
-			return false;
-		}
-		if (!player.hasPermission("zephyrus.shop.create")) {
-			Language.sendError("shop.permission", "You do not have permission to create shops", player);
-			return false;
-		}
 		int amount;
 		Spell spell;
 		try {

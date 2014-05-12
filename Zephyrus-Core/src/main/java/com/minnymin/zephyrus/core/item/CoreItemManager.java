@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -54,6 +55,16 @@ public class CoreItemManager implements ItemManager {
 	public Item getItem(ItemStack item) {
 		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
 			return getItem(item.getItemMeta().getDisplayName());
+		}
+		return null;
+	}
+	
+	@Override
+	public Item getItemFromBaseName(String name) {
+		for (String s : itemMap.keySet()) {
+			if (name.equalsIgnoreCase(ChatColor.stripColor(s))) {
+				return itemMap.get(s);
+			}
 		}
 		return null;
 	}

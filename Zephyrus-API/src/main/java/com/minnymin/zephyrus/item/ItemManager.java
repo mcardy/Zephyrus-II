@@ -1,6 +1,5 @@
 package com.minnymin.zephyrus.item;
 
-
 import org.bukkit.inventory.ItemStack;
 
 import com.minnymin.zephyrus.Manager;
@@ -30,6 +29,14 @@ public interface ItemManager extends Manager {
 	 * @return A registered item or Null if no item was found
 	 */
 	public Item getItem(String name);
+
+	/**
+	 * Gets an item by the specified name without any formatting
+	 * 
+	 * @param name The name of the item to find
+	 * @return A registered item or NULL if no item was found
+	 */
+	public Item getItemFromBaseName(String name);
 
 	/**
 	 * Registers the specified item with Zephyrus and Bukkit

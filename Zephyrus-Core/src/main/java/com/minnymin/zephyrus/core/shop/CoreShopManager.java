@@ -13,6 +13,7 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.shop.Shop;
 import com.minnymin.zephyrus.shop.ShopManager;
 
@@ -35,6 +36,7 @@ public class CoreShopManager implements ShopManager, Listener {
 	public void load() {
 		Bukkit.getPluginManager().registerEvents(this, Zephyrus.getPlugin());
 		registerShop(new SpellShop());
+		registerShop(new WandShop());
 	}
 
 	@Override
@@ -50,6 +52,14 @@ public class CoreShopManager implements ShopManager, Listener {
 	public void onSignCreate(SignChangeEvent event) {
 		for (Shop shop : shops) {
 			if (event.getLine(0).equalsIgnoreCase("[" + shop.getName() + "]")) {
+				if (Zephyrus.getHookManager().getEconomyHook() == null) {
+					Language.sendError("shop.create.economy", "No economy system found. Cannot create shop.", event.getPlayer());
+					return;
+				}
+				if (!event.getPlayer().hasPermission("zephyrus.shop.create")) {
+					Language.sendError("shop.permission", "You do not have permission to create shops", event.getPlayer());
+					return;
+				}
 				if (shop.create(event)) {
 					event.setLine(0, shop.getChatColorIdentifier() + "[" + shop.getName() + "]");
 				}
