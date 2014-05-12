@@ -56,11 +56,4 @@ public class SpellAttributes {
 		ATTACK, BUFF, CREATION, ILLUSION, MOBILITY, RESTORATION, WORLD;
 	}
 
-	/**
-	 * An identifier for the type of target for a targeted spell
-	 */
-	public enum TargetType {
-		BLOCK, ENTITY;
-	}
-
 }

@@ -222,9 +222,4 @@ public class UserCommand {
 		}
 	}
 
-	@Command(name = "effects")
-	public void onEffectsCommand(CommandArgs args) {
-		//TODO Effects command
-	}
-
 }

@@ -14,8 +14,8 @@ import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
-import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
+import com.minnymin.zephyrus.user.Target.TargetType;
 import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
 
@@ -27,7 +27,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 @Bindable
-@Targeted(friendly = true, type = TargetType.ENTITY)
+@Targeted(friendly = true, type = TargetType.PLAYER)
 public class FeederSpell extends Spell {
 
 	public FeederSpell() {

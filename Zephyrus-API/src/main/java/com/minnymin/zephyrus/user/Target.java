@@ -1,10 +1,8 @@
 package com.minnymin.zephyrus.user;
 
-
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
-
-import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
+import org.bukkit.entity.Player;
 
 /**
  * Zephyrus - Target.java<br>
@@ -16,15 +14,18 @@ import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
 
 public class Target {
 
+	/**
+	 * An identifier for the type of target for a targeted spell
+	 */
+	public enum TargetType {
+		BLOCK, ENTITY, PLAYER;
+	}
+
 	private TargetType type;
 	private Object value;
 
-	public Target(Object value) {
-		if (value instanceof LivingEntity) {
-			this.type = TargetType.ENTITY;
-		} else if (value instanceof Block) {
-			this.type = TargetType.BLOCK;
-		}
+	public Target(Object value, TargetType type) {
+		this.type = type;
 		this.value = value;
 	}
 
@@ -52,6 +53,18 @@ public class Target {
 		return null;
 	}
 
+	/**
+	 * Gets the player target
+	 * 
+	 * @return Null if not targeting a player or no target was found
+	 */
+	public Player getPlayer() {
+		if (value instanceof Player) {
+			return (Player) value;
+		}
+		return null;
+	}
+	
 	/**
 	 * Gets the type of target
 	 * 

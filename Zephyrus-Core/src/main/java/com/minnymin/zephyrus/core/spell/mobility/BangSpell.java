@@ -3,7 +3,6 @@ package com.minnymin.zephyrus.core.spell.mobility;
 import java.util.HashSet;
 import java.util.Map;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -21,8 +20,8 @@ import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
-import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
+import com.minnymin.zephyrus.user.Target.TargetType;
 import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
 

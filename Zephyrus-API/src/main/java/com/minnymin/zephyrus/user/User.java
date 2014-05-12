@@ -6,8 +6,8 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 import com.minnymin.zephyrus.spell.Spell;
-import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
 import com.minnymin.zephyrus.state.State;
+import com.minnymin.zephyrus.user.Target.TargetType;
 
 /**
  * Zephyrus - User.java<br>
@@ -66,6 +66,13 @@ public interface User {
 	 */
 	public float drainMana(float mana);
 
+	/**
+	 * The current states applied to this user
+	 * 
+	 * @return A collection of states
+	 */
+	public Collection<State> getActiveStates();
+	
 	/**
 	 * Gets data from the config
 	 * 
@@ -132,12 +139,12 @@ public interface User {
 	public Player getPlayer();
 
 	/**
-	 * The current states applied to this user
+	 * Gets the amount of time of the given state
 	 * 
-	 * @return A collection of states
+	 * @return The time remaining in seconds
 	 */
-	public Collection<State> getStates();
-
+	public int getStateTime(State state);
+	
 	/**
 	 * Gets the user's target for the given spell
 	 * 

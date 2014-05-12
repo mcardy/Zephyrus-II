@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
+import com.minnymin.zephyrus.user.Target.TargetType;
 
 
 /**

@@ -9,7 +9,7 @@ import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
-import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
+import com.minnymin.zephyrus.user.Target.TargetType;
 import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
 

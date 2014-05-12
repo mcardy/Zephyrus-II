@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -23,8 +22,8 @@ import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
 import com.minnymin.zephyrus.item.ActionItem;
 import com.minnymin.zephyrus.item.ItemRecipe;
 import com.minnymin.zephyrus.item.LevelledItem;
-import com.minnymin.zephyrus.spell.SpellAttributes.TargetType;
 import com.minnymin.zephyrus.user.Target;
+import com.minnymin.zephyrus.user.Target.TargetType;
 import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
 
