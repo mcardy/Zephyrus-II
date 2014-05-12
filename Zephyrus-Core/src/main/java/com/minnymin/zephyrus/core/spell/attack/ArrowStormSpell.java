@@ -2,9 +2,9 @@ package com.minnymin.zephyrus.core.spell.attack;
 
 import java.util.Map;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 
@@ -60,7 +60,7 @@ public class ArrowStormSpell extends Spell implements ConfigurableSpell {
 			public void run() {
 				int shots = amount;
 				if (shots > 0 && player.isOnline()) {
-					player.launchProjectile(org.bukkit.entity.Arrow.class)
+					player.launchProjectile(Arrow.class)
 							.setMetadata("ignore_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
 					shots--;
 				}

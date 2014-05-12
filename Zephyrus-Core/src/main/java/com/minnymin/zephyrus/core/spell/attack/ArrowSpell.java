@@ -1,6 +1,7 @@
 package com.minnymin.zephyrus.core.spell.attack;
 
 
+import org.bukkit.entity.Arrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -33,7 +34,7 @@ public class ArrowSpell extends Spell implements Listener {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		user.getPlayer().launchProjectile(org.bukkit.entity.Arrow.class)
+		user.getPlayer().launchProjectile(Arrow.class)
 				.setMetadata("ignore_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
 		return CastResult.SUCCESS;
 	}

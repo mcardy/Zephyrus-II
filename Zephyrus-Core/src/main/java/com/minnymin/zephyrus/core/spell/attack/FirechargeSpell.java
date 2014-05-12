@@ -1,5 +1,7 @@
 package com.minnymin.zephyrus.core.spell.attack;
 
+import org.bukkit.entity.SmallFireball;
+
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.spell.Spell;
@@ -25,7 +27,7 @@ public class FirechargeSpell extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		user.getPlayer().launchProjectile(org.bukkit.entity.Fireball.class);
+		user.getPlayer().launchProjectile(SmallFireball.class);
 		return CastResult.SUCCESS;
 	}
 

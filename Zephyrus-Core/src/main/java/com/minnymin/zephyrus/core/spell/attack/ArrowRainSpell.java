@@ -1,6 +1,7 @@
 package com.minnymin.zephyrus.core.spell.attack;
 
 
+import org.bukkit.entity.Arrow;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import com.minnymin.zephyrus.Zephyrus;
@@ -32,14 +33,14 @@ public class ArrowRainSpell extends ContinuousSpell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		user.getPlayer().launchProjectile(org.bukkit.entity.Arrow.class)
+		user.getPlayer().launchProjectile(Arrow.class)
 				.setMetadata("ignore_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
 		return CastResult.SUCCESS;
 	}
 
 	@Override
 	public CastResult onCastTick(User user, int power, String[] args) {
-		user.getPlayer().launchProjectile(org.bukkit.entity.Arrow.class)
+		user.getPlayer().launchProjectile(Arrow.class)
 				.setMetadata("ignore_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
 		return CastResult.SUCCESS;
 	}
