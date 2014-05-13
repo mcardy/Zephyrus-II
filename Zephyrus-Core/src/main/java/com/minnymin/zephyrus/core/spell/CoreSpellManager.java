@@ -47,6 +47,7 @@ import com.minnymin.zephyrus.core.spell.mobility.BlinkSpell;
 import com.minnymin.zephyrus.core.spell.mobility.HomeSpell;
 import com.minnymin.zephyrus.core.spell.mobility.MassParalyzeSpell;
 import com.minnymin.zephyrus.core.spell.mobility.ParalyzeSpell;
+import com.minnymin.zephyrus.core.spell.mobility.PhaseSpell;
 import com.minnymin.zephyrus.core.spell.mobility.WooshSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeedSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeederSpell;
@@ -208,6 +209,7 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new HomeSpell());
 		registerSpell(new MassParalyzeSpell());
 		registerSpell(new ParalyzeSpell());
+		registerSpell(new PhaseSpell());
 		registerSpell(new WooshSpell());
 
 		// Restoration
@@ -229,7 +231,7 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new TrackSpell());
 
 		// TODO Re-implement:
-		// MassParalyze, Paralyze, Phase, Prospect, Repair, Satisfy,
+		// Prospect, Repair, Satisfy,
 		// Storm, SuperHeat, Vanish, Vision, Zap
 
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
