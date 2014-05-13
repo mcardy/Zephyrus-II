@@ -45,6 +45,7 @@ import com.minnymin.zephyrus.core.spell.illusion.DisorientSpell;
 import com.minnymin.zephyrus.core.spell.mobility.BangSpell;
 import com.minnymin.zephyrus.core.spell.mobility.BlinkSpell;
 import com.minnymin.zephyrus.core.spell.mobility.HomeSpell;
+import com.minnymin.zephyrus.core.spell.mobility.MassParalyzeSpell;
 import com.minnymin.zephyrus.core.spell.mobility.ParalyzeSpell;
 import com.minnymin.zephyrus.core.spell.mobility.WooshSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeedSpell;
@@ -205,6 +206,7 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new BangSpell());
 		registerSpell(new BlinkSpell());
 		registerSpell(new HomeSpell());
+		registerSpell(new MassParalyzeSpell());
 		registerSpell(new ParalyzeSpell());
 		registerSpell(new WooshSpell());
 
