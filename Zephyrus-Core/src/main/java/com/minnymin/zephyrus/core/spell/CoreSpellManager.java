@@ -53,6 +53,8 @@ import com.minnymin.zephyrus.core.spell.restoration.FeedSpell;
 import com.minnymin.zephyrus.core.spell.restoration.FeederSpell;
 import com.minnymin.zephyrus.core.spell.restoration.HealSpell;
 import com.minnymin.zephyrus.core.spell.restoration.HealerSpell;
+import com.minnymin.zephyrus.core.spell.restoration.RepairSpell;
+import com.minnymin.zephyrus.core.spell.restoration.SatisfySpell;
 import com.minnymin.zephyrus.core.spell.world.BrightSpell;
 import com.minnymin.zephyrus.core.spell.world.ClockSpell;
 import com.minnymin.zephyrus.core.spell.world.DetectSpell;
@@ -61,6 +63,7 @@ import com.minnymin.zephyrus.core.spell.world.DimSpell;
 import com.minnymin.zephyrus.core.spell.world.ExplodeSpell;
 import com.minnymin.zephyrus.core.spell.world.FireRingSpell;
 import com.minnymin.zephyrus.core.spell.world.GrowSpell;
+import com.minnymin.zephyrus.core.spell.world.ProspectSpell;
 import com.minnymin.zephyrus.core.spell.world.SmiteSpell;
 import com.minnymin.zephyrus.core.spell.world.TrackSpell;
 import com.minnymin.zephyrus.spell.ConfigurableSpell;
@@ -217,7 +220,9 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new FeederSpell());
 		registerSpell(new HealSpell());
 		registerSpell(new HealerSpell());
-
+		registerSpell(new RepairSpell());
+		registerSpell(new SatisfySpell());
+		
 		// World
 		registerSpell(new BrightSpell());
 		registerSpell(new ClockSpell());
@@ -227,11 +232,11 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new ExplodeSpell());
 		registerSpell(new FireRingSpell());
 		registerSpell(new GrowSpell());
+		registerSpell(new ProspectSpell());
 		registerSpell(new SmiteSpell());
 		registerSpell(new TrackSpell());
 
 		// TODO Re-implement:
-		// Prospect, Repair, Satisfy,
 		// Storm, SuperHeat, Vanish, Vision, Zap
 
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
