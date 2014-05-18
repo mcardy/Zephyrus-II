@@ -17,8 +17,8 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
+import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -42,7 +42,7 @@ public class DigSpell extends Spell implements ConfigurableSpell {
 	@Override
 	@SuppressWarnings("deprecation")
 	public CastResult onCast(User user, int power, String[] args) {
-		Block block = user.getTarget(this.getDefaultName()).getBlock();
+		Block block = (Block) user.getTarget(this).getTarget();
 		if (blacklist.contains(block.getTypeId()) || block.getType() == Material.AIR) {
 			Language.sendError("spell.dig.blacklist", "You cannot break that block", user.getPlayer());
 			return CastResult.FAILURE;

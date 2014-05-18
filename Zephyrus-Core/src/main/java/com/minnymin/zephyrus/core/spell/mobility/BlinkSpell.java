@@ -17,10 +17,9 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 /**
  * Zephyrus - Blink.java
@@ -42,9 +41,8 @@ public class BlinkSpell extends Spell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
-		Target target = user.getTarget(this.getDefaultName());
-		if (target != null && target.getBlock() != null && target.getBlock().getType() != Material.AIR) {
-			Block block = target.getBlock();
+		Block block = (Block) user.getTarget(this).getTarget();
+		if (block.getType() != Material.AIR) {
 			Location bottom = block.getLocation().add(0, 1, 0);
 			Location top = block.getLocation().add(0, 2, 0);
 			Block bottomBlock = bottom.getBlock();

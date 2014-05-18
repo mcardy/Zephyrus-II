@@ -56,16 +56,32 @@ public class MagicBooks {
 								+ "\nWands are used for many of Zephyrus's features. "
 								+ "They are used to craft spells and can be used to cast spells. "
 								+ "There are many types of wands that can be found on the wiki:\n http://wiki.minnymin.com/Portal:Wands"));
-		meta.addPage(Language.get("item.zephyronomicon.pg4", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
-				+ ChatColor.BOLD + "Spell Crafting" + ChatColor.RESET + ChatColor.BLACK
-				+ "\nSpell crafting is done by dropping items onto a bookshelf and clicking the shelf with your wand. "
-				+ "Each spell has a special recipe composed of aspects. "
-				+ "A book of all recipes can be obtained with '/book recipe'."));
-		meta.addPage(Language.get("item.zephyronomicon.pg5", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
-				+ ChatColor.BOLD + "Spell Crafting Continued" + ChatColor.RESET + ChatColor.BLACK
-				+ "\nSome spells require you to be a certain level or already know a spell to craft them (see levelling). "
-				+ "Once you craft a spell, you can pickup a spelltome and view the spell's information. "
-				+ "Left click a spelltome to learn the spell."));
+		meta.addPage(Language
+				.get("item.zephyronomicon.pg4",
+						ChatColor.DARK_AQUA
+								+ ""
+								+ ChatColor.UNDERLINE
+								+ ""
+								+ ChatColor.BOLD
+								+ "Spell Crafting"
+								+ ChatColor.RESET
+								+ ChatColor.BLACK
+								+ "\nYou craft spells by putting items into a chest on top of a bookshelf and right clicking the shelf with your wand. "
+								+ "Each spell has a special recipe composed of aspects. "
+								+ "A book of all recipes can be obtained with '/book recipe'."));
+		meta.addPage(Language
+				.get("item.zephyronomicon.pg5",
+						ChatColor.DARK_AQUA
+								+ ""
+								+ ChatColor.UNDERLINE
+								+ ""
+								+ ChatColor.BOLD
+								+ "Spell Crafting Continued"
+								+ ChatColor.RESET
+								+ ChatColor.BLACK
+								+ "\nSome spells require you to be a certain level or already know a spell to craft them (see levelling). "
+								+ "Once you craft a spell, you can pickup a spelltome and view the spell's information. "
+								+ "Left click a spelltome to learn the spell."));
 		meta.addPage(Language.get("item.zephyronomicon.pg6", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
 				+ ChatColor.BOLD + "Aspects" + ChatColor.RESET + ChatColor.BLACK
 				+ "\nEach item in the game has aspects on it. "

@@ -1,6 +1,7 @@
 package com.minnymin.zephyrus.core.spell.attack;
 
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.metadata.FixedMetadataValue;
 
 import com.minnymin.zephyrus.Zephyrus;
@@ -13,9 +14,9 @@ import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
 import com.minnymin.zephyrus.spell.annotation.Prerequisite;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 /**
  * Zephyrus - HomingArrow.java
@@ -37,7 +38,7 @@ public class HomingArrowSpell extends Spell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		HomingEntityProjectile projectile = new HomingEntityProjectile(user.getPlayer().launchProjectile(
-				org.bukkit.entity.Arrow.class), user.getTarget(getDefaultName()).getEntity());
+				org.bukkit.entity.Arrow.class), (LivingEntity) user.getTarget(this).getTarget());
 		projectile.getEntity().setMetadata("ignore_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
 		projectile.launchProjectile(user.getPlayer());
 		return CastResult.SUCCESS;

@@ -22,10 +22,9 @@ import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
 import com.minnymin.zephyrus.item.ActionItem;
 import com.minnymin.zephyrus.item.ItemRecipe;
 import com.minnymin.zephyrus.item.LevelledItem;
-import com.minnymin.zephyrus.user.Target;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 /**
  * Zephyrus - BlinkPearl.java
@@ -109,15 +108,14 @@ public class BlinkPearl implements ActionItem, LevelledItem {
 		Player player = event.getPlayer();
 		player.updateInventory();
 		User user = Zephyrus.getUser(player);
-		Target target = user.getTarget(this.getName());
+		Block block = (Block) user.getTarget(this).getTarget();
 		int delay = user.getDelay(getName());
 		if (delay > 0) {
 			Language.sendError("item.delay", "You still need to wait [SECONDS] seconds to use this item", player,
 					"[SECONDS]", delay + "");
 			return;
 		}
-		if (target != null && target.getBlock() != null && target.getBlock().getType() != Material.AIR) {
-			Block block = target.getBlock();
+		if (block.getType() != Material.AIR) {
 			Location bottom = block.getLocation().add(0, 1, 0);
 			Location top = block.getLocation().add(0, 2, 0);
 			Block bottomBlock = bottom.getBlock();

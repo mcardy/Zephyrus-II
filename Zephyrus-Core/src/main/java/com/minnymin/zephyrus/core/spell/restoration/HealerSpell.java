@@ -13,8 +13,8 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
+import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -35,7 +35,7 @@ public class HealerSpell extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		LivingEntity target = user.getTarget(this.getDefaultName()).getEntity();
+		LivingEntity target = (LivingEntity) user.getTarget(this).getTarget();
 		target.setHealth(target.getHealth() < target.getMaxHealth() ? target.getHealth() + 1 : target.getMaxHealth());
 		Location loc = target.getEyeLocation();
 		for (double[] pos : MathUtils.getCircleMap()) {

@@ -9,8 +9,8 @@ import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
+import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -30,7 +30,7 @@ public class ExplodeSpell extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		Block target = user.getTarget(getDefaultName()).getBlock();
+		Block target = (Block) user.getTarget(this).getTarget();
 		if (target.getWorld().createExplosion(target.getLocation(), 4F)) {
 			return CastResult.SUCCESS;
 		}

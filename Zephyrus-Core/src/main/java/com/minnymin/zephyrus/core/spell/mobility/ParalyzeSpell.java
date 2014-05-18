@@ -16,8 +16,8 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
+import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -40,7 +40,7 @@ public class ParalyzeSpell extends Spell implements ConfigurableSpell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		LivingEntity entity = user.getTarget(getDefaultName()).getEntity();
+		LivingEntity entity = (LivingEntity) user.getTarget(this).getTarget();
 		entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20 * power, 100));
 		return CastResult.SUCCESS;
 	}

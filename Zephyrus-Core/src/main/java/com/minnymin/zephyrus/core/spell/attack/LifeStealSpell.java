@@ -1,5 +1,6 @@
 package com.minnymin.zephyrus.core.spell.attack;
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import com.minnymin.zephyrus.aspect.Aspect;
@@ -8,9 +9,9 @@ import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 /**
  * Zephyrus - LifeStealSpell.java
@@ -31,7 +32,8 @@ public class LifeStealSpell extends Spell {
 	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
 		player.setHealth(player.getHealth() + 2 <= player.getMaxHealth() ? player.getHealth() + 2 : player.getMaxHealth());
-		user.getTarget(getDefaultName()).getEntity().damage(2);
+		LivingEntity entity = (LivingEntity) user.getTarget(this).getTarget();
+		entity.damage(2);
 		return CastResult.SUCCESS;
 	}
 

@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.enchant.Enchant;
 import com.minnymin.zephyrus.enchant.EnchantTarget;
-import com.minnymin.zephyrus.user.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -73,8 +73,8 @@ public class InstaMine implements Enchant, Listener {
 				Enchant ench = Zephyrus.getEnchantmentManager().getEnchant(entry.getKey().getId());
 				if (ench instanceof InstaMine) {
 					User user = Zephyrus.getUser(player);
-					user.setTarget("instamine", TargetType.BLOCK, 5, false);
-					Block block = user.getTarget("instamine").getBlock();
+					user.setTarget(this, TargetType.BLOCK, 5, false);
+					Block block = (Block) user.getTarget(this).getTarget();
 					if (block.getType() != Material.BEDROCK) {
 						block.breakNaturally();
 						item.setDurability((short) (item.getDurability() - 1));

@@ -3,6 +3,7 @@ package com.minnymin.zephyrus.core.spell.attack;
 import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.LivingEntity;
 
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
@@ -13,9 +14,9 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 
 /**
@@ -37,7 +38,8 @@ public class PunchSpell extends Spell implements ConfigurableSpell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		user.getTarget(this.getDefaultName()).getEntity().damage(damage * power, user.getPlayer());
+		LivingEntity entity = (LivingEntity) user.getTarget(this).getTarget();
+		entity.damage(damage * power, user.getPlayer());
 		return CastResult.SUCCESS;
 	}
 

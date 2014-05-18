@@ -20,8 +20,8 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
+import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -43,7 +43,8 @@ public class PhaseSpell extends Spell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
-		Location loc = user.getTarget(getDefaultName()).getBlock().getLocation();
+		Block block = (Block) user.getTarget(this).getTarget();
+		Location loc = block.getLocation();
 		BlockFace blockFace = posToBlockFace(player);
 		if (!canPhase(loc, blockFace)) {
 			Language.sendError("spell.phase.fail", "You cannot phase through that block", player);

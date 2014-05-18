@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
@@ -44,9 +42,7 @@ public abstract class Spell {
 	public Spell(String name, String description, int manaCost, int xpReward, AspectList recipe, int requiredLevel,
 			SpellElement element, SpellType type) {
 		this.defaultName = name.toLowerCase();
-
 		YmlConfigFile yml = Zephyrus.getSpellConfig();
-		updateCompatibility(defaultName);
 		yml.addDefaults(defaultName + ".Enabled", true);
 		yml.addDefaults(defaultName + ".Name", name.toLowerCase());
 		yml.addDefaults(defaultName + ".Description", description);
@@ -205,23 +201,6 @@ public abstract class Spell {
 			list.add(aspect + "-" + aspects.get(aspect));
 		}
 		return list;
-	}
-
-	private void updateCompatibility(String base) {
-		FileConfiguration config = Zephyrus.getSpellConfig().getConfig();
-		updateKey(config, base, "enabled", "Enabled");
-		updateKey(config, base, "desc", "Description");
-		updateKey(config, base, "displayname", "Name");
-		updateKey(config, base, "level", "RequiredLevel");
-		updateKey(config, base, "mana", "ManaCost");
-		updateKey(config, base, "exp", "XpReward");
-	}
-
-	private void updateKey(FileConfiguration config, String base, String oldKey, String newKey) {
-		if (config.contains(base + "." + oldKey)) {
-			config.set(base + "." + newKey, config.get(base + "." + oldKey));
-			config.set(base + "." + oldKey, null);
-		}
 	}
 
 }

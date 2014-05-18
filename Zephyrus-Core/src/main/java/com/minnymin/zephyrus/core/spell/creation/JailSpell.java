@@ -35,8 +35,8 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
+import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -62,7 +62,7 @@ public class JailSpell extends Spell implements Listener, ConfigurableSpell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		Player player = user.getPlayer();
-		Entity target = user.getTarget(getDefaultName()).getEntity();
+		Entity target = (Entity) user.getTarget(this).getTarget();
 		Location loc = target.getLocation();
 		List<Block> bars = new ArrayList<Block>();
 		List<Block> walls = new ArrayList<Block>();

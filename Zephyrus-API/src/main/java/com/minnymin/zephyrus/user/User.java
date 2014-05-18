@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.state.State;
-import com.minnymin.zephyrus.user.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Target;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
 
 /**
  * Zephyrus - User.java<br>
@@ -151,7 +152,7 @@ public interface User {
 	 * @param key The key to get the target of (Spell default name or item name)
 	 * @return The target of the user
 	 */
-	public Target getTarget(String key);
+	public Target<?> getTarget(Object key);
 
 	/**
 	 * Gets whether or not the user is currently casting a continuous spell
@@ -201,7 +202,7 @@ public interface User {
 	 * @param friendly Whether or not the spell is benificial
 	 * @return true if a target can be set
 	 */
-	public boolean setTarget(String key, TargetType type, int range, boolean friendly);
+	public boolean setTarget(Object key, TargetType type, int range, boolean friendly);
 
 	/**
 	 * Stops the current spell from being cast

@@ -13,6 +13,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
@@ -34,9 +36,9 @@ import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.core.config.ConfigOptions;
 import com.minnymin.zephyrus.core.util.DataStructureUtils;
 import com.minnymin.zephyrus.core.util.InventoryGUI;
+import com.minnymin.zephyrus.core.util.InventoryGUI.InventoryButton;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.ParticleEffects;
-import com.minnymin.zephyrus.core.util.InventoryGUI.InventoryButton;
 import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
 import com.minnymin.zephyrus.event.UserCraftSpellEvent;
 import com.minnymin.zephyrus.item.ActionItem;
@@ -45,9 +47,8 @@ import com.minnymin.zephyrus.item.LevelledItem;
 import com.minnymin.zephyrus.item.Wand;
 import com.minnymin.zephyrus.nms.UpgradeTrade;
 import com.minnymin.zephyrus.spell.Spell;
-import com.minnymin.zephyrus.spell.annotation.Prerequisite;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 /**
  * Zephyrus - ItemListener.java
@@ -106,7 +107,7 @@ public class ItemListener implements Listener {
 				if (action.getActions().contains(event.getAction())) {
 					if (action.getClass().isAnnotationPresent(Targeted.class)) {
 						Targeted targeted = action.getClass().getAnnotation(Targeted.class);
-						user.setTarget(item.getName(), targeted.type(), targeted.range(), targeted.friendly());
+						user.setTarget(item, targeted.type(), targeted.range(), targeted.friendly());
 					}
 					action.onInteract(event);
 				}
@@ -117,20 +118,61 @@ public class ItemListener implements Listener {
 				if (event.getAction() == Action.RIGHT_CLICK_BLOCK
 						&& event.getClickedBlock().getType() == Material.BOOKSHELF
 						&& !ConfigOptions.DISABLE_SPELL_CRAFTING) {
-					Set<org.bukkit.entity.Item> itemEntity = getEntities(event.getClickedBlock().getLocation()
-							.add(0.5, 1.5, 0.5));
-					List<ItemStack> items = getItems(itemEntity);
+					List<ItemStack> items;
+					BukkitRunnable removalTask;
+					if (event.getClickedBlock().getRelative(BlockFace.UP).getType() != Material.CHEST) {
+						final Set<org.bukkit.entity.Item> itemEntity = getEntities(event.getClickedBlock().getLocation()
+								.add(0.5, 1.5, 0.5));
+						items = getItems(itemEntity);
+						removalTask = new BukkitRunnable() {
+							
+							@Override
+							public void run() {
+								for (org.bukkit.entity.Item item : itemEntity) {
+									item.remove();
+								}
+							}
+
+						};
+					} else {
+						final Chest chest = (Chest) event.getClickedBlock().getRelative(BlockFace.UP).getState();
+						items = new ArrayList<ItemStack>();
+						for (ItemStack i : chest.getInventory().getContents()) {
+							if (i != null) {
+								items.add(i);
+							}
+						}
+						removalTask = new BukkitRunnable() {
+							
+							@Override
+							public void run() {
+								for (int i = 0; i < chest.getInventory().getSize(); i++) {
+									ItemStack item = chest.getInventory().getItem(i);
+									if (item != null) {
+										item.setAmount(0);
+										chest.getInventory().setItem(i, item);
+									}
+								}
+								chest.update(true);
+							}
+
+						};
+					}
 					List<Spell> possibleSpells = Zephyrus.getSpell(items);
 					List<Spell> spells = new ArrayList<Spell>();
 					for (Spell spell : possibleSpells) {
-						if (wand.getCraftingAbilityLevel() >= spell.getRequiredLevel()
-								&& user.getLevel() >= spell.getRequiredLevel()
-								&& !(spell.getClass().isAnnotationPresent(Prerequisite.class) && !user
-										.isSpellLearned(Zephyrus.getSpell(((Prerequisite) spell.getClass()
-												.getAnnotation(Prerequisite.class)).requiredSpell())))) {
-							spells.add(spell);
-							// TODO Tell user why they can't create spell
+						if (wand.getCraftingAbilityLevel() < spell.getRequiredLevel()) {
+							Language.sendError("crafting.reqwandlevel",
+									"Your wand is not powerful enough to craft [SPELL]", player, "[SPELL]",
+									spell.getName());
+							continue;
 						}
+						if (user.getLevel() < spell.getRequiredLevel()) {
+							Language.sendError("crafting.reqplayerlevel",
+									"You are not powerful enough to craft [SPELL]", player, "[SPELL]", spell.getName());
+							continue;
+						}
+						spells.add(spell);
 					}
 					if (spells.size() == 1) {
 						Spell spell = spells.get(0);
@@ -149,9 +191,7 @@ public class ItemListener implements Listener {
 								amount = 3;
 							}
 							event.getClickedBlock().setType(Material.AIR);
-							for (org.bukkit.entity.Item i : itemEntity) {
-								i.remove();
-							}
+							removalTask.run();
 							loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount))
 									.setVelocity(new Vector(0, 0, 0));
 							ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 0.25F, 0.1F, 0.25F, 0, 50);
@@ -162,7 +202,7 @@ public class ItemListener implements Listener {
 								Language.get("crafting.selectionname", "Craft which spell?"));
 						for (int i = 0; i < spells.size(); i++) {
 							gui.setSlot(i + 1, SpellTome.createSpellTome(spells.get(i)),
-									getButton(spells.get(i), event.getClickedBlock(), itemEntity));
+									getButton(spells.get(i), event.getClickedBlock(), removalTask));
 						}
 						gui.open(player);
 					} else {
@@ -250,7 +290,7 @@ public class ItemListener implements Listener {
 		}
 	}
 
-	public InventoryButton getButton(final Spell spell, final Block block, final Set<org.bukkit.entity.Item> entities) {
+	public InventoryButton getButton(final Spell spell, final Block block, final BukkitRunnable removalTask) {
 		return new InventoryButton() {
 			@Override
 			public void onClick(Player player, int slot) {
@@ -269,9 +309,7 @@ public class ItemListener implements Listener {
 						amount = 3;
 					}
 					block.setType(Material.AIR);
-					for (org.bukkit.entity.Item i : entities) {
-						i.remove();
-					}
+					removalTask.run();
 					loc.getWorld().dropItem(loc, new ItemStack(Material.BOOK, amount)).setVelocity(new Vector(0, 0, 0));
 					ParticleEffects.sendParticle(Particle.ENCHANTMENT_TABLE, loc, 0.25F, 0.1F, 0.25F, 0, 50);
 					player.playSound(loc, Sound.ORB_PICKUP, 3, 12);

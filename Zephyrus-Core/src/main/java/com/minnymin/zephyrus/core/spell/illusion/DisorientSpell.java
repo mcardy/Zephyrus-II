@@ -33,7 +33,7 @@ public class DisorientSpell extends Spell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		LivingEntity entity = user.getTarget(this.getDefaultName()).getEntity();
+		LivingEntity entity = (LivingEntity) user.getTarget(this).getTarget();
 		if (entity instanceof Player) {
 			Player target = (Player) entity;
 			Location ploc = target.getLocation();

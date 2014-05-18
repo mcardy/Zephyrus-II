@@ -33,10 +33,10 @@ import com.minnymin.zephyrus.spell.ContinuousSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.state.State;
-import com.minnymin.zephyrus.user.Target;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Target;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 /**
  * Zephyrus - OnlineUser.java
@@ -61,7 +61,7 @@ public class OnlineUser implements User {
 	private int progress;
 	private int tick;
 
-	private MultiMap<String, Integer, Target> targetMap;
+	private MultiMap<Object, Integer, Target<?>> targetMap;
 
 	private Map<String, Integer> delayMap;
 
@@ -131,14 +131,13 @@ public class OnlineUser implements User {
 			}
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
 				Targeted targeted = spell.getClass().getAnnotation(Targeted.class);
-				boolean success = setTarget(spell.getDefaultName(), targeted.type(), targeted.range(),
-						targeted.friendly());
+				boolean success = setTarget(spell, targeted.type(), targeted.range(), targeted.friendly());
 				if (!success) {
 					return;
 				}
 				if ((targeted.type() == TargetType.PLAYER || targeted.type() == TargetType.ENTITY)
-						&& (getTarget(spell.getDefaultName()).getEntity() == null || getTarget(spell.getDefaultName())
-								.getEntity().isDead())) {
+						&& (getTarget(spell.getDefaultName()).getTarget() == null || ((LivingEntity) getTarget(
+								spell.getDefaultName()).getTarget()).isDead())) {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
 					return;
 				}
@@ -186,7 +185,7 @@ public class OnlineUser implements User {
 	public Collection<State> getActiveStates() {
 		return states.keySet();
 	}
-	
+
 	@Override
 	public String getData(String key) {
 		Object value = dataMap.get(key);
@@ -238,14 +237,14 @@ public class OnlineUser implements User {
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 	@Override
 	public int getStateTime(State state) {
 		return states.get(state);
 	}
 
 	@Override
-	public Target getTarget(String key) {
+	public Target<?> getTarget(Object key) {
 		if (targetMap.containsKey(key)) {
 			return targetMap.getSecondValue(key);
 		}
@@ -298,7 +297,7 @@ public class OnlineUser implements User {
 									+ getMaxMana() + ChatColor.RESET + ChatColor.DARK_AQUA + "}---",
 							(int) (((float) getMana() / (float) getMaxMana()) * 200));
 		}
-		this.targetMap = new MultiMap<String, Integer, Target>();
+		this.targetMap = new MultiMap<Object, Integer, Target<?>>();
 		this.delayMap = new HashMap<String, Integer>();
 		if (config.contains("data")) {
 			this.dataMap = config.getConfigurationSection("data").getValues(true);
@@ -334,37 +333,38 @@ public class OnlineUser implements User {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean setTarget(String key, TargetType type, int range, boolean friendly) {
+	public boolean setTarget(Object key, TargetType type, int range, boolean friendly) {
 		if (type == TargetType.BLOCK) {
 			Block target = player.getTargetBlock(BlockUtils.getTransparent(), range);
 			if (Zephyrus.getHookManager().canBuild(player, target)) {
 				UserTargetBlockEvent event = new UserTargetBlockEvent(this, target);
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled()) {
-					targetMap.put(key, 0, new Target(target, type));
+					targetMap.put(key, 0, new Target<Block>(target, type));
 					return true;
 				}
 			}
 		} else if (type == TargetType.ENTITY) {
 			LivingEntity target = getTargetEntity(range);
-			if (!targetMap.containsKey(key) || targetMap.getSecondValue(key).getEntity() == null || target != null) {
+			if (!targetMap.containsKey(key) || targetMap.getSecondValue(key).getTarget() == null || target != null) {
 				if (Zephyrus.getHookManager().canTarget(player, target, friendly)) {
 					UserTargetEntityEvent event = new UserTargetEntityEvent(this, target, friendly);
 					Bukkit.getPluginManager().callEvent(event);
 					if (!event.isCancelled()) {
-						targetMap.put(key, 0, new Target(target, type));
+						targetMap.put(key, 0, new Target<LivingEntity>(target, type));
 						return true;
 					}
 				}
 			}
 		} else if (type == TargetType.PLAYER) {
 			LivingEntity target = getTargetEntity(range);
-			if (!targetMap.containsKey(key) || targetMap.getSecondValue(key).getPlayer() == null || (target != null && target instanceof Player)) {
+			if (!targetMap.containsKey(key) || targetMap.getSecondValue(key).getTarget() == null
+					|| (target != null && target instanceof Player)) {
 				if (Zephyrus.getHookManager().canTarget(player, target, friendly)) {
 					UserTargetPlayerEvent event = new UserTargetPlayerEvent(this, (Player) target, friendly);
 					Bukkit.getPluginManager().callEvent(event);
 					if (!event.isCancelled()) {
-						targetMap.put(key, 0, new Target(target, type));
+						targetMap.put(key, 0, new Target<Player>((Player) target, type));
 						return true;
 					}
 				}
@@ -452,7 +452,7 @@ public class OnlineUser implements User {
 					this.states.put(state, time);
 				}
 			}
-			for (String key : targetMap.keySet()) {
+			for (Object key : targetMap.keySet()) {
 				int time = targetMap.getFirstValue(key) + 1;
 				if (time == 10) {
 					targetMap.remove(key);

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -21,9 +22,9 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
-import com.minnymin.zephyrus.user.Target.TargetType;
-import com.minnymin.zephyrus.user.Targeted;
 import com.minnymin.zephyrus.user.User;
+import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.target.Targeted;
 
 /**
  * Zephyrus - Bang.java
@@ -55,14 +56,14 @@ public class BangSpell extends Spell implements ConfigurableSpell {
 
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
-		Location loc = user.getTarget(this.getDefaultName()).getBlock().getLocation();
-		for (Entity entity : getNearbyEntities(loc, radius)) {
+		Block block = (Block) user.getTarget(this).getTarget();
+		for (Entity entity : getNearbyEntities(block.getLocation(), radius)) {
 			if (entity != user.getPlayer()) {
-				entity.setVelocity(entity.getLocation().toVector().subtract(loc.toVector()).normalize().setY(0.4)
+				entity.setVelocity(entity.getLocation().toVector().subtract(block.getLocation().toVector()).normalize().setY(0.4)
 						.multiply(power * 2));
 			}
 		}
-		playParticleEffect(loc);
+		playParticleEffect(block.getLocation());
 		return CastResult.SUCCESS;
 	}
 
