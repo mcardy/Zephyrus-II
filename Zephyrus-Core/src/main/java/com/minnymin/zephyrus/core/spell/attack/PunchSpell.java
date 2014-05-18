@@ -15,8 +15,8 @@ import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
 import com.minnymin.zephyrus.user.User;
-import com.minnymin.zephyrus.user.target.Target.TargetType;
-import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.targeted.Targeted;
+import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 
 
 /**

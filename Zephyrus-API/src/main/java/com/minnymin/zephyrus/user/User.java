@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.state.State;
-import com.minnymin.zephyrus.user.target.Target;
-import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.targeted.Target;
+import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 
 /**
  * Zephyrus - User.java<br>

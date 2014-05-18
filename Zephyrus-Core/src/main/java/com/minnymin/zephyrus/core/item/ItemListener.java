@@ -48,7 +48,7 @@ import com.minnymin.zephyrus.item.Wand;
 import com.minnymin.zephyrus.nms.UpgradeTrade;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.user.User;
-import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.targeted.Targeted;
 
 /**
  * Zephyrus - ItemListener.java

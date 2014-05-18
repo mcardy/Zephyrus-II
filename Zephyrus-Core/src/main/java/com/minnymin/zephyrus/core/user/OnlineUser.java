@@ -34,9 +34,9 @@ import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.state.State;
 import com.minnymin.zephyrus.user.User;
-import com.minnymin.zephyrus.user.target.Target;
-import com.minnymin.zephyrus.user.target.Target.TargetType;
-import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.targeted.Target;
+import com.minnymin.zephyrus.user.targeted.Targeted;
+import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 
 /**
  * Zephyrus - OnlineUser.java

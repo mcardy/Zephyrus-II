@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.enchant.Enchant;
 import com.minnymin.zephyrus.enchant.EnchantTarget;
-import com.minnymin.zephyrus.user.target.Target.TargetType;
+import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 import com.minnymin.zephyrus.user.User;
 
 /**

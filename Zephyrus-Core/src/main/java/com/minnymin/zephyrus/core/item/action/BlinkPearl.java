@@ -23,8 +23,8 @@ import com.minnymin.zephyrus.item.ActionItem;
 import com.minnymin.zephyrus.item.ItemRecipe;
 import com.minnymin.zephyrus.item.LevelledItem;
 import com.minnymin.zephyrus.user.User;
-import com.minnymin.zephyrus.user.target.Target.TargetType;
-import com.minnymin.zephyrus.user.target.Targeted;
+import com.minnymin.zephyrus.user.targeted.Targeted;
+import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 
 /**
  * Zephyrus - BlinkPearl.java
