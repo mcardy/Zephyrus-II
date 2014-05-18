@@ -65,6 +65,8 @@ import com.minnymin.zephyrus.core.spell.world.FireRingSpell;
 import com.minnymin.zephyrus.core.spell.world.GrowSpell;
 import com.minnymin.zephyrus.core.spell.world.ProspectSpell;
 import com.minnymin.zephyrus.core.spell.world.SmiteSpell;
+import com.minnymin.zephyrus.core.spell.world.StormSpell;
+import com.minnymin.zephyrus.core.spell.world.SuperHeatSpell;
 import com.minnymin.zephyrus.core.spell.world.TrackSpell;
 import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
@@ -234,16 +236,18 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new GrowSpell());
 		registerSpell(new ProspectSpell());
 		registerSpell(new SmiteSpell());
+		registerSpell(new StormSpell());
+		registerSpell(new SuperHeatSpell());
 		registerSpell(new TrackSpell());
 
 		// TODO Re-implement:
-		// Storm, SuperHeat, Vanish, Vision, Zap
+		// Vanish, Vision, Zap
 
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)
 
-		// TODO Spell level balancing (broader range of levels
+		// TODO Spell level balancing (broader range of levels)
 		
 		for (Spell spell : spellList) {
 			spell.onEnable();
