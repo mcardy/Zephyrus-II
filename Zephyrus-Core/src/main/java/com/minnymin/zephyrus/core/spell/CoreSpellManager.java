@@ -26,6 +26,7 @@ import com.minnymin.zephyrus.core.spell.attack.GrenadeSpell;
 import com.minnymin.zephyrus.core.spell.attack.HomingArrowSpell;
 import com.minnymin.zephyrus.core.spell.attack.LifeStealSpell;
 import com.minnymin.zephyrus.core.spell.attack.PunchSpell;
+import com.minnymin.zephyrus.core.spell.attack.ZapSpell;
 import com.minnymin.zephyrus.core.spell.buff.ArmorSpell;
 import com.minnymin.zephyrus.core.spell.buff.BuildSpell;
 import com.minnymin.zephyrus.core.spell.buff.DispelSpell;
@@ -36,6 +37,8 @@ import com.minnymin.zephyrus.core.spell.buff.FlySpell;
 import com.minnymin.zephyrus.core.spell.buff.LightSpell;
 import com.minnymin.zephyrus.core.spell.buff.ShieldSpell;
 import com.minnymin.zephyrus.core.spell.buff.SpeedSpell;
+import com.minnymin.zephyrus.core.spell.buff.VanishSpell;
+import com.minnymin.zephyrus.core.spell.buff.VisionSpell;
 import com.minnymin.zephyrus.core.spell.buff.ZephyrSpell;
 import com.minnymin.zephyrus.core.spell.creation.ConjureSpell;
 import com.minnymin.zephyrus.core.spell.creation.EnderchestSpell;
@@ -185,6 +188,7 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new HomingArrowSpell());
 		registerSpell(new LifeStealSpell());
 		registerSpell(new PunchSpell());
+		registerSpell(new ZapSpell());
 
 		// Buff
 		registerSpell(new ArmorSpell());
@@ -197,6 +201,8 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new LightSpell());
 		registerSpell(new ShieldSpell());
 		registerSpell(new SpeedSpell());
+		registerSpell(new VanishSpell());
+		registerSpell(new VisionSpell());
 		registerSpell(new ZephyrSpell());
 
 		// Creation
