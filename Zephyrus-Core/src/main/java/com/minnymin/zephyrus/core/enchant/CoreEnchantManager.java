@@ -22,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.core.config.ConfigOptions;
 import com.minnymin.zephyrus.core.enchant.pickaxe.InstaMine;
 import com.minnymin.zephyrus.core.enchant.sword.BattleAxe;
 import com.minnymin.zephyrus.core.enchant.sword.LifeSuck;
@@ -69,6 +70,9 @@ public class CoreEnchantManager implements EnchantManager, Listener {
 
 	@Override
 	public void load() {
+		if (ConfigOptions.DISABLE_ENCHANTMENTS) {
+			return;
+		}
 		Bukkit.getPluginManager().registerEvents(this, Zephyrus.getPlugin());
 		setAccepting(true);
 		registerEnchantment(new GlowEnchant(), 120);

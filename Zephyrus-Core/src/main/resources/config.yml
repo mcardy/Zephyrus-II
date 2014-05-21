@@ -31,6 +31,14 @@ Mana-Regeneration: 1
 # - Possible Values: true or false
 Disable-Spell-Crafting: false
 
+# ################# #
+# Enchantment stuff #
+# ################# #
+
+# Disables all enchantments from registering
+# - Possible Values: true or false
+Disable-Enchantments: false
+
 # ########## #
 # Item stuff #
 # ########## #
