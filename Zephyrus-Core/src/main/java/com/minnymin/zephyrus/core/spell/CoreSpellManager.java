@@ -91,6 +91,7 @@ public class CoreSpellManager implements SpellManager {
 	public CoreSpellManager() {
 		spellList = new ArrayList<Spell>();
 		spellConfig = new YmlConfigFile("spells.yml");
+		spellConfig.saveDefaultConfig();
 	}
 
 	@Override

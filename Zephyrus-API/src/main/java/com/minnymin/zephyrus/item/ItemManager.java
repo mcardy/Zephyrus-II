@@ -3,6 +3,7 @@ package com.minnymin.zephyrus.item;
 import org.bukkit.inventory.ItemStack;
 
 import com.minnymin.zephyrus.Manager;
+import com.minnymin.zephyrus.YmlConfigFile;
 
 /**
  * Zephyrus - ItemManager.java <br>
@@ -14,6 +15,12 @@ import com.minnymin.zephyrus.Manager;
 
 public interface ItemManager extends Manager {
 
+	/**
+	 * Gets the config file of items.yml
+	 * @return A YmlConfigFile
+	 */
+	public YmlConfigFile getConfig();
+	
 	/**
 	 * Gets an item by the specified itemstack
 	 * 

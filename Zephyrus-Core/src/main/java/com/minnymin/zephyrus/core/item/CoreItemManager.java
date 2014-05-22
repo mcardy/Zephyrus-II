@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.core.config.ConfigOptions;
 import com.minnymin.zephyrus.core.item.action.BlinkPearl;
@@ -27,8 +28,6 @@ import com.minnymin.zephyrus.item.LevelledItem;
 /**
  * Zephyrus - SimpleItemManager.java
  * 
- * TODO Enable/disable items
- * 
  * @author minnymin3
  * 
  */
@@ -36,9 +35,17 @@ import com.minnymin.zephyrus.item.LevelledItem;
 public class CoreItemManager implements ItemManager {
 
 	private Map<String, Item> itemMap;
+	private YmlConfigFile itemConfig;
 
 	public CoreItemManager() {
 		itemMap = new HashMap<String, Item>();
+		itemConfig = new YmlConfigFile("items.yml");
+		itemConfig.saveDefaultConfig();
+	}
+	
+	@Override
+	public YmlConfigFile getConfig() {
+		return itemConfig;
 	}
 
 	@Override
@@ -88,24 +95,26 @@ public class CoreItemManager implements ItemManager {
 
 	@Override
 	public void registerItem(Item item) {
-		itemMap.put(item.getName(), item);
-		if (item instanceof Listener) {
-			Bukkit.getPluginManager().registerEvents((Listener) item, Zephyrus.getPlugin());
-		}
-		ItemStack stack = new ItemStack(item.getMaterial());
-		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName(item.getName());
-		if (item instanceof LevelledItem) {
-			meta.setLore(((LevelledItem)item).getLevelledLore(1));
-		} else {
-			meta.setLore(item.getLore());
-		}
-		for (Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
-			meta.addEnchant(entry.getKey(), entry.getValue(), true);
-		}
-		stack.setItemMeta(meta);
-		if (!ConfigOptions.DISABLE_ITEM_CRAFTING) {
-			Bukkit.addRecipe(item.getRecipe().createRecipe(stack));
+		if (itemConfig.getConfig().getBoolean(item.getDefaultName() + ".Enabled")) {
+			itemMap.put(item.getName(), item);
+			if (item instanceof Listener) {
+				Bukkit.getPluginManager().registerEvents((Listener) item, Zephyrus.getPlugin());
+			}
+			ItemStack stack = new ItemStack(item.getMaterial());
+			ItemMeta meta = stack.getItemMeta();
+			meta.setDisplayName(item.getName());
+			if (item instanceof LevelledItem) {
+				meta.setLore(((LevelledItem)item).getLevelledLore(1));
+			} else {
+				meta.setLore(item.getLore());
+			}
+			for (Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
+				meta.addEnchant(entry.getKey(), entry.getValue(), true);
+			}
+			stack.setItemMeta(meta);
+			if (!ConfigOptions.DISABLE_ITEM_CRAFTING) {
+				Bukkit.addRecipe(item.getRecipe().createRecipe(stack));
+			}
 		}
 	}
 

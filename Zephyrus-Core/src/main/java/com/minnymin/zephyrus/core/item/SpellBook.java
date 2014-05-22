@@ -34,11 +34,11 @@ import com.minnymin.zephyrus.user.User;
  * 
  */
 
-public class SpellBook implements ActionItem {
-
-	@Override
-	public String getName() {
-		return ChatColor.GOLD + "SpellBook";
+public class SpellBook extends ActionItem {
+	
+	public SpellBook() {
+		super(ChatColor.GOLD + "SpellBook", 0, Material.BOOK, DataStructureUtils.createList(ChatColor.GRAY + "Shift right/left click to change spells", ChatColor.GRAY
+				+ "Right click to cast spell", ChatColor.GRAY + "Bound Spell: none"));
 	}
 
 	@Override
@@ -52,26 +52,10 @@ public class SpellBook implements ActionItem {
 	}
 
 	@Override
-	public Material getMaterial() {
-		return Material.BOOK;
-	}
-
-	@Override
-	public List<String> getLore() {
-		return DataStructureUtils.createList(ChatColor.GRAY + "Shift right/left click to change spells", ChatColor.GRAY
-				+ "Right click to cast spell", ChatColor.GRAY + "Bound Spell: none");
-	}
-
-	@Override
 	public Map<Enchantment, Integer> getEnchantments() {
 		Map<Enchantment, Integer> map = new HashMap<Enchantment, Integer>();
 		map.put(Enchantment.getByName("glow"), 1);
 		return map;
-	}
-
-	@Override
-	public int getCraftingLevel() {
-		return 0;
 	}
 
 	public String getBoundName(Spell spell) {

@@ -1,8 +1,6 @@
 package com.minnymin.zephyrus.core.item.wand;
 
-import java.util.List;
 import java.util.Map;
-
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,11 +20,15 @@ import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
  * 
  */
 
-public class BasicFireWand implements Wand {
-	
-	@Override
-	public String getName() {
-		return ChatColor.GRAY + "Simple " + ChatColor.RED + "Fire" + ChatColor.GRAY + " Wand";
+public class BasicFireWand extends Wand {
+
+	private static String name = ChatColor.GRAY + "Simple " + ChatColor.RED + "Fire" + ChatColor.GRAY + " Wand";
+
+	public BasicFireWand() {
+		super(name, name + ChatColor.GOLD + " - " + ChatColor.GRAY + "[SPELL]", 3, 5, 5, Material.STICK,
+				DataStructureUtils.createList(ChatColor.GRAY + "Basic wand with increased fire power"),
+				DataStructureUtils.createList(ChatColor.GRAY + "Bound Spell: [SPELL]", ChatColor.GRAY
+						+ "Basic wand with no perks"));
 	}
 
 	@Override
@@ -41,20 +43,11 @@ public class BasicFireWand implements Wand {
 	}
 
 	@Override
-	public Material getMaterial() {
-		return Material.STICK;
-	}
-
-	@Override
-	public List<String> getLore() {
-		return DataStructureUtils.createList(ChatColor.GRAY + "Basic wand with increased fire power");
-	}
-
-	@Override
 	public Map<Enchantment, Integer> getEnchantments() {
-		return DataStructureUtils.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")), DataStructureUtils.createList(1));
+		return DataStructureUtils.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")),
+				DataStructureUtils.createList(1));
 	}
-	
+
 	@Override
 	public int getPowerIncrease(Spell spell) {
 		if (spell.getElement() == SpellElement.FIRE) {
@@ -69,31 +62,6 @@ public class BasicFireWand implements Wand {
 	}
 
 	@Override
-	public int getCraftingLevel() {
-		return 3;
-	}
-	
-	@Override
-	public int getCraftingAbilityLevel() {
-		return 5;
-	}
-
-	@Override
-	public int getBindingAbilityLevel() {
-		return 5;
-	}
-
-	@Override
-	public String getBoundName(Spell spell) {
-		return getName() + ChatColor.GOLD + " - " + ChatColor.GRAY + spell.getName();
-	}
-	
-	@Override
-	public List<String> getBoundLore(Spell spell) {
-		return DataStructureUtils.createList(ChatColor.GRAY + "Bound Spell: " + spell.getName(), ChatColor.GRAY + "Basic wand with no perks");
-	}
-
-	@Override
 	public String getSpell(ItemStack stack) {
 		if (stack.getItemMeta().hasLore() && stack.getItemMeta().getLore().get(0).contains("Bound Spell:")) {
 			return stack.getItemMeta().getLore().get(0).replace(ChatColor.GRAY + "Bound Spell: ", "");
@@ -102,6 +70,4 @@ public class BasicFireWand implements Wand {
 		}
 	}
 
-	
-	
 }

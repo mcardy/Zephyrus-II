@@ -1,0 +1,15 @@
+# Item Config - Zephyrus
+# -----------------------
+# Config options:
+# Enabled: 
+# - Whether or not the spell should be enabled
+# - Possible values: true, false
+# Name:
+# - The name of the spell
+# - Possible values: any single word using $ as chat color character
+# Lore:
+# - The lore of the item
+# - Possible values: any list of strings of words using $ as chat color character
+# CraftingLevel:
+# - The minimum level to craft this item
+# - Possible values: any number above 0

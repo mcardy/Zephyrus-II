@@ -1,8 +1,6 @@
 package com.minnymin.zephyrus.core.item.wand;
 
-import java.util.List;
 import java.util.Map;
-
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,11 +19,15 @@ import com.minnymin.zephyrus.spell.Spell;
  * 
  */
 
-public class BasicWand implements Wand {
-	
-	@Override
-	public String getName() {
-		return ChatColor.GRAY + "Simple Wand";
+public class BasicWand extends Wand {
+
+	private static String name = ChatColor.GRAY + "Simple Wand";
+
+	public BasicWand() {
+		super(name, name + ChatColor.GOLD + " - " + ChatColor.GRAY + "[SPELL]", 0, 5, 5, Material.STICK,
+				DataStructureUtils.createList(ChatColor.GRAY + "Basic wand with no perks"), DataStructureUtils
+						.createList(ChatColor.GRAY + "Bound Spell: [SPELL]", ChatColor.GRAY
+								+ "Basic wand with no perks"));
 	}
 
 	@Override
@@ -39,20 +41,11 @@ public class BasicWand implements Wand {
 	}
 
 	@Override
-	public Material getMaterial() {
-		return Material.STICK;
-	}
-
-	@Override
-	public List<String> getLore() {
-		return DataStructureUtils.createList(ChatColor.GRAY + "Basic wand with no perks");
-	}
-
-	@Override
 	public Map<Enchantment, Integer> getEnchantments() {
-		return DataStructureUtils.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")), DataStructureUtils.createList(1));
+		return DataStructureUtils.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")),
+				DataStructureUtils.createList(1));
 	}
-	
+
 	@Override
 	public int getPowerIncrease(Spell spell) {
 		return 0;
@@ -64,31 +57,6 @@ public class BasicWand implements Wand {
 	}
 
 	@Override
-	public int getCraftingLevel() {
-		return 0;
-	}
-
-	@Override
-	public int getCraftingAbilityLevel() {
-		return 5;
-	}
-	
-	@Override
-	public int getBindingAbilityLevel() {
-		return 5;
-	}
-
-	@Override
-	public String getBoundName(Spell spell) {
-		return getName() + ChatColor.GOLD + " - " + ChatColor.GRAY + spell.getName();
-	}
-	
-	@Override
-	public List<String> getBoundLore(Spell spell) {
-		return DataStructureUtils.createList(ChatColor.GRAY + "Bound Spell: " + spell.getName(), ChatColor.GRAY + "Basic wand with no perks");
-	}
-
-	@Override
 	public String getSpell(ItemStack stack) {
 		if (stack.getItemMeta().hasLore() && stack.getItemMeta().getLore().get(0).contains("Bound Spell:")) {
 			return stack.getItemMeta().getLore().get(0).replace(ChatColor.GRAY + "Bound Spell: ", "");
@@ -96,5 +64,5 @@ public class BasicWand implements Wand {
 			return null;
 		}
 	}
-	
+
 }

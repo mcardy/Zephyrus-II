@@ -1,9 +1,7 @@
 package com.minnymin.zephyrus.core.item.action;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -27,32 +25,17 @@ import com.minnymin.zephyrus.item.ItemRecipe;
  * 
  */
 
-public class HoeOfGrowth implements ActionItem {
+public class HoeOfGrowth extends ActionItem {
 
-	@Override
-	public int getCraftingLevel() {
-		return 1;
+	public HoeOfGrowth() {
+		super(ChatColor.GREEN + "Hoe of Growth", 1, Material.GOLD_HOE, DataStructureUtils.createList(ChatColor.GRAY
+				+ "Works on all things living"));
 	}
 
 	@Override
 	public Map<Enchantment, Integer> getEnchantments() {
 		return DataStructureUtils.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")),
 				DataStructureUtils.createList(1));
-	}
-
-	@Override
-	public List<String> getLore() {
-		return DataStructureUtils.createList(ChatColor.GRAY + "Works on all things living");
-	}
-
-	@Override
-	public Material getMaterial() {
-		return Material.GOLD_HOE;
-	}
-
-	@Override
-	public String getName() {
-		return ChatColor.GREEN + "Hoe of Growth";
 	}
 
 	@Override

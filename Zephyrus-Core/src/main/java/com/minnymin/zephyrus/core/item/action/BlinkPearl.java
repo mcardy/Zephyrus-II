@@ -1,5 +1,6 @@
 package com.minnymin.zephyrus.core.item.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,8 +24,8 @@ import com.minnymin.zephyrus.item.ActionItem;
 import com.minnymin.zephyrus.item.ItemRecipe;
 import com.minnymin.zephyrus.item.LevelledItem;
 import com.minnymin.zephyrus.user.User;
-import com.minnymin.zephyrus.user.targeted.Targeted;
 import com.minnymin.zephyrus.user.targeted.Target.TargetType;
+import com.minnymin.zephyrus.user.targeted.Targeted;
 
 /**
  * Zephyrus - BlinkPearl.java
@@ -34,11 +35,10 @@ import com.minnymin.zephyrus.user.targeted.Target.TargetType;
  */
 
 @Targeted(type = TargetType.BLOCK, range = 30)
-public class BlinkPearl implements ActionItem, LevelledItem {
+public class BlinkPearl extends ActionItem implements LevelledItem {
 
-	@Override
-	public String getName() {
-		return ChatColor.DARK_BLUE + "Blink Pearl";
+	public BlinkPearl() {
+		super(ChatColor.DARK_BLUE + "Blink Pearl", 1, Material.ENDER_PEARL, new ArrayList<String>());
 	}
 
 	@Override
@@ -52,24 +52,9 @@ public class BlinkPearl implements ActionItem, LevelledItem {
 	}
 
 	@Override
-	public Material getMaterial() {
-		return Material.ENDER_PEARL;
-	}
-
-	@Override
-	public List<String> getLore() {
-		return null;
-	}
-
-	@Override
 	public Map<Enchantment, Integer> getEnchantments() {
 		return DataStructureUtils.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")),
 				DataStructureUtils.createList(1));
-	}
-
-	@Override
-	public int getCraftingLevel() {
-		return 1;
 	}
 
 	@Override

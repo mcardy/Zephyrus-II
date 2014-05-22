@@ -1,8 +1,6 @@
 package com.minnymin.zephyrus.core.item.wand;
 
-import java.util.List;
 import java.util.Map;
-
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,13 +19,17 @@ import com.minnymin.zephyrus.spell.Spell;
  * 
  */
 
-public class AdvancedWand implements Wand {
+public class AdvancedWand extends Wand {
 
 	// TODO Different variations of advanced wand
-	
-	@Override
-	public String getName() {
-		return ChatColor.DARK_AQUA + "Advanced Wand";
+	private static String name = ChatColor.DARK_AQUA + "Advanced Wand";
+
+	public AdvancedWand() {
+		super(name, name + ChatColor.GOLD + " - " + ChatColor.DARK_AQUA + "[SPELL]", 10, 25, 25, Material.STICK,
+				DataStructureUtils.createList(ChatColor.GRAY + "Advanced wand:", ChatColor.GREEN + " - Power +1",
+						ChatColor.AQUA + " - Mana -10"), DataStructureUtils.createList(ChatColor.GRAY
+						+ "Bound Spell: [SPELL]", ChatColor.GRAY + "Advanced wand:", ChatColor.GREEN + " - Power +1",
+						ChatColor.AQUA + " - Mana -10"));
 	}
 
 	@Override
@@ -41,58 +43,9 @@ public class AdvancedWand implements Wand {
 	}
 
 	@Override
-	public Material getMaterial() {
-		return Material.STICK;
-	}
-
-	@Override
-	public List<String> getLore() {
-		return DataStructureUtils
-				.createList(ChatColor.GRAY + "Advanced wand:", ChatColor.GREEN + " - Power +1", ChatColor.AQUA
-						+ " - Mana -10");
-	}
-
-	@Override
 	public Map<Enchantment, Integer> getEnchantments() {
-		return DataStructureUtils
-				.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")), DataStructureUtils
-						.createList(1));
-	}
-
-	@Override
-	public int getPowerIncrease(Spell spell) {
-		return 2;
-	}
-
-	@Override
-	public int getManaDiscount(Spell spell) {
-		return 20;
-	}
-
-	@Override
-	public int getCraftingLevel() {
-		return 10;
-	}
-
-	@Override
-	public int getCraftingAbilityLevel() {
-		return 25;
-	}
-	
-	@Override
-	public int getBindingAbilityLevel() {
-		return 25;
-	}
-
-	@Override
-	public String getBoundName(Spell spell) {
-		return getName() + ChatColor.GOLD + " - " + ChatColor.DARK_AQUA + spell.getName();
-	}
-
-	@Override
-	public List<String> getBoundLore(Spell spell) {
-		return DataStructureUtils.createList(ChatColor.GRAY + "Bound Spell: " + spell.getName(), ChatColor.GRAY
-				+ "Advanced wand:", ChatColor.GREEN + " - Power +1", ChatColor.AQUA + " - Mana -10");
+		return DataStructureUtils.createMap(DataStructureUtils.createList(Enchantment.getByName("glow")),
+				DataStructureUtils.createList(1));
 	}
 
 	@Override
@@ -102,6 +55,16 @@ public class AdvancedWand implements Wand {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public int getManaDiscount(Spell spell) {
+		return 20;
+	}
+
+	@Override
+	public int getPowerIncrease(Spell spell) {
+		return 2;
 	}
 
 }

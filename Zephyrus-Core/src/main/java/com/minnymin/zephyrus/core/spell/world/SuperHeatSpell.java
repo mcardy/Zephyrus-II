@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.Zephyrus;
+import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.ParticleEffects;
@@ -40,8 +41,8 @@ public class SuperHeatSpell extends Spell implements Configurable {
 	Map<Integer, Integer> idMap;
 
 	public SuperHeatSpell() {
-		super("superheat", "Superheat the block you are looking at. Ouch thats hot...", 50, 5, AspectList.newList(), 5,
-				SpellElement.FIRE, SpellType.WORLD);
+		super("superheat", "Superheat the block you are looking at. Ouch thats hot...", 50, 5, AspectList.newList(
+				Aspect.FIRE, 80, Aspect.STONE, 40), 5, SpellElement.FIRE, SpellType.WORLD);
 	}
 
 	@Override
