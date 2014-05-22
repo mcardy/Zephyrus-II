@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.core.item.SpellTome;
@@ -71,7 +72,6 @@ import com.minnymin.zephyrus.core.spell.world.SmiteSpell;
 import com.minnymin.zephyrus.core.spell.world.StormSpell;
 import com.minnymin.zephyrus.core.spell.world.SuperHeatSpell;
 import com.minnymin.zephyrus.core.spell.world.TrackSpell;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellManager;
 import com.minnymin.zephyrus.spell.SpellRecipe;
@@ -160,8 +160,8 @@ public class CoreSpellManager implements SpellManager {
 	public void registerSpell(Spell spell) {
 		if (spellConfig.getConfig().getBoolean(spell.getDefaultName() + ".Enabled")) {
 			this.spellList.add(spell);
-			if (spell instanceof ConfigurableSpell) {
-				((ConfigurableSpell) spell).loadConfiguration(spellConfig.getConfig().getConfigurationSection(
+			if (spell instanceof Configurable) {
+				((Configurable) spell).loadConfiguration(spellConfig.getConfig().getConfigurationSection(
 						spell.getDefaultName()));
 			}
 			if (spell instanceof Listener) {

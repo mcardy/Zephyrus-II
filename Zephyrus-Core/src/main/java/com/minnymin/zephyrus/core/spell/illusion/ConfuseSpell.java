@@ -10,13 +10,13 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.util.ParticleEffects;
 import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
 import com.minnymin.zephyrus.core.util.reflection.NMSUtils;
 import com.minnymin.zephyrus.core.util.reflection.ReflectionUtils;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -32,7 +32,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 @Bindable
-public class ConfuseSpell extends Spell implements ConfigurableSpell {
+public class ConfuseSpell extends Spell implements Configurable {
 
 	private int radius;
 

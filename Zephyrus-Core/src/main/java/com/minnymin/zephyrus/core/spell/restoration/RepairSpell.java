@@ -8,10 +8,10 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.util.Language;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -25,7 +25,7 @@ import com.minnymin.zephyrus.user.User;
  * 
  */
 
-public class RepairSpell extends Spell implements ConfigurableSpell {
+public class RepairSpell extends Spell implements Configurable {
 
 	private int amount;
 

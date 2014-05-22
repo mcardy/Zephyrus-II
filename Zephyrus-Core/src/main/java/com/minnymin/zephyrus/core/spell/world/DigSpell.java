@@ -7,11 +7,11 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.util.DataStructureUtils;
 import com.minnymin.zephyrus.core.util.Language;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -30,7 +30,7 @@ import com.minnymin.zephyrus.user.User;
 
 @Bindable
 @Targeted(type = TargetType.BLOCK, range = 20)
-public class DigSpell extends Spell implements ConfigurableSpell {
+public class DigSpell extends Spell implements Configurable {
 
 	private List<String> blacklist;
 

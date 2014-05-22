@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.state.StateList;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -24,7 +24,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 @Bindable
-public class FlySpell extends Spell implements ConfigurableSpell {
+public class FlySpell extends Spell implements Configurable {
 
 	private int duration;
 

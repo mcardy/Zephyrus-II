@@ -1,4 +1,4 @@
-package com.minnymin.zephyrus.spell;
+package com.minnymin.zephyrus;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import org.bukkit.configuration.ConfigurationSection;
  * 
  */
 
-public interface ConfigurableSpell {
+public interface Configurable {
 
 	/**
 	 * Gets the default map of keys and values<br>

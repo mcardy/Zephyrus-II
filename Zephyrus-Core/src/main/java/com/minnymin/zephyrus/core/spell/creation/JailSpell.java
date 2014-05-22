@@ -25,11 +25,11 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.util.Language;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -48,7 +48,7 @@ import com.minnymin.zephyrus.user.User;
 
 @Bindable
 @Targeted(type = TargetType.ENTITY, range = 30, friendly = false)
-public class JailSpell extends Spell implements Listener, ConfigurableSpell {
+public class JailSpell extends Spell implements Listener, Configurable {
 
 	private int duration;
 	private Map<Location, Set<BlockState>> jails;

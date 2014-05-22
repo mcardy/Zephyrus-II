@@ -10,13 +10,13 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.util.DataStructureUtils;
 import com.minnymin.zephyrus.core.util.ParticleEffects;
 import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -35,7 +35,7 @@ import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 
 @Bindable
 @Targeted(type = TargetType.BLOCK)
-public class BangSpell extends Spell implements ConfigurableSpell {
+public class BangSpell extends Spell implements Configurable {
 
 	private double[][] particles;
 	private int radius;

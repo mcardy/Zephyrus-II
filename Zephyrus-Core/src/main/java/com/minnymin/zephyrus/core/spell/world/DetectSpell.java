@@ -13,11 +13,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
 import com.minnymin.zephyrus.core.util.DataStructureUtils;
 import com.minnymin.zephyrus.core.util.Language;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -33,7 +33,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 @Bindable
-public class DetectSpell extends Spell implements ConfigurableSpell {
+public class DetectSpell extends Spell implements Configurable {
 
 	private int radius;
 

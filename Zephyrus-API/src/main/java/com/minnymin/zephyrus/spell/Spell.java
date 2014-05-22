@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import org.bukkit.configuration.ConfigurationSection;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.aspect.Aspect;
@@ -52,8 +53,8 @@ public abstract class Spell {
 		yml.addDefaults(defaultName + ".RequiredLevel", requiredLevel);
 		yml.saveConfig();
 
-		if (this instanceof ConfigurableSpell) {
-			Iterator<Entry<String, Object>> iter = ((ConfigurableSpell) this).getDefaultConfiguration().entrySet()
+		if (this instanceof Configurable) {
+			Iterator<Entry<String, Object>> iter = ((Configurable) this).getDefaultConfiguration().entrySet()
 					.iterator();
 			while (iter.hasNext()) {
 				Entry<String, Object> value = iter.next();

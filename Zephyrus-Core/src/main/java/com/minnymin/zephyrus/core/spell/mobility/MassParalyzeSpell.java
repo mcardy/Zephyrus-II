@@ -9,10 +9,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -28,7 +28,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 @Bindable
-public class MassParalyzeSpell extends Spell implements ConfigurableSpell {
+public class MassParalyzeSpell extends Spell implements Configurable {
 
 	private int duration;
 	private int range;

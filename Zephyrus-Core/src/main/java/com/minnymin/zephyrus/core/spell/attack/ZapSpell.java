@@ -11,9 +11,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.aspect.Aspect;
 import com.minnymin.zephyrus.aspect.AspectList;
-import com.minnymin.zephyrus.spell.ConfigurableSpell;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
@@ -32,7 +32,7 @@ import com.minnymin.zephyrus.user.targeted.Targeted;
 
 @Bindable
 @Targeted(type = TargetType.ENTITY, range = 30, friendly = false)
-public class ZapSpell extends Spell implements ConfigurableSpell {
+public class ZapSpell extends Spell implements Configurable {
 
 	private int radius;
 	private int range;
