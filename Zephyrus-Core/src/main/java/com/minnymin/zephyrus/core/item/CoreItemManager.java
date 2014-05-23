@@ -15,7 +15,10 @@ import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.core.config.ConfigOptions;
 import com.minnymin.zephyrus.core.item.action.BlinkPearl;
+import com.minnymin.zephyrus.core.item.action.GemOfLightning;
 import com.minnymin.zephyrus.core.item.action.HoeOfGrowth;
+import com.minnymin.zephyrus.core.item.action.ManaPotion;
+import com.minnymin.zephyrus.core.item.action.RodOfFire;
 import com.minnymin.zephyrus.core.item.wand.AdvancedWand;
 import com.minnymin.zephyrus.core.item.wand.BasicFireWand;
 import com.minnymin.zephyrus.core.item.wand.BasicObsidianWand;
@@ -87,6 +90,9 @@ public class CoreItemManager implements ItemManager {
 		registerItem(new SpellBook());
 		registerItem(new BlinkPearl());
 		registerItem(new HoeOfGrowth());
+		registerItem(new GemOfLightning());
+		registerItem(new RodOfFire());
+		registerItem(new ManaPotion());
 	}
 
 	@Override
@@ -95,7 +101,7 @@ public class CoreItemManager implements ItemManager {
 
 	@Override
 	public void registerItem(Item item) {
-		if (itemConfig.getConfig().getBoolean(item.getDefaultName() + ".Enabled")) {
+		if (itemConfig.getConfig().getBoolean(item.getInternalName() + ".Enabled")) {
 			itemMap.put(item.getName(), item);
 			if (item instanceof Listener) {
 				Bukkit.getPluginManager().registerEvents((Listener) item, Zephyrus.getPlugin());

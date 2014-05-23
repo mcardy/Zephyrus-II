@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.material.MaterialData;
 
 /**
  * Zephyrus - ItemRecipe.java<br>
@@ -18,11 +19,11 @@ import org.bukkit.inventory.ShapedRecipe;
 
 public class ItemRecipe {
 
-	private Map<Character, Material> ingredients;
+	private Map<Character, ItemStack> ingredients;
 	private String[] shape;
 
 	public ItemRecipe() {
-		ingredients = new HashMap<Character, Material>();
+		ingredients = new HashMap<Character, ItemStack>();
 	}
 
 	/**
@@ -34,8 +35,8 @@ public class ItemRecipe {
 	public ShapedRecipe createRecipe(ItemStack output) {
 		ShapedRecipe recipe = new ShapedRecipe(output);
 		recipe.shape(shape);
-		for (Entry<Character, Material> entry : ingredients.entrySet()) {
-			recipe.setIngredient(entry.getKey(), entry.getValue());
+		for (Entry<Character, ItemStack> entry : ingredients.entrySet()) {
+			recipe.setIngredient(entry.getKey(), entry.getValue().getData());
 		}
 		return recipe;
 	}
@@ -47,9 +48,19 @@ public class ItemRecipe {
 	 * @param ingredient The material of the ingredient
 	 */
 	public void setIngredient(char key, Material ingredient) {
-		ingredients.put(key, ingredient);
+		ingredients.put(key, new ItemStack(ingredient));
 	}
 
+	/**
+	 * Sets the ingredient of a character in the shape
+	 * 
+	 * @param key The character in the shape
+	 * @param data The material data of the ingredient
+	 */
+	public void setIngredient(char key, MaterialData data) {
+		
+	}
+	
 	/**
 	 * Set the shape of this recipe to the specified rows.<br>
 	 * Each character represents a different ingredient; exactly what each

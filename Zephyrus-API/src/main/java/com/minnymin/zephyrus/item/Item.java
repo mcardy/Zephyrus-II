@@ -116,7 +116,7 @@ public abstract class Item {
 		return mat;
 	}
 
-	public String getDefaultName() {
+	public String getInternalName() {
 		return defaultName;
 	}
 	
