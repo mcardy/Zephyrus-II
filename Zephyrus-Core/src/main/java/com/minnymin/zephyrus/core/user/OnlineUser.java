@@ -131,13 +131,10 @@ public class OnlineUser implements User {
 			}
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
 				Targeted targeted = spell.getClass().getAnnotation(Targeted.class);
-				boolean success = setTarget(spell, targeted.type(), targeted.range(), targeted.friendly());
-				if (!success) {
-					return;
-				}
+				setTarget(spell, targeted.type(), targeted.range(), targeted.friendly());
 				if ((targeted.type() == TargetType.PLAYER || targeted.type() == TargetType.ENTITY)
-						&& (getTarget(spell.getDefaultName()).getTarget() == null || ((LivingEntity) getTarget(
-								spell.getDefaultName()).getTarget()).isDead())) {
+						&& (getTarget(spell).getTarget() == null || ((LivingEntity) getTarget(spell).getTarget())
+								.isDead())) {
 					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
 					return;
 				}
@@ -333,7 +330,7 @@ public class OnlineUser implements User {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean setTarget(Object key, TargetType type, int range, boolean friendly) {
+	public void setTarget(Object key, TargetType type, int range, boolean friendly) {
 		if (type == TargetType.BLOCK) {
 			Block target = player.getTargetBlock(BlockUtils.getTransparent(), range);
 			if (Zephyrus.getHookManager().canBuild(player, target)) {
@@ -341,7 +338,6 @@ public class OnlineUser implements User {
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled()) {
 					targetMap.put(key, 0, new Target<Block>(target, type));
-					return true;
 				}
 			}
 		} else if (type == TargetType.ENTITY) {
@@ -352,7 +348,6 @@ public class OnlineUser implements User {
 					Bukkit.getPluginManager().callEvent(event);
 					if (!event.isCancelled()) {
 						targetMap.put(key, 0, new Target<LivingEntity>(target, type));
-						return true;
 					}
 				}
 			}
@@ -365,12 +360,10 @@ public class OnlineUser implements User {
 					Bukkit.getPluginManager().callEvent(event);
 					if (!event.isCancelled()) {
 						targetMap.put(key, 0, new Target<Player>((Player) target, type));
-						return true;
 					}
 				}
 			}
 		}
-		return false;
 	}
 
 	@Override

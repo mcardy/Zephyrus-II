@@ -200,9 +200,8 @@ public interface User {
 	 * @param type The TargetType of the spell
 	 * @param range The max distance of the target
 	 * @param friendly Whether or not the spell is benificial
-	 * @return true if a target can be set
 	 */
-	public boolean setTarget(Object key, TargetType type, int range, boolean friendly);
+	public void setTarget(Object key, TargetType type, int range, boolean friendly);
 
 	/**
 	 * Stops the current spell from being cast
