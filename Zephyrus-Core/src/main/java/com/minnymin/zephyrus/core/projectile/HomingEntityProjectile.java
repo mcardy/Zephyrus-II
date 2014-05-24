@@ -18,8 +18,8 @@ import org.bukkit.util.Vector;
 
 public class HomingEntityProjectile implements Projectile {
 
-	private Entity entity;
-	private Entity target;
+	protected Entity entity;
+	protected Entity target;
 
 	public HomingEntityProjectile(Entity entity, Entity target) {
 		this.entity = entity;

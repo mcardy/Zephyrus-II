@@ -20,14 +20,15 @@ import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
 
 public class DamagingBallProjectile implements Projectile {
 
-	private Snowball snowball;
-	private Particle particle;
-	private int damage;
-	private int amount;
+	protected Snowball snowball;
+	protected Particle particle;
+	protected int damage;
+	protected int amount;
 
 	public DamagingBallProjectile(Particle particle, int damage, int amount) {
 		this.particle = particle;
 		this.damage = damage;
+		this.amount = amount;
 	}
 
 	@Override

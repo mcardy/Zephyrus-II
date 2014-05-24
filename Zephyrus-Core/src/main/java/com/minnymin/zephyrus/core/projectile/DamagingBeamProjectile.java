@@ -23,10 +23,10 @@ import com.minnymin.zephyrus.core.util.ParticleEffects.Particle;
 
 public class DamagingBeamProjectile implements Projectile {
 
-	private Snowball snowball;
-	private Particle particle;
-	private int damage;
-	private List<Location> locs;
+	protected Snowball snowball;
+	protected Particle particle;
+	protected int damage;
+	protected List<Location> locs;
 	
 	public DamagingBeamProjectile(Particle particle, int damage) {
 		this.particle = particle;

@@ -22,11 +22,11 @@ import com.minnymin.zephyrus.state.State;
 
 public class StateBallProjectile implements Projectile {
 
-	private Snowball snowball;
-	private Particle particle;
-	private State state;
-	private int time;
-	private int amount;
+	protected Snowball snowball;
+	protected Particle particle;
+	protected State state;
+	protected int time;
+	protected int amount;
 
 	public StateBallProjectile(Particle particle, State state, int time, int amount) {
 		this.particle = particle;
