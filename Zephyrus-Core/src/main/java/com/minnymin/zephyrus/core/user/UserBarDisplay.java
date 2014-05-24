@@ -63,6 +63,7 @@ public class UserBarDisplay implements BarDisplay {
 			en.sendMeta();
 			en.sendTeleport();
 		}
+		playerMap.put(player.getName(), en);
 	}
 
 	private class BossEntity {
