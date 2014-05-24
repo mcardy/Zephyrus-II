@@ -3,9 +3,7 @@ package com.minnymin.zephyrus.core.user;
 import java.util.HashMap;
 import java.util.Map;
 
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.EnderDragon;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.minnymin.zephyrus.core.nms.packet.server.PacketEntityDestroy;
@@ -21,10 +19,10 @@ import com.minnymin.zephyrus.user.BarDisplay;
  * Zephyrus - UserBarDisplay.java
  * 
  * @author minnymin3
- *
+ * 
  */
 public class UserBarDisplay implements BarDisplay {
-
+	
 	private Map<String, BossEntity> playerMap;
 
 	public UserBarDisplay() {
@@ -44,6 +42,7 @@ public class UserBarDisplay implements BarDisplay {
 
 	/**
 	 * Set the boss bar for the given player
+	 * 
 	 * @param name The name that appears above the bar
 	 * @param health A number from 0 - 200 displaying the health
 	 */
@@ -70,8 +69,9 @@ public class UserBarDisplay implements BarDisplay {
 
 		private String name;
 		private int health;
-		private EnderDragon dragon;
+		private Object nmsDragon;
 		private Player player;
+		private int id;
 
 		BossEntity(Player player, String name, int health) {
 			this.player = player;
@@ -88,46 +88,42 @@ public class UserBarDisplay implements BarDisplay {
 		}
 
 		private void sendSpawn() {
-			int x = player.getLocation().getBlockX();
-			int y = player.getLocation().add(0, -400, 0).getBlockY();
-			int z = player.getLocation().getBlockZ();
-
+			Location loc = player.getLocation();
 			Class<?> nmsDragonClass = NMSUtils.getNMSClass("EntityEnderDragon");
-			Class<?> craftServerClass = NMSUtils.getOBCClass("CraftServer");
-			Class<?> craftDragonClass = NMSUtils.getOBCClass("entity.CraftEnderDragon");
-			Object nmsdragon = ReflectionUtils.newInstance(nmsDragonClass,
-					new Class<?>[] { NMSUtils.getNMSClass("World") },
+			nmsDragon = ReflectionUtils.newInstance(nmsDragonClass, new Class<?>[] { NMSUtils.getNMSClass("World") },
 					NMSUtils.getHandle(player.getLocation().getWorld()));
 
-			ReflectionUtils.invokeMethod(nmsdragon, "setLocation", new Class<?>[] { double.class, double.class,
-					double.class, float.class, float.class }, x, y, z, 0, 0);
-			ReflectionUtils.invokeMethod(nmsdragon, "setInvisible", new Class<?>[] { boolean.class }, false);
-			ReflectionUtils.invokeMethod(nmsdragon, "setCustomName", new Class<?>[] { String.class }, name);
-			ReflectionUtils.invokeMethod(nmsdragon, "setHealth", new Class<?>[] { float.class }, health);
+			ReflectionUtils.invokeMethod(nmsDragon, "setLocation", new Class<?>[] { double.class, double.class,
+					double.class, float.class, float.class }, loc.getX(), loc.getY(), loc.getZ(), 0, 0);
+			ReflectionUtils.invokeMethod(nmsDragon, "setInvisible", new Class<?>[] { boolean.class }, false);
+			ReflectionUtils.invokeMethod(nmsDragon, "setCustomName", new Class<?>[] { String.class }, name);
+			ReflectionUtils.invokeMethod(nmsDragon, "setHealth", new Class<?>[] { float.class }, health);
+			id = (Integer) ReflectionUtils.getDeepField(nmsDragon, "id");
 
-			this.dragon = (EnderDragon) ReflectionUtils.newInstance(craftDragonClass, new Class<?>[] {
-					craftServerClass, nmsDragonClass }, Bukkit.getServer(), nmsdragon);
-			PacketEntityLivingSpawn packet = new PacketEntityLivingSpawn(dragon);
+			PacketEntityLivingSpawn packet = new PacketEntityLivingSpawn(nmsDragon);
 			packet.send(player);
 		}
 
 		private void sendDestroy() {
-			new PacketEntityDestroy(dragon.getEntityId()).send(player);
+			new PacketEntityDestroy(id).send(player);
 		}
 
 		private void sendMeta() {
-			new PacketEntityMetadata(dragon.getEntityId(), getWatcher()).send(player);
+			new PacketEntityMetadata(id, getWatcher()).send(player);
 		}
 
 		private void sendTeleport() {
-			new PacketEntityTeleport(dragon.getEntityId(), player.getLocation().add(0, -400, 0)).send(player);
+			new PacketEntityTeleport(id, player.getLocation().add(0, -400, 0)).send(player);
 		}
 
 		private Object getWatcher() {
 			Class<?> entity = NMSUtils.getNMSClass("Entity");
 			Class<?> dataWatcher = NMSUtils.getNMSClass("DataWatcher");
-			Object watcher = ReflectionUtils.newInstance(dataWatcher, new Class<?>[] { entity },
-					NMSUtils.getHandle(dragon));
+			Object watcher = ReflectionUtils.newInstance(dataWatcher, new Class<?>[] { entity }, (Object) null);
+			ReflectionUtils.invokeMethod(watcher, "a", new Class<?>[]{int.class, Object.class}, 0, (Byte) (byte) 0x20);
+			ReflectionUtils.invokeMethod(watcher, "a", new Class<?>[]{int.class, Object.class}, 6, (Float) (float) health);
+			ReflectionUtils.invokeMethod(watcher, "a", new Class<?>[]{int.class, Object.class}, 10, (String) name);
+			ReflectionUtils.invokeMethod(watcher, "a", new Class<?>[]{int.class, Object.class}, 11, (Integer) (int) health);
 			return watcher;
 		}
 

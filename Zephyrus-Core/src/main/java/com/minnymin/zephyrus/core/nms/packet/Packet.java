@@ -18,7 +18,7 @@ public abstract class Packet {
 	/**
 	 * Sets the value of the field in the packet object
 	 */
-	public <T> void setValue(Class<T> fieldType, int index, T value) {
+	public void setValue(Class<?> fieldType, int index, Object value) {
 		InjectionUtils.setField(packet.getClass(), fieldType, index, packet, value);
 	}
 

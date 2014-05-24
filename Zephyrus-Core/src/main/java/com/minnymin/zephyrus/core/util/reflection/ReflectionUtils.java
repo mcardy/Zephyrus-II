@@ -65,6 +65,67 @@ public class ReflectionUtils {
 		}
 	}
 
+	public static Object getStaticField(Class<?> cls, String fieldName) {
+		try {
+			return getField(cls, fieldName).get(null);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the value of a field that exists the class or in it's super-classes
+	 * 
+	 * @param obj The object to get the field from
+	 * @param fieldName The field name to get
+	 * @return null if there is no field or an exception was thrown
+	 */
+	public static Object getDeepField(Object obj, String fieldName) {
+		try {
+			return getDeepField(obj.getClass(), fieldName).get(obj);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the value of a field that exists the class or in it's super-classes
+	 * 
+	 * @param obj The object to get the field from
+	 * @param fieldName The field name to get
+	 * @return null if there is no field or an exception was thrown
+	 */
+	public static Field getDeepField(Class<?> cl, String fieldName) {
+		Field field = null;
+		try {
+			field = cl.getDeclaredField(fieldName);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+		}
+		while (cl.getSuperclass() != null && field == null) {
+			cl = cl.getSuperclass();
+			try {
+				field = cl.getDeclaredField(fieldName);
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (NoSuchFieldException e) {
+			}
+		}
+		if (field != null) {
+			field.setAccessible(true);
+			return field;
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Gets the value of a field
 	 * 
