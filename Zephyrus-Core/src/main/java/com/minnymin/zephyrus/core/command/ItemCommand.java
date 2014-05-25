@@ -190,8 +190,8 @@ public class ItemCommand {
 			if (args.getArgs().length < 2) {
 				String s = user.getData("book.recipe1");
 				if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
-					Language.sendError("command.book.max", "You have reached the maximum amount of books allowed",
-							args.getSender());
+					Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
+							args.getSender(), "[BOOK]", "recipe");
 					return;
 				}
 				args.getPlayer().getInventory().addItem(MagicBooks.createZephyricRecipeBook(1, 5));

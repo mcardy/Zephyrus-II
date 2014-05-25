@@ -1,6 +1,8 @@
 package com.minnymin.zephyrus.core.item;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.WordUtils;
@@ -79,7 +81,7 @@ public class MagicBooks {
 								+ "Spell Crafting Continued"
 								+ ChatColor.RESET
 								+ ChatColor.BLACK
-								+ "\nSome spells require you to be a certain level or already know a spell to craft them (see levelling). "
+								+ "\nSome spells require you to be a certain level or already know a spell to craft them. "
 								+ "Once you craft a spell, you can pickup a spelltome and view the spell's information. "
 								+ "Left click a spelltome to learn the spell."));
 		meta.addPage(Language.get("item.zephyronomicon.pg6", ChatColor.DARK_AQUA + "" + ChatColor.UNDERLINE + ""
@@ -123,7 +125,24 @@ public class MagicBooks {
 		StringBuilder currentText = new StringBuilder();
 		int pos = 0;
 
+		List<Spell> spells = new ArrayList<Spell>();
 		for (Spell spell : Zephyrus.getSpellSet()) {
+			spells.add(spell);
+		}
+		boolean sorted = true;
+		do {
+			sorted = true;
+			for (int i = 0; i < spells.size()-1; i++) {
+				if (spells.get(i).getRequiredLevel() > spells.get(i+1).getRequiredLevel()) {
+					Spell temp = spells.get(i);
+					spells.set(i, spells.get(i+1));
+					spells.set(i+1, temp);
+					sorted = false;
+				}
+			}
+		} while (!sorted);
+		
+		for (Spell spell : spells) {
 			if (spell.getRequiredLevel() >= startLevel && spell.getRequiredLevel() <= endLevel) {
 				currentText.append(ChatColor.GOLD
 						+ WordUtils.capitalize(spell.getName())
