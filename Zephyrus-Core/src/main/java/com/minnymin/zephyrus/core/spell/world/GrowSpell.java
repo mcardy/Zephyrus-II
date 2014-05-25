@@ -27,7 +27,8 @@ import com.minnymin.zephyrus.user.User;
 public class GrowSpell extends Spell {
 
 	public GrowSpell() {
-		super("grow", "Grows your target block", 20, 2, AspectList.newList(Aspect.PLANT, 30, Aspect.LIFE, 15, Aspect.WOOD, 15), 1, SpellElement.EARTH, SpellType.WORLD);
+		super("grow", "Grows your target block", 20, 2, AspectList.newList(Aspect.PLANT, 30, Aspect.LIFE, 15,
+				Aspect.WOOD, 15), 1, SpellElement.EARTH, SpellType.WORLD);
 	}
 
 	@Override

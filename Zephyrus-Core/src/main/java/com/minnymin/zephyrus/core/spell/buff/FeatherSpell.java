@@ -30,8 +30,8 @@ public class FeatherSpell extends Spell implements Configurable {
 	private int duration;
 
 	public FeatherSpell() {
-		super("feather", "Lets you float like a feather", 100, 10, AspectList.newList(Aspect.WIND, 50, Aspect.MOVEMENT,
-				25), 3, SpellElement.AIR, SpellType.BUFF);
+		super("feather", "Lets you float like a feather", 100, 10, AspectList.newList(Aspect.WIND, 40, Aspect.MOVEMENT,
+				20), 2, SpellElement.AIR, SpellType.BUFF);
 	}
 
 	@Override

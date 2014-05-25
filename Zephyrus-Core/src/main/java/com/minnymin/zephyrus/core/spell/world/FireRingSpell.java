@@ -34,8 +34,8 @@ public class FireRingSpell extends Spell implements Configurable {
 	private int radius;
 
 	public FireRingSpell() {
-		super("firering", "Creates a ring of fire around you", 150, 10, AspectList.newList(Aspect.FIRE, 50,
-				Aspect.DESTRUCTION, 25), 4, SpellElement.FIRE, SpellType.WORLD);
+		super("firering", "Creates a ring of fire around you", 150, 10, AspectList.newList(Aspect.FIRE, 80,
+				Aspect.DESTRUCTION, 40), 6, SpellElement.FIRE, SpellType.WORLD);
 	}
 
 	@Override

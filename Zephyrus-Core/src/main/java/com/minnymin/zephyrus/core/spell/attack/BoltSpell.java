@@ -11,7 +11,6 @@ import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
 import com.minnymin.zephyrus.user.User;
 
-
 /**
  * Zephyrus - Bolt.java
  * 
@@ -23,8 +22,8 @@ import com.minnymin.zephyrus.user.User;
 public class BoltSpell extends Spell {
 
 	public BoltSpell() {
-		super("bolt", "Launches a ball of electricity", 20, 1, AspectList
-				.newList(Aspect.ENERGY, 30, Aspect.WIND, 15, Aspect.MOVEMENT, 15, Aspect.WEAPON, 15), 1, SpellElement.AIR, SpellType.ATTACK);
+		super("bolt", "Launches a ball of electricity", 20, 1, AspectList.newList(Aspect.ENERGY, 30, Aspect.WIND, 15,
+				Aspect.MOVEMENT, 15, Aspect.WEAPON, 15), 1, SpellElement.AIR, SpellType.ATTACK);
 	}
 
 	@Override

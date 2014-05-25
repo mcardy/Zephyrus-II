@@ -24,7 +24,7 @@ public class ClockSpell extends Spell {
 
 	public ClockSpell() {
 		super("clock", "Change time at will", 500, 20, AspectList.newList(Aspect.TIME, 100, Aspect.LIGHT, 50,
-				Aspect.DARKNESS, 50), 18, SpellElement.NEUTREAL, SpellType.WORLD);
+				Aspect.DARKNESS, 50), 15, SpellElement.NEUTREAL, SpellType.WORLD);
 	}
 
 	@Override

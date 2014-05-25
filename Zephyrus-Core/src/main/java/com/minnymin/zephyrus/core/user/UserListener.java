@@ -42,7 +42,7 @@ public class UserListener implements Listener {
 		}.runTaskLater(Zephyrus.getPlugin(), 10);
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onWorldChange(final PlayerChangedWorldEvent event) {
 		new BukkitRunnable() {
 			public void run() {

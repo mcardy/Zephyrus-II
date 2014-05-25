@@ -55,7 +55,7 @@ public class JailSpell extends Spell implements Listener, Configurable {
 
 	public JailSpell() {
 		super("jail", "Lock up 'em bandits in a solid steel jail", 500, 50, AspectList.newList(Aspect.METAL, 150,
-				Aspect.MACHINE, 75, Aspect.DEFENSE, 75), 10, SpellElement.NEUTREAL, SpellType.CREATION);
+				Aspect.MACHINE, 75, Aspect.DEFENSE, 75), 8, SpellElement.NEUTREAL, SpellType.CREATION);
 		jails = new HashMap<Location, Set<BlockState>>();
 	}
 

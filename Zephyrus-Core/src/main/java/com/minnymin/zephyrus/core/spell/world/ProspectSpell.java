@@ -32,8 +32,8 @@ public class ProspectSpell extends Spell implements Configurable {
 	private int radius;
 
 	public ProspectSpell() {
-		super("prospect", "Find nearby ores", 100, 10, AspectList.newList(Aspect.STONE, 50, Aspect.VALUE, 25,
-				Aspect.METAL, 25), 3, SpellElement.EARTH, SpellType.WORLD);
+		super("prospect", "Find nearby ores", 100, 10, AspectList.newList(Aspect.STONE, 60, Aspect.VALUE, 30,
+				Aspect.METAL, 30), 4, SpellElement.EARTH, SpellType.WORLD);
 	}
 
 	@Override

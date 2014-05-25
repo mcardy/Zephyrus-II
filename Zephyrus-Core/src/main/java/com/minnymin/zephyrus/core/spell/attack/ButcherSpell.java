@@ -35,7 +35,7 @@ public class ButcherSpell extends Spell implements Configurable {
 
 	public ButcherSpell() {
 		super("butcher", "Butchers all monsters nearby", 100, 10, AspectList
-				.newList(Aspect.BEAST, 30, Aspect.WEAPON, 30), 4, SpellElement.NEUTREAL, SpellType.ATTACK);
+				.newList(Aspect.BEAST, 60, Aspect.WEAPON, 60), 6, SpellElement.NEUTREAL, SpellType.ATTACK);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class PhaseSpell extends Spell {
 
 	public PhaseSpell() {
 		super("phase", "Ever wanted to go through blocks? Now you can!", 100, 10, AspectList.newList(Aspect.MOVEMENT,
-				80, Aspect.ENDER, 40, Aspect.MYSTICAL, 40), 4, SpellElement.ENDER, SpellType.MOBILITY);
+				80, Aspect.ENDER, 40, Aspect.MYSTICAL, 40), 6, SpellElement.ENDER, SpellType.MOBILITY);
 	}
 
 	@Override

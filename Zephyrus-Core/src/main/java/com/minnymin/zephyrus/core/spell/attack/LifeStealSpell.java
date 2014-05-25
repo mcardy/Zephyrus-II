@@ -25,7 +25,7 @@ public class LifeStealSpell extends Spell {
 
 	public LifeStealSpell() {
 		super("lifesteal", "Suck the life force out of an enemy", 25, 2, AspectList.newList(Aspect.BEAST, 50,
-				Aspect.LIFE, 25, Aspect.FLESH, 25), 2, SpellElement.NEUTREAL, SpellType.ATTACK);
+				Aspect.LIFE, 25, Aspect.FLESH, 25), 3, SpellElement.NEUTREAL, SpellType.ATTACK);
 	}
 
 	@Override

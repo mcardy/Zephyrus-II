@@ -30,7 +30,7 @@ public class RepairSpell extends Spell implements Configurable {
 	private int amount;
 
 	public RepairSpell() {
-		super("repair", "Fix up your tools", 25, 2, AspectList.newList(Aspect.TOOL, 30, Aspect.METAL, 15, Aspect.WEAPON, 15, Aspect.CONSTRUCT, 15), 1, SpellElement.NEUTREAL, SpellType.RESTORATION);
+		super("repair", "Fix up your tools", 100, 2, AspectList.newList(Aspect.TOOL, 40, Aspect.METAL, 20, Aspect.WEAPON, 20, Aspect.CONSTRUCT, 15), 2, SpellElement.NEUTREAL, SpellType.RESTORATION);
 	}
 
 	@Override

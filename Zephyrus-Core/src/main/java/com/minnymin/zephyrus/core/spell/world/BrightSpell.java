@@ -20,8 +20,8 @@ import com.minnymin.zephyrus.user.User;
 public class BrightSpell extends Spell {
 
 	public BrightSpell() {
-		super("bright", "Destroy the darkness and embrace the light", 250, 50, AspectList.newList(Aspect.TIME, 50,
-				Aspect.LIGHT, 25), 6, SpellElement.LIGHT, SpellType.WORLD);
+		super("bright", "Destroy the darkness and embrace the light", 250, 50, AspectList.newList(Aspect.TIME, 80,
+				Aspect.LIGHT, 40), 7, SpellElement.LIGHT, SpellType.WORLD);
 	}
 
 	@Override

@@ -18,7 +18,6 @@ import com.minnymin.zephyrus.user.User;
 import com.minnymin.zephyrus.user.targeted.Targeted;
 import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 
-
 /**
  * Zephyrus - Punch.java
  * 
@@ -31,9 +30,10 @@ import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 public class PunchSpell extends Spell implements Configurable {
 
 	private int damage;
-	
+
 	public PunchSpell() {
-		super("punch", "Punches your target with a superpunch", 25, 2, AspectList.newList(Aspect.WEAPON, 30, Aspect.FLESH, 15, Aspect.MYSTICAL, 15), 1, SpellElement.NEUTREAL, SpellType.ATTACK);
+		super("punch", "Punches your target with a superpunch", 25, 2, AspectList.newList(Aspect.WEAPON, 40,
+				Aspect.FLESH, 20, Aspect.MYSTICAL, 20), 2, SpellElement.NEUTREAL, SpellType.ATTACK);
 	}
 
 	@Override

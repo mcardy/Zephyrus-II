@@ -30,8 +30,8 @@ public class VanishSpell extends Spell implements Configurable {
 	private int duration;
 
 	public VanishSpell() {
-		super("vanish", "Ever wanted to dissappear...?", 90, 9, AspectList.newList(Aspect.DARKNESS, 40, Aspect.BEAST,
-				20), 2, SpellElement.DARKNESS, SpellType.BUFF);
+		super("vanish", "Ever wanted to dissappear...?", 90, 9, AspectList.newList(Aspect.DARKNESS, 50, Aspect.BEAST,
+				25), 3, SpellElement.DARKNESS, SpellType.BUFF);
 	}
 
 	@Override

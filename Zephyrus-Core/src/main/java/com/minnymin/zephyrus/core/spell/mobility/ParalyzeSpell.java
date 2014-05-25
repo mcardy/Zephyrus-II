@@ -35,7 +35,7 @@ public class ParalyzeSpell extends Spell implements Configurable {
 	
 	public ParalyzeSpell() {
 		super("paralyze", "Freeze your target! Don't let 'em move!", 40, 4, AspectList.newList(Aspect.MOVEMENT, 50,
-				Aspect.TIME, 25, Aspect.BEAST, 25), 3, SpellElement.NEUTREAL, SpellType.MOBILITY);
+				Aspect.TIME, 25, Aspect.BEAST, 25), 4, SpellElement.NEUTREAL, SpellType.MOBILITY);
 	}
 
 	@Override

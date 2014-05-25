@@ -21,7 +21,7 @@ public class DimSpell extends Spell {
 
 	public DimSpell() {
 		super("dim", "Destroy the light and embrace the darkness", 250, 50, AspectList.newList(Aspect.TIME, 50,
-				Aspect.DARKNESS, 25), 6, SpellElement.DARKNESS, SpellType.WORLD);
+				Aspect.DARKNESS, 25), 7, SpellElement.DARKNESS, SpellType.WORLD);
 	}
 
 	@Override

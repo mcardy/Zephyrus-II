@@ -25,8 +25,8 @@ import com.minnymin.zephyrus.user.User;
 public class HomeSpell extends Spell {
 
 	public HomeSpell() {
-		super("home", "Lets you go home", 100, 10, AspectList.newList(Aspect.MOVEMENT, 50, Aspect.ENDER, 25,
-				Aspect.KNOWLEDGE, 25), 4, SpellElement.ENDER, SpellType.MOBILITY);
+		super("home", "Lets you go home", 100, 10, AspectList.newList(Aspect.MOVEMENT, 60, Aspect.ENDER, 30,
+				Aspect.KNOWLEDGE, 30), 5, SpellElement.ENDER, SpellType.MOBILITY);
 	}
 
 	@SuppressWarnings("unchecked")

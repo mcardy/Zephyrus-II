@@ -31,8 +31,8 @@ import com.minnymin.zephyrus.user.targeted.Target.TargetType;
 public class HomingArrowSpell extends Spell {
 
 	public HomingArrowSpell() {
-		super("homingarrow", "Shoots an arrow to track your target", 25, 2, AspectList.newList(Aspect.WEAPON, 30,
-				Aspect.MOVEMENT, 15, Aspect.WOOD, 15, Aspect.WIND, 15), 1, SpellElement.AIR, SpellType.ATTACK);
+		super("homingarrow", "Shoots an arrow to track your target", 25, 2, AspectList.newList(Aspect.WEAPON, 40,
+				Aspect.MOVEMENT, 20, Aspect.WOOD, 20, Aspect.WIND, 20), 2, SpellElement.AIR, SpellType.ATTACK);
 	}
 
 	@Override

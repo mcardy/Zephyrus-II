@@ -36,7 +36,7 @@ public class DigSpell extends Spell implements Configurable {
 
 	public DigSpell() {
 		super("dig", "Diggy diggy hole", 5, 1, AspectList.newList(Aspect.EARTH, 40, Aspect.STONE, 20, Aspect.TOOL, 20),
-				2, SpellElement.EARTH, SpellType.WORLD);
+				3, SpellElement.EARTH, SpellType.WORLD);
 	}
 
 	@Override

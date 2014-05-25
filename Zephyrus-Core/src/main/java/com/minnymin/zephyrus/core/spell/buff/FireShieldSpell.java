@@ -14,6 +14,7 @@ import com.minnymin.zephyrus.spell.SpellAttributes.CastResult;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellElement;
 import com.minnymin.zephyrus.spell.SpellAttributes.SpellType;
 import com.minnymin.zephyrus.spell.annotation.Bindable;
+import com.minnymin.zephyrus.spell.annotation.Prerequisite;
 import com.minnymin.zephyrus.user.User;
 
 /**
@@ -24,6 +25,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 @Bindable
+@Prerequisite(requiredSpell = ShieldSpell.class)
 public class FireShieldSpell extends Spell implements Configurable {
 
 	private int duration;

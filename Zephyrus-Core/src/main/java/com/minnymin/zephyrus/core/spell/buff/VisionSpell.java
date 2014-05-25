@@ -30,8 +30,8 @@ public class VisionSpell extends Spell implements Configurable {
 	private int duration;
 
 	public VisionSpell() {
-		super("vanish", "Ever wanted to see everything...?", 90, 9, AspectList.newList(Aspect.LIGHT, 40, Aspect.BEAST,
-				20), 2, SpellElement.LIGHT, SpellType.BUFF);
+		super("vanish", "Ever wanted to see everything...?", 90, 9, AspectList.newList(Aspect.LIGHT, 50, Aspect.BEAST,
+				25), 3, SpellElement.LIGHT, SpellType.BUFF);
 	}
 
 	@Override

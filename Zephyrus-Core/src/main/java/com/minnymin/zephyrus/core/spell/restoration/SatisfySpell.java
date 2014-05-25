@@ -21,7 +21,7 @@ public class SatisfySpell extends Spell {
 
 	public SatisfySpell() {
 		super("satisfy", "Your health and hunger will be satisfied", 300, 20, AspectList.newList(Aspect.BEAST, 60,
-				Aspect.LIFE, 30, Aspect.FLESH, 30), 3, SpellElement.NEUTREAL, SpellType.RESTORATION);
+				Aspect.LIFE, 30, Aspect.FLESH, 30), 4, SpellElement.NEUTREAL, SpellType.RESTORATION);
 	}
 
 	@Override

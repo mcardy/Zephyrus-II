@@ -34,7 +34,7 @@ public class BlinkSpell extends Spell {
 
 	public BlinkSpell() {
 		super("blink", "Gets you from point to point without bothering with whats in between", 50, 8, AspectList
-				.newList(Aspect.ENDER, 40, Aspect.MOVEMENT, 20, Aspect.MYSTICAL, 20), 2, SpellElement.ENDER,
+				.newList(Aspect.ENDER, 50, Aspect.MOVEMENT, 25, Aspect.MYSTICAL, 25), 4, SpellElement.ENDER,
 				SpellType.MOBILITY);
 	}
 

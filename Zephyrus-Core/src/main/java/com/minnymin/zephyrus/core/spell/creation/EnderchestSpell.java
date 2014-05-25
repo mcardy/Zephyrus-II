@@ -19,7 +19,7 @@ public class EnderchestSpell extends Spell {
 
 	public EnderchestSpell() {
 		super("enderchest", "Summons the chests of ender", 100, 5, AspectList
-				.newList(Aspect.ENDER, 40, Aspect.VOID, 20), 2, SpellElement.ENDER, SpellType.CREATION);
+				.newList(Aspect.ENDER, 50, Aspect.VOID, 25), 3, SpellElement.ENDER, SpellType.CREATION);
 	}
 
 	@Override

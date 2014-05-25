@@ -25,7 +25,7 @@ public class BuildSpell extends Spell {
 
 	public BuildSpell() {
 		super("build", "Allows you to build far away", 300, 10, AspectList.newList(Aspect.CONSTRUCT, 100,
-				Aspect.DESTRUCTION, 100), 6, SpellElement.NEUTREAL, SpellType.BUFF);
+				Aspect.DESTRUCTION, 100), 8, SpellElement.NEUTREAL, SpellType.BUFF);
 	}
 
 	@Override

@@ -247,9 +247,6 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new SuperHeatSpell());
 		registerSpell(new TrackSpell());
 
-		// TODO Re-implement:
-		// Vanish, Vision, Zap
-
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)

@@ -24,8 +24,8 @@ import com.minnymin.zephyrus.user.User;
 public class SmiteSpell extends Spell {
 
 	public SmiteSpell() {
-		super("smite", "Call down the power of the skies upon the earth", 50, 5, AspectList.newList(Aspect.ENERGY, 50,
-				Aspect.WIND, 25, Aspect.LIGHT, 25), 3, SpellElement.AIR, SpellType.WORLD);
+		super("smite", "Call down the power of the skies upon the earth", 50, 5, AspectList.newList(Aspect.ENERGY, 60,
+				Aspect.WIND, 30, Aspect.LIGHT, 30), 5, SpellElement.AIR, SpellType.WORLD);
 	}
 
 	@Override

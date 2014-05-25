@@ -27,7 +27,7 @@ public class ConjureSpell extends Spell {
 	public ConjureSpell() {
 		super("conjure", "Conjures items out of mana", 0, 10, AspectList.newList(Aspect.CONSTRUCT, 100,
 				Aspect.MYSTICAL, 50, Aspect.FIRE, 25, Aspect.WATER, 25, Aspect.WIND, 25, Aspect.EARTH, 25,
-				Aspect.STONE, 25), 8, SpellElement.ARCANE, SpellType.CREATION);
+				Aspect.STONE, 25), 9, SpellElement.ARCANE, SpellType.CREATION);
 	}
 
 	@Override
