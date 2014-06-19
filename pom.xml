@@ -2,16 +2,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <properties>
-    <bukkit.version>1.7.2-R0.4-SNAPSHOT</bukkit.version>
+    <bukkit.version>1.7.9-R0.2</bukkit.version>
     <worldguard.version>5.7.3</worldguard.version>
     <vault.version>1.2.27</vault.version>
     <build.number>DEV</build.number>
-    <plugin.version>${project.version}-B:${build.number}</plugin.version>
+    <plugin.version>${project.version}</plugin.version> <!-- -B:${build.number}</plugin.version> -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <artifactId>Zephyrus</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.0</version>
   <groupId>com.minnymin.zephyrus</groupId>
   <packaging>pom</packaging>
   
