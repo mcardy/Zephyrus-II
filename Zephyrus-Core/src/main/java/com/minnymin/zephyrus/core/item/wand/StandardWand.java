@@ -50,7 +50,7 @@ public class StandardWand extends Wand {
 
 	@Override
 	public int getPowerIncrease(Spell spell) {
-		return 0;
+		return 1;
 	}
 
 	@Override

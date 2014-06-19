@@ -229,7 +229,7 @@ public class ItemListener implements Listener {
 					} else if (bound != null) {
 						Spell spell = Zephyrus.getSpell(bound);
 						didCast = true;
-						user.castSpell(spell, wand.getPowerIncrease(spell), null);
+						user.castSpell(spell, 1 + wand.getPowerIncrease(spell), null);
 					} else {
 						Language.sendError("item.wand.nobound",
 								"There is no spell bound to this wand! Bind one with /bind <spell>", player);
