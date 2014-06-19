@@ -67,10 +67,6 @@ public class SpellShop implements Shop {
 		User user = Zephyrus.getUser(player);
 		Spell spell = Zephyrus.getSpell(args[1]);
 		int amount = Integer.parseInt(args[2].replace("$", ""));
-		if (Zephyrus.getHookManager().getEconomyHook() == null) {
-			Language.sendError("shop.use.economy", "No economy system found. Cannot use shop.", player);
-			return;
-		}
 		if (spell == null) {
 			Language.sendError("shop.spell.use.broken", "Something went wrong! Spell not found...", player);
 			return;

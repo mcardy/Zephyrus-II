@@ -18,7 +18,6 @@ import com.minnymin.zephyrus.core.chat.MessageForm.MessageFormatting;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.item.Item;
 import com.minnymin.zephyrus.item.LevelledItem;
-import com.minnymin.zephyrus.item.Wand;
 import com.minnymin.zephyrus.shop.Shop;
 
 /**
@@ -28,7 +27,7 @@ import com.minnymin.zephyrus.shop.Shop;
  * 
  */
 
-public class WandShop implements Shop {
+public class ItemShop implements Shop {
 
 	@Override
 	public boolean create(SignChangeEvent event) {
@@ -36,68 +35,66 @@ public class WandShop implements Shop {
 		String[] args = event.getLines();
 		int amount;
 		Item item;
-		Wand wand;
 		try {
 			amount = Integer.parseInt(args[2]);
 		} catch (Exception ex) {
-			Language.sendError("shop.wand.create.amount", "Cost on line 3 not valid. Expected a number.", player);
+			Language.sendError("shop.item.create.amount", "Cost on line 3 not valid. Expected a number.", player);
 			return false;
 		}
 		item = Zephyrus.getItemManager().getItemFromBaseName(args[1]);
-		if (item == null || !(item instanceof Wand)) {
-			Language.sendError("shop.wand.create.wand", "Wand on line 2 not valid. No wand found by that name.",
-					player);
+		if (item == null) {
+			Language.sendError("shop.item.create.wand", "Item on line 2 not valid. No item found by that name.", player);
 			return false;
 		}
-		wand = (Wand) item;
-		Language.sendMessage("shop.wand.create.complete",
-				"Successfully created a WandShop selling the [WAND] wand for [AMOUNT]", player, "[WAND]",
-				wand.getName(), "[AMOUNT]", amount + "");
+		Language.sendMessage("shop.item.create.complete",
+				"Successfully created an ItemShop selling the [ITEM] item for [AMOUNT]", player, "[ITEM]",
+				item.getName(), "[AMOUNT]", amount + "");
 		event.setLine(2, "$" + args[2]);
-		event.setLine(1, wand.getName());
+		event.setLine(1, item.getName());
 		return true;
 	}
 
 	@Override
 	public ChatColor getChatColorIdentifier() {
-		return ChatColor.DARK_AQUA;
+		return ChatColor.BLUE;
 	}
 
 	@Override
 	public String getName() {
-		return "WandShop";
+		return "ItemShop";
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
 	public void onClick(Player player, String[] args) {
-		Wand wand = (Wand) Zephyrus.getItemManager().getItem(args[1]);
+		Item item = (Item) Zephyrus.getItemManager().getItem(args[1]);
 		int amount = Integer.parseInt(args[2].replace("$", ""));
 		if (Zephyrus.getHookManager().getEconomyHook().getBalance(player) < amount) {
-			Language.sendError("shop.wand.use.amount", "You do not have enough money to buy this wand: [AMOUNT]",
+			Language.sendError("shop.item.use.amount", "You do not have enough money to buy this spell: [AMOUNT]",
 					player, "[AMOUNT]", Zephyrus.getHookManager().getEconomyHook().getBalance(player) + "/" + amount);
 			return;
 		}
-		ItemStack stack = new ItemStack(wand.getMaterial());
+		ItemStack stack = new ItemStack(item.getMaterial());
 		ItemMeta meta = stack.getItemMeta();
-		meta.setDisplayName(wand.getName());
-		if (wand instanceof LevelledItem) {
-			meta.setLore(((LevelledItem)wand).getLevelledLore(1));
+		meta.setDisplayName(item.getName());
+		if (item instanceof LevelledItem) {
+			meta.setLore(((LevelledItem) item).getLevelledLore(1));
 		} else {
-			meta.setLore(wand.getLore());
+			meta.setLore(item.getLore());
 		}
-		for (Entry<Enchantment, Integer> entry : wand.getEnchantments().entrySet()) {
+		for (Entry<Enchantment, Integer> entry : item.getEnchantments().entrySet()) {
 			meta.addEnchant(entry.getKey(), entry.getValue(), true);
 		}
 		stack.setItemMeta(meta);
 		if (player.getInventory().addItem(stack).isEmpty()) {
 			Zephyrus.getHookManager().getEconomyHook().drainBalance(player, amount);
 			player.updateInventory();
-			new Message("shop.wand.use.complete", "You have successfully purchased ",
-					MessageColor.GRAY, MessageFormatting.NONE).addComponent(new MessageComponent(wand.getName(),
-					MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(MessageHoverEvent.TEXT, wand.getLore().get(0))).sendMessage(player);
+			new Message("shop.item.use.complete", "You have successfully purchased ", MessageColor.GRAY,
+					MessageFormatting.NONE).addComponent(
+					new MessageComponent(item.getName(), MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(
+							MessageHoverEvent.TEXT, item.getLore().get(0))).sendMessage(player);
 		} else {
-			Language.sendError("shop.wand.use.full", "Your inventory is full! Cannot add item!", player);
+			Language.sendError("shop.item.use.full", "Your inventory is full! Cannot add item!", player);
 		}
 	}
 

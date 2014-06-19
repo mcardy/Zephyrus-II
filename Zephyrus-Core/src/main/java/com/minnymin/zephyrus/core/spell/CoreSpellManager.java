@@ -250,8 +250,6 @@ public class CoreSpellManager implements SpellManager {
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)
-
-		// TODO Spell level balancing (broader range of levels)
 		
 		for (Spell spell : spellList) {
 			spell.onEnable();

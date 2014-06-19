@@ -32,7 +32,6 @@ import com.minnymin.zephyrus.core.util.command.CommandFramework;
  * Zephyrus - ZephyrusPlugin.java
  * 
  * TODO Implement Combo-Spells - Later release
- * TODO Implement Spell and Item Shops
  * 
  * @author minnymin3
  * 
