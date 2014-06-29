@@ -37,6 +37,7 @@ public class CoreShopManager implements ShopManager, Listener {
 		Bukkit.getPluginManager().registerEvents(this, Zephyrus.getPlugin());
 		registerShop(new SpellShop());
 		registerShop(new WandShop());
+		registerShop(new ItemShop());
 	}
 
 	@Override
