@@ -56,9 +56,10 @@ public class ArrowStormSpell extends Spell implements Configurable {
 		final Player player = user.getPlayer();
 		final int amount = this.amount * power;
 		Bukkit.getScheduler().runTaskTimer(Zephyrus.getPlugin(), new Runnable() {
+			int shots = amount;
+			
 			@Override
 			public void run() {
-				int shots = amount;
 				if (shots > 0 && player.isOnline()) {
 					player.launchProjectile(Arrow.class)
 							.setMetadata("ignore_pickup", new FixedMetadataValue(Zephyrus.getPlugin(), true));
