@@ -6,7 +6,7 @@
     <worldguard.version>5.7.3</worldguard.version>
     <vault.version>1.2.27</vault.version>
     <build.number>DEV</build.number>
-    <plugin.version>${project.version}</plugin.version> <!-- -B:${build.number}</plugin.version> -->
+    <plugin.version>${project.version}-B:${build.number}</plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
