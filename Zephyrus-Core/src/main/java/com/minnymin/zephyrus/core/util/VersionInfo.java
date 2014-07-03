@@ -38,12 +38,23 @@ public class VersionInfo {
 		}
 	}
 	
+	private static String[] keys_200 = {};
+	//private static String[] keys_201 = {};
+	
 	/**
 	 * If language items have changed they will be updated here when the plugin updates
 	 */
 	private static void updateLanguage(String previousVersion) {
-		if (previousVersion == "2.0.0") {
-			//Language.remove("");
+		int version = Integer.parseInt(previousVersion.replace(".", ""));
+		switch (version) {
+		case 200:
+			for (String key : keys_200) {
+				Language.remove(key);
+			}
+		//case 201:
+		//	for (String key : keys_201) {
+		//		Language.remove(key);
+		//	}
 		}
 	}
 }
