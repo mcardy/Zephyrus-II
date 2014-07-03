@@ -13,8 +13,8 @@ import com.minnymin.zephyrus.Zephyrus;
 public class VersionInfo {
 
 	public static void load() {
+		YmlConfigFile file = new YmlConfigFile("version.yml");
 		if (Zephyrus.getPlugin().getDescription().getVersion().contains("B:")) {
-			YmlConfigFile file = new YmlConfigFile("version.yml");
 			try {
 				int version = Integer.parseInt(Zephyrus.getPlugin().getDescription().getVersion().split("B:")[1]);
 				if (file.getConfig().getInt("version") < version) {
@@ -27,6 +27,11 @@ public class VersionInfo {
 					file.saveConfig();
 				}
 			} catch (Exception ex) {
+			}
+		} else {
+			if (file.getConfig().getString("release") != Zephyrus.getPlugin().getDescription().getVersion()) {
+				file.getConfig().set("release", Zephyrus.getPlugin().getDescription().getVersion());
+				file.saveConfig();
 			}
 		}
 	}
