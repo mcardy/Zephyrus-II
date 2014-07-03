@@ -26,9 +26,10 @@ public class BasicObsidianWand extends Wand {
 
 	public BasicObsidianWand() {
 		super(name, name + ChatColor.GOLD + " - " + ChatColor.GRAY + "[SPELL]", 3, 5, 5, Material.STICK,
-				DataStructureUtils.createList(ChatColor.GRAY + "Basic wand with increased power and discounted mana"),
-				DataStructureUtils.createList(ChatColor.GRAY + "Bound Spell: [SPELL]", ChatColor.GRAY
-						+ "Basic wand with increased power and discounted mana"));
+				DataStructureUtils.createList(ChatColor.GRAY + "Basic wand: ", ChatColor.GREEN + " - Power +1",
+						ChatColor.AQUA + " - Mana -5"), DataStructureUtils.createList(ChatColor.GRAY
+						+ "Bound Spell: [SPELL]", ChatColor.GRAY + "Basic wand: ", ChatColor.GREEN + " - Power +1",
+						ChatColor.AQUA + " - Mana -5"));
 	}
 
 	@Override

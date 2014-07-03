@@ -26,9 +26,9 @@ public class BasicFireWand extends Wand {
 
 	public BasicFireWand() {
 		super(name, name + ChatColor.GOLD + " - " + ChatColor.GRAY + "[SPELL]", 3, 5, 5, Material.STICK,
-				DataStructureUtils.createList(ChatColor.GRAY + "Basic wand with increased fire power"),
+				DataStructureUtils.createList(ChatColor.GRAY + "Basic wand: ", ChatColor.GREEN + " - Power +1 on fire spells"),
 				DataStructureUtils.createList(ChatColor.GRAY + "Bound Spell: [SPELL]", ChatColor.GRAY
-						+ "Basic wand with no perks"));
+						+ "Basic wand: ", ChatColor.GREEN + " - Power +1 on fire spells"));
 	}
 
 	@Override

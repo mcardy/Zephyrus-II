@@ -57,7 +57,7 @@ public class MagicBooks {
 								+ ChatColor.BLACK
 								+ "\nWands are used for many of Zephyrus's features. "
 								+ "They are used to craft spells and can be used to cast spells. "
-								+ "There are many types of wands that can be found on the wiki:\n http://wiki.minnymin.com/Portal:Wands"));
+								+ "There are many types of wands that can be found on the forum page:\ndev.bukkit.org/bukkit-plugins/zephyrus"));
 		meta.addPage(Language
 				.get("item.zephyronomicon.pg4",
 						ChatColor.DARK_AQUA
