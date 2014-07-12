@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 
 import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
@@ -106,9 +107,9 @@ public class CoreItemManager implements ItemManager {
 	public void registerItem(Item item) {
 		if (itemConfig.getConfig().getBoolean(item.getInternalName() + ".Enabled")) {
 			if (item instanceof Wand) {
-				PermissionsManager.addPermission(new Permission("zephyrus.craft.wand." + item.getInternalName(), "Ability to craft " + ChatColor.stripColor(item.getName())));
+				PermissionsManager.addPermission(new Permission("zephyrus.craft.wand." + item.getInternalName(), "Ability to craft a " + ChatColor.stripColor(item.getName()), PermissionDefault.TRUE));
 			} else {
-				PermissionsManager.addPermission(new Permission("zephyrus.craft." + item.getInternalName(), "Ability to craft " + item.getName()));
+				PermissionsManager.addPermission(new Permission("zephyrus.craft." + item.getInternalName(), "Ability to craft a " + item.getName(), PermissionDefault.TRUE));
 			}
 			itemMap.put(item.getName(), item);
 			if (item instanceof Listener) {
