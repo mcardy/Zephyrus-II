@@ -39,14 +39,14 @@ public class TrackSpell extends Spell implements Configurable {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		if (args.length == 0) {
-			Language.sendError("spell.track.notarget", "Specify a target entity", user.getPlayer());
+			Language.sendError("spell.track.notarget", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 		EntityType type;
 		try {
 			type = EntityType.valueOf(args[0].toUpperCase());
 		} catch (Exception ex) {
-			Language.sendError("spell.track.badtarget", "That is not an entity", user.getPlayer());
+			Language.sendError("spell.track.badtarget", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 		for (Entity entity : user.getPlayer().getNearbyEntities(radius, radius, radius)) {
@@ -56,7 +56,7 @@ public class TrackSpell extends Spell implements Configurable {
 				double deltaX = playerLoc.getX() - entityLoc.getX();
 				double deltaY = playerLoc.getY() - entityLoc.getY();
 				double deltaZ = playerLoc.getZ() - entityLoc.getZ();
-				Language.sendMessage("spell.track.title", ChatColor.GRAY + "There is a [ENTITY] nearby",
+				Language.sendMessage("spell.track.title", 
 						user.getPlayer(), "[ENTITY]", type.toString().toLowerCase());
 				String locX = ChatColor.BLUE
 						+ (deltaX > 0 ? (int) deltaX + " blocks west" : (int) -deltaX + " blocks east");
@@ -64,12 +64,12 @@ public class TrackSpell extends Spell implements Configurable {
 						+ (deltaY > 0 ? (int) deltaY + " blocks down" : (int) -deltaY + " blocks up");
 				String locZ = ChatColor.GREEN
 						+ (deltaZ > 0 ? (int) deltaZ + " blocks north" : (int) -deltaZ + " blocks south");
-				Language.sendMessage("spell.track.location", ChatColor.GRAY + "Travel [X], [Y], [Z]", user.getPlayer(),
+				Language.sendMessage("spell.track.location", user.getPlayer(),
 						"[X]", locX, "[Y]", locY, "[Z]", locZ);
 				return CastResult.SUCCESS;
 			}
 		}
-		Language.sendError("spell.track.none", "There are no entities of that type nearby", user.getPlayer());
+		Language.sendError("spell.track.none", user.getPlayer());
 		return CastResult.SUCCESS;
 	}
 

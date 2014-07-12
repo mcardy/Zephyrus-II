@@ -32,12 +32,12 @@ public class FeatherState implements State {
 
 	@Override
 	public void onApplied(User user) {
-		Language.sendMessage("spell.feather.start", "You feel like you can float like a feather", user.getPlayer());
+		Language.sendMessage("spell.feather.start", user.getPlayer());
 	}
 
 	@Override
 	public void onRemoved(User user) {
-		Language.sendMessage("spell.feather.end", "You feel heavy again", user.getPlayer());
+		Language.sendMessage("spell.feather.end", user.getPlayer());
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class FeatherState implements State {
 
 	@Override
 	public void onWarning(User user) {
-		Language.sendMessage("spell.feather.warn", "You begin to feel heavy", user.getPlayer());
+		Language.sendMessage("spell.feather.warn", user.getPlayer());
 	}
 	
 	@EventHandler

@@ -2,7 +2,6 @@ package com.minnymin.zephyrus.core.state;
 
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -35,12 +34,12 @@ public class BuildState implements State {
 
 	@Override
 	public void onApplied(User user) {
-		Language.sendMessage("spell.build.applied", ChatColor.GRAY + "You feel your reach extend", user.getPlayer());
+		Language.sendMessage("spell.build.applied", user.getPlayer());
 	}
 
 	@Override
 	public void onRemoved(User user) {
-		Language.sendMessage("spell.build.removed", ChatColor.GRAY + "You feel your reach shorten back to normal", user.getPlayer());
+		Language.sendMessage("spell.build.removed", user.getPlayer());
 	}
 
 	@Override
@@ -53,7 +52,7 @@ public class BuildState implements State {
 
 	@Override
 	public void onWarning(User user) {
-		Language.sendMessage("spell.build.warning", ChatColor.GRAY + "You feel your begin to shorten back to normal", user.getPlayer());
+		Language.sendMessage("spell.build.warning", user.getPlayer());
 	}
 
 	@EventHandler

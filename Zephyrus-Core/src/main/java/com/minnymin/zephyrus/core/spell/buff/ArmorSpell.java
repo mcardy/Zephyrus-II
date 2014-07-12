@@ -2,8 +2,6 @@ package com.minnymin.zephyrus.core.spell.buff;
 
 import java.util.Map;
 
-
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
@@ -44,16 +42,14 @@ public class ArmorSpell extends Spell implements Configurable {
 		if (player.getInventory().getHelmet() == null && player.getInventory().getChestplate() == null
 				&& player.getInventory().getLeggings() == null && player.getInventory().getBoots() == null) {
 			user.addState(StateList.ARMOR, duration);
-			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold",
-					player);
+			Language.sendMessage("spell.armor.applied", player);
 			return CastResult.SUCCESS;
 		} else if (user.isStateApplied(StateList.ARMOR)) {
 			user.addState(StateList.ARMOR, duration);
-			Language.sendMessage("spell.armor.applied", ChatColor.GOLD + "Your skin is hardened with magic and gold",
-					player);
+			Language.sendMessage("spell.armor.applied", player);
 			return CastResult.SUCCESS;
 		} else {
-			Language.sendError("spell.armor.fail", "You cannot be waring armour when casting this spell", player);
+			Language.sendError("spell.armor.fail", player);
 			return CastResult.FAILURE;
 		}
 	}

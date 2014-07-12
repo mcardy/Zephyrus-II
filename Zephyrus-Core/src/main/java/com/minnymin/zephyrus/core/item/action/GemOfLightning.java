@@ -57,7 +57,7 @@ public class GemOfLightning extends ActionItem implements LevelledItem {
 		Block block = (Block) user.getTarget(this).getTarget();
 		int delay = user.getDelay(getInternalName());
 		if (delay > 0) {
-			Language.sendError("item.delay", "You still need to wait [SECONDS] seconds to use this item", player,
+			Language.sendError("item.delay", player,
 					"[SECONDS]", delay + "");
 			return;
 		}
@@ -66,7 +66,7 @@ public class GemOfLightning extends ActionItem implements LevelledItem {
 			user.setDelay(getName(), levelToDelay(getLevel(player.getItemInHand().getItemMeta().getLore())));
 			return;
 		}
-		Language.sendError("item.gemoflightning.failure", "You can't strike lightning there!", player);
+		Language.sendError("item.gemoflightning.failure", player);
 	}
 
 	@Override

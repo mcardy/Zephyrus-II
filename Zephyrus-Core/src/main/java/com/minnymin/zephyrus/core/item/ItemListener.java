@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -100,7 +99,7 @@ public class ItemListener implements Listener {
 					trade.openTrade(player);
 					this.traders.put(player.getName(), trade);
 				} else {
-					Language.sendError("item.arcane.max", "This item is already at max level", player);
+					Language.sendError("item.arcane.max", player);
 				}
 			} else if (item != null && item instanceof ActionItem) {
 				ActionItem action = (ActionItem) item;
@@ -121,11 +120,11 @@ public class ItemListener implements Listener {
 					List<ItemStack> items;
 					BukkitRunnable removalTask;
 					if (event.getClickedBlock().getRelative(BlockFace.UP).getType() != Material.CHEST) {
-						final Set<org.bukkit.entity.Item> itemEntity = getEntities(event.getClickedBlock().getLocation()
-								.add(0.5, 1.5, 0.5));
+						final Set<org.bukkit.entity.Item> itemEntity = getEntities(event.getClickedBlock()
+								.getLocation().add(0.5, 1.5, 0.5));
 						items = getItems(itemEntity);
 						removalTask = new BukkitRunnable() {
-							
+
 							@Override
 							public void run() {
 								for (org.bukkit.entity.Item item : itemEntity) {
@@ -143,7 +142,7 @@ public class ItemListener implements Listener {
 							}
 						}
 						removalTask = new BukkitRunnable() {
-							
+
 							@Override
 							public void run() {
 								for (int i = 0; i < chest.getInventory().getSize(); i++) {
@@ -162,14 +161,11 @@ public class ItemListener implements Listener {
 					List<Spell> spells = new ArrayList<Spell>();
 					for (Spell spell : possibleSpells) {
 						if (wand.getCraftingAbilityLevel() < spell.getRequiredLevel()) {
-							Language.sendError("crafting.reqwandlevel",
-									"Your wand is not powerful enough to craft [SPELL]", player, "[SPELL]",
-									spell.getName());
+							Language.sendError("crafting.reqwandlevel", player, "[SPELL]", spell.getName());
 							continue;
 						}
 						if (user.getLevel() < spell.getRequiredLevel()) {
-							Language.sendError("crafting.reqplayerlevel",
-									"You are not powerful enough to craft [SPELL]", player, "[SPELL]", spell.getName());
+							Language.sendError("crafting.reqplayerlevel", player, "[SPELL]", spell.getName());
 							continue;
 						}
 						spells.add(spell);
@@ -206,22 +202,17 @@ public class ItemListener implements Listener {
 						}
 						gui.open(player);
 					} else {
-						Language.sendError(
-								"crafting.nospell",
-								"You cannot craft any spells with those aspects. Consult the SpellBook for more information.",
-								player);
+						Language.sendError("crafting.nospell", player);
 					}
 					// Checking Bound Spell
 				} else if (event.getAction() == Action.RIGHT_CLICK_BLOCK
 						&& event.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
 					event.getClickedBlock().setData((byte) 10);
-					Language.sendMessage("item.arcane.create", ChatColor.GOLD + "You have created an Arcane Leveller",
-							player);
+					Language.sendMessage("item.arcane.create", player);
 					return;
 				} else if (player.isSneaking()
 						&& (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
-					Language.sendMessage("item.wand.bound", "Current bound spell: " + ChatColor.GOLD + "[SPELL]",
-							player, "[SPELL]", bound != null ? bound : "none");
+					Language.sendMessage("item.wand.bound", player, "[SPELL]", bound != null ? bound : "none");
 					// Casting Bound Spell
 				} else if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 					if (user.isCastingSpell()) {
@@ -231,8 +222,7 @@ public class ItemListener implements Listener {
 						didCast = true;
 						user.castSpell(spell, 1 + wand.getPowerIncrease(spell), null);
 					} else {
-						Language.sendError("item.wand.nobound",
-								"There is no spell bound to this wand! Bind one with /bind <spell>", player);
+						Language.sendError("item.wand.nobound", player);
 					}
 				}
 			}
@@ -331,9 +321,8 @@ public class ItemListener implements Listener {
 					Player player = (Player) human;
 					if (Zephyrus.getUser(player).getLevel() < item.getCraftingLevel()) {
 						event.getInventory().setResult(null);
-						Language.sendError("crafting.item.requiredlevel",
-								"You lack the knowledge of level [LEVEL] required to craft [ITEM]", player, "[LEVEL]",
-								item.getCraftingLevel() + "", "[ITEM]", item.getName());
+						Language.sendError("crafting.item.requiredlevel", player, "[LEVEL]", item.getCraftingLevel()
+								+ "", "[ITEM]", item.getName());
 					}
 				}
 			}

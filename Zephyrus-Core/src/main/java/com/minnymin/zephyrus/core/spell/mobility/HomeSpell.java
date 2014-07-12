@@ -33,7 +33,7 @@ public class HomeSpell extends Spell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		if (user.getData(getDefaultName()) == null && (args.length == 0 || !args[0].equalsIgnoreCase("set"))) {
-			Language.sendMessage("spell.home.needset", "You need to set your home with '/cast home set'", user.getPlayer());
+			Language.sendMessage("spell.home.needset", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 		if (args.length > 0 && args[0].equalsIgnoreCase("set")) {
@@ -46,7 +46,7 @@ public class HomeSpell extends Spell {
 			obj.put("yaw", loc.getYaw());
 			obj.put("pitch", loc.getPitch());
 			user.setData(getDefaultName(), obj.toJSONString());
-			Language.sendMessage("spell.home.set", "Home successfully set!", user.getPlayer());
+			Language.sendMessage("spell.home.set", user.getPlayer());
 			return CastResult.SUCCESS;
 		}
 		JSONObject obj = null;
@@ -63,7 +63,7 @@ public class HomeSpell extends Spell {
 		float pitch = ((Double) obj.get("pitch")).floatValue();
 		String world = (String) obj.get("world");
 		user.getPlayer().teleport(new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch));
-		Language.sendMessage("spell.home.success", "Going home...", user.getPlayer());
+		Language.sendMessage("spell.home.success", user.getPlayer());
 		return CastResult.SUCCESS;
 	}
 

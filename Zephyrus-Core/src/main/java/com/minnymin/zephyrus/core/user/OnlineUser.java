@@ -88,8 +88,7 @@ public class OnlineUser implements User {
 		while (this.progress >= (level ^ 2 * 10 + 100)) {
 			this.progress -= (level ^ 2 * 10 + 100);
 			level++;
-			Language.sendMessage("game.levelup", ChatColor.AQUA + "You leveled up to level [LEVEL]", player, "[LEVEL]",
-					getLevel() + "");
+			Language.sendMessage("game.levelup", player, "[LEVEL]", getLevel() + "");
 			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 2, 1);
 			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 2, 8);
 			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 2, -1);
@@ -119,14 +118,12 @@ public class OnlineUser implements User {
 		}
 		if (Zephyrus.getHookManager().canCast(player, spell)) {
 			if (spell == null || !isSpellLearned(spell)) {
-				Language.sendError("command.cast.learn", "You have not learned [SPELL]", getPlayer(), "[SPELL]",
-						args[0]);
+				Language.sendError("command.cast.learn", getPlayer(), "[SPELL]", args[0]);
 				return;
 			}
 			if (getMana() < spell.getManaCost()) {
-				Language.sendError("command.cast.mana", "You do not have enough mana to cast [SPELL] [MANA]",
-						getPlayer(), "[SPELL]", spell.getName(), "[MANA]", ChatColor.RED + "" + getMana()
-								+ ChatColor.GRAY + "/" + ChatColor.GREEN + spell.getManaCost());
+				Language.sendError("command.cast.mana", getPlayer(), "[SPELL]", spell.getName(), "[MANA]",
+						ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/" + ChatColor.GREEN + spell.getManaCost());
 				return;
 			}
 			if (spell.getClass().isAnnotationPresent(Targeted.class)) {
@@ -135,7 +132,7 @@ public class OnlineUser implements User {
 				if ((targeted.type() == TargetType.PLAYER || targeted.type() == TargetType.ENTITY)
 						&& (getTarget(spell).getTarget() == null || ((LivingEntity) getTarget(spell).getTarget())
 								.isDead())) {
-					Language.sendError("spell.notarget", "You do not have a target", getPlayer());
+					Language.sendError("spell.notarget", getPlayer());
 					return;
 				}
 			}
@@ -410,10 +407,9 @@ public class OnlineUser implements User {
 		}
 		if (isCastingSpell()) {
 			if (getMana() < continuousSpell.getManaCostPerTick()) {
-				Language.sendError("command.cast.continuous.mana",
-						"You do not have enough mana to continue cast [SPELL] [MANA]", getPlayer(), "[SPELL]",
-						continuousSpell.getName(), "[MANA]", ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/"
-								+ ChatColor.GREEN + continuousSpell.getManaCost());
+				Language.sendError("command.cast.continuous.mana", getPlayer(), "[SPELL]", continuousSpell.getName(),
+						"[MANA]", ChatColor.RED + "" + getMana() + ChatColor.GRAY + "/" + ChatColor.GREEN
+								+ continuousSpell.getManaCost());
 				stopCasting();
 				return;
 			}

@@ -29,12 +29,12 @@ public class ShieldState implements State {
 
 	@Override
 	public void onApplied(User user) {
-		Language.sendMessage("spell.shield.applied", "A shield of magical energy surrounds you", user.getPlayer());
+		Language.sendMessage("spell.shield.applied", user.getPlayer());
 	}
 
 	@Override
 	public void onRemoved(User user) {
-		Language.sendMessage("spell.shield.applied", "Your magic shield dissapates", user.getPlayer());
+		Language.sendMessage("spell.shield.applied", user.getPlayer());
 	}
 
 	@Override

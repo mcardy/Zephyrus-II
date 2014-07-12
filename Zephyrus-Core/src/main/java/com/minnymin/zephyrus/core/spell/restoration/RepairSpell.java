@@ -26,7 +26,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class RepairSpell extends Spell implements Configurable {
-
+	
 	private int amount;
 
 	public RepairSpell() {
@@ -44,11 +44,11 @@ public class RepairSpell extends Spell implements Configurable {
 			} else {
 				player.getItemInHand().setDurability(player.getItemInHand().getType().getMaxDurability());
 			}
-			Language.sendMessage("spell.repair.success", "Your tool feels a bit stronger", player);
+			Language.sendMessage("spell.repair.success", player);
 			player.getWorld().playSound(player.getLocation(), Sound.ANVIL_USE, 1.0F, 0.0F);
 			return CastResult.SUCCESS;
 		} else {
-			Language.sendError("spell.repair.fail", "You can't repair that item", player);
+			Language.sendError("spell.repair.fail", player);
 			return CastResult.FAILURE;
 		}
 	}

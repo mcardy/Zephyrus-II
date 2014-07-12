@@ -2,7 +2,6 @@ package com.minnymin.zephyrus.core.item;
 
 import java.util.Arrays;
 
-
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -69,23 +68,22 @@ public class SpellTome implements Listener {
 			Spell spell = Zephyrus
 					.getSpell(ChatColor.stripColor(player.getItemInHand().getItemMeta().getLore().get(0)));
 			if (spell == null) {
-				Language.sendError("item.spelltome.broken", "Something went wrong! Spell not found...", player);
+				Language.sendError("item.spelltome.broken", player);
 				return;
 			}
 			if (user.isSpellLearned(spell)) {
-				Language.sendError("item.spelltome.learned", "You already know [SPELL]!", player, "[SPELL]", spell
-						.getName());
+				Language.sendError("item.spelltome.learned", player, "[SPELL]", spell.getName());
 				return;
 			}
 			if (user.getLevel() < spell.getRequiredLevel()) {
-				Language.sendError("item.spelltome.level", "You need to have the knowledge of level [LEVEL] to learn [SPELL]!", player, "[SPELL]", spell
-						.getName(), "[LEVEL]", spell.getRequiredLevel() + "");
+				Language.sendError("item.spelltome.level", player, "[SPELL]", spell.getName(), "[LEVEL]",
+						spell.getRequiredLevel() + "");
 				return;
 			}
 			if (spell.getClass().isAnnotationPresent(Prerequisite.class)
-					&& !user.isSpellLearned(Zephyrus.getSpell(((Prerequisite) spell.getClass()
-							.getAnnotation(Prerequisite.class)).requiredSpell()))) {
-				Language.sendError("item.spelltome.requiredspell", "You do not have the knowledge of [SPELL]", player, "[SPELL]", ((Prerequisite) spell)
+					&& !user.isSpellLearned(Zephyrus.getSpell(((Prerequisite) spell.getClass().getAnnotation(
+							Prerequisite.class)).requiredSpell()))) {
+				Language.sendError("item.spelltome.requiredspell", player, "[SPELL]", ((Prerequisite) spell)
 						.requiredSpell().getName());
 				return;
 			}
@@ -93,10 +91,9 @@ public class SpellTome implements Listener {
 			Bukkit.getPluginManager().callEvent(learn);
 			if (!learn.isCancelled()) {
 				user.addSpell(spell);
-				new Message("item.spelltome.complete", "You have successfully learned ",
-						MessageColor.GRAY, MessageFormatting.NONE).addComponent(new MessageComponent(spell.getName(),
-						MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(MessageHoverEvent.TEXT, spell
-						.getDescription())).sendMessage(player);
+				new Message("item.spelltome.complete", MessageColor.GRAY, MessageFormatting.NONE).addComponent(
+						new MessageComponent(spell.getName(), MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(
+								MessageHoverEvent.TEXT, spell.getDescription())).sendMessage(player);
 				player.setItemInHand(null);
 			}
 		} catch (Exception e) {

@@ -96,8 +96,7 @@ public class BlinkPearl extends ActionItem implements LevelledItem {
 		Block block = (Block) user.getTarget(this).getTarget();
 		int delay = user.getDelay(getName());
 		if (delay > 0) {
-			Language.sendError("item.delay", "You still need to wait [SECONDS] seconds to use this item", player,
-					"[SECONDS]", delay + "");
+			Language.sendError("item.delay", player, "[SECONDS]", delay + "");
 			return;
 		}
 		if (block.getType() != Material.AIR) {
@@ -117,7 +116,7 @@ public class BlinkPearl extends ActionItem implements LevelledItem {
 				return;
 			}
 		}
-		Language.sendError("spell.blink.failure", "You can't blink there!", player);
+		Language.sendError("spell.blink.failure", player);
 	}
 
 	private int levelToDelay(int level) {

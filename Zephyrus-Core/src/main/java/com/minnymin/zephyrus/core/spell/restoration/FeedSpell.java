@@ -22,7 +22,7 @@ import com.minnymin.zephyrus.user.User;
 
 @Bindable
 public class FeedSpell extends Spell {
-
+	
 	public FeedSpell() {
 		super("feed", "Feeds you scraps of magic food", 25, 2, AspectList.newList(Aspect.FLESH, 30, Aspect.LIFE, 15,
 				Aspect.BEAST, 15), 1, SpellElement.NEUTREAL, SpellType.RESTORATION);
@@ -35,7 +35,7 @@ public class FeedSpell extends Spell {
 			player.setFoodLevel(player.getFoodLevel() + 1);
 			return CastResult.SUCCESS;
 		} else {
-			Language.sendError("spell.feed.full", "You are already full!", player);
+			Language.sendError("spell.feed.full", player);
 			return CastResult.FAILURE;
 		}
 	}

@@ -44,7 +44,7 @@ public class DigSpell extends Spell implements Configurable {
 	public CastResult onCast(User user, int power, String[] args) {
 		Block block = (Block) user.getTarget(this).getTarget();
 		if (blacklist.contains(block.getTypeId()) || block.getType() == Material.AIR) {
-			Language.sendError("spell.dig.blacklist", "You cannot break that block", user.getPlayer());
+			Language.sendError("spell.dig.blacklist", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 		block.breakNaturally();

@@ -85,7 +85,7 @@ public class ArmorState implements State {
 
 	@Override
 	public void onWarning(User user) {
-		Language.sendMessage("spell.armor.warning", "Your magic armor begins to fade", user.getPlayer());
+		Language.sendMessage("spell.armor.warning", user.getPlayer());
 	}
 
 	@EventHandler

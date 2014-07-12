@@ -58,7 +58,7 @@ public class BlinkSpell extends Spell {
 				return CastResult.SUCCESS;
 			}
 		}
-		Language.sendError("spell.blink.failure", "You can't blink there!", player);
+		Language.sendError("spell.blink.failure", player);
 		return CastResult.FAILURE;
 	}
 

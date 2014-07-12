@@ -12,7 +12,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class SpeedState implements State {
-
+	
 	@Override
 	public int getTickTime() {
 		return 0;
@@ -21,13 +21,13 @@ public class SpeedState implements State {
 	@Override
 	public void onApplied(User user) {
 		user.getPlayer().setWalkSpeed(0.4F);
-		Language.sendMessage("spell.speed.applied", "You feel your legs speed up", user.getPlayer());
+		Language.sendMessage("spell.speed.applied", user.getPlayer());
 	}
 
 	@Override
 	public void onRemoved(User user) {
 		user.getPlayer().setWalkSpeed(0.2F);
-		Language.sendMessage("spell.speed.removed", "You feel your legs slow down", user.getPlayer());
+		Language.sendMessage("spell.speed.removed", user.getPlayer());
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class SpeedState implements State {
 	@Override
 	public void onWarning(User user) {
 		user.getPlayer().setWalkSpeed(0.3F);
-		Language.sendMessage("spell.speed.removed", "You feel your legs begin to slow down", user.getPlayer());
+		Language.sendMessage("spell.speed.removed", user.getPlayer());
 	}
 
 }

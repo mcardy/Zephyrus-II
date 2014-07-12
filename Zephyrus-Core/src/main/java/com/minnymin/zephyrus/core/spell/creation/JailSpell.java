@@ -124,7 +124,7 @@ public class JailSpell extends Spell implements Listener, Configurable {
 	public void onBreakJail(BlockBreakEvent event) {
 		if (event.getBlock().hasMetadata("jailblock")) {
 			event.setCancelled(true);
-			Language.sendError("spell.jail.break", "You cannot break jail blocks!", event.getPlayer());
+			Language.sendError("spell.jail.break", event.getPlayer());
 		}
 	}
 

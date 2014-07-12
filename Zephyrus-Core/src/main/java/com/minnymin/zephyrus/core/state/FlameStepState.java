@@ -27,7 +27,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class FlameStepState implements State {
-
+	
 	private int radius;
 
 	public FlameStepState() {
@@ -41,12 +41,12 @@ public class FlameStepState implements State {
 
 	@Override
 	public void onApplied(User user) {
-		Language.sendMessage("spell.flamestep.applied", "You feel the power of fire running through your pixels", user.getPlayer());
+		Language.sendMessage("spell.flamestep.applied", user.getPlayer());
 	}
 
 	@Override
 	public void onRemoved(User user) {
-		Language.sendMessage("spell.flamestep.removed", "You feel the power of fire dissapate throughout", user.getPlayer());
+		Language.sendMessage("spell.flamestep.removed", user.getPlayer());
 		user.getPlayer().setFireTicks(0);
 	}
 
@@ -74,7 +74,7 @@ public class FlameStepState implements State {
 
 	@Override
 	public void onWarning(User user) {
-		Language.sendMessage("spell.flamestep.warning", "You feel the power of fire fading", user.getPlayer());
+		Language.sendMessage("spell.flamestep.warning", user.getPlayer());
 	}
 
 	@EventHandler

@@ -21,7 +21,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class ZephyrState implements State {
-
+	
 	private boolean blockAll;
 	
 	public ZephyrState() {
@@ -39,7 +39,7 @@ public class ZephyrState implements State {
 
 	@Override
 	public void onRemoved(User user) {
-		Language.sendMessage("spell.zephyr.removed", "The air becomes still around you", user.getPlayer());
+		Language.sendMessage("spell.zephyr.removed", user.getPlayer());
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class ZephyrState implements State {
 
 	@Override
 	public void onWarning(User user) {
-		Language.sendMessage("spell.zephyr.warning", "The air begins to slow down around you", user.getPlayer());
+		Language.sendMessage("spell.zephyr.warning", user.getPlayer());
 	}
 
 }

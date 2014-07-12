@@ -40,19 +40,16 @@ public class WandShop implements Shop {
 		try {
 			amount = Integer.parseInt(args[2]);
 		} catch (Exception ex) {
-			Language.sendError("shop.wand.create.amount", "Cost on line 3 not valid. Expected a number.", player);
+			Language.sendError("shop.wand.create.amount", player);
 			return false;
 		}
 		item = Zephyrus.getItemManager().getItemFromBaseName(args[1]);
 		if (item == null || !(item instanceof Wand)) {
-			Language.sendError("shop.wand.create.wand", "Wand on line 2 not valid. No wand found by that name.",
-					player);
+			Language.sendError("shop.wand.create.wand", player);
 			return false;
 		}
 		wand = (Wand) item;
-		Language.sendMessage("shop.wand.create.complete",
-				"Successfully created a WandShop selling the [WAND] wand for [AMOUNT]", player, "[WAND]",
-				wand.getName(), "[AMOUNT]", amount + "");
+		Language.sendMessage("shop.wand.create.complete", player, "[WAND]", wand.getName(), "[AMOUNT]", amount + "");
 		event.setLine(2, "$" + args[2]);
 		event.setLine(1, wand.getName());
 		return true;
@@ -74,15 +71,16 @@ public class WandShop implements Shop {
 		Wand wand = (Wand) Zephyrus.getItemManager().getItem(args[1]);
 		int amount = Integer.parseInt(args[2].replace("$", ""));
 		if (Zephyrus.getHookManager().getEconomyHook().getBalance(player) < amount) {
-			Language.sendError("shop.wand.use.amount", "You do not have enough money to buy this wand: [AMOUNT]",
-					player, "[AMOUNT]", Zephyrus.getHookManager().getEconomyHook().getBalance(player) + "/" + amount);
+			Language.sendError("shop.wand.use.amount", player, "[AMOUNT]", Zephyrus.getHookManager().getEconomyHook()
+					.getBalance(player)
+					+ "/" + amount);
 			return;
 		}
 		ItemStack stack = new ItemStack(wand.getMaterial());
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName(wand.getName());
 		if (wand instanceof LevelledItem) {
-			meta.setLore(((LevelledItem)wand).getLevelledLore(1));
+			meta.setLore(((LevelledItem) wand).getLevelledLore(1));
 		} else {
 			meta.setLore(wand.getLore());
 		}
@@ -93,11 +91,11 @@ public class WandShop implements Shop {
 		if (player.getInventory().addItem(stack).isEmpty()) {
 			Zephyrus.getHookManager().getEconomyHook().drainBalance(player, amount);
 			player.updateInventory();
-			new Message("shop.wand.use.complete", "You have successfully purchased ",
-					MessageColor.GRAY, MessageFormatting.NONE).addComponent(new MessageComponent(wand.getName(),
-					MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(MessageHoverEvent.TEXT, wand.getLore().get(0))).sendMessage(player);
+			new Message("shop.wand.use.complete", MessageColor.GRAY, MessageFormatting.NONE).addComponent(
+					new MessageComponent(wand.getName(), MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(
+							MessageHoverEvent.TEXT, wand.getLore().get(0))).sendMessage(player);
 		} else {
-			Language.sendError("shop.wand.use.full", "Your inventory is full! Cannot add item!", player);
+			Language.sendError("shop.wand.use.full", player);
 		}
 	}
 

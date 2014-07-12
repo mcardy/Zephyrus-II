@@ -1,6 +1,5 @@
 package com.minnymin.zephyrus.core.spell.creation;
 
-
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -33,8 +32,7 @@ public class ConjureSpell extends Spell {
 	@Override
 	public CastResult onCast(User user, int power, String[] args) {
 		if (args.length == 0) {
-			Language.sendError("spell.conjure.noitem",
-					"Specify an item to conjure! /cast conjure <id>:<data> [amount]", user.getPlayer());
+			Language.sendError("spell.conjure.noitem", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 		int id = 0;
@@ -46,14 +44,14 @@ public class ConjureSpell extends Spell {
 				id = Integer.parseInt(s[0]);
 				data = Byte.parseByte(args[1]);
 			} catch (NumberFormatException ex) {
-				Language.sendError("spell.conjure.badid", "Invalid item!", user.getPlayer());
+				Language.sendError("spell.conjure.badid", user.getPlayer());
 				return CastResult.FAILURE;
 			}
 		} else {
 			try {
 				id = Integer.parseInt(args[0]);
 			} catch (NumberFormatException ex) {
-				Language.sendError("spell.conjure.badid", "Invalid item!", user.getPlayer());
+				Language.sendError("spell.conjure.badid", user.getPlayer());
 				return CastResult.FAILURE;
 			}
 		}
@@ -61,27 +59,26 @@ public class ConjureSpell extends Spell {
 			try {
 				amount = Integer.parseInt(args[1]);
 			} catch (NumberFormatException ex) {
-				Language.sendError("spell.conjure.badamount", "Invalid amount!", user.getPlayer());
+				Language.sendError("spell.conjure.badamount", user.getPlayer());
 				return CastResult.FAILURE;
 			}
 		}
 		int value = getValue(id);
 		if (value == -1) {
-			Language.sendError("spell.conjure.baditem", "You cannot conjure that item!", user.getPlayer());
+			Language.sendError("spell.conjure.baditem", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 		int manaCost = value * amount;
 		if (user.getMana() < getValue(id) * amount) {
-			Language.sendError("spell.conjure.mana", "You do not have enough mana to conjure that item [MANA]",
-					user.getPlayer(), "[SPELL]", this.getName(), "[MANA]", ChatColor.RED + "" + user.getMana()
-							+ ChatColor.GRAY + "/" + ChatColor.GREEN + manaCost);
+			Language.sendError("spell.conjure.mana", user.getPlayer(), "[SPELL]", this.getName(), "[MANA]",
+					ChatColor.RED + "" + user.getMana() + ChatColor.GRAY + "/" + ChatColor.GREEN + manaCost);
 			return CastResult.FAILURE;
 		}
 		@SuppressWarnings("deprecation")
 		ItemStack item = new ItemStack(Material.getMaterial(id), amount, data);
 		user.getPlayer().getInventory().addItem(item);
 		String itemName = WordUtils.capitalizeFully(item.getType().toString().replace("_", " "));
-		Language.sendMessage("spell.conjure.complete", "Successfully conjured [AMOUNT] [ITEM]", user.getPlayer(),
+		Language.sendMessage("spell.conjure.complete", user.getPlayer(),
 				"[AMOUNT]", "" + amount, "[ITEM]", itemName);
 		user.drainMana(manaCost);
 		return CastResult.SUCCESS;

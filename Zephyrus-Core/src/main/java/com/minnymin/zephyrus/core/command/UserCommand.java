@@ -18,7 +18,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class UserCommand {
-
+	
 	@Command(name = "level",
 			description = "View your level and progress",
 			permission = "zephyrus.command.level",
@@ -39,12 +39,11 @@ public class UserCommand {
 					builder.append("=");
 				}
 				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage("command.level.display", ChatColor.GRAY + "Level [LEVEL], [AMOUNT] {[BAR]}",
-						args.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]",
-						ChatColor.RED + "" + user.getLevelProgress() + ChatColor.GRAY + " / " + next
+				Language.sendMessage("command.level.display", args.getSender(), "[LEVEL]", user.getLevel() + "",
+						"[AMOUNT]", ChatColor.RED + "" + user.getLevelProgress() + ChatColor.GRAY + " / " + next
 								+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
 			} else {
-				Language.sendError("command.player", "No player specified", args.getSender());
+				Language.sendError("command.player", args.getSender());
 			}
 		} else {
 			if (args.getSender().hasPermission("zephyrus.command.level.other")) {
@@ -62,16 +61,14 @@ public class UserCommand {
 						builder.append("=");
 					}
 					builder.append(ChatColor.DARK_GRAY);
-					Language.sendMessage("command.level.display", ChatColor.GRAY + "Level [LEVEL], [AMOUNT] {[BAR]}",
-							args.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]",
-							ChatColor.GOLD + "" + user.getLevelProgress() + ChatColor.GRAY + " / " + next
+					Language.sendMessage("command.level.display", args.getSender(), "[LEVEL]", user.getLevel() + "",
+							"[AMOUNT]", ChatColor.GOLD + "" + user.getLevelProgress() + ChatColor.GRAY + " / " + next
 									+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
 				} else {
-					Language.sendError("command.offline", "That player is offline", args.getSender());
+					Language.sendError("command.offline", args.getSender());
 				}
 			} else {
-				Language.sendError("command.noperm", "You do not have permission to perform that action",
-						args.getSender());
+				Language.sendError("command.noperm", args.getSender());
 			}
 		}
 	}
@@ -86,10 +83,10 @@ public class UserCommand {
 				User user = Zephyrus.getUser(args.getPlayer().getName());
 				int level = user.getLevel();
 				user.addLevelProgress((level * level * level + 100));
-				Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
-						"[PLAYER]", args.getSender().getName());
+				Language.sendMessage("command.level.add.complete", args.getSender(), "[PLAYER]", args.getSender()
+						.getName());
 			} else {
-				Language.sendError("command.player", "No player specified", args.getSender());
+				Language.sendError("command.player", args.getSender());
 			}
 		} else if (args.getArgs().length == 1) {
 			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
@@ -97,8 +94,8 @@ public class UserCommand {
 				User user = Zephyrus.getUser(target.getName());
 				int level = user.getLevel();
 				user.addLevelProgress((level * level * level + 100));
-				Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
-						"[PLAYER]", args.getSender().getName());
+				Language.sendMessage("command.level.add.complete", args.getSender(), "[PLAYER]", args.getSender()
+						.getName());
 			} else if (args.isPlayer()) {
 				try {
 					int levels = Integer.parseInt(args.getArgs()[0]);
@@ -107,14 +104,13 @@ public class UserCommand {
 						int level = user.getLevel();
 						user.addLevelProgress((level * level * level + 100));
 					}
-					Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
-							"[PLAYER]", args.getSender().getName());
+					Language.sendMessage("command.level.add.complete", args.getSender(), "[PLAYER]", args.getSender()
+							.getName());
 				} catch (NumberFormatException ex) {
-					Language.sendError("command.number", "Got [STRING] but expected a number", args.getSender(),
-							"[STRING]", args.getArgs()[2]);
+					Language.sendError("command.level.add.number", args.getSender(), "[STRING]", args.getArgs()[2]);
 				}
 			} else {
-				Language.sendError("command.player", "No player specified", args.getSender());
+				Language.sendError("command.player", args.getSender());
 			}
 		} else {
 			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
@@ -126,14 +122,13 @@ public class UserCommand {
 						int level = user.getLevel();
 						user.addLevelProgress((level * level * level + 100));
 					}
-					Language.sendMessage("command.level.add.complete", "Levelled up [PLAYER]", args.getSender(),
-							"[PLAYER]", args.getSender().getName());
+					Language.sendMessage("command.level.add.complete", args.getSender(), "[PLAYER]", args.getSender()
+							.getName());
 				} catch (NumberFormatException ex) {
-					Language.sendError("command.number", "Got [STRING] but expected a number", args.getSender(),
-							"[STRING]", args.getArgs()[2]);
+					Language.sendError("command.level.add.number", args.getSender(), "[STRING]", args.getArgs()[2]);
 				}
 			} else {
-				Language.sendError("command.offline", "That player is offline", args.getSender());
+				Language.sendError("command.offline", args.getSender());
 			}
 		}
 	}
@@ -156,17 +151,12 @@ public class UserCommand {
 					builder.append("=");
 				}
 				builder.append(ChatColor.DARK_GRAY);
-				Language.sendMessage(
-						"command.mana.display",
-						ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}",
-						args.getSender(),
-						"[LEVEL]",
-						user.getLevel() + "",
-						"[AMOUNT]",
-						ChatColor.DARK_AQUA + "" + user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN
-								+ user.getMaxMana() + ChatColor.DARK_GRAY, "[BAR]", builder.toString());
+				Language.sendMessage("command.mana.display", args.getSender(), "[LEVEL]", user.getLevel() + "",
+						"[AMOUNT]", ChatColor.DARK_AQUA + "" + user.getMana() + ChatColor.GRAY + " / "
+								+ ChatColor.GREEN + user.getMaxMana() + ChatColor.DARK_GRAY, "[BAR]",
+						builder.toString());
 			} else {
-				Language.sendError("command.player", "No player specified", args.getSender());
+				Language.sendError("command.player", args.getSender());
 			}
 		} else {
 			if (args.getSender().hasPermission("zephyrus.command.mana.other")) {
@@ -182,16 +172,15 @@ public class UserCommand {
 						builder.append("=");
 					}
 					builder.append(ChatColor.DARK_GRAY);
-					Language.sendMessage("command.mana.display", ChatColor.GRAY + "Mana: [AMOUNT] {[BAR]}",
-							args.getSender(), "[LEVEL]", user.getLevel() + "", "[AMOUNT]", ChatColor.DARK_AQUA + ""
-									+ user.getMana() + ChatColor.GRAY + " / " + ChatColor.GREEN + user.getMaxMana()
-									+ ChatColor.DARK_GRAY, "[BAR]", builder.toString());
+					Language.sendMessage("command.mana.display", args.getSender(), "[LEVEL]", user.getLevel() + "",
+							"[AMOUNT]", ChatColor.DARK_AQUA + "" + user.getMana() + ChatColor.GRAY + " / "
+									+ ChatColor.GREEN + user.getMaxMana() + ChatColor.DARK_GRAY, "[BAR]",
+							builder.toString());
 				} else {
-					Language.sendError("command.offline", "That player is offline", args.getSender());
+					Language.sendError("command.offline", args.getSender());
 				}
 			} else {
-				Language.sendError("command.noperm", "You do not have permission to perform that action",
-						args.getSender());
+				Language.sendError("command.noperm", args.getSender());
 			}
 		}
 	}
@@ -206,18 +195,18 @@ public class UserCommand {
 				Player player = args.getPlayer();
 				User user = Zephyrus.getUser(player.getName());
 				user.drainMana(-user.getMaxMana() + user.getMana());
-				Language.sendMessage("command.mana.restore.complete", "Your magical powers feel restored", player);
+				Language.sendMessage("command.mana.restore.complete", player);
 			} else {
-				Language.sendError("command.player", "No player specified", args.getSender());
+				Language.sendError("command.player", args.getSender());
 			}
 		} else {
 			if (Bukkit.getPlayer(args.getArgs()[0]) != null) {
 				Player player = Bukkit.getServer().getPlayer(args.getArgs()[1]);
 				User user = Zephyrus.getUser(player.getName());
 				user.drainMana(-user.getMaxMana() + user.getMana());
-				Language.sendMessage("command.mana.restore.complete", "Your magical powers feel restored", player);
+				Language.sendMessage("command.mana.restore.complete", player);
 			} else {
-				Language.sendError("command.offline", "That player is offline", args.getSender());
+				Language.sendError("command.offline", args.getSender());
 			}
 		}
 	}

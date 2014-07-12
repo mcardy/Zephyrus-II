@@ -50,35 +50,34 @@ public class ItemCommand {
 			usage = "/spelltome <spell> [player]")
 	public void onTomeCommand(CommandArgs args) {
 		if (args.getArgs().length == 0) {
-			Language.sendMessage("command.spell", "No spell specified", args.getSender());
+			Language.sendMessage("command.spell", args.getSender());
 		} else if (args.getArgs().length == 1) {
 			if (!args.isPlayer()) {
-				Language.sendError("command.player", "No player specified", args.getSender());
+				Language.sendError("command.player", args.getSender());
 				return;
 			}
 			Spell spell = Zephyrus.getSpell(args.getArgs()[0]);
 			if (spell == null) {
-				Language.sendError("command.spelltome.badspell", "That is not a spell", args.getSender());
+				Language.sendError("command.spelltome.badspell", args.getSender());
 				return;
 			}
 			args.getPlayer().getInventory().addItem(SpellTome.createSpellTome(spell));
-			Language.sendMessage("command.spelltome.complete.self", "You have been given a [SPELL] spelltome",
-					args.getSender(), "[SPELL]", ChatColor.GOLD + WordUtils.capitalize(spell.getName()));
+			Language.sendMessage("command.spelltome.complete.self", args.getSender(), "[SPELL]", ChatColor.GOLD
+					+ WordUtils.capitalize(spell.getName()));
 		} else {
 			Spell spell = Zephyrus.getSpell(args.getArgs()[0]);
 			if (spell == null) {
-				Language.sendError("command.spelltome.badspell", "That is not a spell", args.getSender());
+				Language.sendError("command.spelltome.badspell", args.getSender());
 				return;
 			}
 			Player player = Bukkit.getPlayer(args.getArgs()[1]);
 			if (player == null) {
-				Language.sendError("command.offline", "That player is offline", args.getSender());
+				Language.sendError("command.offline", args.getSender());
 				return;
 			}
 			player.getInventory().addItem(SpellTome.createSpellTome(spell));
-			Language.sendMessage("command.spelltome.complete", "[PLAYER] has been given a [SPELL] spelltome",
-					args.getSender(), "[PLAYER]", player.getName(), "[SPELL]",
-					ChatColor.GOLD + WordUtils.capitalize(spell.getName()));
+			Language.sendMessage("command.spelltome.complete", args.getSender(), "[PLAYER]", player.getName(),
+					"[SPELL]", ChatColor.GOLD + WordUtils.capitalize(spell.getName()));
 		}
 	}
 
@@ -89,24 +88,22 @@ public class ItemCommand {
 	public void onAspects(CommandArgs args) {
 		if (args.getArgs().length == 0) {
 			if (!args.isPlayer()) {
-				Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+				Language.sendError("command.ingame", args.getSender());
 				return;
 			}
 			if (args.getPlayer().getItemInHand() == null) {
-				Language.sendError("command.aspects.noitem", "You need to have an item in your hand to analyze",
-						args.getSender());
+				Language.sendError("command.aspects.noitem", args.getSender());
 				return;
 			}
 			AspectList list = Zephyrus.getAspectManager().getAspects(args.getPlayer().getItemInHand());
-			Language.sendMessage("command.aspects.aspecttitle", "Aspects: ", args.getSender());
+			Language.sendMessage("command.aspects.aspecttitle", args.getSender());
 			if (list == null) {
-				Language.sendError("command.aspects.none", "None", args.getSender());
+				Language.sendError("command.aspects.none", args.getSender());
 				return;
 			}
 			for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
 				Language.sendMessage(
 						"command.aspects.aspects",
-						"[NAME] x[AMOUNT] - [DESC]",
 						args.getSender(),
 						"[NAME]",
 						entry.getKey().getColor()
@@ -119,17 +116,16 @@ public class ItemCommand {
 			Material mat = Material.getMaterial(args.getArgs()[0].toUpperCase());
 			if (mat != null) {
 				AspectList list = Zephyrus.getAspectManager().getAspects(new ItemStack(mat));
-				Language.sendMessage("command.aspects.aspecttitle", "Aspects: ", args.getSender());
+				Language.sendMessage("command.aspects.aspecttitle", args.getSender());
 				if (list == null) {
-					Language.sendError("command.aspects.none", "None", args.getSender());
+					Language.sendError("command.aspects.none", args.getSender());
 					return;
 				}
 				for (Entry<Aspect, Integer> entry : list.getAspectMap().entrySet()) {
-					Language.sendMessage("command.aspects.aspects", "[NAME] x[AMOUNT] - [DESC]", args.getSender(),
-							"[NAME]", Language.get("aspect." + entry.getKey().name().toLowerCase() + ".name", entry
-									.getKey().getDefaultName()), "[DESC]", Language.get("aspect."
-									+ entry.getKey().name() + ".desc", entry.getKey().getDefaultDescription()),
-							"[AMOUNT]", entry.getValue() + "");
+					Language.sendMessage("command.aspects.aspects", args.getSender(), "[NAME]", Language.get("aspect."
+							+ entry.getKey().name().toLowerCase() + ".name", entry.getKey().getDefaultName()),
+							"[DESC]", Language.get("aspect." + entry.getKey().name() + ".desc", entry.getKey()
+									.getDefaultDescription()), "[AMOUNT]", entry.getValue() + "");
 				}
 			}
 		}
@@ -141,7 +137,7 @@ public class ItemCommand {
 			usage = "/aspects list")
 	public void onAspectList(CommandArgs args) {
 		if (args.isPlayer()) {
-			Message message = new Message("command.aspects.aspecttitle", "Aspects: ", MessageColor.RED,
+			Message message = new Message("command.aspects.aspecttitle", MessageColor.RED,
 					MessageFormatting.BOLD);
 			for (Aspect aspect : Aspect.values()) {
 				message.addComponent(new MessageComponent(Language.get("aspect." + aspect.name().toLowerCase()
@@ -162,42 +158,38 @@ public class ItemCommand {
 			usage = "/book <recipe|info>")
 	public void onBookCommand(CommandArgs args) {
 		if (!args.isPlayer()) {
-			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+			Language.sendError("command.ingame", args.getSender());
 			return;
 		}
 		User user = Zephyrus.getUser(args.getPlayer());
 		if (args.getArgs().length == 0) {
 			String s = user.getData("book.info");
 			if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
-				Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
-						args.getSender(), "[BOOK]", "info");
+				Language.sendError("command.book.max", args.getSender(), "[BOOK]", "info");
 				return;
 			}
 			args.getPlayer().getInventory().addItem(MagicBooks.createZephyronomicon());
-			Language.sendMessage("command.book.info", "You recieved a Zephyronomicon", args.getSender());
+			Language.sendMessage("command.book.info", args.getSender());
 			user.setData("book.info", String.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1));
 		} else if (args.getArgs()[0].equalsIgnoreCase("info")) {
 			String s = user.getData("book.info");
 			if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
-				Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
-						args.getSender(), "[BOOK]", "info");
+				Language.sendError("command.book.max", args.getSender(), "[BOOK]", "info");
 				return;
 			}
 			args.getPlayer().getInventory().addItem(MagicBooks.createZephyronomicon());
-			Language.sendMessage("command.book.info", "You recieved a Zephyronomicon", args.getSender());
+			Language.sendMessage("command.book.info", args.getSender());
 			user.setData("book.info", String.valueOf(Integer.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1) + 1));
 		} else if (args.getArgs()[0].equalsIgnoreCase("recipe")) {
 			if (args.getArgs().length < 2) {
 				String s = user.getData("book.recipe1");
 				if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
-					Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
-							args.getSender(), "[BOOK]", "recipe");
+					Language.sendError("command.book.max", args.getSender(), "[BOOK]", "recipe");
 					return;
 				}
 				args.getPlayer().getInventory().addItem(MagicBooks.createZephyricRecipeBook(1, 5));
-				Language.sendMessage("command.book.recipe",
-						"You recieved a spell recipe book! Level [START-LEVEL] to [END-LEVEL]", args.getSender(),
-						"[START-LEVEL]", String.valueOf(1), "[END-LEVEL]", String.valueOf(5));
+				Language.sendMessage("command.book.recipe", args.getSender(), "[START-LEVEL]", String.valueOf(1),
+						"[END-LEVEL]", String.valueOf(5));
 				user.setData("book.recipe1", String.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1));
 			} else {
 				int teir = 1;
@@ -207,26 +199,22 @@ public class ItemCommand {
 				}
 				int level = (teir - 1) * 5 + 1;
 				if (user.getLevel() < level) {
-					Language.sendError("command.book.recipe.reqlevel",
-							"You need to be level [LEVEL] to get the teir [TEIR] recipe book", args.getSender(),
-							"[LEVEL]", String.valueOf(level), "[TEIR]", String.valueOf(teir));
+					Language.sendError("command.book.recipe.reqlevel", args.getSender(), "[LEVEL]",
+							String.valueOf(level), "[TEIR]", String.valueOf(teir));
 					return;
 				}
 				String s = user.getData("book.recipe" + teir);
 				if (Integer.valueOf(s == null ? 0 + "" : s) >= ConfigOptions.MAX_BOOKS) {
-					Language.sendError("command.book.max", "You have reached the maximum amount of [BOOK] books allowed",
-							args.getSender(), "[BOOK]", "recipe teir " + teir);
+					Language.sendError("command.book.max", args.getSender(), "[BOOK]", "recipe teir " + teir);
 					return;
 				}
 				args.getPlayer().getInventory().addItem(MagicBooks.createZephyricRecipeBook(level, level + 4));
-				Language.sendMessage("command.book.recipe",
-						"You recieved a spell recipe book! Level [START-LEVEL] to [END-LEVEL]", args.getSender(),
-						"[START-LEVEL]", String.valueOf(level), "[END-LEVEL]", String.valueOf(level + 4));
+				Language.sendMessage("command.book.recipe", args.getSender(), "[START-LEVEL]", String.valueOf(level),
+						"[END-LEVEL]", String.valueOf(level + 4));
 				user.setData("book.recipe" + teir, String.valueOf(Integer.valueOf(s == null ? 0 + "" : s) + 1));
 			}
 		} else {
-			Language.sendError("command.book.unknown",
-					"Book choices are: 'recipe', 'recipe [1, 2, 3, 4, 5]' and 'info'", args.getSender());
+			Language.sendError("command.book.unknown", args.getSender());
 		}
 	}
 
@@ -236,34 +224,31 @@ public class ItemCommand {
 			usage = "/bind <spell>")
 	public void onBind(CommandArgs args) {
 		if (!args.isPlayer()) {
-			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+			Language.sendError("command.ingame", args.getSender());
 			return;
 		}
 		if (args.getArgs().length == 0) {
-			Language.sendMessage("command.spell", "No spell specified", args.getSender());
+			Language.sendMessage("command.spell", args.getSender());
 			return;
 		}
 		User user = Zephyrus.getUser(args.getPlayer().getName());
 		Spell spell = Zephyrus.getSpell(args.getArgs()[0]);
 		Item item = Zephyrus.getItem(args.getPlayer().getItemInHand());
 		if (item == null || !(item instanceof Wand)) {
-			Language.sendError("command.bind.nowand", "You need to be equiped with a wand to bind a spell",
-					args.getSender());
+			Language.sendError("command.bind.nowand", args.getSender());
 			return;
 		}
 		Wand wand = (Wand) item;
 		if (spell == null || !user.isSpellLearned(spell)) {
-			Language.sendError("command.bind.learn", "You have not learned [SPELL]", args.getSender(), "[SPELL]",
-					args.getArgs()[0]);
+			Language.sendError("command.bind.learn", args.getSender(), "[SPELL]", args.getArgs()[0]);
 			return;
 		}
 		if (!spell.getClass().isAnnotationPresent(Bindable.class)) {
-			Language.sendError("command.bind.unable", "That spell cannot be bound to a wand", args.getSender());
+			Language.sendError("command.bind.unable", args.getSender());
 			return;
 		}
 		if (wand.getBindingAbilityLevel() < spell.getRequiredLevel()) {
-			Language.sendError("commabd.bind.level", "That spell requires a higher level wand to bind to",
-					args.getSender());
+			Language.sendError("commabd.bind.level", args.getSender());
 			return;
 		}
 		UserBindSpellEvent event = new UserBindSpellEvent(args.getPlayer(), spell, wand);
@@ -275,8 +260,8 @@ public class ItemCommand {
 			meta.setLore(wand.getBoundLore(spell));
 			stack.setItemMeta(meta);
 			args.getPlayer().setItemInHand(stack);
-			Language.sendMessage("command.bind.complete", "Successfully bound [SPELL] to your wand", args.getSender(),
-					"[SPELL]", ChatColor.GOLD + spell.getName() + ChatColor.WHITE);
+			Language.sendMessage("command.bind.complete", args.getSender(), "[SPELL]", ChatColor.GOLD + spell.getName()
+					+ ChatColor.WHITE);
 		}
 	}
 
@@ -287,13 +272,12 @@ public class ItemCommand {
 			usage = "/unbind")
 	public void onBindNone(CommandArgs args) {
 		if (!args.isPlayer()) {
-			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+			Language.sendError("command.ingame", args.getSender());
 			return;
 		}
 		Item item = Zephyrus.getItem(args.getPlayer().getItemInHand());
 		if (item == null || !(item instanceof Wand)) {
-			Language.sendError("command.unbind.nowand", "You need to be equiped with a wand to unbind a spell",
-					args.getSender());
+			Language.sendError("command.unbind.nowand", args.getSender());
 			return;
 		}
 		Wand wand = (Wand) item;
@@ -303,8 +287,7 @@ public class ItemCommand {
 		meta.setLore(wand.getLore());
 		stack.setItemMeta(meta);
 		args.getPlayer().setItemInHand(stack);
-		Language.sendMessage("command.unbind.complete", "Successfully unbound all spells from your wand",
-				args.getSender());
+		Language.sendMessage("command.unbind.complete", args.getSender());
 	}
 
 	@Completer(name = "spelltome", aliases = { "tome", "learn", "teach" })

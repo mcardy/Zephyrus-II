@@ -46,7 +46,7 @@ public class DisorientSpell extends Spell {
 			}
 			return CastResult.SUCCESS;
 		} else {
-			Language.sendError("spell.notarget", "You do not have a target", user.getPlayer());
+			Language.sendError("spell.notarget", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 	}

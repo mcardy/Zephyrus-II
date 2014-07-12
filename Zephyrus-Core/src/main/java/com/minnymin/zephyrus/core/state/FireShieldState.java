@@ -21,7 +21,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class FireShieldState implements State {
-
+	
 	@Override
 	public int getTickTime() {
 		return 2;
@@ -33,7 +33,7 @@ public class FireShieldState implements State {
 
 	@Override
 	public void onRemoved(User user) {
-		Language.sendMessage("spell.fireshield.removed", "Your shield fades to cold air", user.getPlayer());
+		Language.sendMessage("spell.fireshield.removed", user.getPlayer());
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class FireShieldState implements State {
 
 	@Override
 	public void onWarning(User user) {
-		Language.sendMessage("spell.fireshield.warning", "Your shield begins to fade", user.getPlayer());
+		Language.sendMessage("spell.fireshield.warning", user.getPlayer());
 	}
 
 }

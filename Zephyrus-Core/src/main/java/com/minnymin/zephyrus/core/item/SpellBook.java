@@ -121,7 +121,7 @@ public class SpellBook extends ActionItem {
 				Spell spell = Zephyrus.getSpell(bound);
 				user.castSpell(spell, 1, null);
 			} else {
-				Language.sendError("item.wand.nobound", "There is no spell bound to this wand! Bind one with /bind <spell>", player);
+				Language.sendError("item.wand.nobound", player);
 			}
 		}
 	}
@@ -134,7 +134,7 @@ public class SpellBook extends ActionItem {
 			meta.setDisplayName(getBoundName(spell));
 			meta.setLore(getBoundLore(spell));
 			item.setItemMeta(meta);
-			Language.sendMessage("command.bind.complete", "Successfully bound [SPELL] to your wand", player, "[SPELL]", ChatColor.GOLD
+			Language.sendMessage("command.bind.complete", player, "[SPELL]", ChatColor.GOLD
 					+ spell.getName() + ChatColor.WHITE);
 			player.setItemInHand(item);
 		}

@@ -47,7 +47,7 @@ public class PhaseSpell extends Spell {
 		Location loc = block.getLocation();
 		BlockFace blockFace = posToBlockFace(player);
 		if (!canPhase(loc, blockFace)) {
-			Language.sendError("spell.phase.fail", "You cannot phase through that block", player);
+			Language.sendError("spell.phase.fail", player);
 			return CastResult.FAILURE;
 		}
 		loc.add(0.5, -1, 0.5);

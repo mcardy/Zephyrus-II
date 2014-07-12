@@ -38,17 +38,15 @@ public class ItemShop implements Shop {
 		try {
 			amount = Integer.parseInt(args[2]);
 		} catch (Exception ex) {
-			Language.sendError("shop.item.create.amount", "Cost on line 3 not valid. Expected a number.", player);
+			Language.sendError("shop.item.create.amount", player);
 			return false;
 		}
 		item = Zephyrus.getItemManager().getItemFromBaseName(args[1]);
 		if (item == null) {
-			Language.sendError("shop.item.create.wand", "Item on line 2 not valid. No item found by that name.", player);
+			Language.sendError("shop.item.create.item", player);
 			return false;
 		}
-		Language.sendMessage("shop.item.create.complete",
-				"Successfully created an ItemShop selling the [ITEM] item for [AMOUNT]", player, "[ITEM]",
-				item.getName(), "[AMOUNT]", amount + "");
+		Language.sendMessage("shop.item.create.complete", player, "[ITEM]", item.getName(), "[AMOUNT]", amount + "");
 		event.setLine(2, "$" + args[2]);
 		event.setLine(1, item.getName());
 		return true;
@@ -70,8 +68,9 @@ public class ItemShop implements Shop {
 		Item item = (Item) Zephyrus.getItemManager().getItem(args[1]);
 		int amount = Integer.parseInt(args[2].replace("$", ""));
 		if (Zephyrus.getHookManager().getEconomyHook().getBalance(player) < amount) {
-			Language.sendError("shop.item.use.amount", "You do not have enough money to buy this spell: [AMOUNT]",
-					player, "[AMOUNT]", Zephyrus.getHookManager().getEconomyHook().getBalance(player) + "/" + amount);
+			Language.sendError("shop.item.use.amount", player, "[AMOUNT]", Zephyrus.getHookManager().getEconomyHook()
+					.getBalance(player)
+					+ "/" + amount);
 			return;
 		}
 		ItemStack stack = new ItemStack(item.getMaterial());
@@ -89,12 +88,11 @@ public class ItemShop implements Shop {
 		if (player.getInventory().addItem(stack).isEmpty()) {
 			Zephyrus.getHookManager().getEconomyHook().drainBalance(player, amount);
 			player.updateInventory();
-			new Message("shop.item.use.complete", "You have successfully purchased ", MessageColor.GRAY,
-					MessageFormatting.NONE).addComponent(
+			new Message("shop.item.use.complete", MessageColor.GRAY, MessageFormatting.NONE).addComponent(
 					new MessageComponent(item.getName(), MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(
 							MessageHoverEvent.TEXT, item.getLore().get(0))).sendMessage(player);
 		} else {
-			Language.sendError("shop.item.use.full", "Your inventory is full! Cannot add item!", player);
+			Language.sendError("shop.item.use.full", player);
 		}
 	}
 

@@ -20,18 +20,18 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class SpellCommand {
-
+	
 	@Command(name = "cast",
 			permission = "zephyrus.command.cast",
 			description = "The mage's spell casting",
 			usage = "/cast <spell> [args]")
 	public void onCastCommand(CommandArgs args) {
 		if (!args.isPlayer()) {
-			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+			Language.sendError("command.ingame", args.getSender());
 			return;
 		}
 		if (args.getArgs().length == 0) {
-			Language.sendError("command.spell", "No spell specified", args.getSender());
+			Language.sendError("command.spell", args.getSender());
 			return;
 		}
 		User user = Zephyrus.getUser(args.getPlayer().getName());
@@ -45,21 +45,21 @@ public class SpellCommand {
 			usage = "/learn <spell>")
 	public void onLearnCommand(CommandArgs args) {
 		if (!args.isPlayer()) {
-			Language.sendError("command.ingame", "This command is only available in game", args.getSender());
+			Language.sendError("command.ingame", args.getSender());
 			return;
 		}
 		if (args.getArgs().length == 0) {
-			Language.sendError("command.spell", "No spell specified", args.getSender());
+			Language.sendError("command.spell", args.getSender());
 			return;
 		}
 		User user = Zephyrus.getUser(args.getPlayer().getName());
 		Spell spell = Zephyrus.getSpell(args.getArgs()[0]);
 		if (spell == null) {
-			Language.sendError("command.learn.badspell", "That is not a spell", args.getSender());
+			Language.sendError("command.learn.badspell", args.getSender());
 			return;
 		}
 		user.addSpell(spell);
-		Language.sendMessage("command.learn.complete", "You have learned [SPELL]", args.getSender(), "[SPELL]", spell
+		Language.sendMessage("command.learn.complete", args.getSender(), "[SPELL]", spell
 				.getName());
 	}
 

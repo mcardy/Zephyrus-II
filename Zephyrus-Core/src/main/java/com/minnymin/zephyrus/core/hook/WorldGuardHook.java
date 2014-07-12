@@ -35,7 +35,7 @@ public class WorldGuardHook implements ProtectionHook {
 		if (plugin.canBuild(player, block)) {
 			return true;
 		} else {
-			Language.sendError("user.target.block.worldguard", "You cannot target that block here", player);
+			Language.sendError("user.target.block.worldguard", player);
 			return false;
 		}
 	}
@@ -45,7 +45,7 @@ public class WorldGuardHook implements ProtectionHook {
 		if (plugin.canBuild(player, loc)) {
 			return true;
 		} else {
-			Language.sendError("user.target.block.worldguard", "You cannot target that block here", player);
+			Language.sendError("user.target.block.worldguard", player);
 			return false;
 		}
 	}
@@ -56,7 +56,7 @@ public class WorldGuardHook implements ProtectionHook {
 				|| player.hasPermission("zephyrus.worldguard.bypass")) {
 			return true;
 		}
-		Language.sendError("spell.cast.region", "You cannot cast spells inside of this region", player);
+		Language.sendError("spell.cast.region", player);
 		return false;
 	}
 
@@ -69,7 +69,7 @@ public class WorldGuardHook implements ProtectionHook {
 			if (friendly) {
 				return true;
 			} else {
-				Language.sendError("user.target.entity.worldguard", "You cannot target that player here", player);
+				Language.sendError("user.target.entity.worldguard", player);
 				return false;
 			}
 		}

@@ -1,6 +1,5 @@
 package com.minnymin.zephyrus.core.spell.world;
 
-
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 
@@ -21,7 +20,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class ClockSpell extends Spell {
-
+	
 	public ClockSpell() {
 		super("clock", "Change time at will", 500, 20, AspectList.newList(Aspect.TIME, 100, Aspect.LIGHT, 50,
 				Aspect.DARKNESS, 50), 15, SpellElement.NEUTREAL, SpellType.WORLD);
@@ -52,8 +51,8 @@ public class ClockSpell extends Spell {
 			}
 			String min = minutes < 10 ? "0" + minutes : minutes + "";
 			String s = am ? "AM" : "PM";
-			Language.sendMessage("spell.clock.time", "It is currently [TIME]", user.getPlayer(), "[TIME]", color + ""
-					+ hours + ":" + min + " " + s);
+			Language.sendMessage("spell.clock.time", user.getPlayer(), "[TIME]", color + "" + hours + ":" + min + " "
+					+ s);
 			return CastResult.FAILURE;
 		} else {
 			World world = user.getPlayer().getWorld();
@@ -70,8 +69,7 @@ public class ClockSpell extends Spell {
 					int time = Integer.parseInt(args[0]);
 					world.setTime(time);
 				} catch (NumberFormatException ex) {
-					Language.sendError("spells.clock.usage", "Expected number or <day|night|noon|midnight>",
-							user.getPlayer());
+					Language.sendError("spell.clock.usage", user.getPlayer());
 					return CastResult.FAILURE;
 				}
 			}

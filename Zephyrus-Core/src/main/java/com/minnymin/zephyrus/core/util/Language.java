@@ -1,16 +1,15 @@
 package com.minnymin.zephyrus.core.util;
 
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import com.minnymin.zephyrus.YmlConfigFile;
+import com.minnymin.zephyrus.core.ZephyrusPlugin;
 
 /**
  * Zephyrus - Language.java
  * 
- * @author minnymin3
- * TODO Remove default text params and add strings with add()
+ * @author minnymin3 TODO Remove default text params and add strings with add()
  * 
  */
 
@@ -26,11 +25,8 @@ public class Language {
 	 * @param desc The text to add
 	 */
 	public static void add(String key, String desc) {
-		if (config == null)
-			config = new YmlConfigFile("locale.yml");
 		config.addDefaults(key, desc.replace(ChatColor.COLOR_CHAR + "", "$"));
 	}
-	
 
 	/**
 	 * Gets the specified section from the language configurations and
@@ -41,10 +37,7 @@ public class Language {
 	 * @param replace The group of replacements (what to replace followed by
 	 *            replacement)
 	 */
-	public static String get(String key, String def, String... replace) {
-		if (config == null)
-			config = new YmlConfigFile("locale.yml");
-		add(key, def);
+	public static String get(String key, String... replace) {
 		String msg = ChatColor.translateAlternateColorCodes('$', config.getConfig().getString(key));
 		int i = 0;
 		while (i < replace.length) {
@@ -69,8 +62,8 @@ public class Language {
 	 * @param replace The group of replacements (what to replace followed by
 	 *            replacement)
 	 */
-	public static void sendError(String key, String def, CommandSender sender, String... replace) {
-		sender.sendMessage(ChatColor.DARK_RED + get(key, def, replace));
+	public static void sendError(String key, CommandSender sender, String... replace) {
+		sender.sendMessage(ChatColor.DARK_RED + get(key, replace));
 	}
 
 	/**
@@ -83,8 +76,22 @@ public class Language {
 	 * @param replace The group of replacements (what to replace followed by
 	 *            replacement)
 	 */
-	public static void sendMessage(String key, String def, CommandSender sender, String... replace) {
-		sender.sendMessage(get(key, def, replace));
+	public static void sendMessage(String key, CommandSender sender, String... replace) {
+		sender.sendMessage(get(key, replace));
+	}
+
+	/**
+	 * Removes a key from the language file
+	 * 
+	 * @param string The key to remove
+	 */
+	public static void remove(String key) {
+		config.getConfig().set(key, null);
+	}
+	
+	public static void load(ZephyrusPlugin plugin) {
+		config = new YmlConfigFile("locale.yml");
+		LanguageDefaults.addKeys();
 	}
 
 }

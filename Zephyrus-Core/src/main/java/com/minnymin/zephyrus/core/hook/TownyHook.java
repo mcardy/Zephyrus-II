@@ -27,7 +27,7 @@ import com.palmergames.bukkit.towny.utils.CombatUtil;
  */
 
 public class TownyHook implements ProtectionHook {
-
+	
 	private Towny towny;
 
 	@Override
@@ -42,7 +42,7 @@ public class TownyHook implements ProtectionHook {
 			if (tblock.getType() == TownBlockType.WILDS) {
 				return true;
 			}
-			Language.sendError("user.target.block.town", "You cannot target blocks inside of a town", player);
+			Language.sendError("user.target.block.town", player);
 			return false;
 		}
 		return true;
@@ -57,7 +57,7 @@ public class TownyHook implements ProtectionHook {
 					return true;
 				}
 			}
-			Language.sendError("spell.cast.town", "You cannot cast spells inside of towns", player);
+			Language.sendError("spell.cast.town", player);
 			return false;
 		}
 		return true;
@@ -71,7 +71,7 @@ public class TownyHook implements ProtectionHook {
 				if (friendly) {
 					return true;
 				} else {
-					Language.sendError("user.target.entity.towny", "You cannot target that player here", player);
+					Language.sendError("user.target.entity.towny", player);
 					return false;
 				}
 			}

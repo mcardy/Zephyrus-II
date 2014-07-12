@@ -54,11 +54,11 @@ public class CoreShopManager implements ShopManager, Listener {
 		for (Shop shop : shops) {
 			if (event.getLine(0).equalsIgnoreCase("[" + shop.getName() + "]")) {
 				if (Zephyrus.getHookManager().getEconomyHook() == null) {
-					Language.sendError("shop.create.economy", "No economy system found. Cannot create shop.", event.getPlayer());
+					Language.sendError("shop.create.noeconomy", event.getPlayer());
 					return;
 				}
 				if (!event.getPlayer().hasPermission("zephyrus.shop.create")) {
-					Language.sendError("shop.permission", "You do not have permission to create shops", event.getPlayer());
+					Language.sendError("shop.permission", event.getPlayer());
 					return;
 				}
 				if (shop.create(event)) {

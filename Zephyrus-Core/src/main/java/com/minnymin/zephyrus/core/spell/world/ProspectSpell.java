@@ -28,7 +28,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class ProspectSpell extends Spell implements Configurable {
-
+	
 	private int radius;
 
 	public ProspectSpell() {
@@ -70,10 +70,10 @@ public class ProspectSpell extends Spell implements Configurable {
 			for (String str : s) {
 				ores.append(str + " ");
 			}
-			Language.sendMessage("spell.prospect.ores", ChatColor.GRAY + "Ores found: [ORES]", user.getPlayer(),
+			Language.sendMessage("spell.prospect.ores", user.getPlayer(),
 					"[ORES]", ores.toString());
 		} else {
-			Language.sendMessage("spell.prospect.noores", ChatColor.GRAY + "No ores found...", user.getPlayer());
+			Language.sendMessage("spell.prospect.noores", user.getPlayer());
 		}
 		return CastResult.SUCCESS;
 	}

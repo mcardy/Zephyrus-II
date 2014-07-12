@@ -36,18 +36,15 @@ public class SpellShop implements Shop {
 		try {
 			amount = Integer.parseInt(args[2]);
 		} catch (Exception ex) {
-			Language.sendError("shop.spell.create.amount", "Cost on line 3 not valid. Expected a number.", player);
+			Language.sendError("shop.spell.create.amount", player);
 			return false;
 		}
 		spell = Zephyrus.getSpell(args[1]);
 		if (spell == null) {
-			Language.sendError("shop.spell.create.spell", "Spell on line 2 not valid. No spell found by that name.",
-					player);
+			Language.sendError("shop.spell.create.spell", player);
 			return false;
 		}
-		Language.sendMessage("shop.spell.create.complete",
-				"Successfully created a SpellShop selling the [SPELL] spell for [AMOUNT]", player, "[SPELL]",
-				spell.getName(), "[AMOUNT]", amount + "");
+		Language.sendMessage("shop.spell.create.complete", player, "[SPELL]", spell.getName(), "[AMOUNT]", amount + "");
 		event.setLine(2, "$" + args[2]);
 		return true;
 	}
@@ -68,17 +65,16 @@ public class SpellShop implements Shop {
 		Spell spell = Zephyrus.getSpell(args[1]);
 		int amount = Integer.parseInt(args[2].replace("$", ""));
 		if (spell == null) {
-			Language.sendError("shop.spell.use.broken", "Something went wrong! Spell not found...", player);
+			Language.sendError("shop.spell.use.broken", player);
 			return;
 		}
 		if (user.getLevel() < spell.getRequiredLevel()) {
-			Language.sendError("shop.spell.use.level", "You are not high enough level to learn this spell: [LEVEL]",
-					player, "[LEVEL]", user.getLevel() + "/" + spell.getRequiredLevel());
+			Language.sendError("shop.spell.use.level", player, "[LEVEL]",
+					user.getLevel() + "/" + spell.getRequiredLevel());
 			return;
 		}
 		if (user.isSpellLearned(spell)) {
-			Language.sendError("shop.spell.use.learned", "You already know [SPELL]!", player, "[SPELL]", spell
-					.getName());
+			Language.sendError("shop.spell.use.learned", player, "[SPELL]", spell.getName());
 			return;
 		}
 		if (spell.getClass().isAnnotationPresent(Prerequisite.class)
@@ -86,7 +82,6 @@ public class SpellShop implements Shop {
 						Prerequisite.class)).requiredSpell()))) {
 			Language.sendError(
 					"shop.spell.use.level",
-					"You do not have the spells required to learn this spell: [SPELL]",
 					player,
 					"[SPELL]",
 					Zephyrus.getSpell(
@@ -95,8 +90,9 @@ public class SpellShop implements Shop {
 			return;
 		}
 		if (Zephyrus.getHookManager().getEconomyHook().getBalance(player) < amount) {
-			Language.sendError("shop.spell.use.amount", "You do not have enough money to buy this spell: [AMOUNT]",
-					player, "[AMOUNT]", Zephyrus.getHookManager().getEconomyHook().getBalance(player) + "/" + amount);
+			Language.sendError("shop.spell.use.amount", player, "[AMOUNT]", Zephyrus.getHookManager().getEconomyHook()
+					.getBalance(player)
+					+ "/" + amount);
 			return;
 		}
 		UserLearnSpellEvent learn = new UserLearnSpellEvent(player, spell);
@@ -104,11 +100,10 @@ public class SpellShop implements Shop {
 		if (!learn.isCancelled()) {
 			Zephyrus.getHookManager().getEconomyHook().drainBalance(player, amount);
 			user.addSpell(spell);
-			new Message("shop.spell.use.complete", "You have successfully purchased ",
-					MessageColor.GRAY, MessageFormatting.NONE).addComponent(new MessageComponent(spell.getName(),
-					MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(MessageHoverEvent.TEXT, spell
-					.getDescription())).sendMessage(player);
+			new Message("shop.spell.use.complete", MessageColor.GRAY, MessageFormatting.NONE).addComponent(
+					new MessageComponent(spell.getName(), MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(
+							MessageHoverEvent.TEXT, spell.getDescription())).sendMessage(player);
 		}
-		
+
 	}
 }

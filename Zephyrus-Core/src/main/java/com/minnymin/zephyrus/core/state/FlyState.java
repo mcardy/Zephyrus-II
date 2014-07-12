@@ -15,7 +15,7 @@ import com.minnymin.zephyrus.user.User;
  */
 
 public class FlyState implements State {
-
+	
 	@Override
 	public int getTickTime() {
 		return 0;
@@ -24,13 +24,13 @@ public class FlyState implements State {
 	@Override
 	public void onApplied(User user) {
 		user.getPlayer().setAllowFlight(true);
-		Language.sendMessage("spell.fly.applied", "You have conjured wings", user.getPlayer());
+		Language.sendMessage("spell.fly.applied", user.getPlayer());
 	}
 
 	@Override
 	public void onRemoved(User user) {
 		user.getPlayer().setAllowFlight(false);
-		Language.sendMessage("spell.fly.removed", "Your wings have faded", user.getPlayer());
+		Language.sendMessage("spell.fly.removed", user.getPlayer());
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class FlyState implements State {
 
 	@Override
 	public void onWarning(User user) {
-		Language.sendMessage("spell.fly.warning", "Your wings begin to fade", user.getPlayer());
+		Language.sendMessage("spell.fly.warning", user.getPlayer());
 	}
 
 }

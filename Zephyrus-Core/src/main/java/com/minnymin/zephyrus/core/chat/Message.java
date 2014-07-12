@@ -30,10 +30,10 @@ public class Message {
 	 * @param color The colour of the message
 	 * @param formats The formatting for the message
 	 */
-	public Message(String key, String def, MessageColor color, MessageFormatting... formats) {
+	public Message(String key, MessageColor color, MessageFormatting... formats) {
 		this.message = new JSONObject();
 		this.color = color;
-		add("text", Language.get(key, def));
+		add("text", Language.get(key));
 		if (color != null) {
 			add("color", color.getColor());
 		}

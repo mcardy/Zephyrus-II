@@ -27,7 +27,7 @@ import com.minnymin.zephyrus.spell.Spell;
  */
 
 public class FactionsHook implements ProtectionHook {
-
+	
 	@Override
 	public boolean canBuild(Player player, Block block) {
 		return canBuild(player, block.getLocation());
@@ -41,7 +41,7 @@ public class FactionsHook implements ProtectionHook {
 			if (uplayer.getFactionId().equals(faction.getId())) {
 				return true;
 			}
-			Language.sendError("user.target.block.faction", "You cannot target blocks inside of a faction", player);
+			Language.sendError("user.target.block.faction", player);
 			return false;
 		}
 		return true;
@@ -58,7 +58,7 @@ public class FactionsHook implements ProtectionHook {
 					return true;
 				}
 			}
-			Language.sendError("spell.cast.faction", "You cannot cast spells inside of a faction", player);
+			Language.sendError("spell.cast.faction", player);
 			return false;
 		}
 		return true;
@@ -74,7 +74,7 @@ public class FactionsHook implements ProtectionHook {
 				if (friendly) {
 					return true;
 				} else {
-					Language.sendError("user.target.entity.faction", "You cannot target that player", player);
+					Language.sendError("user.target.entity.faction", player);
 					return false;
 				}
 			}

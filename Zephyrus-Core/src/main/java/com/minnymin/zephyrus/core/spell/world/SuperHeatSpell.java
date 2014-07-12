@@ -62,7 +62,7 @@ public class SuperHeatSpell extends Spell implements Configurable {
 			ParticleEffects.sendParticle(Particle.FIRE, loc, 0.6F, 0.6F, 0.6F, 0, 20);
 			return CastResult.SUCCESS;
 		} else {
-			Language.sendError("spell.superheat.fail", "That block can't be superheated", user.getPlayer());
+			Language.sendError("spell.superheat.fail", user.getPlayer());
 			return CastResult.FAILURE;
 		}
 	}

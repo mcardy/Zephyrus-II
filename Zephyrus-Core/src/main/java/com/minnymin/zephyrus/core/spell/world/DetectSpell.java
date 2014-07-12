@@ -34,7 +34,7 @@ import com.minnymin.zephyrus.user.User;
 
 @Bindable
 public class DetectSpell extends Spell implements Configurable {
-
+	
 	private int radius;
 
 	public DetectSpell() {
@@ -47,7 +47,7 @@ public class DetectSpell extends Spell implements Configurable {
 		Player player = user.getPlayer();
 		int radius = this.radius * power;
 		List<Entity> entityList = player.getNearbyEntities(radius, radius, radius);
-		Language.sendMessage("spell.detect.nearby", ChatColor.GRAY + "Nearby mobs:", player);
+		Language.sendMessage("spell.detect.nearby", player);
 		Map<String, Integer> entityMap = new HashMap<String, Integer>();
 		for (Entity entity : entityList) {
 			if (entity instanceof LivingEntity) {
@@ -63,7 +63,7 @@ public class DetectSpell extends Spell implements Configurable {
 					+ ": " + entry.getValue());
 		}
 		if (entityMap.isEmpty()) {
-			Language.sendMessage("spell.detect.none", ChatColor.GRAY + "None...", player);
+			Language.sendMessage("spell.detect.none", player);
 		}
 		return CastResult.SUCCESS;
 	}
