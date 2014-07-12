@@ -22,6 +22,7 @@ import com.minnymin.zephyrus.core.shop.CoreShopManager;
 import com.minnymin.zephyrus.core.spell.CoreSpellManager;
 import com.minnymin.zephyrus.core.state.CoreStateManager;
 import com.minnymin.zephyrus.core.user.CoreUserManager;
+import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.Metrics;
 import com.minnymin.zephyrus.core.util.Updater;
 import com.minnymin.zephyrus.core.util.Updater.UpdateResult;
@@ -39,13 +40,14 @@ import com.minnymin.zephyrus.core.util.command.CommandFramework;
 
 public class ZephyrusPlugin extends JavaPlugin {
 
-	private CommandFramework command;
+	private CommandFramework command = new CommandFramework(this);
 
 	@Override
 	public void onLoad() {
-		command = new CommandFramework(this);
-		saveDefaultConfig();
 		Zephyrus.setPlugin(this);
+		VersionInfo.load(this);
+		Language.load(this);
+		saveDefaultConfig();
 		Zephyrus.setAspectManager(new CoreAspectManager());
 		Zephyrus.setEnchantmentManager(new CoreEnchantManager());
 		Zephyrus.setHookManager(new CoreHookManager());
@@ -141,7 +143,6 @@ public class ZephyrusPlugin extends JavaPlugin {
 					break;
 				}
 				getLogger().info("[Spells] Loaded " + Zephyrus.getSpellManager().getSpellSet().size() + " spells");
-				VersionInfo.load();
 			}
 		});
 	}

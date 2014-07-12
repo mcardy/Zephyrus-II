@@ -1,8 +1,11 @@
 package com.minnymin.zephyrus.core.util;
 
+import java.io.File;
+
 import org.bukkit.plugin.Plugin;
 
 import com.minnymin.zephyrus.YmlConfigFile;
+import com.minnymin.zephyrus.Zephyrus;
 
 /**
  * Zephyrus - VersionInfo.java
@@ -29,7 +32,11 @@ public class VersionInfo {
 			} catch (Exception ex) {
 			}
 		} else {
-			if (file.getConfig().getString("release") != plugin.getDescription().getVersion()) {
+			if (!file.getFile().exists() || !file.getConfig().contains("release")) {
+				file.getConfig().set("release", plugin.getDescription().getVersion());
+				file.saveConfig();
+				updateLanguage("2.0.0");
+			} else if (file.getConfig().getString("release") != plugin.getDescription().getVersion()) {
 				String previous = file.getConfig().getString("release");
 				file.getConfig().set("release", plugin.getDescription().getVersion());
 				file.saveConfig();
@@ -38,7 +45,6 @@ public class VersionInfo {
 		}
 	}
 	
-	private static String[] keys_200 = {};
 	//private static String[] keys_201 = {};
 	
 	/**
@@ -48,9 +54,8 @@ public class VersionInfo {
 		int version = Integer.parseInt(previousVersion.replace(".", ""));
 		switch (version) {
 		case 200:
-			for (String key : keys_200) {
-				Language.remove(key);
-			}
+			File file = new File(Zephyrus.getPlugin().getDataFolder(), "locale.yml");
+			file.delete();
 		//case 201:
 		//	for (String key : keys_201) {
 		//		Language.remove(key);
