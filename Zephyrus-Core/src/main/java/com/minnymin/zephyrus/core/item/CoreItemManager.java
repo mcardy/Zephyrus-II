@@ -106,7 +106,7 @@ public class CoreItemManager implements ItemManager {
 	public void registerItem(Item item) {
 		if (itemConfig.getConfig().getBoolean(item.getInternalName() + ".Enabled")) {
 			if (item instanceof Wand) {
-				PermissionsManager.addPermission(new Permission("zephyrus.craft.wand." + item.getInternalName(), "Ability to craft " + item.getName()));
+				PermissionsManager.addPermission(new Permission("zephyrus.craft.wand." + item.getInternalName(), "Ability to craft " + ChatColor.stripColor(item.getName())));
 			} else {
 				PermissionsManager.addPermission(new Permission("zephyrus.craft." + item.getInternalName(), "Ability to craft " + item.getName()));
 			}
