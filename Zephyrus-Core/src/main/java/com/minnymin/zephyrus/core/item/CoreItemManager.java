@@ -10,6 +10,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.Permission;
 
 import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
@@ -24,9 +25,11 @@ import com.minnymin.zephyrus.core.item.wand.BasicFireWand;
 import com.minnymin.zephyrus.core.item.wand.BasicObsidianWand;
 import com.minnymin.zephyrus.core.item.wand.BasicWand;
 import com.minnymin.zephyrus.core.item.wand.StandardWand;
+import com.minnymin.zephyrus.core.permissions.PermissionsManager;
 import com.minnymin.zephyrus.item.Item;
 import com.minnymin.zephyrus.item.ItemManager;
 import com.minnymin.zephyrus.item.LevelledItem;
+import com.minnymin.zephyrus.item.Wand;
 
 /**
  * Zephyrus - SimpleItemManager.java
@@ -102,6 +105,11 @@ public class CoreItemManager implements ItemManager {
 	@Override
 	public void registerItem(Item item) {
 		if (itemConfig.getConfig().getBoolean(item.getInternalName() + ".Enabled")) {
+			if (item instanceof Wand) {
+				PermissionsManager.addPermission(new Permission("zephyrus.craft.wand." + item.getInternalName(), "Ability to craft " + item.getName()));
+			} else {
+				PermissionsManager.addPermission(new Permission("zephyrus.craft." + item.getInternalName(), "Ability to craft " + item.getName()));
+			}
 			itemMap.put(item.getName(), item);
 			if (item instanceof Listener) {
 				Bukkit.getPluginManager().registerEvents((Listener) item, Zephyrus.getPlugin());

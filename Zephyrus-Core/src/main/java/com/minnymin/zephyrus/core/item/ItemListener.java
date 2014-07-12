@@ -319,7 +319,10 @@ public class ItemListener implements Listener {
 			for (HumanEntity human : event.getViewers()) {
 				if (human instanceof Player) {
 					Player player = (Player) human;
-					if (Zephyrus.getUser(player).getLevel() < item.getCraftingLevel()) {
+					if (!player.hasPermission("zephyrus.craft." + item.getInternalName())) {
+						event.getInventory().setResult(null);
+						Language.sendError("crafting.item.nopermission", player, "[ITEM]", item.getName());
+					} else if (Zephyrus.getUser(player).getLevel() < item.getCraftingLevel()) {
 						event.getInventory().setResult(null);
 						Language.sendError("crafting.item.requiredlevel", player, "[LEVEL]", item.getCraftingLevel()
 								+ "", "[ITEM]", item.getName());

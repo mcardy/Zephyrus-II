@@ -40,6 +40,8 @@ public class PermissionsManager {
 		addPermission(new Permission("zephyrus.command.mana.restore", "Permission to restore mana with '/mana restore'", PermissionDefault.OP));
 		addPermission(new Permission("zephyrus.command.mana.other", "Permission to check other player's mana with '/mana <player>'", PermissionDefault.OP));
 		addPermission(new Permission("zephyrus.command.book.bypass", "Permission to ignore the book limit of '/book'", PermissionDefault.FALSE));
+		addPermission(new Permission("zephyrus.shop.create", "Allows user to create shops", PermissionDefault.OP));
+		addPermission(new Permission("zephyrus.shop.use", "Allows user to use shops", PermissionDefault.TRUE));
 		for (Permission permission : permissions) {
 			Bukkit.getPluginManager().addPermission(permission);
 		}

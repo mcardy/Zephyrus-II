@@ -70,7 +70,7 @@ public class CoreShopManager implements ShopManager, Listener {
 
 	@EventHandler
 	public void onSignClick(PlayerInteractEvent event) {
-		if (Zephyrus.getHookManager().getEconomyHook() != null) {
+		if (Zephyrus.getHookManager().getEconomyHook() != null && event.getPlayer().hasPermission("zephyrus.shop.use")) {
 			if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				Material type = event.getClickedBlock().getType();
 				if (type == Material.SIGN || type == Material.SIGN_POST || type == Material.WALL_SIGN) {
