@@ -197,6 +197,7 @@ class LanguageDefaults {
 		{
 			// Armor
 			Language.add("spell.armor.warning", "Your magic armor begins to fade");
+			Language.add("spell.armor.item", ChatColor.GOLD + "Arcane Armour");
 
 			// Build
 			Language.add("spell.build.applied", ChatColor.GRAY + "You feel your reach extend");

@@ -1,7 +1,6 @@
 package com.minnymin.zephyrus.core.state;
 
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,7 +34,7 @@ public class ArmorState implements State {
 		ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
 		ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
 		ItemMeta meta = helm.getItemMeta();
-		meta.setDisplayName(Language.get("spell.armor.item", ChatColor.GOLD + "Arcane Armour"));
+		meta.setDisplayName(Language.get("spell.armor.item"));
 		helm.setItemMeta(meta);
 		chest.setItemMeta(meta);
 		legs.setItemMeta(meta);
@@ -76,7 +75,7 @@ public class ArmorState implements State {
 				&& item.hasItemMeta()
 				&& item.getItemMeta().hasDisplayName()
 				&& item.getItemMeta().getDisplayName()
-						.equals(Language.get("spell.armor.item", ChatColor.GOLD + "Arcane Armour"));
+						.equals(Language.get("spell.armor.item"));
 	}
 
 	@Override

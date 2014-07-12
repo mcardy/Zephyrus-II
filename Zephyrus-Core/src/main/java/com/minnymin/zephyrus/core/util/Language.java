@@ -39,14 +39,16 @@ public class Language {
 	 */
 	public static String get(String key, String... replace) {
 		String msg = ChatColor.translateAlternateColorCodes('$', config.getConfig().getString(key));
-		int i = 0;
-		while (i < replace.length) {
-			String from = replace[i];
-			i++;
-			String to = replace[i];
-			i++;
-			if (from != null && to != null) {
-				msg = msg.replace(from, to);
+		if (replace.length % 2 == 0) {
+			int i = 0;
+			while (i < replace.length) {
+				String from = replace[i];
+				i++;
+				String to = replace[i];
+				i++;
+				if (from != null && to != null) {
+					msg = msg.replace(from, to);
+				}
 			}
 		}
 		return msg;
