@@ -109,7 +109,7 @@ public class CoreItemManager implements ItemManager {
 			if (item instanceof Wand) {
 				PermissionsManager.addPermission(new Permission("zephyrus.craft.wand." + item.getInternalName(), "Ability to craft a " + ChatColor.stripColor(item.getName()), PermissionDefault.TRUE));
 			} else {
-				PermissionsManager.addPermission(new Permission("zephyrus.craft." + item.getInternalName(), "Ability to craft a " + item.getName(), PermissionDefault.TRUE));
+				PermissionsManager.addPermission(new Permission("zephyrus.craft." + item.getInternalName(), "Ability to craft a " + ChatColor.stripColor(item.getName()), PermissionDefault.TRUE));
 			}
 			itemMap.put(item.getName(), item);
 			if (item instanceof Listener) {
