@@ -49,17 +49,25 @@ public class CoreHookManager implements PluginHookManager {
 
 	@Override
 	public void addProtectionHook(ProtectionHook hook) {
-		if (hook.checkHook()) {
-			hook.setupHook();
-			this.hooks.add(hook);
+		try {
+			if (hook.checkHook()) {
+				hook.setupHook();
+				this.hooks.add(hook);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	@Override
 	public boolean canBuild(Player player, Block block) {
 		for (ProtectionHook hook : this.hooks) {
-			if (!hook.canBuild(player, block)) {
-				return false;
+			try {
+				if (!hook.canBuild(player, block)) {
+					return false;
+				}
+			} catch (Exception e) {
+				return true;
 			}
 		}
 		return true;
@@ -68,8 +76,12 @@ public class CoreHookManager implements PluginHookManager {
 	@Override
 	public boolean canBuild(Player player, Location loc) {
 		for (ProtectionHook hook : this.hooks) {
-			if (!hook.canBuild(player, loc)) {
-				return false;
+			try {
+				if (!hook.canBuild(player, loc)) {
+					return false;
+				}
+			} catch (Exception e) {
+				return true;
 			}
 		}
 		return true;
@@ -78,8 +90,12 @@ public class CoreHookManager implements PluginHookManager {
 	@Override
 	public boolean canCast(Player player, Spell spell) {
 		for (ProtectionHook hook : this.hooks) {
-			if (!hook.canCast(player, spell)) {
-				return false;
+			try {
+				if (!hook.canCast(player, spell)) {
+					return false;
+				}
+			} catch (Exception e) {
+				return true;
 			}
 		}
 		return true;
@@ -88,8 +104,12 @@ public class CoreHookManager implements PluginHookManager {
 	@Override
 	public boolean canTarget(Player player, LivingEntity target, boolean friendly) {
 		for (ProtectionHook hook : this.hooks) {
-			if (!hook.canTarget(player, target, friendly)) {
-				return false;
+			try {
+				if (!hook.canTarget(player, target, friendly)) {
+					return false;
+				}
+			} catch (Exception e) {
+				return true;
 			}
 		}
 		return true;
