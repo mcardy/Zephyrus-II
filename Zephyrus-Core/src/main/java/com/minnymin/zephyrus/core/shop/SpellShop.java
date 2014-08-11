@@ -1,6 +1,5 @@
 package com.minnymin.zephyrus.core.shop;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.SignChangeEvent;
@@ -12,7 +11,6 @@ import com.minnymin.zephyrus.core.chat.MessageEvent.MessageHoverEvent;
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageColor;
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageFormatting;
 import com.minnymin.zephyrus.core.util.Language;
-import com.minnymin.zephyrus.event.UserLearnSpellEvent;
 import com.minnymin.zephyrus.shop.Shop;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.annotation.Prerequisite;
@@ -95,11 +93,8 @@ public class SpellShop implements Shop {
 					+ "/" + amount);
 			return;
 		}
-		UserLearnSpellEvent learn = new UserLearnSpellEvent(player, spell);
-		Bukkit.getPluginManager().callEvent(learn);
-		if (!learn.isCancelled()) {
+		if (user.addSpell(spell)) {
 			Zephyrus.getHookManager().getEconomyHook().drainBalance(player, amount);
-			user.addSpell(spell);
 			new Message("shop.spell.use.complete", MessageColor.GRAY, MessageFormatting.NONE).addComponent(
 					new MessageComponent(spell.getName(), MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(
 							MessageHoverEvent.TEXT, spell.getDescription())).sendMessage(player);

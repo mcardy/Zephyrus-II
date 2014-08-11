@@ -3,7 +3,6 @@ package com.minnymin.zephyrus.core.item;
 import java.util.Arrays;
 
 import org.apache.commons.lang.WordUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +20,6 @@ import com.minnymin.zephyrus.core.chat.MessageEvent.MessageHoverEvent;
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageColor;
 import com.minnymin.zephyrus.core.chat.MessageForm.MessageFormatting;
 import com.minnymin.zephyrus.core.util.Language;
-import com.minnymin.zephyrus.event.UserLearnSpellEvent;
 import com.minnymin.zephyrus.spell.Spell;
 import com.minnymin.zephyrus.spell.annotation.Prerequisite;
 import com.minnymin.zephyrus.user.User;
@@ -87,10 +85,7 @@ public class SpellTome implements Listener {
 						.requiredSpell().getName());
 				return;
 			}
-			UserLearnSpellEvent learn = new UserLearnSpellEvent(player, spell);
-			Bukkit.getPluginManager().callEvent(learn);
-			if (!learn.isCancelled()) {
-				user.addSpell(spell);
+			if (user.addSpell(spell)) {
 				new Message("item.spelltome.complete", MessageColor.GRAY, MessageFormatting.NONE).addComponent(
 						new MessageComponent(spell.getName(), MessageColor.GOLD, MessageFormatting.BOLD).setHoverEvent(
 								MessageHoverEvent.TEXT, spell.getDescription())).sendMessage(player);

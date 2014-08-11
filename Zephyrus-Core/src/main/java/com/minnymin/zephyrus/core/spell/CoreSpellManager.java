@@ -10,11 +10,14 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 
 import com.minnymin.zephyrus.Configurable;
 import com.minnymin.zephyrus.YmlConfigFile;
 import com.minnymin.zephyrus.Zephyrus;
 import com.minnymin.zephyrus.core.item.SpellTome;
+import com.minnymin.zephyrus.core.permissions.PermissionsManager;
 import com.minnymin.zephyrus.core.spell.attack.ArrowRainSpell;
 import com.minnymin.zephyrus.core.spell.attack.ArrowSpell;
 import com.minnymin.zephyrus.core.spell.attack.ArrowStormSpell;
@@ -161,6 +164,9 @@ public class CoreSpellManager implements SpellManager {
 	public void registerSpell(Spell spell) {
 		if (spellConfig.getConfig().getBoolean(spell.getDefaultName() + ".Enabled")) {
 			this.spellList.add(spell);
+			PermissionsManager.addPermission(new Permission("zephyrus.spell.learn." + spell.getDefaultName().toLowerCase()));
+			PermissionsManager.addPermission(new Permission("zephyrus.spell.cast." + spell.getDefaultName().toLowerCase(),
+					"Permission to cast the " + spell.getDefaultName() + " spell", PermissionDefault.FALSE));
 			if (spell instanceof Configurable) {
 				((Configurable) spell).loadConfiguration(spellConfig.getConfig().getConfigurationSection(
 						spell.getDefaultName()));
@@ -231,7 +237,7 @@ public class CoreSpellManager implements SpellManager {
 		registerSpell(new HealerSpell());
 		registerSpell(new RepairSpell());
 		registerSpell(new SatisfySpell());
-		
+
 		// World
 		registerSpell(new BrightSpell());
 		registerSpell(new ClockSpell());
@@ -250,7 +256,7 @@ public class CoreSpellManager implements SpellManager {
 		// TODO Add: God spells (FireGod, IceGod, etc.), Freeze, Woosh (move
 		// forwards fast), Magnet, Transplace, Shear, Chop, Flash, Telekenisis,
 		// 'WorldEdit' (build)
-		
+
 		for (Spell spell : spellList) {
 			spell.onEnable();
 		}

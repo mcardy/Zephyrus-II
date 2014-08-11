@@ -58,9 +58,10 @@ public class SpellCommand {
 			Language.sendError("command.learn.badspell", args.getSender());
 			return;
 		}
-		user.addSpell(spell);
-		Language.sendMessage("command.learn.complete", args.getSender(), "[SPELL]", spell
-				.getName());
+		if (user.addSpell(spell)) {
+			Language.sendMessage("command.learn.complete", args.getSender(), "[SPELL]", spell
+					.getName());
+		}
 	}
 
 	@Completer(name = "cast", aliases = { "bind" })

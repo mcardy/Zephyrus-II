@@ -6,7 +6,6 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
 import com.minnymin.zephyrus.spell.Spell;
-import com.minnymin.zephyrus.user.User;
 
 /**
  * Zephyrus - UserLearnSpellEvent.java <br>
@@ -30,11 +29,6 @@ public class UserLearnSpellEvent extends UserEvent implements Cancellable {
 
 	public UserLearnSpellEvent(Player player, Spell spell) {
 		super(player);
-		this.spell = spell;
-	}
-
-	public UserLearnSpellEvent(User user, Spell spell) {
-		super(user);
 		this.spell = spell;
 	}
 

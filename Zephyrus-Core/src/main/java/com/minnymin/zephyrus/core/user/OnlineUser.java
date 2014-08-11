@@ -24,6 +24,7 @@ import com.minnymin.zephyrus.core.config.ConfigOptions;
 import com.minnymin.zephyrus.core.util.BlockUtils;
 import com.minnymin.zephyrus.core.util.Language;
 import com.minnymin.zephyrus.core.util.map.MultiMap;
+import com.minnymin.zephyrus.event.UserLearnSpellEvent;
 import com.minnymin.zephyrus.event.UserPostCastEvent;
 import com.minnymin.zephyrus.event.UserPreCastEvent;
 import com.minnymin.zephyrus.event.UserTargetBlockEvent;
@@ -97,8 +98,15 @@ public class OnlineUser implements User {
 	}
 
 	@Override
-	public void addSpell(Spell spell) {
-		learned.add(spell.getName());
+	public boolean addSpell(Spell spell) {
+		UserLearnSpellEvent event = new UserLearnSpellEvent(player, spell);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled()) {
+			learned.add(spell.getName());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -257,6 +265,9 @@ public class OnlineUser implements User {
 
 	@Override
 	public boolean isSpellLearned(Spell spell) {
+		if (getPlayer().hasPermission("zephyrus.spell.cast." + spell.getDefaultName().toLowerCase())) {
+			return true;
+		}
 		return getLearnedSpells().contains(spell.getName());
 	}
 

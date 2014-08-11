@@ -39,8 +39,9 @@ public interface User {
 	 * Teaches the user the spell
 	 * 
 	 * @param spell The spell to teach
+	 * @return True if spell was taught, false if failed
 	 */
-	public void addSpell(Spell spell);
+	public boolean addSpell(Spell spell);
 
 	/**
 	 * Adds the status effect to the user's current states
