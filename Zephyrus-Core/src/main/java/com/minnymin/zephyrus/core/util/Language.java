@@ -9,7 +9,7 @@ import com.minnymin.zephyrus.core.ZephyrusPlugin;
 /**
  * Zephyrus - Language.java
  * 
- * @author minnymin3 TODO Remove default text params and add strings with add()
+ * @author minnymin3
  * 
  */
 
