@@ -32,7 +32,7 @@ public class VersionInfo {
 			} catch (Exception ex) {
 			}
 		} else {
-			if (!file.getFile().exists() || !file.getConfig().contains("release")) {
+			if (file.getFile() == null || !file.getFile().exists() || !file.getConfig().contains("release")) {
 				file.getConfig().set("release", plugin.getDescription().getVersion());
 				file.saveConfig();
 				updateLanguage("2.0.0");
