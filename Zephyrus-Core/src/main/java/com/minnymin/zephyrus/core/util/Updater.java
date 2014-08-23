@@ -249,8 +249,8 @@ public class Updater {
 	 */
 	private boolean versionCheck(String title) {
 		final String version = this.plugin.getDescription().getVersion().replace("-SNAPSHOT", "");
-		if (title.split("-").length == 2) {
-			final String remoteVersion = title.split("-")[1].split(" ")[0];
+		if (title.split("-").length == 3) {
+			final String remoteVersion = title.split("-")[2].split(" ")[0];
 			if (this.hasTag(version) || version.equalsIgnoreCase(remoteVersion)
 					|| getVersionHeritage(version, remoteVersion) >= 0) {
 				this.result = Updater.UpdateResult.NO_UPDATE;
