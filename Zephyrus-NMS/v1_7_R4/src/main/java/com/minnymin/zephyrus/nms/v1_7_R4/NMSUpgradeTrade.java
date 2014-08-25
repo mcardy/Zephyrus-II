@@ -1,12 +1,12 @@
-package com.minnymin.zephyrus.nms.v1_7_R3;
+package com.minnymin.zephyrus.nms.v1_7_R4;
 
-import net.minecraft.server.v1_7_R3.EntityHuman;
-import net.minecraft.server.v1_7_R3.IMerchant;
-import net.minecraft.server.v1_7_R3.MerchantRecipe;
-import net.minecraft.server.v1_7_R3.MerchantRecipeList;
+import net.minecraft.server.v1_7_R4.EntityHuman;
+import net.minecraft.server.v1_7_R4.IMerchant;
+import net.minecraft.server.v1_7_R4.MerchantRecipe;
+import net.minecraft.server.v1_7_R4.MerchantRecipeList;
 
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_7_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_7_R4.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,7 +15,7 @@ import com.minnymin.zephyrus.nms.UpgradeTrade;
 /**
  * Zephyrus - ItemUpgradeTrade.java
  *
- * This class represents the 1.7.9 version of the item upgrade trade
+ * This class represents the 1.7.10 version of the item upgrade trade
  *
  * @author minnymin3
  *
@@ -50,7 +50,7 @@ public class NMSUpgradeTrade implements IMerchant, UpgradeTrade {
 	}
 
 	@Override
-	public void a_(net.minecraft.server.v1_7_R3.ItemStack arg0) {
+	public void a_(net.minecraft.server.v1_7_R4.ItemStack arg0) {
 	}
 
 	@Override
