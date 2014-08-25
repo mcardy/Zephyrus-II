@@ -6,9 +6,9 @@ target
 *.versionsBackup
 
 # Eclipse stuff
-/.classpath
-/.project
-/.settings
+.classpath
+.project
+.settings
 
 # netbeans
 /nbproject
